@@ -17,25 +17,33 @@ for this step.
 
 You will also most likely want to download [Android Studio](https://developer.android.com/studio) to manage your device.
 
-### Install test Wallet app
-The [fakewallet](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/android/fakewallet) app is an implementation of a Solana wallet app compatible with 
-the Mobile Wallet Adapter SDK. It was created for implementation reference and testing purposes. While developing your dApp, you can use fakewallet to test integration with the Mobile Wallet Adapter SDK.
+### Install a wallet app
 
+The [fakewallet](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/android/fakewallet) app is a test implementation of a Solana wallet app compatible with 
+the Mobile Wallet Adapter SDK. It was created for implementation reference and testing purposes. While developing your dApp, you can use fakewallet to test integration with the Mobile Wallet Adapter SDK.
 
 <details>
 <summary>Installation steps</summary>
 
-1. Download the Mobile Wallet Adapter repo, containing the fakewallet app from the [Github repository](https://github.com/solana-mobile/mobile-wallet-adapter)
+1. Clone the Mobile Wallet Adapter repo, containing the fakewallet app from the [github repository](https://github.com/solana-mobile/mobile-wallet-adapter)
 
-2. Import the project into Android Studio, then choose `fakewallet` in the build/run configuration. 
+```
+git clone https://github.com/solana-mobile/mobile-wallet-adapter.git
+```
 
-3. Build and run the app on your connected Android device or emulator.
+2. In Android Studio, `Open project > Navigate to the cloned directory > Select mobile-wallet-adapter/android/build.gradle`
 
-4. You should now be able to see the fakewallet app on your Android device.
+3. After Android Studio finishes loading the project, select `fakewallet` in the build/run configuration dropdown in the top right
 
-5. Now you can use the Mobile Wallet Adapter SDK to connect your dApp to the fakewallet app and test your integration.
+4. Make sure you have your created Android emulator or connected your physical device. If not, you can follow setup instructions from the previous section.
+
+5. You should now be able to see the fakewallet app on your Android device.
+
+6. Now you can use the Mobile Wallet Adapter SDK to connect your dApp to the fakewallet app and test your integration.
 
 </details>
+
+You can also use any Mobile Wallet Adapter compatible wallet for testing, like Phantom or Solflare.
 
 ### Choose a development framework
 

@@ -6,7 +6,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import SideBySideLayout from "../../src/layouts/SideBySideLayout"
 
-In this tutorial, we'll walk you through the process of setting up an Android React Native project and use our Javascript SDK to build a simple user interface that allows you to connect to a mobile wallet, request an airdrop, and send a message to the Solana network. 
+In this tutorial, we'll walk you through the process of setting up an Android React Native project and use the Mobile Wallet Adapter Javascript SDK to build a simple user interface that allows you to connect to a mobile wallet, request an airdrop, and send a message to the Solana network. 
 
 By the end of this tutorial, you'll have an understanding of how to use the Solana Mobile SDK to build dApps that can interact with the Solana Blockchain.
 
@@ -17,7 +17,7 @@ By the end of this tutorial, you'll have an understanding of how to use the Sola
 - How to use the memo program to write your message to the network and see your message on the blockchain!
 
 ## Prerequisites
-Read the [development setup guide](http://localhost:3000/docs/getting-started/quickstart) before starting the tutorial. For this tutorial, we will be using the [fakewallet application](./quickstart#install-test-wallet-app) to test your dApp's integration with Mobile Wallet Adapter.
+Read the [development setup guide](quickstart.md/quickstart) before starting the tutorial. For this tutorial, we will be using the [fakewallet application](./quickstart#install-test-wallet-app) to test your dApp's integration with Mobile Wallet Adapter.
 
 ### Clone our tutorial repo
 
@@ -209,7 +209,7 @@ In `MainScreen.tsx`:
 - Conditionally render the `AccountInfo` component if connected to a wallet.
 
 In `AccountInfoSection.tsx`:
-- The starter code includes function `convertLamportToSOL` because the number returned from `getBalance` is [Lamport denomination](https://docs.solana.com/terminology#lamport).
+- The starter code includes function `convertLamportToSOL` because the number returned from `getBalance` is in units of [lamport](https://docs.solana.com/terminology#lamport).
 
 :::note
 The starter code handles wrapping our app with a `ConnectionProvider` in `App.tsx`, enabling the `useConnection` hook.
@@ -416,8 +416,8 @@ export default function MainScreen() {
 After receiving an airdrop successfully, you should see your SOL balance update to `0.1`. We can now pay the fee to send a transaction to record our message on the network. To do so, we'll be invoking an [on-chain program](https://docs.solana.com/developing/intro/programs#on-chain-programs) called the [`MemoProgram`](https://spl.solana.com/memo).
 
 In `RecordMessageButton.tsx`, create a function `recordMessage` that:
-- Constructs our `MemoProgram` Transaction .
-- Sends a `signAndSendTransaction` request to the wallet..
+- Constructs our `MemoProgram` Transaction.
+- Sends a `signAndSendTransaction` request to the wallet.
 - The wallet then signs the transaction with the private key and sends it to devnet.
 
 <Tabs>
@@ -502,7 +502,7 @@ export default function RecordMessageButton({ authorization, message }: RecordMe
 ### View your message on explorer
 If this transaction is successful, we can use the [Solana Explorer](https://explorer.solana.com/) to see our message on the blockchain itself.
 
-- On the success case, add an `Alert` to give the user the option to click a link and navigate to the `explorerUrl`.
+On the success case, add an `Alert` to give the user the option to click a link and navigate to the `explorerUrl`.
 
 ```tsx
 Alert.alert(
