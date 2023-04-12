@@ -66,11 +66,23 @@ const sidebars = {
       type: 'category',
       label: 'Android Native SDK',
       collapsible: true,
-      items: [{
-        type: 'doc',
-        id: 'android-native/quickstart',
-        label: 'Quickstart'
-      },]
+      items: [
+        {
+          type: 'doc',
+          id: 'android-native/quickstart',
+          label: 'Quickstart'
+        },
+        {
+          type: 'link',
+          href: 'https://www.javadoc.io/doc/com.solanamobile/mobile-wallet-adapter-clientlib-ktx/latest/index.html',
+          label: 'Kotlin MWA Reference'
+        },
+        {
+          type: 'link',
+          href: 'https://www.javadoc.io/doc/com.solanamobile/mobile-wallet-adapter-clientlib',
+          label: 'Java MWA Reference'
+        },
+      ]  
     },
     {
       type: 'doc',
