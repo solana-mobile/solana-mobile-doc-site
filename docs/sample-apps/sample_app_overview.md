@@ -3,9 +3,9 @@ title: Sample App Collection
 hide_table_of_contents: true
 ---
 
-We've created a number of open-source sample apps in different languages/frameworks to help you get started! 
-- If you're new to using the mobile wallet adapter SDK or looking for a reference point for your own implementation, you're in the right place.
-- By exploring these sample apps, you can get a better understanding of the capabilities of our SDK and how it can be integrated into a project.
+A list of open-source sample apps in different languages/frameworks to help you get started! 
+- If you're new to using the mobile wallet adapter SDK or looking for a reference point for your own implementation, explore these sample apps.
+- By exploring these sample apps, you can get a better understanding of the capabilities of the Mobile Wallet Adapter SDK and how it can be integrated into a project.
 
 
 | Name | Description | Technologies |

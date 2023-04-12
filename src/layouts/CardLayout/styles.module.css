@@ -1,7 +1,5 @@
 .cardLayout {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: left;
-  align-items: stretch;
-  gap: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 16px;
 }
