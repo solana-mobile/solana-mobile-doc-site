@@ -14,13 +14,13 @@ The [**Solana Mobile Stack**](https://github.com/solana-mobile) is an open sourc
 Get started by installing the Mobile Wallet Adapter SDK or following our Hello World Tutorial to learn the core concepts of building a mobile dApp.
 
 :::note
-You don't need a Saga device or physical device to build on Solana Mobile. See [**development setup**](getting-started/quickstart) to set up your development environment and start building!
+You don't need a Saga device or physical device to build on Solana Mobile. See [**development setup**](getting-started/development_setup) to set up your development environment and start building!
 :::
 
 ## Quickstart     
 <CardLayout>
     <Card
-        to="getting-started/quickstart"
+        to="getting-started/development_setup"
         header={{
             label: "Setup Development",
             translateId: "development-setup",
@@ -33,11 +33,11 @@ You don't need a Saga device or physical device to build on Solana Mobile. See [
     <Card
         to="getting-started/hello_world_tutorial"
         header={{
-            label: "Hello World Tutorial",
+            label: "Hello World React Native Tutorial",
             translateId: "developer-programs",
         }}
         body={{
-            label: "Learn how to write your first Solana Mobile app with our step-by-step tutorial.",
+            label: "Learn how to write your first Solana Mobile React Native app with a step-by-step tutorial.",
             translateId: "learn-programs",
         }}
     />

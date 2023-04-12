@@ -6,7 +6,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import SideBySideLayout from "../../src/layouts/SideBySideLayout"
 
-In this tutorial, we'll walk you through the process of setting up an Android React Native project and use the Mobile Wallet Adapter Javascript SDK to build a simple user interface that allows you to connect to a mobile wallet, request an airdrop, and send a message to the Solana network. 
+In this tutorial, we'll walk you through the process of setting up an Android React Native project and use the [Mobile Wallet Adapter Javascript SDK](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/js/packages) to build a simple user interface that allows you to connect to a mobile wallet, request an airdrop, and send a message to the Solana network. 
 
 By the end of this tutorial, you'll have an understanding of how to use the Solana Mobile SDK to build dApps that can interact with the Solana Blockchain.
 
@@ -17,9 +17,9 @@ By the end of this tutorial, you'll have an understanding of how to use the Sola
 - How to use the memo program to write your message to the network and see your message on the blockchain!
 
 ## Prerequisites
-Read the [development setup guide](quickstart.md/quickstart) before starting the tutorial. For this tutorial, we will be using the [fakewallet application](./quickstart#install-test-wallet-app) to test your dApp's integration with Mobile Wallet Adapter.
+Read the [development setup guide](./development_setup) before starting the tutorial. This tutorial will be using the [fakewallet application](./development_setup#install-test-wallet-app) to test your dApp's integration with Mobile Wallet Adapter.
 
-### Clone our tutorial repo
+### Clone the tutorial repo
 
 Clone the [tutorial repo](https://github.com/solana-mobile/tutorial-apps/tree/main/SolanaReactNativeTutorial) from github. 
 ```shell
@@ -27,7 +27,7 @@ git clone https://github.com/solana-mobile/tutorial-apps.git
 cd SolanaReactNativeTutorial
 ```
 There should be two folders:
-- `SolanaReactNativeTutorialStarter`: A boilerplate app with our packages/dependencies ready and starter code that we'll be building up throughout the tutorial.
+- `SolanaReactNativeTutorialStarter`: A boilerplate app with the MWA packages/dependencies ready and starter code that we'll be building up throughout the tutorial.
 - `SolanaReactNativeTutorialComplete`: The complete version of the app and the end product of the tutorial.
 
 ### First run
@@ -42,15 +42,15 @@ In the Metro bundler menu, select the android option to build and launch the app
 
 ## Connect to a wallet
 
-Wallet apps manage your wallet's private key and can do actions like signing and sending transactions/messages. We will use the [Mobile Wallet Adapter JS SDK](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/js/packages/mobile-wallet-adapter-protocol) to connect your dApp to the `fakewallet` app.
+Wallet apps manage your wallet's private key and can do actions like signing and sending transactions/messages. You will learn how use the [Mobile Wallet Adapter JS SDK](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/js/packages/mobile-wallet-adapter-protocol) to connect your dApp to the `fakewallet` app.
 
 ### Build a connect button
 In `ConnectButton.tsx`:
 - Use the `transact` function to start a session with a wallet app. 
-- Then within the session, we request wallet authorization for our dApp. 
-- Save the results of authorization in our parent component's state.
+- Then within the session, request wallet authorization for the dApp. 
+- Save the results of authorization in the parent component's state.
 
-After successful authorization, our dApp receives an `AuthorizationResult` object from `authorize`. It contains a list of `accounts` and an `authToken`.
+After successful authorization, the dApp receives an `AuthorizationResult` object from `authorize`. It contains a list of `accounts` and an `authToken`.
 Each account object contains useful information like the account's address (or `publicKey`) and account label. The `authToken` will be used for `reauthorization` in future `transact`'s with the wallet. 
 
 In `MainScreen.tsx`:
@@ -64,7 +64,7 @@ In `MainScreen.tsx`:
 export default function ConnectButton({ onConnect }: ConnectButtonProps) {
   const onPress = async () => {
     await transact(async wallet => {
-      // Transact starts a session with the wallet app during which our app 
+      // Transact starts a session with the wallet app during which this app 
       // can send actions (like `authorize`) to the wallet.
       const authResult: AuthorizationResult = await wallet.authorize({
         cluster: 'devnet',
@@ -201,18 +201,18 @@ export default function MainScreen() {
 </Tabs>
 
 ## View wallet account balance
-After connecting to a wallet, we'll use the `connection` class from `useConnection` to view our account's SOL balance on devnet. 
+After connecting to a wallet, we'll use the `connection` class from `useConnection` to view your wallet account's SOL balance on devnet. 
 
 In `MainScreen.tsx`:
-- Create a `balance` state and call `connection.getBalance(authorization.publicKey)` to fetch our balance from devnet.
-- Create a `useEffect` hook, that calls the fetches and updates the balance once we have connected to a wallet.
+- Create a `balance` state and call `connection.getBalance(authorization.publicKey)` to fetch the wallet balance from devnet.
+- Create a `useEffect` hook, that calls the fetches and updates the balance once connected to a wallet.
 - Conditionally render the `AccountInfo` component if connected to a wallet.
 
 In `AccountInfoSection.tsx`:
 - The starter code includes function `convertLamportToSOL` because the number returned from `getBalance` is in units of [lamport](https://docs.solana.com/terminology#lamport).
 
 :::note
-The starter code handles wrapping our app with a `ConnectionProvider` in `App.tsx`, enabling the `useConnection` hook.
+The starter code handles wrapping the app with a `ConnectionProvider` in `App.tsx`, enabling the `useConnection` hook.
 :::
 
 <Tabs>
@@ -244,14 +244,14 @@ export default function MainScreen() {
   const [balance, setBalance] = useState<number | null>(null)
 
   const fetchAndUpdateBalance = async (authorization: Authorization) => {
-    // Our ConnectionProvider (in App.tsx) is set to the devnet endpoint.
+    // The ConnectionProvider (in App.tsx) is set to the devnet endpoint.
     const balance = await connection.getBalance(authorization.publicKey)
     console.log("Balance fetched: " + balance)
     setBalance(balance)
   }
 
   useEffect(() => {
-    // Fetch and update balance, when we connect to a wallet.
+    // Fetch and update balance, if connected to a wallet.
     if (!authorization) {
       return;
     }
@@ -277,7 +277,7 @@ export default function MainScreen() {
                   />
               </View>
 
-          {/* Conditionally render if we are connected to a wallet. */}
+          {/* Conditionally render if connected to a wallet. */}
           {authorization !== null ? <AccountInfo authorization={authorization} balance={balance} /> : null}
           </ScrollView>
           {authorization === null ? 
@@ -293,12 +293,12 @@ export default function MainScreen() {
 </Tabs>
 
 ## Request a SOL airdrop
-If you try connecting to the wallet at this point, you'll notice that we have 0 SOL tokens in our balance. 
-In order to send transactions to devnet, we'll need to fund our account by requesting an airdrop. 
+If you try connecting to the wallet at this point, you'll notice that you have 0 SOL tokens in your balance. 
+In order to send transactions to devnet, we'll need to fund the account by requesting an airdrop. 
 
-With `RequestAirdropButton`, we use `connection.requestAirdrop(...)` to request an airdrop to our wallet's address (public key).
+With `RequestAirdropButton`, use `connection.requestAirdrop(...)` to request an airdrop to your wallet's address (public key).
 
-Then in `MainScreen` we render the new button and pass in `fetchAndUpdateBalance(authorization)` to the `onAirdropComplete` prop.
+Then in `MainScreen`, render the new button and pass in `fetchAndUpdateBalance(authorization)` to the `onAirdropComplete` prop.
 
 :::note
 Unfortunately, airdropping on devnet is prone to flakiness and a request can often fail. If you are seeing a transaction confirmation error
@@ -359,14 +359,14 @@ export default function MainScreen() {
   const [balance, setBalance] = useState<number | null>(null)
 
   const fetchAndUpdateBalance = async (authorization: Authorization) => {
-    // Our ConnectionProvider (in App.tsx) is set to the devnet endpoint.
+    // The ConnectionProvider (in App.tsx) is set to the devnet endpoint.
     const balance = await connection.getBalance(authorization.publicKey)
     console.log("Balance fetched: " + balance)
     setBalance(balance)
   }
 
   useEffect(() => {
-    // Fetch and update balance, when we connect to a wallet.
+    // Fetch and update balance, after connecting to a wallet.
     if (!authorization) {
       return;
     }
@@ -392,7 +392,7 @@ export default function MainScreen() {
                   />
               </View>
 
-          {/* Conditionally render if we are connected to a wallet. */}
+          {/* Conditionally render if connected to a wallet. */}
           {authorization !== null ? <AccountInfo authorization={authorization} balance={balance} /> : null}
           <View style={styles.buttonGroup}>
             {authorization !== null ? <RequestAirdropButton authorization={authorization} 
@@ -413,10 +413,10 @@ export default function MainScreen() {
 
 ## Record a message to the blockchain
 ### Construct and send a transaction
-After receiving an airdrop successfully, you should see your SOL balance update to `0.1`. We can now pay the fee to send a transaction to record our message on the network. To do so, we'll be invoking an [on-chain program](https://docs.solana.com/developing/intro/programs#on-chain-programs) called the [`MemoProgram`](https://spl.solana.com/memo).
+After receiving an airdrop successfully, you should see your SOL balance update to `0.1`. You can now pay the fee to send a transaction to record the message on the network. To do so, we'll be invoking an [on-chain program](https://docs.solana.com/developing/intro/programs#on-chain-programs) called the [`MemoProgram`](https://spl.solana.com/memo).
 
 In `RecordMessageButton.tsx`, create a function `recordMessage` that:
-- Constructs our `MemoProgram` Transaction.
+- Constructs the `MemoProgram` Transaction.
 - Sends a `signAndSendTransaction` request to the wallet.
 - The wallet then signs the transaction with the private key and sends it to devnet.
 
@@ -424,12 +424,12 @@ In `RecordMessageButton.tsx`, create a function `recordMessage` that:
 <TabItem value="recordMessage" label="recordMessage">
 
 ```tsx
-// Takes in a `Buffer` type that represents our message string.
+// Takes in a `Buffer` type that represents the message string.
 async function recordMessage(authorization: Authorization, messageBuffer: Buffer): Promise<[string, RpcResponseAndContext<SignatureResult>]> {
   const {connection} = useConnection()
   const [signature] = await transact(async wallet => {
     // Start a wallet session with `transact` and `reauthorize` 
-    // our dApp by passing in the `authToken`.
+    // the dApp by passing in the `authToken`.
     const authResult: AuthorizationResult = await wallet.reauthorize({
       auth_token: authorization.authToken,
       identity: APP_IDENTITY
@@ -479,7 +479,7 @@ export default function RecordMessageButton({ authorization, message }: RecordMe
                 if (err) {
                     console.log('Failed to record message:' + (err instanceof Error ? err.message : err))
                 } else {
-                    // recordMessage was successful, so construct a link to our transaction on Solana Explorer
+                    // recordMessage was successful, so construct a link to the transaction on Solana Explorer
                     const explorerUrl =
                           'https://explorer.solana.com/tx/' +
                           signature +
@@ -500,7 +500,7 @@ export default function RecordMessageButton({ authorization, message }: RecordMe
 </Tabs>
 
 ### View your message on explorer
-If this transaction is successful, we can use the [Solana Explorer](https://explorer.solana.com/) to see our message on the blockchain itself.
+If this transaction is successful, you can use the [Solana Explorer](https://explorer.solana.com/) to see your message on the blockchain itself.
 
 On the success case, add an `Alert` to give the user the option to click a link and navigate to the `explorerUrl`.
 
@@ -524,10 +524,10 @@ You've successfully recorded your message onto the Solana blockchain and created
 
 ## Next steps
 
-Explore our guides and SDK references to learn more and create more advanced applications. Here are some links to explore:
+Explore guides and SDK references to learn more and create more advanced applications. Here are some links to explore:
 
 ### Sample App Collection
-- If you want to see more examples of dApps, then check out this [curated list](../sample-apps/sample_app_overview) of sample apps we've built. It also includes a more [robust version of the app](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/examples/example-react-native-app) we built in this tutorial.
+- If you want to see more examples of dApps, then check out this [curated list](../sample-apps/sample_app_overview) of Solana mobile sample apps. It also includes a more [robust version of the app](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/examples/example-react-native-app) built in this tutorial.
 
 ### Guides/References
 - [Mobile Wallet Adapter Javascript SDK reference](https://solana-labs.github.io/solana-web3.js/)

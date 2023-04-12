@@ -30,15 +30,40 @@ const sidebars = {
         },
         {
           type: 'doc',
-          id: 'getting-started/quickstart',
-          label: 'Development setup'
+          id: 'getting-started/development_setup',
+          label: 'Development Setup'
         },
         {
-          type: 'doc',
-          id: 'getting-started/hello_world_tutorial',
-          label: 'Hello World Tutorial'
+          type: 'category',
+          label: 'Hello World Tutorial',
+          collapsible: true,
+          items: [{
+            type: 'doc',
+            id: 'getting-started/hello_world_tutorial',
+            label: 'React Native'
+          },]
         },
       ],
+    },
+    {
+      type: 'category',
+      label: 'React Native SDK',
+      collapsible: true,
+      items: [{
+        type: 'doc',
+        id: 'react-native/quickstart',
+        label: 'Quickstart'
+      },]
+    },
+    {
+      type: 'category',
+      label: 'Android Native SDK',
+      collapsible: true,
+      items: [{
+        type: 'doc',
+        id: 'android-native/quickstart',
+        label: 'Quickstart'
+      },]
     },
     {
       type: 'doc',
@@ -52,7 +77,7 @@ const sidebars = {
       items: [
         {
           type: 'doc',
-          id: 'seed-vault/seedvault_intro',
+          id: 'additional-sdks/seedvault_intro',
           label: 'Seed Vault SDK'
         },
       ],
