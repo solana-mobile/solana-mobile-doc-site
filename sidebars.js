@@ -49,11 +49,18 @@ const sidebars = {
       type: 'category',
       label: 'React Native SDK',
       collapsible: true,
-      items: [{
-        type: 'doc',
-        id: 'react-native/quickstart',
-        label: 'Quickstart'
-      },]
+      items: [
+        {
+          type: 'doc',
+          id: 'react-native/quickstart',
+          label: 'Quickstart'
+        },
+        {
+          type: 'doc',
+          id: 'react-native/expo',
+          label: 'Developing with Expo'
+        },
+      ]
     },
     {
       type: 'category',
