@@ -24,10 +24,10 @@ Follow the [development setup](../getting-started/development_setup#install-a-wa
 
 ### Clone Solana Mobile dApp Scaffold
 
-The fastest way to start building React Native on Solana is cloning our [Solana React Native dApp Scaffold repo](https://github.com/Michaelsulistio/SolanaReactNativeScaffold):
+The fastest way to start building React Native on Solana is cloning our [Solana Mobile React Native dApp Scaffold](https://github.com/solana-mobile/SolanaMobileDAppScaffold):
 
 ```shell
-git clone https://github.com/Michaelsulistio/SolanaReactNativeScaffold.git
+git clone https://github.com/solana-mobile/SolanaMobileDAppScaffold.git
 ```
 
 The scaffold is a ready-to-go React Native dApp that comes with:
