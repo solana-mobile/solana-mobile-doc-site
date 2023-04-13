@@ -11,7 +11,7 @@ import CardLayout from "../../src/layouts/CardLayout"
 
 The [**Solana Mobile Stack**](https://github.com/solana-mobile) is an open source collection of libraries that provides key technologies for building high-quality, user friendly Android apps that can interact with the Solana network. The SDK provides libraries for wallets and apps, allowing developers to create rich mobile experiences for the Solana network with integrations for popular frameworks like Android Native and React Native. 
 
-Get started by installing the Mobile Wallet Adapter SDK or following our Hello World Tutorial to learn the core concepts of building a mobile dApp.
+Get started by setting up your development environment and following the Hello World Tutorial to learn the core concepts of building a Solana Mobile dApp.
 
 :::note
 You don't need a Saga device or physical device to build on Solana Mobile. See [**development setup**](getting-started/development_setup) to set up your development environment and start building!
