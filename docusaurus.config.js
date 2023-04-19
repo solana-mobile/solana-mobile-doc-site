@@ -117,6 +117,7 @@ const config = {
         copyright: `Copyright © ${new Date().getFullYear()} Solana Mobile, Inc. Built with Docusaurus.`,
       },
       prism: {
+        additionalLanguages: ['kotlin'],
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
       },

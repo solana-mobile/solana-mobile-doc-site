@@ -73,6 +73,11 @@ const sidebars = {
           label: 'Quickstart'
         },
         {
+          type: 'doc',
+          id: 'android-native/mwa_integration',
+          label: 'Integrate with MWA'
+        },
+        {
           type: 'link',
           href: 'https://www.javadoc.io/doc/com.solanamobile/mobile-wallet-adapter-clientlib-ktx/latest/index.html',
           label: 'Kotlin MWA Reference'
