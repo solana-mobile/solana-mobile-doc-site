@@ -57,6 +57,11 @@ const sidebars = {
         },
         {
           type: 'doc',
+          id: 'react-native/mwa_integration_rn',
+          label: 'Integrate with MWA'
+        },
+        {
+          type: 'doc',
           id: 'react-native/expo',
           label: 'Developing with Expo'
         },
