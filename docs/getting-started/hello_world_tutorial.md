@@ -6,7 +6,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import SideBySideLayout from "../../src/layouts/SideBySideLayout"
 
-In this tutorial, we'll walk you through the process of setting up an Android React Native project and use the [Mobile Wallet Adapter Javascript SDK](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/js/packages) to build a simple user interface that allows you to connect to a mobile wallet, request an airdrop, and send a message to the Solana network. 
+In this tutorial, we'll walk you through the process of setting up an Android React Native project and use the [Mobile Wallet Adapter Javascript library](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/js/packages) to build a simple user interface that allows you to connect to a mobile wallet, request an airdrop, and send a message to the Solana network. 
 
 By the end of this tutorial, you'll have an understanding of how to use the Solana Mobile SDK to build dApps that can interact with the Solana Blockchain.
 
@@ -17,7 +17,7 @@ By the end of this tutorial, you'll have an understanding of how to use the Sola
 - How to use the memo program to write your message to the network and see your message on the blockchain!
 
 ## Prerequisites
-Read the [development setup guide](./development_setup) before starting the tutorial. This tutorial will be using the [fakewallet application](./development_setup#install-test-wallet-app) to test your dApp's integration with Mobile Wallet Adapter.
+Read the [development setup guide](./development_setup) before starting the tutorial. This tutorial will be using the [fakewallet application](./development_setup#install-test-wallet-app) to test your app's integration with Mobile Wallet Adapter.
 
 ### Clone the tutorial repo
 
@@ -42,7 +42,7 @@ In the Metro bundler menu, select the android option to build and launch the app
 
 ## Connect to a wallet
 
-Wallet apps manage your wallet's private key and can do actions like signing and sending transactions/messages. You will learn how use the [Mobile Wallet Adapter JS SDK](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/js/packages/mobile-wallet-adapter-protocol) to connect your dApp to the `fakewallet` app.
+Wallet apps manage your wallet's private key and can do actions like signing and sending transactions/messages. You will learn how use the [Mobile Wallet Adapter JS library](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/js/packages/mobile-wallet-adapter-protocol) to connect your dApp to the `fakewallet` app.
 
 ### Build a connect button
 In `ConnectButton.tsx`:

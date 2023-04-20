@@ -7,15 +7,15 @@ import TabItem from '@theme/TabItem';
 This page is a work in progress. More content is being worked on and will being added soon!
 :::
 
-The Mobile Wallet Adapter JS library is an implementation of the Mobile Wallet Adapter protocol in JavaScript. It provides a library of classes and methods to start a session between your DApp and a wallet app, in which you can issue API calls to it (eg. *sign_messages*) as per the spec. 
+The Mobile Wallet Adapter JS library is an implementation of the Mobile Wallet Adapter protocol in JavaScript. It provides a library of classes and methods to start a session between your dApp and a wallet app, in which you can issue API calls to it (eg. *sign_messages*) as per the spec. 
 
 ### Library overview
-[`@solana-mobile/mobile-wallet-adapter-protocol`](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/js/packages/mobile-wallet-adapter-protocol) is a React Native/Javascript API that provides an implementation of the Mobile Wallet Adapter protocol, enabling interaction with MWA-compatible wallets.
+[`@solana-mobile/mobile-wallet-adapter-protocol`](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/js/packages/mobile-wallet-adapter-protocol) is a React Native npmt package that provides an implementation of the Mobile Wallet Adapter protocol, enabling interaction with MWA-compatible wallets.
 
-[`@solana-mobile/mobile-wallet-adapter-protocol-web3js`](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/js/packages/mobile-wallet-adapter-protocol-web3js) is a convenience wrapper around `mobile-wallet-adapter-protocol` enabling use of common primitives from @solana/web3.js – such as Transaction and Uint8Array.
+[`@solana-mobile/mobile-wallet-adapter-protocol-web3js`](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/js/packages/mobile-wallet-adapter-protocol-web3js) is a convenience wrapper package around `mobile-wallet-adapter-protocol` enabling use of common primitives from @solana/web3.js – such as [`Transaction`](https://solana-labs.github.io/solana-web3.js/classes/Transaction.html) and `Uint8Array`.
 
 
-This integration guide will teach you how to integrate a DApp with these libraries to enable wallet signing and sending services.
+This integration guide will teach you how to integrate a dApp with these libraries to enable wallet signing and sending services.
 
 ### What you will learn
 - How to connect a wallet with `transact`.
@@ -27,11 +27,11 @@ This integration guide will teach you how to integrate a DApp with these librari
 
 To connect to a wallet, use the [`transact`](https://github.com/solana-mobile/mobile-wallet-adapter/blob/main/js/packages/mobile-wallet-adapter-protocol-web3js/src/transact.ts) function from `@solana-mobile/mobile-wallet-adapter-protocol-web3js`. 
 
-The `transact` method starts a session with a locally installed MWA-compatible wallet app. Within the callback, the DApp can use
+The `transact` method starts a session with a locally installed MWA-compatible wallet app. Within the callback, use
 `wallet` to send requests for signing or sending transactions/messages.
 
 ```tsx
-import {transact} from '@solana-mobile/mobile-wallet-adapter-protocol';
+import {transact} from '@solana-mobile/mobile-wallet-adapter-protocol-web3js';
 
 await transact(async (wallet) => {
     /* ... */
@@ -39,15 +39,16 @@ await transact(async (wallet) => {
 ```
 
 ## Authorizing a wallet
-After starting a session with a wallet app with `transact`, you should first request authorization for your DApp with a call to [`authorize`](https://www.javadoc.io/doc/com.solanamobile/mobile-wallet-adapter-clientlib-ktx/latest/com/solana/mobilewalletadapter/clientlib/AdapterOperations.html#authorize(Uri,Uri,String,RpcCluster)).
+After starting a session with a wallet app with `transact`, you should first request authorization for your app with a call to [`authorize`](https://www.javadoc.io/doc/com.solanamobile/mobile-wallet-adapter-clientlib-ktx/latest/com/solana/mobilewalletadapter/clientlib/AdapterOperations.html#authorize(Uri,Uri,String,RpcCluster)).
 
-When requesting `authorization`, include an [App Identity](https://github.com/solana-mobile/mobile-wallet-adapter/blob/main/js/packages/mobile-wallet-adapter-protocol/src/types.ts#L13) to the request so users can recognize your DApp during the authorization flow.
-- `name`: The name of your DApp.
-- `uri`: The web URL associated with your DApp.
-- `icon`: A relative path to your DApp icon.
+When requesting `authorization`, include an [App Identity](https://github.com/solana-mobile/mobile-wallet-adapter/blob/main/js/packages/mobile-wallet-adapter-protocol/src/types.ts#L13) to the request so users can recognize your app during the authorization flow.
+- `name`: The name of your app.
+- `uri`: The web URL associated with your app.
+- `icon`: A relative path to your app icon.
 
 ```tsx
-import {transact} from '@solana-mobile/mobile-wallet-adapter-protocol';
+import {transact} from '@solana-mobile/mobile-wallet-adapter-protocol-web3js';
+import {AuthorizeAPI} from '@solana-mobile/mobile-wallet-adapter-protocol';
 
 export const APP_IDENTITY = {
   name: 'React Native dApp',
@@ -55,7 +56,7 @@ export const APP_IDENTITY = {
   icon: "favicon.ico",
 };
 
-await transact(async (wallet) => {
+await transact(async (wallet: AuthorizeAPI) => {
   const authorizationResult = await wallet.authorize({
     cluster: 'devnet',
     identity: APP_IDENTITY,
@@ -65,7 +66,7 @@ await transact(async (wallet) => {
 });
 ```
 
-Once authorized with a wallet, the DApp can request the wallet to sign transactions, messages and send transactions via RPC. `authorize` also returns an [`AuthorizationResult`](https://github.com/solana-mobile/mobile-wallet-adapter/blob/main/js/packages/mobile-wallet-adapter-protocol/src/types.ts#L31) that contains information from the wallet app.
+Once authorized with a wallet, the app can request the wallet to sign transactions, messages and send transactions via RPC. `authorize` also returns an [`AuthorizationResult`](https://github.com/solana-mobile/mobile-wallet-adapter/blob/main/js/packages/mobile-wallet-adapter-protocol/src/types.ts#L31) that contains information from the wallet app.
 
 `AuthorizationResult` contains: 
 - `accounts`: An array of [Accounts](https://github.com/solana-mobile/mobile-wallet-adapter/blob/main/js/packages/mobile-wallet-adapter-protocol/src/types.ts#L3) (a label and public key) from the wallet.
@@ -77,7 +78,8 @@ For subsequent connections to the wallet app, you can skip the authorization ste
 with a previously stored `authToken`. If still valid, `reauthorize` will bypass the need to explicitly grant authorization again.
 
 ```tsx
-import {transact} from '@solana-mobile/mobile-wallet-adapter-protocol';
+import {transact} from '@solana-mobile/mobile-wallet-adapter-protocol-web3js';
+import {AuthorizeAPI, DeauthorizeAPI} from '@solana-mobile/mobile-wallet-adapter-protocol';
 
 export const APP_IDENTITY = {
   name: 'React Native dApp',
@@ -85,10 +87,10 @@ export const APP_IDENTITY = {
   icon: "favicon.ico",
 };
 
-// If we have one, retrieve an authToken from a previous authorization, 
-const storedAuthToken = maybeGetStoredAuthToken();
+// If we have one, retrieve an authToken from a previous authorization. 
+const storedAuthToken = maybeGetStoredAuthToken(); // dummy placeholder function
 
-await transact(async (wallet) => {
+await transact(async (wallet: AuthorizeAPI & ReauthorizeAPI) => {
   // If we have a previously stored authToken, we can instead call `reauthorize`.
   const authorizationResult = await (storedAuthToken
     ? wallet.reauthorize({
