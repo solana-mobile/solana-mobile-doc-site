@@ -32,6 +32,8 @@ The `transact` method instantiates a [`Scenario`](https://github.com/solana-mobi
 This starts a session with a wallet and within the callback, the DApp can send requests for signing or sending transactions/messages.
 
 ```kotlin
+import com.solana.mobilewalletadapter.clientlib.*
+
 val walletAdapterClient = MobileWalletAdapter()
 val result = walletAdapterClient.transact(sender) {
     /* ... */
@@ -51,6 +53,8 @@ the authorization flow.
 <TabItem value="Kotlin" label="Kotlin">
 
 ```kotlin
+import com.solana.mobilewalletadapter.clientlib.*
+
 val walletAdapterClient = MobileWalletAdapter()
 val result = walletAdapterClient.transact(sender) {
     // Pass in identity metadata about your DApp.
@@ -79,6 +83,8 @@ with a previously stored `authToken`. If still valid, `reauthorize` will bypass 
 <TabItem value="Kotlin" label="Kotlin">
 
 ```kotlin
+import com.solana.mobilewalletadapter.clientlib.*
+
 val walletAdapterClient = MobileWalletAdapter()
 val result = walletAdapterClient.transact(sender) {
     // Pass in DApp identity metadata
