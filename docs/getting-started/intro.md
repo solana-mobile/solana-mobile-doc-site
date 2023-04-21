@@ -2,13 +2,15 @@
 hide_table_of_contents: true
 ---
 
+import CTAButton from "../../src/components/CTAButton"
 import Card from "../../src/components/Card"
 import CardLayout from "../../src/layouts/CardLayout"
 
-
 # Introduction
 
-The [**Solana Mobile Stack**](https://github.com/solana-mobile) is an open source collection of libraries that provides key technologies for building high-quality, user friendly Android apps that can interact with the Solana network. The SDK provides libraries for wallets and apps, allowing developers to create rich mobile experiences for the Solana network with integrations for popular frameworks like Android Native and React Native. 
+The **Solana Mobile Stack** is an open source collection of libraries that provides key technologies for building Mobile dApps that can interact with the Solana network. 
+
+The SDK provides libraries for wallets and apps, allowing developers to create rich mobile experiences for the Solana network with integrations for popular frameworks like Android Native and React Native. 
 
 Get started by setting up your development environment and following the Hello World Tutorial to learn the core concepts of building a Solana Mobile dApp.
 
@@ -53,3 +55,6 @@ You don't need a Saga device or physical device to build on Solana Mobile. See [
     />
 
 </CardLayout>
+
+
+##
