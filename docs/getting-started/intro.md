@@ -19,7 +19,7 @@ You don't need a Saga device or physical device to build on Solana Mobile. See [
 ## Quickstart     
 <CardLayout>
     <Card
-        to="getting-started/development_setup"
+        to="development_setup"
         header={{
             label: "Setup Development",
             translateId: "development-setup",
@@ -30,7 +30,7 @@ You don't need a Saga device or physical device to build on Solana Mobile. See [
         }}
     />
     <Card
-        to="getting-started/hello_world_tutorial"
+        to="hello_world_tutorial"
         header={{
             label: "Hello World React Native Tutorial",
             translateId: "developer-programs",
