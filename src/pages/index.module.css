@@ -21,3 +21,136 @@
   align-items: center;
   justify-content: center;
 }
+
+/* Logo */
+
+.logoContainer {
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+
+.backgroundImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+/* Header Hero */
+.HeaderHero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 75vh;
+}
+
+.HeaderHero .title {
+  font-size: 64px;
+  color: var(--brand);
+  line-height: 1;
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.HeaderHero .tagline {
+  font-size: 36px;
+  line-height: 1.3;
+  color: white;
+  font-weight: 500;
+}
+
+.HeaderHero .buttons {
+  margin-top: 40px;
+}
+
+.HeaderHero .image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media only screen and (min-width: 481px) and (max-width: 960px) {
+  .HeaderHero .title {
+    display: flex;
+    justify-content: center;
+  }
+  .HeaderHero .column.last {
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 760px) {
+  .HeaderHero .title {
+    font-size: 42px;
+  }
+
+  .HeaderHero .tagline {
+    font-size: 30px;
+  }
+
+  .HeaderHero .socialLinks {
+    margin-top: -2rem;
+  }
+}
+
+/* Section */
+.Section {
+  width: 100%;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  overflow-x: hidden;
+}
+
+.Section + .Section {
+  border-top: 1px solid var(--ifm-table-border-color);
+}
+
+.Section.tint {
+  background-color: var(--ifm-menu-color-background-active);
+}
+
+.Section.dark {
+  background-color: var(--dark);
+}
+
+/* ActionButton */
+
+.ActionButton {
+  padding: 0.50rem 1.25rem;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none !important;
+  border-bottom: none;
+  transition: all 0.4s ease-out;
+  border-radius: 25px;
+}
+
+.ActionButton.primary {
+  margin-right: 5px;
+  color: black;
+  background-color: #00EB9F;
+}
+
+.ActionButton.primary:hover {
+  color: black;
+  background-color: white;
+}
+
+.ActionButton.secondary {
+  margin-left: 5px;
+  background-color: var(--ifm-color-primary-darker);
+  color: black;
+}
+
+.ActionButton.secondary:hover {
+  margin-left: 5px;
+  background-color: white;
+  color: black;
+}

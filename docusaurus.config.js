@@ -56,7 +56,7 @@ const config = {
       image: 'img/solanamobile.png',
       colorMode: {
         defaultMode: 'dark',
-        disableSwitch: false,
+        disableSwitch: true,
         respectPrefersColorScheme: false,
       },
       navbar: {

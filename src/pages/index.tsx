@@ -3,26 +3,71 @@ import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
-import HomepageFeatures from '@site/src/components/HomepageFeatures';
-
+import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './index.module.css';
 
-function HomepageHeader() {
-  const {siteConfig} = useDocusaurusContext();
+export function Section({
+  children,
+  className,
+  background = 'light',
+}) {
+  const sectionClasses = clsx(styles.Section, className, background);
   return (
-    <header className={clsx('hero hero--primary', styles.heroBanner)}>
-      <div className="container">
-        <h1 className="hero__title">{siteConfig.title}</h1>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
+    <div className={sectionClasses}>
+      {children}
+    </div>
+  );
+}
+
+function ActionButton({ href, type = 'primary', target, children }) {
+  const classes = clsx(styles.ActionButton, styles[type]);
+  return (
+    <a className={classes} href={href} target={target}>
+      {children}
+    </a>
+  );
+}
+
+
+function HomeCallToAction() {
+  return (
+    <>
+      <ActionButton
+        type="primary"
+        href={useBaseUrl('getting-started/development_setup#choose-a-development-framework')}
+        target="_self">
+        Get started
+      </ActionButton>
+      <ActionButton
+        type="secondary"
+        href={useBaseUrl('getting-started/intro')}
+        target="_self">
+        Learn the basics
+      </ActionButton>
+    </>
+  );
+}
+
+function SolanaMobileStackLogo() {
+  return (
+    <div className={styles.logoContainer}>
+      <img src="img/solana-mobile-stack-logo-200x200.png" alt="Solana Mobile Stack" />
+    </div>
+  );
+}
+
+function HeaderHero() {
+  return (
+    <Section background="dark" className={styles.HeaderHero}>
+      <SolanaMobileStackLogo />
+      <>
+        <h1 className={styles.title}>Solana Mobile Stack</h1>
+        <p className={styles.tagline}>Learn to build Solana Mobile dApps.</p>
         <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="/docs/getting-started/intro">
-            Docusaurus Tutorial - 5min ⏱️
-          </Link>
+          <HomeCallToAction />
         </div>
-      </div>
-    </header>
+      </>
+    </Section>
   );
 }
 
@@ -32,10 +77,7 @@ export default function Home(): JSX.Element {
     <Layout
       title={`Hello from ${siteConfig.title}`}
       description="Description will go into a meta tag in <head />">
-      <HomepageHeader />
-      <main>
-        <HomepageFeatures />
-      </main>
+      <HeaderHero />
     </Layout>
   );
 }
