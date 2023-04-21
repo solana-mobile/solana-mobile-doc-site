@@ -1,6 +1,5 @@
 --- 
 hide_table_of_contents: true
-slug: /
 ---
 
 import Card from "../../src/components/Card"
