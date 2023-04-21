@@ -34,7 +34,7 @@ function HomeCallToAction() {
     <>
       <ActionButton
         type="primary"
-        href={useBaseUrl('getting-started/development_setup#choose-a-development-framework')}
+        href={useBaseUrl('getting-started/development_setup')}
         target="_self">
         Get started
       </ActionButton>
@@ -62,7 +62,7 @@ function HeaderHero() {
       <SolanaMobileStackLogo />
       <>
         <h1 className={styles.title}>Solana Mobile Stack</h1>
-        <p className={styles.tagline}>Learn to build Solana Mobile dApps.</p>
+        <p className={styles.tagline}>Learn to build Solana Mobile dApps</p>
         <div className={styles.buttons}>
           <HomeCallToAction />
         </div>
@@ -75,8 +75,8 @@ export default function Home(): JSX.Element {
   const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
+      title={`${siteConfig.title}`}
+      description="The documentation site for Solana Mobile">
       <HeaderHero />
     </Layout>
   );
