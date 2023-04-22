@@ -43,3 +43,61 @@ Learn to how to develop Solana Mobile dApps in your preferred programming langua
         iconPath="img/android_icon.svg"
     />
 </CardLayout>
+
+<CardLayout>
+    <Card
+        to="/getting-started/overview"
+        header={{
+            label: "React Native Scaffold dApp",
+            translateId: "developer-programs",
+        }}
+        body={{
+            label: "Get started building quickly by using our template React Native dApp.",
+            translateId: "learn-programs",
+        }}
+        iconPath="img/rocket-icon2.png"
+    />
+    <Card
+        to="https://docs.solana.com/introduction"
+        header={{
+            label: "Sample Apps",
+            translateId: "development-setup",
+        }}
+        body={{
+            label: "Reference our collection of sample apps to learn how to use the Solana Mobile Stack.",
+            translateId: "development-setup-body",
+        }}
+        iconPath="img/bookshelf-circle-icon.png"
+    />
+</CardLayout>
+
+## Learn about Solana Mobile
+
+Explore the full Solana Mobile SDK or learn about the Solana blockchain itself.
+
+<CardLayout>
+    <Card
+        to="/getting-started/overview"
+        header={{
+            label: "SDK Overview",
+            translateId: "developer-programs",
+        }}
+        body={{
+            label: "Learn about the different libraries and tools provided by the Solana Mobile Stack.",
+            translateId: "learn-programs",
+        }}
+        iconPath="img/solana-mobile-stack-logo.png"
+    />
+    <Card
+        to="https://docs.solana.com/introduction"
+        header={{
+            label: "Solana Core Documentation",
+            translateId: "development-setup",
+        }}
+        body={{
+            label: "Learn about the history and core concepts of the Solana Blockchain.",
+            translateId: "development-setup-body",
+        }}
+        iconPath="img/solanaLogoMark.svg"
+    />
+</CardLayout>

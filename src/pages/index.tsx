@@ -42,7 +42,7 @@ function HomeCallToAction() {
         type="secondary"
         href={useBaseUrl('getting-started/intro')}
         target="_self">
-        Browse the docs
+        Learn the stack
       </ActionButton>
     </>
   );
