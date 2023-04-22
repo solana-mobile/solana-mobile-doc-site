@@ -150,7 +150,7 @@
 .ActionButton.primary {
   margin-right: 5px;
   color: black;
-  background-color: #00EB9F;
+  background-color: #14F195;
 }
 
 .ActionButton.primary:hover {
@@ -160,12 +160,13 @@
 
 .ActionButton.secondary {
   margin-left: 5px;
-  background-color: var(--ifm-color-primary-darker);
-  color: black;
+  color: #14F195;
+  border-color: #14F195;
+  border: 1px solid #14F195;
 }
 
 .ActionButton.secondary:hover {
   margin-left: 5px;
-  background-color: white;
-  color: black;
+  color: white;
+  border: 1px solid white;
 }
