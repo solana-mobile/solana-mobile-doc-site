@@ -1,123 +1,72 @@
-/* cardContainer */
 .cardContainer {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 12px;
-  overflow: hidden;
+  border-radius: 18px;
   background-color: var(--card-background);
   border: 1px solid var(--card-border-color);
-  transition: background-color 0.3s, box-shadow 0.3s, border-color 0.3s;
-  max-height: 150px;
-  padding: 18px 18px 6px 18px;
+  transition: background-color 0.2s, box-shadow 0.2s, border-color 0.2s;
+  height: auto;
+  overflow: hidden;
+  padding: 18px 18px 0px 18px;
 }
 
-/* Switch to columns when screen width is less than 768px */
 @media screen and (max-width: 768px) {
-    .cardContainer {
-        width: 100%;
-        margin: 10px 0;
-    }
+  .cardContainer {
+      width: 100%;
+  }
 }
 
-/* Light mode */
-[data-theme="light"] .cardContainer {
-  --card-background: #ffffff;
-  --card-border-color: #b5b5b5;
-}
-
-/* Dark mode */
 [data-theme="dark"] .cardContainer {
   --card-background: #2c2c2c;
-  --card-border-color: #4a4a4a;
+  --card-border-color: #3b3b3b;
 }
+
+.cardLink {
+  display: block;
+  padding: 16px;
+  text-decoration: none;
+}
+
+.cardHeader {
+  display: flex;
+  color: white;
+  transition: color 0.2s; /* Added transition property */
+
+}
+
+.cardBody {
+  color: #ffffffb3;
+  transition: color 0.2s; /* Added transition property */
+
+}
+
+.cardIcon {
+  width: 32px;
+  height: 32px;
+  margin-right: 8px
+}
+/* Hover */ 
 
 .cardContainer:hover {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border: 1px solid var(--outline-color);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--outline-color);
 }
 
-/* Light mode */
 [data-theme="light"] .cardContainer:hover {
-    --outline-color: var(--ifm-color-primary-light);
-  }
-  
-  /* Dark mode */
-  [data-theme="dark"] .cardContainer:hover {
-    --outline-color: var(--ifm-color-primary-light);
-  }
-  
-  
-  /* cardLink */
-  .cardLink {
-    text-decoration: none;
-    display: block;
-    height: 100%;
-  }
-  
-  .cardLink:hover {
-    text-decoration: none;
-  }
-  
-  /* cardHeader */
-  .cardHeader {
-    color: var(--ifm-color-primary-darker)
-  }
-  
-  .cardHeader h3 {
-    display: flex;
-    align-items: center;
-    font-size: 22px;
-    color: var(--header-text-color);
-    transition: color 0.3s;
-  }
-  
-  /* Light mode */
-  [data-theme="light"] .cardHeader h3 {
-    --header-text-color: var(--ifm-color-primary);
-  }
-  
-  /* Dark mode */
-  [data-theme="dark"] .cardHeader h3 {
-    --header-text-color: var(--ifm-color-primary)
-  }
-  
-  /* iconExternalIcon */
-  .iconExternalIcon {
-    margin-left: 8px;
-    fill: var(--icon-color);
-    transition: fill 0.3s;
-  }
-  
-  /* Light mode */
-  [data-theme="light"] .iconExternalIcon {
-    --icon-color: #333333;
-  }
-  
-  /* Dark mode */
-  [data-theme="dark"] .iconExternalIcon {
-    --icon-color: #cccccc;
-  }
-  
-  .cardBody p {
-    font-size: 16px;
-    color: var(--body-text-color);
-    transition: color 0.3s;
-  }
-  
-  /* Light mode */
-  [data-theme="light"] .cardBody p {
-    --body-text-color: black;
-  }
-  
-  /* Dark mode */
-  [data-theme="dark"] .cardBody p {
-    --body-text-color: #aaaaaa;
-  }
-  
-  .cardContainer:hover .cardBody p {
-    color: var(--ifm-color-primary-light);
-  }
-  
-  .cardContainer:hover .iconExternalIcon {
-    fill: var(--ifm-color-primary-light);
-  }
-  
+  --outline-color: var(--ifm-color-primary-light);
+}
+
+[data-theme="dark"] .cardContainer:hover {
+  --outline-color: var(--ifm-color-primary-light);
+}
+
+.cardLink:hover {
+  text-decoration: none;
+}
+
+.cardContainer:hover .cardBody p {
+  color: var(--ifm-color-primary-light);
+}
+
+.cardContainer:hover .cardHeader {
+  color: var(--ifm-color-primary-light);
+}

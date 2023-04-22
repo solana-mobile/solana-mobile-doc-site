@@ -1,9 +1,8 @@
-
-
 import React from "react";
 import Link from "@docusaurus/Link";
 import styles from "./styles.module.css";
 import Translate from "@docusaurus/Translate";
+import useBaseUrl from '@docusaurus/useBaseUrl';
 
 interface CardProps {
   header: {
@@ -15,22 +14,15 @@ interface CardProps {
     translateId: string;
   };
   to: string;
-  externalIcon?: boolean;
+  iconPath?: string;
 }
 
-const Card: React.FC<CardProps> = ({ header, body, to, externalIcon }) => {
-  /*
-  Both the `header` and `body` expect an object with the following type
-  header = {
-    label: String, //
-    translateId: String //
-  }
-  */
-
+const Card: React.FC<CardProps> = ({ header, body, to, iconPath }) => {
   return (
     <div className={styles.cardContainer}>
       <Link className={styles.cardLink} to={to}>
         <div className={styles.cardHeader}>
+          {iconPath && <img src={useBaseUrl(iconPath)} alt="" className={styles.cardIcon} />}
           <h3>
             <Translate description={header.translateId}>
               {header.label}

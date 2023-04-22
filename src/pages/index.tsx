@@ -34,7 +34,7 @@ function HomeCallToAction() {
     <>
       <ActionButton
         type="primary"
-        href={useBaseUrl('getting-started/development_setup')}
+        href={useBaseUrl('getting-started/prerequisite_setup')}
         target="_self">
         Get started
       </ActionButton>

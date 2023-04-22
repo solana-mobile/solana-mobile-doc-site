@@ -3,10 +3,12 @@ import TabItem from '@theme/TabItem';
 import Card from "../../src/components/Card"
 import CardLayout from "../../src/layouts/CardLayout"
 
-# Development Setup
+# Prerequisite Setup
 
-This quickstart guide will demonstrate how to quickly install necessary tools and set up your development environment, getting you ready to start
+This guide will demonstrate how to quickly install necessary tools and set up your development environment, getting you ready to start
 building a mobile app on Solana. 
+
+If you are familiar with mobile development, you can skip to [choosing a development framework](#choose-a-development-framework).
 
 ### Android Device/Emulator
 
@@ -61,28 +63,28 @@ Currently, the Solana Mobile SDK can be installed as a dependency for apps built
     <Card
         to="/react-native/quickstart"
         header={{
-            label: "React Native Setup",
-            translateId: "react-native-setup",
+            label: "React Native Quickstart",
+            translateId: "developer-programs",
         }}
         body={{
-            label: "Quickly set up a React Native Android project with our Mobile Wallet Adapter Javascript SDK.",
-            translateId: "react-native-setup-body",
+            label: "Quickly set up a React Native project and start building on Solana Mobile with our Javascript SDKs.",
+            translateId: "learn-programs",
         }}
+        iconPath="img/react-native-96.svg"
     />
     <Card
         to="/android-native/quickstart"
         header={{
-            label: "Android Native Setup",
-            translateId: "android-native-setup",
+            label: "Android Quickstart",
+            translateId: "development-setup",
         }}
         body={{
-            label: "Quickly set up a Native Android project with our Mobile Wallet Adapter SDK in Java or Kotlin.",
-            translateId: "android-native-setup-body",
+            label: "Quickly set up an Android project and start building on Solana Mobile with our Android SDK.",
+            translateId: "development-setup-body",
         }}
+        iconPath="img/android_icon.svg"
     />
 </CardLayout>
-
-
 
 
 
