@@ -30,13 +30,13 @@ const sidebars = {
         },
         {
           type: 'doc',
-          id: 'getting-started/overview',
-          label: 'SMS Overview'
+          id: 'getting-started/quickstart',
+          label: 'Quickstart'
         },
         {
           type: 'doc',
-          id: 'getting-started/quickstart',
-          label: 'Quickstart'
+          id: 'getting-started/overview',
+          label: 'SMS Overview'
         },
       ],
     },
