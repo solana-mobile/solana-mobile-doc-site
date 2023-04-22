@@ -18,7 +18,7 @@ The Solana Mobile SDK's provides a [Mobile Wallet Adapter](https://github.com/so
 
 - Download [Android Studio](https://developer.android.com/studio) or your Android development IDE of choice.
 
-- Follow the [prerequisite setup](../getting-started/prerequisite_setup#install-a-wallet-app) guide to set up your [Android Device/Emulator](../getting-started/prerequisite_setup#android-deviceemulator) and install a MWA-compatible wallet, like [fakewallet](../getting-started/prerequisite_setup#install-a-wallet-app).
+- Follow the [prerequisite setup](../getting-started/quickstart#prerequisite-setup) guide to set up your [Android Device/Emulator](../getting-started/quickstart#android-deviceemulator) and install a MWA-compatible wallet, like [fakewallet](../getting-started/quickstart#install-a-wallet-app).
 
 
 ### Setting up an Android Project 

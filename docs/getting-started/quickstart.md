@@ -3,12 +3,45 @@ import TabItem from '@theme/TabItem';
 import Card from "../../src/components/Card"
 import CardLayout from "../../src/layouts/CardLayout"
 
-# Prerequisite Setup
+# Quickstart
 
 This guide will demonstrate how to quickly install necessary tools and set up your development environment, getting you ready to start
 building a mobile app on Solana. 
 
-If you are familiar with mobile development, you can skip to [choosing a development framework](#choose-a-development-framework).
+## Choose a development framework
+
+Currently, the Solana Mobile SDK can be installed as a dependency for Android apps built in React Native and Android Native. In the future, there will be support for additional frameworks like Flutter/Dart. 
+
+<CardLayout>
+    <Card
+        to="/react-native/quickstart"
+        header={{
+            label: "React Native Quickstart",
+            translateId: "developer-programs",
+        }}
+        body={{
+            label: "Quickly set up a React Native project and start building on Solana Mobile with our Javascript SDKs.",
+            translateId: "learn-programs",
+        }}
+        iconPath="img/react-native-96.svg"
+    />
+    <Card
+        to="/android-native/quickstart"
+        header={{
+            label: "Android Quickstart",
+            translateId: "development-setup",
+        }}
+        body={{
+            label: "Quickly set up an Android project and start building on Solana Mobile with our Android SDK.",
+            translateId: "development-setup-body",
+        }}
+        iconPath="img/android_icon.svg"
+    />
+</CardLayout>
+
+## Prerequisite Setup
+
+Regardless of framework choice, ensure you follow this prerequisite setup guide to fully test integration of your app.
 
 ### Android Device/Emulator
 
@@ -54,38 +87,4 @@ git clone https://github.com/solana-mobile/mobile-wallet-adapter.git
 #### Production
 
 Fakewallet was created for implementation reference and quick testing purposes. For production testing, test your dApp with popular MWA-compatible wallet apps like [Phantom](https://play.google.com/store/apps/details?id=app.phantom) and [Solflare](https://play.google.com/store/apps/details?id=com.solflare.mobile).
-
-### Choose a development framework
-
-Currently, the Solana Mobile SDK can be installed as a dependency for apps built in React Native and Android Native. In the future, there will be support for additional frameworks like React Native Expo, Flutter/Dart.
-
-<CardLayout>
-    <Card
-        to="/react-native/quickstart"
-        header={{
-            label: "React Native Quickstart",
-            translateId: "developer-programs",
-        }}
-        body={{
-            label: "Quickly set up a React Native project and start building on Solana Mobile with our Javascript SDKs.",
-            translateId: "learn-programs",
-        }}
-        iconPath="img/react-native-96.svg"
-    />
-    <Card
-        to="/android-native/quickstart"
-        header={{
-            label: "Android Quickstart",
-            translateId: "development-setup",
-        }}
-        body={{
-            label: "Quickly set up an Android project and start building on Solana Mobile with our Android SDK.",
-            translateId: "development-setup-body",
-        }}
-        iconPath="img/android_icon.svg"
-    />
-</CardLayout>
-
-
-
 

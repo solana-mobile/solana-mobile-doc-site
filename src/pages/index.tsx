@@ -34,7 +34,7 @@ function HomeCallToAction() {
     <>
       <ActionButton
         type="primary"
-        href={useBaseUrl('getting-started/prerequisite_setup')}
+        href={useBaseUrl('getting-started/quickstart')}
         target="_self">
         Get started
       </ActionButton>
@@ -42,7 +42,7 @@ function HomeCallToAction() {
         type="secondary"
         href={useBaseUrl('getting-started/intro')}
         target="_self">
-        Learn the basics
+        Browse the docs
       </ActionButton>
     </>
   );

@@ -35,8 +35,8 @@ const sidebars = {
         },
         {
           type: 'doc',
-          id: 'getting-started/prerequisite_setup',
-          label: 'Prerequisite Setup'
+          id: 'getting-started/quickstart',
+          label: 'Quickstart'
         },
       ],
     },
