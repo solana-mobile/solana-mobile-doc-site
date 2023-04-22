@@ -3,12 +3,10 @@ hide_table_of_contents: false
 title: Solana Mobile Documentation
 ---
 
-import CTAButton from "../../src/components/CTAButton"
 import Card from "../../src/components/Card"
-import SDKCard from "../../src/components/SDKCard"
 import CardLayout from "../../src/layouts/CardLayout"
 
-The **Solana Mobile Stack (SMS)** is an open source collection of libraries that provides key technologies for building Mobile dApps that can interact with the Solana network. This documentation site provides guides, tutorials, and references to help developers get started building on Solana.
+The **Solana Mobile Stack (SMS)** is an open source collection of libraries that provides key technologies for building Mobile dApps that can interact with the Solana network. This documentation site provides guides, tutorials, and references to help developers get started building on Solana Mobile.
 
 The SDK is primarily developed and maintained by the [Solana Mobile](https://github.com/solana-mobile) team, but welcomes contributions from the community!
 
@@ -20,7 +18,7 @@ You don't need a Saga device or physical device to build on Solana Mobile. See [
 Learn to how to develop Solana Mobile dApps in your preferred programming language.
 
 <CardLayout>
-    <SDKCard
+    <Card
         to="/react-native/quickstart"
         header={{
             label: "React Native Quickstart",
@@ -32,7 +30,7 @@ Learn to how to develop Solana Mobile dApps in your preferred programming langua
         }}
         iconPath="img/react-native-96.svg"
     />
-    <SDKCard
+    <Card
         to="/android-native/quickstart"
         header={{
             label: "Android Quickstart",

@@ -1,16 +1,16 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# React Native dApp Integration 
+# React Native Integration Guide
 
 :::note
 This page is a work in progress. More content is being worked on and will being added soon!
 :::
 
-The Mobile Wallet Adapter JS library is an implementation of the Mobile Wallet Adapter protocol in JavaScript. It provides a library of classes and methods to start a session between your dApp and a wallet app, in which you can issue API calls to it (eg. *sign_messages*) as per the spec. 
+The [**Mobile Wallet Adapter Javascript library**](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/js/packages) is an implementation of the [Mobile Wallet Adapter](../getting-started/overview#mobile-wallet-adapter) protocol in [React Native](https://reactnative.dev/docs/getting-started). It provides a library of classes and methods to start a session between your dApp and a wallet app, in which you can issue API calls to it (eg. *sign_messages*) as per the spec. 
 
 ### Library overview
-[`@solana-mobile/mobile-wallet-adapter-protocol`](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/js/packages/mobile-wallet-adapter-protocol) is a React Native npmt package that provides an implementation of the Mobile Wallet Adapter protocol, enabling interaction with MWA-compatible wallets.
+[`@solana-mobile/mobile-wallet-adapter-protocol`](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/js/packages/mobile-wallet-adapter-protocol) is a React Native npm package that provides an implementation of the Mobile Wallet Adapter protocol, enabling interaction with MWA-compatible wallets.
 
 [`@solana-mobile/mobile-wallet-adapter-protocol-web3js`](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/js/packages/mobile-wallet-adapter-protocol-web3js) is a convenience wrapper package around `mobile-wallet-adapter-protocol` enabling use of common primitives from @solana/web3.js – such as [`Transaction`](https://solana-labs.github.io/solana-web3.js/classes/Transaction.html) and `Uint8Array`.
 

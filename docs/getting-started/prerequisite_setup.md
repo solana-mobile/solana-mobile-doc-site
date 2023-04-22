@@ -2,7 +2,6 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Card from "../../src/components/Card"
 import CardLayout from "../../src/layouts/CardLayout"
-import SDKCard from "../../src/components/SDKCard"
 
 # Prerequisite Setup
 
@@ -61,7 +60,7 @@ Fakewallet was created for implementation reference and quick testing purposes. 
 Currently, the Solana Mobile SDK can be installed as a dependency for apps built in React Native and Android Native. In the future, there will be support for additional frameworks like React Native Expo, Flutter/Dart.
 
 <CardLayout>
-    <SDKCard
+    <Card
         to="/react-native/quickstart"
         header={{
             label: "React Native Quickstart",
@@ -73,7 +72,7 @@ Currently, the Solana Mobile SDK can be installed as a dependency for apps built
         }}
         iconPath="img/react-native-96.svg"
     />
-    <SDKCard
+    <Card
         to="/android-native/quickstart"
         header={{
             label: "Android Quickstart",

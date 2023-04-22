@@ -20,7 +20,7 @@ You can continue using well supported and useful Solana web libraries like [`@so
 
 ### Prerequisites
 
-Follow the [development setup](../getting-started/development_setup#install-a-wallet-app) guide to set up your [Android Device/Emulator](../getting-started/development_setup#android-deviceemulator) and install a MWA-compatible wallet, like [fakewallet](../getting-started/development_setup#install-a-wallet-app).
+Follow the [prerequisite setup](../getting-started/prerequisite_setup#install-a-wallet-app) guide to set up your [Android Device/Emulator](../getting-started/prerequisite_setup#android-deviceemulator) and install a MWA-compatible wallet, like [fakewallet](../getting-started/prerequisite_setup#install-a-wallet-app).
 
 ### Clone Solana Mobile dApp Scaffold
 
@@ -119,6 +119,6 @@ The Metro Bundler terminal UI will pop up then select the Android option. Your a
 
 Congrats! At this point, your React Native project is set up and running with all the dependencies to build a Solana Mobile dApp!
 
-You can follow the [React Native Hello World Tutorial](../getting-started/hello_world_tutorial.md) to see how to write components that can connect to the Solana network and record a message on the blockchain.
+You can follow the [React Native Hello World Tutorial](../react-native/hello_world_tutorial.md) to see how to write components that can connect to the Solana network and record a message on the blockchain.
 
 
