@@ -38,6 +38,7 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
+          editUrl: 'https://github.com/solana-mobile/solana-mobile-doc-site/tree/main/',
           routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
         },
