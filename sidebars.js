@@ -30,18 +30,13 @@ const sidebars = {
         },
         {
           type: 'doc',
-          id: 'getting-started/development_setup',
-          label: 'Development Setup'
+          id: 'getting-started/overview',
+          label: 'SMS Overview'
         },
         {
-          type: 'category',
-          label: 'Hello World Tutorial',
-          collapsible: true,
-          items: [{
-            type: 'doc',
-            id: 'getting-started/hello_world_tutorial',
-            label: 'React Native'
-          },]
+          type: 'doc',
+          id: 'getting-started/prerequisite_setup',
+          label: 'Prerequisite Setup'
         },
       ],
     },
@@ -54,6 +49,11 @@ const sidebars = {
           type: 'doc',
           id: 'react-native/quickstart',
           label: 'Quickstart'
+        },
+        {
+          type: 'doc',
+          id: 'react-native/hello_world_tutorial',
+          label: 'Hello World Tutorial'
         },
         {
           type: 'doc',
@@ -99,18 +99,6 @@ const sidebars = {
       label: 'Sample App Collection',
       id: 'sample-apps/sample_app_overview',
     },
-    {
-      type: 'category',
-      label: 'Additional SDKs',
-      collapsible: true,
-      items: [
-        {
-          type: 'doc',
-          id: 'additional-sdks/seedvault_intro',
-          label: 'Seed Vault SDK'
-        },
-      ],
-    }
   ]
 };
 

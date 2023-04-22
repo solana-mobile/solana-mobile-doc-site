@@ -1,60 +1,47 @@
 --- 
-hide_table_of_contents: true
+hide_table_of_contents: false
+title: Solana Mobile Documentation
 ---
 
 import CTAButton from "../../src/components/CTAButton"
 import Card from "../../src/components/Card"
+import SDKCard from "../../src/components/SDKCard"
 import CardLayout from "../../src/layouts/CardLayout"
 
-# Introduction
+The **Solana Mobile Stack (SMS)** is an open source collection of libraries that provides key technologies for building Mobile dApps that can interact with the Solana network. This documentation site provides guides, tutorials, and references to help developers get started building on Solana.
 
-The **Solana Mobile Stack** is an open source collection of libraries that provides key technologies for building Mobile dApps that can interact with the Solana network. 
-
-The SDK provides libraries for wallets and apps, allowing developers to create rich mobile experiences for the Solana network with integrations for popular frameworks like Android Native and React Native. 
-
-Get started by setting up your development environment and following the Hello World Tutorial to learn the core concepts of building a Solana Mobile dApp.
+The SDK is primarily developed and maintained by the [Solana Mobile](https://github.com/solana-mobile) team, but welcomes contributions from the community!
 
 :::note
-You don't need a Saga device or physical device to build on Solana Mobile. See [**development setup**](development_setup) to set up your development environment and start building!
+You don't need a Saga device or physical device to build on Solana Mobile. See [**prerequisite setup**](prerequisite_setup) to set up your development environment and start building!
 :::
 
-## Quickstart     
+## Quickstart 
+Learn to how to develop Solana Mobile dApps in your preferred programming language.
+
 <CardLayout>
-    <Card
-        to="development_setup"
+    <SDKCard
+        to="/react-native/quickstart"
         header={{
-            label: "Setup Development",
-            translateId: "development-setup",
-        }}
-        body={{
-            label: "Quickly set up your Android device and integrate your app with Mobile Wallet Adapter.",
-            translateId: "development-setup-body",
-        }}
-    />
-    <Card
-        to="hello_world_tutorial"
-        header={{
-            label: "Hello World React Native Tutorial",
+            label: "React Native Quickstart",
             translateId: "developer-programs",
         }}
         body={{
-            label: "Learn how to write your first Solana Mobile React Native app with a step-by-step tutorial.",
+            label: "Quickly set up a React Native project and start building on Solana Mobile with our Javascript SDKs.",
             translateId: "learn-programs",
         }}
+        iconPath="img/react-native-96.svg"
     />
-    <Card
-        to="../sample-apps/sample_app_overview"
+    <SDKCard
+        to="/android-native/quickstart"
         header={{
-            label: "Learn Through Example Apps",
-            translateId: "sample-app-collection",
+            label: "Android Quickstart",
+            translateId: "development-setup",
         }}
         body={{
-            label: "Browse through and learn from our collection of sample apps.",
-            translateId: "sample-app-collection-body",
+            label: "Quickly set up an Android project and start building on Solana Mobile with our Android SDK.",
+            translateId: "development-setup-body",
         }}
+        iconPath="img/android_icon.svg"
     />
-
 </CardLayout>
-
-
-##
