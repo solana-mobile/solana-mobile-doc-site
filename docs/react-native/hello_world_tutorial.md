@@ -61,29 +61,29 @@ In `MainScreen.tsx`:
 <TabItem value="ConnectButton" label="ConnectButton">
 
 ```tsx
-export default function ConnectButton({ onConnect }: ConnectButtonProps) {
+export default function ConnectButton({onConnect}: ConnectButtonProps) {
   const onPress = async () => {
     await transact(async wallet => {
-      // Transact starts a session with the wallet app during which this app 
+      // Transact starts a session with the wallet app during which our app
       // can send actions (like `authorize`) to the wallet.
       const authResult: AuthorizationResult = await wallet.authorize({
         cluster: 'devnet',
         identity: APP_IDENTITY,
       });
-      const {accounts, auth_token} = authResult
+      const {accounts, auth_token} = authResult;
 
-      // After authorizing, store the results with the onConnect callback we pass into the button
+      // After authorizing, store the authResult with the onConnect callback we pass into the button
       onConnect({
-        address: accounts[0].address, // fakewallet only has one acccount, so just use accounts[0]
+        address: accounts[0].address,
         label: accounts[0].label,
         authToken: auth_token,
-        publicKey: getPublicKeyFromAddress(accounts[0].address) 
-      })
+        publicKey: getPublicKeyFromAddress(accounts[0].address),
+      });
     });
-  }
+  };
   return (
     <TouchableOpacity style={styles.button} onPress={onPress}>
-        <Text style={styles.buttonText}>Connect Wallet</Text>
+      <Text style={styles.buttonText}>Connect Wallet</Text>
     </TouchableOpacity>
   );
 }
@@ -94,30 +94,36 @@ export default function ConnectButton({ onConnect }: ConnectButtonProps) {
 
 ```tsx
 export default function MainScreen() {
-  const {connection} = useConnection()
-  const [message, setMessage] = useState<string>("")
-  const [authorization, setAuthorization] = useState<Authorization | null>(null);
+  const {connection} = useConnection();
+  const [message, setMessage] = useState<string>('');
+  const [authorization, setAuthorization] = useState<Authorization | null>(
+    null,
+  );
   return (
     <>
-        <View style={styles.mainContainer}>
-          <ScrollView contentContainerStyle={styles.scrollContainer}>
-              <View style={styles.header}>
-                  <Text style={styles.headerText}>Hello Solana!</Text>
-              </View>
+      <View style={styles.mainContainer}>
+        <ScrollView contentContainerStyle={styles.scrollContainer}>
+          <View style={styles.header}>
+            <Text style={styles.headerText}>Hello Solana!</Text>
+          </View>
 
-              {/* Text Input */}
-              <View>
-                  <Text style={styles.inputHeader}>What's on your mind?</Text>
-                  <TextInput
-                  style={styles.input}
-                  numberOfLines={1}
-                  onChangeText={(text) => setMessage(text)}
-                  placeholder="Write your message here"
-                  />
-              </View>
-          </ScrollView>
-          <ConnectButton onConnect={async (authorization: Authorization) => { setAuthorization(authorization) }} />
-        </View>
+          {/* Text Input */}
+          <View>
+            <Text style={styles.inputHeader}>What's on your mind?</Text>
+            <TextInput
+              style={styles.input}
+              numberOfLines={1}
+              onChangeText={text => setMessage(text)}
+              placeholder="Write your message here"
+            />
+          </View>
+        </ScrollView>
+        <ConnectButton
+          onConnect={async (authorization: Authorization) => {
+            setAuthorization(authorization);
+          }}
+        />
+      </View>
     </>
   );
 }
@@ -141,23 +147,27 @@ In `MainScreen.tsx`:
 <TabItem value="DisconnectButton" label="DisconnectButton">
 
 ```tsx
-export default function DisconnectButton({ onDisconnect, authorization }: DisconnectButtonProps) {
+export default function DisconnectButton({
+  onDisconnect,
+  authorization,
+}: DisconnectButtonProps) {
   const onPress = async () => {
     await transact(async wallet => {
-       // The deauthorize request will invalidate the authToken.
-       await wallet.deauthorize({
-        auth_token: authorization.authToken
+      // The deauthorize request will invalidate the authToken.
+      await wallet.deauthorize({
+        auth_token: authorization.authToken,
       });
       // Set stored authorization state to null through onDisconnect callback
-      onDisconnect()
+      onDisconnect();
     });
-  }
+  };
   return (
     <TouchableOpacity style={styles.button} onPress={onPress}>
-        <Text style={styles.buttonText}>Disconnect Wallet</Text>
+      <Text style={styles.buttonText}>Disconnect Wallet</Text>
     </TouchableOpacity>
   );
 }
+
 ```
 
 </TabItem>
@@ -165,36 +175,52 @@ export default function DisconnectButton({ onDisconnect, authorization }: Discon
 
 ```tsx
 export default function MainScreen() {
-  const {connection} = useConnection()
-  const [message, setMessage] = useState<string>("")
-  const [authorization, setAuthorization] = useState<Authorization | null>(null);
+  const {connection} = useConnection();
+  const [message, setMessage] = useState<string>('');
+  const [authorization, setAuthorization] = useState<Authorization | null>(
+    null,
+  );
   return (
     <>
-        <View style={styles.mainContainer}>
-          <ScrollView contentContainerStyle={styles.scrollContainer}>
-              <View style={styles.header}>
-                  <Text style={styles.headerText}>Hello Solana!</Text>
-              </View>
+      <View style={styles.mainContainer}>
+        <ScrollView contentContainerStyle={styles.scrollContainer}>
+          <View style={styles.header}>
+            <Text style={styles.headerText}>Hello Solana!</Text>
+          </View>
 
-              {/* Text Input */}
-              <View>
-                  <Text style={styles.inputHeader}>What's on your mind?</Text>
-                  <TextInput
-                  style={styles.input}
-                  numberOfLines={1}
-                  onChangeText={(text) => setMessage(text)}
-                  placeholder="Write your message here"
-                  />
-              </View>
-          </ScrollView>
-          {authorization === null ? 
-              <ConnectButton onConnect={async (authorization: Authorization) => { setAuthorization(authorization) }} /> :
-              <DisconnectButton authorization={authorization} onDisconnect={() => {  setAuthorization(null) }} />
-          }
-        </View>
+          {/* Text Input */}
+          <View>
+            <Text style={styles.inputHeader}>What's on your mind?</Text>
+            <TextInput
+              style={styles.input}
+              numberOfLines={1}
+              onChangeText={text => setMessage(text)}
+              placeholder="Write your message here"
+            />
+          </View>
+        </ScrollView>
+
+        {/* Conditionally render connect or disconnect, 
+            depending on if a wallet is connected */}
+        {authorization === null ? (
+          <ConnectButton
+            onConnect={async (authorization: Authorization) => {
+              setAuthorization(authorization);
+            }}
+          />
+        ) : (
+          <DisconnectButton
+            authorization={authorization}
+            onDisconnect={() => {
+              setAuthorization(null);
+            }}
+          />
+        )}
+      </View>
     </>
   );
 }
+
 ```
 
 </TabItem>
@@ -219,72 +245,94 @@ The starter code handles wrapping the app with a `ConnectionProvider` in `App.ts
 <TabItem value="AccountInfoSection" label="AccountInfoSection">
 
 ```tsx
-export default function AccountInfoSection({ authorization, balance }: AccountInfoProps) {
+export default function AccountInfoSection({
+  authorization,
+  balance,
+}: AccountInfoProps) {
   return (
     <View style={styles.container}>
       <View style={styles.textContainer}>
         <Text style={styles.walletBalance}>
-          {balance !== null ? `Balance: ${convertLamportsToSOL(balance)} SOL` : "Loading balance..."}
+          {balance !== null
+            ? `Balance: ${convertLamportsToSOL(balance)} SOL`
+            : 'Loading balance...'}
         </Text>
-        <Text style={styles.walletName}>{authorization.label ?? "Wallet name not found"}</Text>
+        <Text style={styles.walletName}>
+          {authorization.label ?? 'Wallet name not found'}
+        </Text>
         <Text style={styles.walletNameSubtitle}>{authorization.address}</Text>
       </View>
     </View>
   );
 }
+
 ```
 </TabItem>
 <TabItem value="MainScreen" label="MainScreen">
 
 ```tsx
 export default function MainScreen() {
-  const {connection} = useConnection()
-  const [message, setMessage] = useState<string>("")
-  const [authorization, setAuthorization] = useState<Authorization | null>(null);
-  const [balance, setBalance] = useState<number | null>(null)
+  const {connection} = useConnection();
+  const [message, setMessage] = useState<string>('');
+  const [authorization, setAuthorization] = useState<Authorization | null>(
+    null,
+  );
+  const [balance, setBalance] = useState<number | null>(null);
 
   const fetchAndUpdateBalance = async (authorization: Authorization) => {
     // The ConnectionProvider (in App.tsx) is set to the devnet endpoint.
-    const balance = await connection.getBalance(authorization.publicKey)
-    console.log("Balance fetched: " + balance)
-    setBalance(balance)
-  }
+    const balance = await connection.getBalance(authorization.publicKey);
+    console.log('Balance fetched: ' + balance);
+    setBalance(balance);
+  };
 
   useEffect(() => {
     // Fetch and update balance, if connected to a wallet.
     if (!authorization) {
       return;
     }
-    fetchAndUpdateBalance(authorization)
-  }, [authorization])
+    fetchAndUpdateBalance(authorization);
+  }, [authorization]);
 
   return (
     <>
-        <View style={styles.mainContainer}>
-          <ScrollView contentContainerStyle={styles.scrollContainer}>
-              <View style={styles.header}>
-                  <Text style={styles.headerText}>Hello Solana!</Text>
-              </View>
+      <View style={styles.mainContainer}>
+        <ScrollView contentContainerStyle={styles.scrollContainer}>
+          <View style={styles.header}>
+            <Text style={styles.headerText}>Hello Solana!</Text>
+          </View>
 
-              {/* Text Input */}
-              <View>
-                  <Text style={styles.inputHeader}>What's on your mind?</Text>
-                  <TextInput
-                  style={styles.input}
-                  numberOfLines={1}
-                  onChangeText={(text) => setMessage(text)}
-                  placeholder="Write your message here"
-                  />
-              </View>
+          {/* Text Input */}
+          <View>
+            <Text style={styles.inputHeader}>What's on your mind?</Text>
+            <TextInput
+              style={styles.input}
+              numberOfLines={1}
+              onChangeText={text => setMessage(text)}
+              placeholder="Write your message here"
+            />
+          </View>
 
           {/* Conditionally render if connected to a wallet. */}
-          {authorization !== null ? <AccountInfo authorization={authorization} balance={balance} /> : null}
-          </ScrollView>
-          {authorization === null ? 
-              <ConnectButton onConnect={async (authorization: Authorization) => { setAuthorization(authorization) }} /> :
-              <DisconnectButton authorization={authorization} onDisconnect={() => {  setAuthorization(null) }} />
-          }
-        </View>
+          {authorization !== null ? (
+            <AccountInfo authorization={authorization} balance={balance} />
+          ) : null}
+        </ScrollView>
+        {authorization === null ? (
+          <ConnectButton
+            onConnect={async (authorization: Authorization) => {
+              setAuthorization(authorization);
+            }}
+          />
+        ) : (
+          <DisconnectButton
+            authorization={authorization}
+            onDisconnect={() => {
+              setAuthorization(null);
+            }}
+          />
+        )}
+      </View>
     </>
   );
 }
@@ -309,41 +357,44 @@ at this step, it's most likely because due to this instability.
 <TabItem value="RequestAirdropButton" label="RequestAirdropButton">
 
 ```tsx
-export default function RequestAirdropButton({ authorization, onAirdropComplete }: AccountInfoProps) {
-  const {connection} = useConnection()
-  
+export default function RequestAirdropButton({
+  authorization,
+  onAirdropComplete,
+}: AccountInfoProps) {
+  const {connection} = useConnection();
+
   const requestAirdrop = async () => {
     // SOL/Lamports will be airdropped to the wallet's address (public key).
     // Use Promise.all to also fetch the latest block hash in parallel.
     const [signature, latestBlockhash] = await Promise.all([
-      connection.requestAirdrop(
-        authorization.publicKey,
-        LAMPORTS_PER_AIRDROP
-      ),
-      connection.getLatestBlockhash()
+      connection.requestAirdrop(authorization.publicKey, LAMPORTS_PER_AIRDROP),
+      connection.getLatestBlockhash(),
     ]);
 
     // Confirm that the airdrop was successful.
     return await connection.confirmTransaction({
       signature: signature,
-      ...latestBlockhash
-    })
-  }
+      ...latestBlockhash,
+    });
+  };
 
   return (
-    <TouchableOpacity 
-          style={styles.button} 
-          onPress={async () => {
-            const result = await requestAirdrop()
-            const error = result?.value?.err
-            if (error) {
-              console.log('Failed to fund account: ' + (error instanceof Error ? error.message : error))
-            } else {
-              // Fetch and update balance if airdrop is successful
-              onAirdropComplete(authorization)
-            }
-          }}>
-          <Text style={styles.buttonText}>Request airdrop</Text>
+    <TouchableOpacity
+      style={styles.button}
+      onPress={async () => {
+        const result = await requestAirdrop();
+        const error = result?.value?.err;
+        if (error) {
+          console.log(
+            'Failed to fund account: ' +
+              (error instanceof Error ? error.message : error),
+          );
+        } else {
+          // Fetch and update balance if airdrop is successful
+          onAirdropComplete(authorization);
+        }
+      }}>
+      <Text style={styles.buttonText}>Request airdrop</Text>
     </TouchableOpacity>
   );
 }
@@ -353,57 +404,77 @@ export default function RequestAirdropButton({ authorization, onAirdropComplete 
 
 ```tsx
 export default function MainScreen() {
-  const {connection} = useConnection()
-  const [message, setMessage] = useState<string>("")
-  const [authorization, setAuthorization] = useState<Authorization | null>(null);
-  const [balance, setBalance] = useState<number | null>(null)
+  const {connection} = useConnection();
+  const [message, setMessage] = useState<string>('');
+  const [authorization, setAuthorization] = useState<Authorization | null>(
+    null,
+  );
+  const [balance, setBalance] = useState<number | null>(null);
 
   const fetchAndUpdateBalance = async (authorization: Authorization) => {
     // The ConnectionProvider (in App.tsx) is set to the devnet endpoint.
-    const balance = await connection.getBalance(authorization.publicKey)
-    console.log("Balance fetched: " + balance)
-    setBalance(balance)
-  }
+    const balance = await connection.getBalance(authorization.publicKey);
+    console.log('Balance fetched: ' + balance);
+    setBalance(balance);
+  };
 
   useEffect(() => {
     // Fetch and update balance, after connecting to a wallet.
     if (!authorization) {
       return;
     }
-    fetchAndUpdateBalance(authorization)
-  }, [authorization])
+    fetchAndUpdateBalance(authorization);
+  }, [authorization]);
 
   return (
     <>
-        <View style={styles.mainContainer}>
-          <ScrollView contentContainerStyle={styles.scrollContainer}>
-              <View style={styles.header}>
-                  <Text style={styles.headerText}>Hello Solana!</Text>
-              </View>
+      <View style={styles.mainContainer}>
+        <ScrollView contentContainerStyle={styles.scrollContainer}>
+          <View style={styles.header}>
+            <Text style={styles.headerText}>Hello Solana!</Text>
+          </View>
 
-              {/* Text Input */}
-              <View>
-                  <Text style={styles.inputHeader}>What's on your mind?</Text>
-                  <TextInput
-                  style={styles.input}
-                  numberOfLines={1}
-                  onChangeText={(text) => setMessage(text)}
-                  placeholder="Write your message here"
-                  />
-              </View>
+          {/* Text Input */}
+          <View>
+            <Text style={styles.inputHeader}>What's on your mind?</Text>
+            <TextInput
+              style={styles.input}
+              numberOfLines={1}
+              onChangeText={text => setMessage(text)}
+              placeholder="Write your message here"
+            />
+          </View>
 
           {/* Conditionally render if connected to a wallet. */}
-          {authorization !== null ? <AccountInfo authorization={authorization} balance={balance} /> : null}
+          {authorization !== null ? (
+            <AccountInfo authorization={authorization} balance={balance} />
+          ) : null}
           <View style={styles.buttonGroup}>
-            {authorization !== null ? <RequestAirdropButton authorization={authorization} 
-                                            onAirdropComplete={(authorization: Authorization) => {fetchAndUpdateBalance(authorization)}} /> : null}
+            {authorization !== null ? (
+              <RequestAirdropButton
+                authorization={authorization}
+                onAirdropComplete={(authorization: Authorization) => {
+                  fetchAndUpdateBalance(authorization);
+                }}
+              />
+            ) : null}
           </View>
-          </ScrollView>
-          {authorization === null ? 
-              <ConnectButton onConnect={async (authorization: Authorization) => { setAuthorization(authorization) }} /> :
-              <DisconnectButton authorization={authorization} onDisconnect={() => {  setAuthorization(null) }} />
-          }
-        </View>
+        </ScrollView>
+        {authorization === null ? (
+          <ConnectButton
+            onConnect={async (authorization: Authorization) => {
+              setAuthorization(authorization);
+            }}
+          />
+        ) : (
+          <DisconnectButton
+            authorization={authorization}
+            onDisconnect={() => {
+              setAuthorization(null);
+            }}
+          />
+        )}
+      </View>
     </>
   );
 }
@@ -425,24 +496,29 @@ In `RecordMessageButton.tsx`, create a function `recordMessage` that:
 
 ```tsx
 // Takes in a `Buffer` type that represents the message string.
-async function recordMessage(authorization: Authorization, messageBuffer: Buffer): Promise<[string, RpcResponseAndContext<SignatureResult>]> {
-  const {connection} = useConnection()
+async function recordMessage(
+  connection: Connection,
+  authorization: Authorization,
+  messageBuffer: Buffer,
+): Promise<[string, RpcResponseAndContext<SignatureResult>]> {
   const [signature] = await transact(async wallet => {
-    // Start a wallet session with `transact` and `reauthorize` 
-    // the dApp by passing in the `authToken`.
-    const authResult: AuthorizationResult = await wallet.reauthorize({
-      auth_token: authorization.authToken,
-      identity: APP_IDENTITY
-    })
-    const latestBlockhash = await connection.getLatestBlockhash()
+    // Start a wallet session with `transact` and `reauthorize` our dApp by passing in the `authToken`.
+    // Use Promise.all to also fetch the latest block hash in parallel.
+    const [authResult, latestBlockhash] = await Promise.all([
+      wallet.reauthorize({
+        auth_token: authorization.authToken,
+        identity: APP_IDENTITY,
+      }),
+      connection.getLatestBlockhash(),
+    ]);
 
     // Construct a `Transaction` with an instruction to invoke the `MemoProgram`.
     const memoProgramTransaction = new Transaction({
       ...latestBlockhash,
-      feePayer: authorization.publicKey
+      feePayer: authorization.publicKey,
     }).add(
       new TransactionInstruction({
-        data: messageBuffer, 
+        data: messageBuffer,
         keys: [],
         programId: new PublicKey(
           'MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr', // Memo Program address
@@ -450,14 +526,20 @@ async function recordMessage(authorization: Authorization, messageBuffer: Buffer
       }),
     );
 
-    // Send a `signAndSendTransactions` request to the wallet. 
-    // The wallet will sign the transaction with the private key and send it to devnet.
+    // Send a `signAndSendTransactions` request to the wallet. The wallet will sign the transaction with the private key and send it to devnet.
     return await wallet.signAndSendTransactions({
       transactions: [memoProgramTransaction],
     });
   });
 
-  return [signature, await connection.confirmTransaction(signature)]
+  const latestBlockhash = await connection.getLatestBlockhash();
+  return [
+    signature,
+    await connection.confirmTransaction({
+      signature: signature,
+      ...latestBlockhash,
+    }),
+  ];
 }
 ```
 
@@ -465,32 +547,46 @@ async function recordMessage(authorization: Authorization, messageBuffer: Buffer
 <TabItem value="RecordMessageButton" label="RecordMessageButton">
 
 ```tsx
-export default function RecordMessageButton({ authorization, message }: RecordMessageButtonProps) {
+export default function RecordMessageButton({
+  authorization,
+  message,
+}: RecordMessageButtonProps) {
+  const {connection} = useConnection();
   const buttonDisabled = message === null || message.length === 0;
-  const buttonStyle = buttonDisabled ? styles.disabled : styles.enabled
+  const buttonStyle = buttonDisabled ? styles.disabled : styles.enabled;
   return (
-    <TouchableOpacity disabled={buttonDisabled} style={[styles.button, buttonStyle]} onPress={
-        async () => {
-            // Convert the message string into a `Buffer` type and pass into the helper function
-            const result = await recordMessage(authorization, new TextEncoder().encode(message) as Buffer)
-            if (result) {
-                const [signature, response] = result
-                const err = response.value.err
-                if (err) {
-                    console.log('Failed to record message:' + (err instanceof Error ? err.message : err))
-                } else {
-                    // recordMessage was successful, so construct a link to the transaction on Solana Explorer
-                    const explorerUrl =
-                          'https://explorer.solana.com/tx/' +
-                          signature +
-                          '?cluster=' +
-                          WalletAdapterNetwork.Devnet;
-                    console.log('Successfully recorded a message. View your message at: ' + explorerUrl)
-                }
-            }
+    <TouchableOpacity
+      disabled={buttonDisabled}
+      style={[styles.button, buttonStyle]}
+      onPress={async () => {
+        const result = await recordMessage(
+          connection,
+          authorization,
+          new TextEncoder().encode(message) as Buffer,
+        );
+        if (result) {
+          const [signature, response] = result;
+          const err = response.value.err;
+          if (err) {
+            console.log(
+              'Failed to record message:' +
+                (err instanceof Error ? err.message : err),
+            );
+          } else {
+            const explorerUrl =
+              'https://explorer.solana.com/tx/' +
+              signature +
+              '?cluster=' +
+              WalletAdapterNetwork.Devnet;
+            console.log(
+              'Successfully recorded a message. View your message at: ' +
+                explorerUrl,
+            );
+            // TODO: Add an alert to give the user an option to click the link.
+          }
         }
-    }>
-        <Text style={styles.buttonText}>Record message</Text>
+      }}>
+      <Text style={styles.buttonText}>Record message</Text>
     </TouchableOpacity>
   );
 }
@@ -530,7 +626,6 @@ Explore guides and SDK references to learn more and create more advanced applica
 - If you want to see more examples of dApps, then check out this [curated list](../sample-apps/sample_app_overview) of Solana mobile sample apps. It also includes a more [robust version of the app](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/examples/example-react-native-app) built in this tutorial.
 
 ### Guides/References
-- [Mobile Wallet Adapter Javascript SDK reference](https://solana-labs.github.io/solana-web3.js/)
 - [web3.js Javascript SDK reference](https://solana-labs.github.io/solana-web3.js/)
 - [Writing your own Solana programs](https://docs.solana.com/developing/on-chain-programs/overview)
 
