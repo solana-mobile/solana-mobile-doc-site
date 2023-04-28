@@ -10,6 +10,10 @@ Unity is a popular development platform for games and other real-time 3D experie
 
 The Solana Unity SDK is an open source community led project that enables Solana NFT support and RPC functionality to Unity games and projects. If you are a game developer looking to incorporate web3 features using the Solana blockchain, check out the [Solana.Unity-SDK](https://solana.unity-sdk.gg/).
 
-### [Quickstart Setup](https://solana.unity-sdk.gg/docs/installation)
+## Quickstart
 
-### [dApp Integration Guide](https://solana.unity-sdk.gg/docs/configuration)
+### [Solana Unity SDK Setup](https://solana.unity-sdk.gg/docs/installation)
+A step by step guide to import and setup the Solana Unity SDK in Unity.
+
+### [Mobile Wallet Adapter Integration Guide](https://solana.unity-sdk.gg/docs/configuration)
+Learn how to configure an external wallet using Mobile Wallet Adapter in your Unity project.
