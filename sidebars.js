@@ -95,6 +95,18 @@ const sidebars = {
       ]  
     },
     {
+      type: 'category',
+      label: 'Additional SDKs',
+      collapsible: true,
+      items: [
+        {
+          type: 'doc',
+          id: 'additional-sdks/unity_intro',
+          label: 'Unity SDK'
+        },
+      ]  
+    },
+    {
       type: 'doc',
       label: 'Sample App Collection',
       id: 'sample-apps/sample_app_overview',
