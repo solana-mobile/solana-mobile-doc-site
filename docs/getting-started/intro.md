@@ -46,7 +46,7 @@ Learn to how to develop Solana Mobile dApps in your preferred programming langua
 
 <CardLayout>
     <Card
-        to="/getting-started/overview"
+        to="/react-native/quickstart#clone-solana-mobile-dapp-scaffold"
         header={{
             label: "React Native Scaffold dApp",
             translateId: "developer-programs",
@@ -58,7 +58,7 @@ Learn to how to develop Solana Mobile dApps in your preferred programming langua
         iconPath="img/rocket-icon2.png"
     />
     <Card
-        to="https://docs.solana.com/introduction"
+        to="/sample-apps/sample_app_overview"
         header={{
             label: "Sample Apps",
             translateId: "development-setup",
