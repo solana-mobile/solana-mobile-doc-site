@@ -53,28 +53,28 @@ import {AuthorizeAPI} from '@solana-mobile/mobile-wallet-adapter-protocol';
 export const APP_IDENTITY = {
   name: 'React Native dApp',
   uri:  'https://yourdapp.com'
-  icon: "favicon.ico",
+  icon: "./favicon.ico",
 };
 
-await transact(async (wallet: AuthorizeAPI) => {
+const authorizationResult = await transact(async (wallet: AuthorizeAPI) => {
   const authorizationResult = await wallet.authorize({
     cluster: 'devnet',
     identity: APP_IDENTITY,
   }));
 
-  // Rest of transact code goes below...
+  return authorizationResult;
 });
 ```
 
-Once authorized with a wallet, the app can request the wallet to sign transactions, messages and send transactions via RPC. `authorize` also returns an [`AuthorizationResult`](https://github.com/solana-mobile/mobile-wallet-adapter/blob/main/js/packages/mobile-wallet-adapter-protocol/src/types.ts#L31) that contains information from the wallet app.
+Once authorized with a wallet, the app can request the wallet to sign transactions, messages and send transactions via RPC. We'll cover that in the next section. 
 
-`AuthorizationResult` contains: 
+`authorize` returns an [`AuthorizationResult`](https://github.com/solana-mobile/mobile-wallet-adapter/blob/main/js/packages/mobile-wallet-adapter-protocol/src/types.ts#L31) that contains:
 - `accounts`: An array of [Accounts](https://github.com/solana-mobile/mobile-wallet-adapter/blob/main/js/packages/mobile-wallet-adapter-protocol/src/types.ts#L3) (a label and public key) from the wallet.
 - `authToken`: An authorization token that can be stored and re-used for requathorization on subsequent connections.
 
 ### Reauthorization for subsequent connections
 
-For subsequent connections to the wallet app, you can skip the authorization step by sending a `reauthorization` request 
+For subsequent connections to the wallet app, you can skip the authorization step by sending a `reauthorize` request 
 with a previously stored `authToken`. If still valid, `reauthorize` will bypass the need to explicitly grant authorization again.
 
 ```tsx
@@ -84,7 +84,7 @@ import {AuthorizeAPI, DeauthorizeAPI} from '@solana-mobile/mobile-wallet-adapter
 export const APP_IDENTITY = {
   name: 'React Native dApp',
   uri:  'https://yourdapp.com'
-  icon: "favicon.ico",
+  icon: "./favicon.ico",
 };
 
 // If we have one, retrieve an authToken from a previous authorization. 
@@ -106,6 +106,100 @@ await transact(async (wallet: AuthorizeAPI & ReauthorizeAPI) => {
 });
 ```
 
+## Signing Transactions and Messages
 
+After authorized with a wallet, you can now request signing services within `transact` with:
+- `signMessages`
+- `signTransactions`
 
+<Tabs>
+<TabItem value="signMessasges" label="signMessages">
+
+```tsx
+import {transact} from '@solana-mobile/mobile-wallet-adapter-protocol-web3js';
+
+// If we have one, retrieve an authToken from a previous authorization. 
+const storedAuthToken = maybeGetStoredAuthToken(); // dummy placeholder function
+const message = 'Hello world!'
+const messageBuffer = new Uint8Array(
+  message.split('').map(c => c.charCodeAt(0)),
+);
+
+const signedMessages = await transact(async (wallet) => {
+  // First, request for authorization from the wallet.
+  const authorizationResult = await (storedAuthToken
+    ? wallet.reauthorize({
+        auth_token: storedAuthToken,
+        identity: APP_IDENTITY,
+      })
+    : wallet.authorize({
+      cluster: 'devnet',
+      identity: APP_IDENTITY,
+  }));
+
+  // Sign the payload with the provided address from authorization.
+  const signedMessages = wallet.signMessages({
+    addresses: [authorizationResult.address].
+    payloads: [messageBuffer]
+  })
+
+  return signedMessages;
+});
+```
+
+</TabItem>
+<TabItem value="signTransactions" label="signTransactions">
+
+```tsx
+import {transact} from '@solana-mobile/mobile-wallet-adapter-protocol-web3js';
+import {
+  Keypair,
+  clusterApiUrl,
+  Connection,
+  SystemProgram,
+  Transaction,
+} from '@solana/web3.js';
+
+// If we have one, retrieve an authToken from a previous authorization. 
+const storedAuthToken = maybeGetStoredAuthToken(); // dummy placeholder function
+const connection = new Connection(clusterApiUrl('devnet'), 'confirmed');
+
+await transact(async (wallet) => {
+  // First, request for authorization from the wallet.
+  const authorizationResult = await (storedAuthToken
+    ? wallet.reauthorize({
+        auth_token: storedAuthToken,
+        identity: APP_IDENTITY,
+      })
+    : wallet.authorize({
+      cluster: 'devnet',
+      identity: APP_IDENTITY,
+    }));
+
+  // Construct a transaction. This transaction uses web3.js `SystemProgram`
+  // to create a transfer that sends lamports to randomly generated address.
+  const latestBlockhash = await connection.getLatestBlockhash();
+  const keypair = Keypair.generate();
+  const randomTransferTransaction = new Transaction({
+    ...latestBlockhash,
+    feePayer: authorizationResult.publicKey,
+  }).add(
+    SystemProgram.transfer({
+      fromPubkey: authorizationResult.publicKey,
+      toPubkey: keypair.publicKey,
+      lamports: 1_000,
+    }),
+  );
+
+  // Sign and return the transactions.
+  const signedTransactions: await wallet.signTransactions({
+    transactions: [memoProgramTransaction],
+  });
+
+  return signedTransactions;
+});
+```
+
+</TabItem>
+</Tabs>
 
