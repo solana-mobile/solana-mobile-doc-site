@@ -5,6 +5,16 @@ title: Overview
 ## Building for the Solana Mobile Stack
 Building for the Solana Mobile Stack is, at its core, building for Android. The SDK provides enabling libraries for wallets and apps, allowing developers to create rich mobile experiences for the Solana network. Whether you are developing a mobile-friendly web app, a React Native Android app, or a native mobile wallet app, these libraries, samples, and reference implementations will help you to use the Solana network on Android devices.
 
+## Development community
+
+#### Discord
+Currently, most technical discussion around the Solana Mobile Stack happens in our offical [Solana Mobile Discord](https://discord.gg/solanamobile).
+If you have any questions, are interested in contributing, or want to get in touch with the development community, come join and send a message!
+
+#### Twitter
+
+On Twitter, you can follow [@SolanaMobile](https://twitter.com/solanamobile).
+
 ## What’s in the Solana Mobile Stack?
 
 ### Mobile Wallet Adapter
