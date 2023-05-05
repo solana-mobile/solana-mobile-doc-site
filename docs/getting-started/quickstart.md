@@ -10,7 +10,8 @@ building a mobile app on Solana.
 
 ## Choose a development framework
 
-Currently, the Solana Mobile SDK can be installed as a dependency for Android apps built in React Native and Android Native. In the future, there will be support for additional frameworks like Flutter/Dart. 
+Currently, the Solana Mobile SDK is primarily supported for Android apps built in React Native and Android Native. 
+In particular,  **Mobile Wallet Adapter** has a React Native and an Android library maintained by the Solana Mobile team.
 
 <CardLayout>
     <Card
@@ -38,6 +39,11 @@ Currently, the Solana Mobile SDK can be installed as a dependency for Android ap
         iconPath="img/android_icon.svg"
     />
 </CardLayout>
+
+### Additional SDKs
+
+- **[Solana Mobile Flutter SDK](/additional-sdks/flutter_sdk)** for those interested in developing Flutter mobile dApps.
+- **[Solana Unity SDK](/additional-sdks/unity_intro):** for game developers interested in integrating Solana in a mobile game.
 
 ## Prerequisite Setup
 

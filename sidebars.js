@@ -104,6 +104,11 @@ const sidebars = {
           id: 'additional-sdks/unity_intro',
           label: 'Unity SDK'
         },
+        {
+          type: 'doc',
+          id: 'additional-sdks/flutter_sdk',
+          label: 'Flutter SDK'
+        },
       ]  
     },
     {

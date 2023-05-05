@@ -162,7 +162,6 @@ import {
 
 // If we have one, retrieve an authToken from a previous authorization. 
 const storedAuthToken = maybeGetStoredAuthToken(); // dummy placeholder function
-const connection = new Connection(clusterApiUrl('devnet'), 'confirmed');
 
 await transact(async (wallet) => {
   // First, request for authorization from the wallet.
@@ -176,9 +175,13 @@ await transact(async (wallet) => {
       identity: APP_IDENTITY,
     }));
 
+  // Connect to an RPC endpoint and get the latest blockhash, to include in
+  // the transaction.
+  const connection = new Connection(clusterApiUrl('devnet'), 'confirmed');
+  const latestBlockhash = await connection.getLatestBlockhash();
+
   // Construct a transaction. This transaction uses web3.js `SystemProgram`
   // to create a transfer that sends lamports to randomly generated address.
-  const latestBlockhash = await connection.getLatestBlockhash();
   const keypair = Keypair.generate();
   const randomTransferTransaction = new Transaction({
     ...latestBlockhash,
@@ -202,4 +205,5 @@ await transact(async (wallet) => {
 
 </TabItem>
 </Tabs>
+
 
