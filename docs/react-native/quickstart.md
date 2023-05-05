@@ -62,7 +62,7 @@ yarn add \
   @solana-mobile/mobile-wallet-adapter-protocol \
   @solana/wallet-adapter-react \
   react-native-get-random-values \
-  react-native-url-polyfill
+  buffer
 ```
 
 </TabItem>
@@ -76,7 +76,7 @@ npm install \
   @solana-mobile/mobile-wallet-adapter-protocol \
   @solana/wallet-adapter-react \
   react-native-get-random-values \
-  react-native-url-polyfill
+  buffer
 ```
 
 </TabItem>
@@ -89,19 +89,26 @@ npm install \
 - `@solana-mobile/mobile-wallet-adapter-protocol-web3js`: A convenience wrapper to use common primitives from [@solana/web3.js](https://github.com/solana-labs/solana-web3.js) – such as `Transaction` and `Uint8Array`.
 - `@solana/web3.js`: Solana Web Library for interacting with Solana network through the [JSON RPC API](https://docs.solana.com/api/http).
 - `@solana/wallet-adapter-react`: Solana Web Library where we can re-use certain React components/hooks like `ConnectionProvider`.
-- `react-native-get-random-values` Secure random number generator polyfil for `web3.js` underlying Crypto library. 
-- `react-native-url-polyfill`: Polyfill for React Native's missing `URL` class.
+- `react-native-get-random-values` Secure random number generator polyfill for `web3.js` underlying Crypto library on React Native. 
+- `buffer` Buffer polyfill also needed for `web3.js` on React Native.
 
 </details>
 
 
-#### Step 3: Update index.js
+#### Step 3: Update index.js with polyfills
 
-To load the polyfills, we open the file index.js in the root of the project and add the following two lines to the top of the file:
+To load the polyfills, we open the file `index.js` in the root of the project and add the following two lines to the top of the file:
+
+:::note
+Make sure you place these imports before your App component import!
+:::
 
 ```javascript
-import 'react-native-get-random-values';
-import 'react-native-url-polyfill/auto';
+import {Buffer} from 'buffer';
+import 'react-native-get-random-values'
+
+// Place the App component import below your polyfill imports!
+import App from './App';
 ```
 
 #### Step 4: Run the app on device/emulator
@@ -110,7 +117,7 @@ Make sure your device/emulator is set up by following the [official React Native
 
 In your project folder run:
 ```
-npx react-native start
+npx react-native run-android
 ```
 The Metro Bundler terminal UI will pop up then select the Android option. Your app should build and launch on your emulator. 
 
