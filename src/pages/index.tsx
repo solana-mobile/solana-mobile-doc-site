@@ -34,13 +34,13 @@ function HomeCallToAction() {
     <>
       <ActionButton
         type="primary"
-        href={useBaseUrl('getting-started/quickstart')}
+        href={useBaseUrl('getting-started/intro')}
         target="_self">
         Get started
       </ActionButton>
       <ActionButton
         type="secondary"
-        href={useBaseUrl('getting-started/intro')}
+        href={useBaseUrl('getting-started/overview')}
         target="_self">
         Learn the stack
       </ActionButton>
