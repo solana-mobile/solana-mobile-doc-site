@@ -44,7 +44,7 @@ After starting a session with a wallet app with `transact`, you should first req
 When requesting `authorization`, include an [App Identity](https://github.com/solana-mobile/mobile-wallet-adapter/blob/main/js/packages/mobile-wallet-adapter-protocol/src/types.ts#L13) to the request so users can recognize your app during the authorization flow.
 - `name`: The name of your app.
 - `uri`: The web URL associated with your app.
-- `icon`: A relative path to your app icon.
+- `icon`: A path to your app icon relative to the app uri above.
 
 ```tsx
 import {transact} from '@solana-mobile/mobile-wallet-adapter-protocol-web3js';
@@ -53,7 +53,7 @@ import {AuthorizeAPI} from '@solana-mobile/mobile-wallet-adapter-protocol';
 export const APP_IDENTITY = {
   name: 'React Native dApp',
   uri:  'https://yourdapp.com'
-  icon: "./favicon.ico",
+  icon: "favicon.ico", // Full path resolves to https://yourdapp.com/favicon.ico
 };
 
 const authorizationResult = await transact(async (wallet: AuthorizeAPI) => {

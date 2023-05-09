@@ -51,7 +51,7 @@ When requesting `authorization`, pass in identity metadata to the request so use
 the authorization flow.
 - `identityName`: The name of your app.
 - `identityUri`: The web URL associated with your app.
-- `iconUri`: A relative path to your app icon.
+- `iconUri`: A path to your app icon relative to the app uri above.
 
 <Tabs>
 <TabItem value="Kotlin" label="Kotlin">
@@ -63,7 +63,7 @@ val walletAdapterClient = MobileWalletAdapter()
 val result = walletAdapterClient.transact(sender) {
     // Pass in identity metadata about your app.
     val identityUri = Uri.parse("https://yourapp.com")
-    val iconUri = Uri.parse("favicon.ico")
+    val iconUri = Uri.parse("favicon.ico") // Full path resolves to https://yourdapp.com/favicon.ico
     val identityName = "Example Solana app"
 
     // `authorize` prompts the user to accept your authorization request.
