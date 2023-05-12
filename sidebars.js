@@ -47,6 +47,16 @@ const sidebars = {
       items: [
         {
           type: 'doc',
+          id: 'react-native/overview',
+          label: 'Overview'
+        },
+        {
+          type: 'doc',
+          id: 'react-native/setup',
+          label: 'Setup'
+        },
+        {
+          type: 'doc',
           id: 'react-native/quickstart',
           label: 'Quickstart'
         },
@@ -54,11 +64,6 @@ const sidebars = {
           type: 'doc',
           id: 'react-native/hello_world_tutorial',
           label: 'Hello World Tutorial'
-        },
-        {
-          type: 'doc',
-          id: 'react-native/mwa_integration_rn',
-          label: 'Integrate with MWA'
         },
         {
           type: 'doc',

@@ -3,129 +3,212 @@ import TabItem from '@theme/TabItem';
 
 # React Native Quickstart
 
-This quickstart guide will cover:
-- An overview of Solana Mobile's React Native SDK.
-- How to clone and run our React Native dApp Scaffold.
-- How to install the SDK into a React Native project.
+This guide covers basic use cases and teaches you how to use our React Native SDK in your mobile app.
+For a more comprehensive guide of how to build a complete app, check out our React Native [starter tutorial](/react-native/hello_world_tutorial).
 
-## Overview
+### What you will learn
+- How to use **Mobile Wallet Adapter** to:
+  - Connect to a wallet app with `transact`.
+  - Request wallet authorization and reauthorization.
+  - Sign transactions and messages
+- How to use **web3.js** to:
+  - Connect to a Solana RPC endpoint.
+  - Construct a Solana transaction for signing.
 
-The Solana Mobile SDK provides a [React Native package](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/js/packages/mobile-wallet-adapter-protocol) that implements the Mobile Wallet Adapter protocol and [a wrapper package](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/js/packages/mobile-wallet-adapter-protocol-web3js) for easier integration with [@solana/web3.js](https://github.com/solana-labs/solana-web3.js).
+## Connect to a wallet
 
-Developing with the React Native SDK will be familiar for developers that already have experience building Solana Web dApps. 
+To connect to a wallet, use the [`transact`](https://github.com/solana-mobile/mobile-wallet-adapter/blob/main/js/packages/mobile-wallet-adapter-protocol-web3js/src/transact.ts) function from `@solana-mobile/mobile-wallet-adapter-protocol-web3js`. 
 
-You can continue using well supported and useful Solana web libraries like [`@solana/web3.js`](https://github.com/solana-labs/solana-web3.js/) and [`@solana/wallet-adapter-react`](https://github.com/solana-labs/wallet-adapter`).
+The `transact` method starts a session with a locally installed MWA-compatible wallet app. Within the callback, use
+`wallet` to send requests for signing or sending transactions/messages.
 
-## React Native Project Setup
+```tsx
+import {transact} from '@solana-mobile/mobile-wallet-adapter-protocol-web3js';
 
-### Prerequisites
-
-Follow the [prerequisite setup](../getting-started/quickstart#prerequisite-setup) guide to set up your [Android Device/Emulator](../getting-started/quickstart#android-deviceemulator) and install a MWA-compatible wallet, like [fakewallet](../getting-started/quickstart#install-a-wallet-app).
-
-### Clone Solana Mobile dApp Scaffold
-
-The fastest way to start building React Native on Solana is cloning our [Solana Mobile React Native dApp Scaffold](https://github.com/solana-mobile/SolanaMobileDAppScaffold):
-
-```shell
-git clone https://github.com/solana-mobile/SolanaMobileDAppScaffold.git
+await transact(async (wallet) => {
+    /* ... */
+});
 ```
 
-The scaffold is a ready-to-go React Native dApp that comes with:
-- The Mobile Wallet Adapter JS SDK and `@solana/web3.js`.
-- Required polyfills like `react-native-get-random-values` and `react-native-url-polyfill` installed.
-- Wallet authorization/connecting and airdrop request functionality.
-- Premade React UI Components like `ConnectWalletButton`, `RequestAirdropButton`, `AccountInfoComponent`.
+## Authorizing a wallet
+After starting a session with a wallet app with `transact`, you should first request authorization for your app with a call to [`authorize`](https://www.javadoc.io/doc/com.solanamobile/mobile-wallet-adapter-clientlib-ktx/latest/com/solana/mobilewalletadapter/clientlib/AdapterOperations.html#authorize(Uri,Uri,String,RpcCluster)).
 
+When requesting `authorization`, include an [App Identity](https://github.com/solana-mobile/mobile-wallet-adapter/blob/main/js/packages/mobile-wallet-adapter-protocol/src/types.ts#L13) to the request so users can recognize your app during the authorization flow.
+- `name`: The name of your app.
+- `uri`: The web URL associated with your app.
+- `icon`: A path to your app icon relative to the app uri above.
 
-### Setting up a new React Native project
+```tsx
+import {transact} from '@solana-mobile/mobile-wallet-adapter-protocol-web3js';
+import {AuthorizeAPI} from '@solana-mobile/mobile-wallet-adapter-protocol';
 
-If you want to create a new React Native project from scratch then follow these steps. If you want to integrate an existing project with the SDK, then skip to [installing the dependencies](#step-2-install-dependencies).
+export const APP_IDENTITY = {
+  name: 'React Native dApp',
+  uri:  'https://yourdapp.com'
+  icon: "favicon.ico", // Full path resolves to https://yourdapp.com/favicon.ico
+};
 
-As a prerequisite, follow the [React Native official documentation](https://reactnative.dev/docs/environment-setup) and set up your environment for Android.
+const authorizationResult = await transact(async (wallet: AuthorizeAPI) => {
+  const authorizationResult = await wallet.authorize({
+    cluster: 'devnet',
+    identity: APP_IDENTITY,
+  }));
 
-#### Step 1: Initialize a new React Native project
-
-```shell
-npx react-native@latest init MySolanaMobileDapp
-cd MySolanaMobileDapp
+  return authorizationResult;
+});
 ```
 
-#### Step 2: Install dependencies
+Once authorized with a wallet, the app can request the wallet to sign transactions, messages and send transactions via RPC. We'll cover that in the next section. 
+
+`authorize` returns an [`AuthorizationResult`](https://github.com/solana-mobile/mobile-wallet-adapter/blob/main/js/packages/mobile-wallet-adapter-protocol/src/types.ts#L31) that contains:
+- `accounts`: An array of [Accounts](https://github.com/solana-mobile/mobile-wallet-adapter/blob/main/js/packages/mobile-wallet-adapter-protocol/src/types.ts#L3) (a label and public key) from the wallet.
+- `authToken`: An authorization token that can be stored and re-used for requathorization on subsequent connections.
+
+### Reauthorization for subsequent connections
+
+For subsequent connections to the wallet app, you can skip the authorization step by sending a `reauthorize` request 
+with a previously stored `authToken`. If still valid, `reauthorize` will bypass the need to explicitly grant authorization again.
+
+```tsx
+import {transact} from '@solana-mobile/mobile-wallet-adapter-protocol-web3js';
+import {AuthorizeAPI, DeauthorizeAPI} from '@solana-mobile/mobile-wallet-adapter-protocol';
+
+export const APP_IDENTITY = {
+  name: 'React Native dApp',
+  uri:  'https://yourdapp.com'
+  icon: "./favicon.ico",
+};
+
+// If we have one, retrieve an authToken from a previous authorization. 
+const storedAuthToken = maybeGetStoredAuthToken(); // dummy placeholder function
+
+await transact(async (wallet: AuthorizeAPI & ReauthorizeAPI) => {
+  // If we have a previously stored authToken, we can instead call `reauthorize`.
+  const authorizationResult = await (storedAuthToken
+    ? wallet.reauthorize({
+        auth_token: storedAuthToken,
+        identity: APP_IDENTITY,
+      })
+    : wallet.authorize({
+      cluster: 'devnet',
+      identity: APP_IDENTITY,
+    }));
+
+  // Rest of transact code goes below...
+});
+```
+
+## Signing Transactions and Messages
+
+After authorized with a wallet, you can now request signing services within `transact` with:
+- `signMessages`
+- `signTransactions`
+
+In `signTransactions`, we use using [**System Program**](https://docs.solana.com/developing/runtime-facilities/programs#system-program) to generate a simple *transfer* instruction that moves SOL around. *System Program* is an example of a Solana [Native Program](https://docs.solana.com/developing/runtime-facilities/programs).
 
 <Tabs>
-<TabItem value="yarn" label="yarn">
+<TabItem value="signMessasges" label="signMessages">
 
-```shell
-yarn add \
-  @solana/web3.js \
-  @solana-mobile/mobile-wallet-adapter-protocol-web3js \
-  @solana-mobile/mobile-wallet-adapter-protocol \
-  @solana/wallet-adapter-react \
-  react-native-get-random-values \
-  buffer
+```tsx
+import {transact} from '@solana-mobile/mobile-wallet-adapter-protocol-web3js';
+
+// If we have one, retrieve an authToken from a previous authorization. 
+const storedAuthToken = maybeGetStoredAuthToken(); // dummy placeholder function
+const message = 'Hello world!'
+const messageBuffer = new Uint8Array(
+  message.split('').map(c => c.charCodeAt(0)),
+);
+
+const signedMessages = await transact(async (wallet) => {
+  // First, request for authorization from the wallet.
+  const authorizationResult = await (storedAuthToken
+    ? wallet.reauthorize({
+        auth_token: storedAuthToken,
+        identity: APP_IDENTITY,
+      })
+    : wallet.authorize({
+      cluster: 'devnet',
+      identity: APP_IDENTITY,
+  }));
+
+  // Sign the payload with the provided address from authorization.
+  const signedMessages = wallet.signMessages({
+    addresses: [authorizationResult.address].
+    payloads: [messageBuffer]
+  })
+
+  return signedMessages;
+});
 ```
 
 </TabItem>
-<TabItem value="npm" label="npm">
+<TabItem value="signTransactions" label="signTransactions">
 
+```tsx
+import {transact} from '@solana-mobile/mobile-wallet-adapter-protocol-web3js';
+import {
+  Keypair,
+  clusterApiUrl,
+  Connection,
+  SystemProgram,
+  Transaction,
+} from '@solana/web3.js';
 
-```shell
-npm install \
-  @solana/web3.js \
-  @solana-mobile/mobile-wallet-adapter-protocol-web3js \
-  @solana-mobile/mobile-wallet-adapter-protocol \
-  @solana/wallet-adapter-react \
-  react-native-get-random-values \
-  buffer
+// If we have one, retrieve an authToken from a previous authorization. 
+const storedAuthToken = maybeGetStoredAuthToken(); // dummy placeholder function
+
+await transact(async (wallet) => {
+  // First, request for authorization from the wallet.
+  const authorizationResult = await (storedAuthToken
+    ? wallet.reauthorize({
+        auth_token: storedAuthToken,
+        identity: APP_IDENTITY,
+      })
+    : wallet.authorize({
+      cluster: 'devnet',
+      identity: APP_IDENTITY,
+    }));
+
+  // Connect to an RPC endpoint and get the latest blockhash, to include in
+  // the transaction.
+  const connection = new Connection(clusterApiUrl('devnet'), 'confirmed');
+  const latestBlockhash = await connection.getLatestBlockhash();
+
+  // Construct a transaction. This transaction uses web3.js `SystemProgram`
+  // to create a transfer that sends lamports to randomly generated address.
+  const keypair = Keypair.generate();
+  const randomTransferTransaction = new Transaction({
+    ...latestBlockhash,
+    feePayer: authorizationResult.publicKey,
+  }).add(
+    SystemProgram.transfer({
+      fromPubkey: authorizationResult.publicKey,
+      toPubkey: keypair.publicKey,
+      lamports: 1_000,
+    }),
+  );
+
+  // Sign and return the transactions.
+  const signedTransactions: await wallet.signTransactions({
+    transactions: [memoProgramTransaction],
+  });
+
+  return signedTransactions;
+});
 ```
 
 </TabItem>
 </Tabs>
 
-<details>
-<summary>A brief overview of each dependency:</summary>
-
-- `@solana-mobile/mobile-wallet-adapter-protocol`: A React Native/Javascript API enabling interaction with MWA-compatible wallets.
-- `@solana-mobile/mobile-wallet-adapter-protocol-web3js`: A convenience wrapper to use common primitives from [@solana/web3.js](https://github.com/solana-labs/solana-web3.js) – such as `Transaction` and `Uint8Array`.
-- `@solana/web3.js`: Solana Web Library for interacting with Solana network through the [JSON RPC API](https://docs.solana.com/api/http).
-- `@solana/wallet-adapter-react`: Solana Web Library where we can re-use certain React components/hooks like `ConnectionProvider`.
-- `react-native-get-random-values` Secure random number generator polyfill for `web3.js` underlying Crypto library on React Native. 
-- `buffer` Buffer polyfill also needed for `web3.js` on React Native.
-
-</details>
-
-
-#### Step 3: Update index.js with polyfills
-
-To load the polyfills, we open the file `index.js` in the root of the project and add the following two lines to the top of the file:
-
-:::note
-Make sure you place these imports before your App component import!
-:::
-
-```javascript
-import {Buffer} from 'buffer';
-import 'react-native-get-random-values'
-
-// Place the App component import below your polyfill imports!
-import App from './App';
-```
-
-#### Step 4: Run the app on device/emulator
-
-Make sure your device/emulator is set up by following the [official React Native documentation](https://reactnative.dev/docs/running-on-device). 
-
-In your project folder run:
-```
-npx react-native run-android
-```
-The Metro Bundler terminal UI will pop up then select the Android option. Your app should build and launch on your emulator. 
-
-
 ## Next Steps
 
-Congrats! At this point, your React Native project is set up and running with all the dependencies to build a Solana Mobile dApp!
+- Dive into the [**Solana Program Library (SPL)**](https://spl.solana.com/) to learn about more interesting Solana Programs, like the [Token Program](https://spl.solana.com/token) used to create NFTs!
 
-You can follow the [React Native Hello World Tutorial](../react-native/hello_world_tutorial.md) to see how to write components that can connect to the Solana network and record a message on the blockchain.
+- Follow the [Hello World Tutorial](../react-native/hello_world_tutorial.md) to learn how to write a React Native app, create UI components, and record a public message on the Solana Blockchain.
+
+- See our collection of [Sample Apps](/sample-apps/sample_app_overview) to reference a full React Native app.
+
+
+
 
 
