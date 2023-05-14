@@ -76,7 +76,7 @@ export default function Home(): JSX.Element {
   return (
     <Layout
       title={`${siteConfig.title}`}
-      description="The documentation site for Solana Mobile">
+      description="A mobile development stack for building Solana Mobile dApps">
       <HeaderHero />
     </Layout>
   );

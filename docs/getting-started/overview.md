@@ -17,7 +17,7 @@ You don't need a Saga device or physical device to build on Solana Mobile. The s
 
 [**Mobile Wallet Adapter (MWA)**](https://github.com/solana-mobile/mobile-wallet-adapter) is the core enabling SDK and first step in building a Solana Mobile dApp. For dApp developers, **MWA allows your app to connect to any compatible wallet app** (like Phantom and Solflare) and then perform actions like signing and sending transactions to the Solana network.
 
-Why this is important -- dApp developers no longer need to build in support for each individual wallet, instead **just integrate the MWA SDK once to be compatible with every compliant Solana wallet!**
+Why this is important: dApp developers no longer need to build in support for each individual wallet, and instead can just **integrate the MWA SDK once to be compatible with every compliant Solana wallet!**
 
 ### Integrate MWA into your dApp
 

@@ -6,7 +6,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Solana Mobile',
+  title: 'Solana Mobile Docs',
   tagline: 'Learn to build on Solana Mobile',
   favicon: 'img/favicon.ico',
 
@@ -54,7 +54,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       // Replace with your project's social card
-      image: 'img/solanamobile.png',
+      image: 'img/solana-mobile-stack-social-card.png',
       colorMode: {
         defaultMode: 'dark',
         disableSwitch: true,
@@ -115,7 +115,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} Solana Mobile, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Solana Mobile, Inc.`,
       },
       prism: {
         additionalLanguages: ['kotlin'],
