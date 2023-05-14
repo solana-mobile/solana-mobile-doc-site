@@ -3,64 +3,103 @@ import TabItem from '@theme/TabItem';
 
 # Android Native Quickstart
 
-This quickstart guide will cover:
+:::note
+This page is a work in progress. More content is being worked on and will being added soon!
+:::
 
-- An overview of Solana Mobile's Android Native SDK.
-- How to install and integrate Mobile Wallet Adapter into a Kotlin or Java Android project.
+### What you will learn
+- How to use [**Mobile Wallet Adapter**](/android-native/overview#library-overview) to:
+  - Connect to a wallet app with `transact`.
+  - Request wallet authorization and reauthorization.
 
-## Overview
+## Connect to a wallet
 
-The Solana Mobile SDK's provides a [Mobile Wallet Adapter](https://github.com/solana-mobile/mobile-wallet-adapter) client library for native Android apps, enabling MWA-compatible wallet apps to connect and provide transaction signing services for the app.
+To connect to a wallet, use the [`transact`](https://www.javadoc.io/doc/com.solanamobile/mobile-wallet-adapter-clientlib-ktx/latest/com/solana/mobilewalletadapter/clientlib/MobileWalletAdapter.html) method provided by the `MobileWalletAdapter` class. 
 
-## Android Project Setup
+The `transact` method instantiates a [`Scenario`](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/android/clientlib/src/main/java/com/solana/mobilewalletadapter/clientlib/scenario/Scenario.java) and dispatches an association Intent via [`startActivity()`](https://developer.android.com/reference/android/app/Activity#startActivity(android.content.Intent)) that will be received by MWA-compatible wallet apps. 
 
-### Prerequisites
+This starts a session with a wallet and within the callback, the app can send requests for signing or sending transactions/messages.
 
-- Download [Android Studio](https://developer.android.com/studio) or your Android development IDE of choice.
+```kotlin
+import com.solana.mobilewalletadapter.clientlib.*
 
-- Follow the [prerequisite setup](../getting-started/quickstart#prerequisite-setup) guide to set up your [Android Device/Emulator](../getting-started/quickstart#android-deviceemulator) and install a MWA-compatible wallet, like [fakewallet](../getting-started/quickstart#install-a-wallet-app).
-
-
-### Setting up an Android Project 
-
-Follow these steps to install the Mobile Wallet Adapter dependencies into a new or existing Android project.
-
-#### Step 1: Navigate to your Android project's build.gradle file
-In Android Studio, navigate to your Android project's module `build.gradle` file.
-
-#### Step 2. Add MWA dependencies
-The Mobile Wallet Adapter SDK is hosted on [Maven repository](https://mvnrepository.com/artifact/com.solanamobile/mobile-wallet-adapter-clientlib), so you just need to add the appropriate library to the dependencies section in your `build.gradle:
-
-<Tabs>
-<TabItem value="kotlin" label="Kotlin">
-
-```language-kotlin
-dependencies {
-    // other dependencies here
-    implementation 'com.solanamobile:mobile-wallet-adapter-clientlib-ktx:1.0.5'
+val walletAdapterClient = MobileWalletAdapter()
+val result = walletAdapterClient.transact(sender) {
+    /* ... */
 }
 ```
 
-</TabItem>
-<TabItem value="java" label="Java">
+## Authorizing a wallet
+After starting a `Scenario` with a wallet app with `transact`, you should first request authorization for your app with a call to [`authorize`](https://www.javadoc.io/doc/com.solanamobile/mobile-wallet-adapter-clientlib-ktx/latest/com/solana/mobilewalletadapter/clientlib/AdapterOperations.html#authorize(Uri,Uri,String,RpcCluster)).
 
+When requesting `authorization`, pass in identity metadata to the request so users can recognize your app during 
+the authorization flow.
+- `identityName`: The name of your app.
+- `identityUri`: The web URL associated with your app.
+- `iconUri`: A path to your app icon relative to the app uri above.
 
-```groovy
-dependencies {
-    // other dependencies here
-    implementation 'com.solanamobile:mobile-wallet-adapter-clientlib:1.0.5'
+<Tabs>
+<TabItem value="Kotlin" label="Kotlin">
+
+```kotlin
+import com.solana.mobilewalletadapter.clientlib.*
+
+val walletAdapterClient = MobileWalletAdapter()
+val result = walletAdapterClient.transact(sender) {
+    // Pass in identity metadata about your app.
+    val identityUri = Uri.parse("https://yourapp.com")
+    val iconUri = Uri.parse("favicon.ico") // Full path resolves to https://yourdapp.com/favicon.ico
+    val identityName = "Example Solana app"
+
+    // `authorize` prompts the user to accept your authorization request.
+    val authed = client.authorize(identityUri, iconUri, identityName, RpcCluster.Devnet)
+
+    // Rest of transact code goes below...
 }
 ```
 
 </TabItem>
 </Tabs>
 
-#### Step 3. Build and run your app
+Once authorized with a wallet, the app can request the wallet to sign transactions, messages and send transactions via RPC. `authorize` also returns an [`AuthorizationResult`](https://www.javadoc.io/doc/com.solanamobile/mobile-wallet-adapter-clientlib/latest/com/solana/mobilewalletadapter/clientlib/protocol/MobileWalletAdapterClient.AuthorizationResult.html) that contains metadata from the wallet, like the wallet label and an `authToken`.
 
-Your project's dependencies should be set up and you can try building and run the app!
+### Reauthorization for subsequent connections
+
+For subsequent connections to the wallet app, you can skip the authorization step by sending a `reauthorization` request 
+with a previously stored `authToken`. If still valid, `reauthorize` will bypass the need to explicitly grant authorization again.
+
+<Tabs>
+<TabItem value="Kotlin" label="Kotlin">
+
+```kotlin
+import com.solana.mobilewalletadapter.clientlib.*
+
+val walletAdapterClient = MobileWalletAdapter()
+val result = walletAdapterClient.transact(sender) {
+    // Pass in app identity metadata
+    val identityUri = Uri.parse("https://yourapp.com")
+    val iconUri = Uri.parse("favicon.ico")
+    val identityName = "Example Solana app"
+
+    if (hasAuthToken) {
+        // If we've saved an authToken from a previous `AuthorizationResult`, we can skip `authorize`
+        // by sending a `reauthorize` request.
+        val reauthed = reauthorize(identityUri, iconUri, identityName, savedAuthToken)
+    } else {
+        val authed = client.authorize(identityUri, iconUri, identityName, RpcCluster.Devnet)
+    }
+
+    // Rest of transact code goes below...
+}
+```
+
+</TabItem>
+</Tabs>
 
 ## Next Steps
 
-Congrats! At this point, you have installed the Mobile Wallet Adapter SDK into your project and are ready to start building to interact with the Solana network.
+- Reference and learn about [Minty Fresh](https://github.com/solana-mobile/Minty-fresh) a Kotlin Android app where you can take a picture and mint it into NFT.
 
-To learn more about how to integrate Mobile Wallet Adapter into your Android Native app, you can reference our [Kotlin sample dApp](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/android/fakedapp/src/main/java/com/solana/mobilewalletadapter/fakedapp).
+- Dive into the [**Solana Program Library (SPL)**](https://spl.solana.com/) to learn about more interesting Solana Programs, like the [Token Program](https://spl.solana.com/token) used to create NFTs!
+
+

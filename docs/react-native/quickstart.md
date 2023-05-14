@@ -7,11 +7,11 @@ This guide covers basic use cases and teaches you how to use our React Native SD
 For a more comprehensive guide of how to build a complete app, check out our React Native [starter tutorial](/react-native/hello_world_tutorial).
 
 ### What you will learn
-- How to use **Mobile Wallet Adapter** to:
+- How to use [**Mobile Wallet Adapter**](/react-native/overview#library-overview) to:
   - Connect to a wallet app with `transact`.
   - Request wallet authorization and reauthorization.
   - Sign transactions and messages
-- How to use **web3.js** to:
+- How to use [**web3.js**](https://solana-labs.github.io/solana-web3.js/) to:
   - Connect to a Solana RPC endpoint.
   - Construct a Solana transaction for signing.
 

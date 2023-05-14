@@ -12,11 +12,11 @@ Developers familiar with React development will be able to leverage their existi
 ## Library overview
 You can find the full source code on [Github](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/js/packages).
 
-[`@solana-mobile/mobile-wallet-adapter-protocol`](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/js/packages/mobile-wallet-adapter-protocol)
+[**`@solana-mobile/mobile-wallet-adapter-protocol`**](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/js/packages/mobile-wallet-adapter-protocol)
 
 - An implementation of the [Mobile Wallet Adapter](../getting-started/overview#mobile-wallet-adapter) protocol in React Native. It provides a library of classes and methods to start a session between your dApp and a wallet app, in which you can issue API calls to it (eg. *sign_messages*) as per the spec. 
 
-[`@solana-mobile/mobile-wallet-adapter-protocol-web3js`](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/js/packages/mobile-wallet-adapter-protocol-web3js)
+[**`@solana-mobile/mobile-wallet-adapter-protocol-web3js`**](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/js/packages/mobile-wallet-adapter-protocol-web3js)
 - A convenience wrapper package around `mobile-wallet-adapter-protocol` enabling use of common primitives from [**@solana/web3.js**](https://solana-labs.github.io/solana-web3.js) – such as `Transaction` and `Uint8Array`. Use the `transact` function from this package.
 
 ## Expo?
