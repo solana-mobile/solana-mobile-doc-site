@@ -64,7 +64,7 @@ const config = {
         title: 'Solana Mobile',
         logo: {
           alt: 'Solana Mobile Logo',
-          src: 'img/solanamobile.png',
+          src: 'img/solana-mobile-stack-logo-50x50.png',
         },
         items: [
           {
