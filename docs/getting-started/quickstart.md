@@ -5,8 +5,8 @@ import CardLayout from "../../src/layouts/CardLayout"
 
 # Quickstart
 
-This guide will demonstrate how to quickly install necessary tools and set up your development environment, getting you ready to start
-building a mobile app on Solana. 
+This guide will demonstrate how to install necessary tools and set up your development environment, getting you ready to 
+build a mobile app on Solana. 
 
 ## Choose a development framework
 
@@ -52,22 +52,22 @@ Regardless of framework choice, ensure you follow this prerequisite setup guide 
 ### Android Device/Emulator
 
 :::note
-You don't need a Saga device or physical device to build on Solana Mobile! The Mobile Wallet Adapter SDK is compatible with any android device.
+You don't need a Saga device or physical device to build on Solana Mobile! The Mobile Wallet Adapter SDK is compatible with any Android device.
 :::
 
-To start building with the Solana Mobile SDK, you need an android device or emulator. You can follow the official [Android developer documentation](https://developer.android.com/studio/run/emulator)
+To start building with the Solana Mobile SDK, you will need an android device or emulator. You can follow the official [Android Emulator developer documentation](https://developer.android.com/studio/run/emulator)
 for this step.
 
-You will also most likely want to download [Android Studio](https://developer.android.com/studio) to build apps and manage your device.
+You will most likely want to download [Android Studio](https://developer.android.com/studio) to build apps and manage your device.
 
 ### Install a wallet app
 
-The [Mobile Wallet Adapter](https://github.com/solana-mobile/mobile-wallet-adapter) library allows your dApp to connect and interface with Wallet Apps that implement the Mobile Wallet Adapter protocol. For testing, you want to have a MWA-compatible wallet on the same device/emulator as your dApp.
+The [Mobile Wallet Adapter](https://github.com/solana-mobile/mobile-wallet-adapter) (MWA) library allows your dApp to connect and interface with Wallet Apps that implement the MWA protocol. For testing, you want to have an MWA-compatible wallet on the same device or emulator as your dApp.
 
 #### fakewallet
 
 The [fakewallet](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/android/fakewallet) app is a test implementation of a Solana wallet app compatible with 
-the Mobile Wallet Adapter SDK. It doesn't store persistent keypairs and the wallet is "reset" each time the app is exited.
+the Mobile Wallet Adapter SDK. It does not store persistent keypairs, and the wallet is "reset" each time the app is exited.
 
 <details>
 <summary>Installation steps</summary>
@@ -92,5 +92,5 @@ git clone https://github.com/solana-mobile/mobile-wallet-adapter.git
 
 #### Production
 
-Fakewallet was created for implementation reference and quick testing purposes. For production testing, test your dApp with popular MWA-compatible wallet apps like [Phantom](https://play.google.com/store/apps/details?id=app.phantom) and [Solflare](https://play.google.com/store/apps/details?id=com.solflare.mobile).
+fakewallet was created for implementation reference and quick testing purposes. For production testing, test your dApp with popular MWA-compatible wallet apps like [Phantom](https://play.google.com/store/apps/details?id=app.phantom) and [Solflare](https://play.google.com/store/apps/details?id=com.solflare.mobile).
 

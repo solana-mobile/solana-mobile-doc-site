@@ -6,16 +6,16 @@ title: Solana Mobile Documentation
 import Card from "../../src/components/Card"
 import CardLayout from "../../src/layouts/CardLayout"
 
-The **Solana Mobile Stack (SMS)** is an open source collection of libraries that provides key technologies for building Mobile dApps that can interact with the Solana network. This documentation site provides guides, tutorials, and references to help developers get started building on Solana Mobile.
+The **Solana Mobile Stack (SMS)** is an open source collection of libraries that provides key technologies for building Mobile dApps that can interact with the Solana network. This documentation site provides guides, tutorials, and references to help developers get started with building on Solana Mobile.
 
 The SDK is primarily developed and maintained by the [Solana Mobile](https://github.com/solana-mobile) team, but welcomes contributions from the community!
 
 :::note
-You don't need a Saga device or physical device to build on Solana Mobile. See [**prerequisite setup**](quickstart#prerequisite-setup) to set up your development environment and start building!
+You don't need a Saga device or physical device to build on Solana Mobile. The stack is compatible with any Android device. See [**prerequisite setup**](quickstart#prerequisite-setup) to set up your development environment and start building!
 :::
 
 ## Quickstart 
-Learn to how to develop Solana Mobile dApps in your preferred programming language.
+Learn how to develop Solana Mobile dApps in your preferred programming language.
 
 <CardLayout>
     <Card
@@ -52,7 +52,7 @@ Learn to how to develop Solana Mobile dApps in your preferred programming langua
             translateId: "developer-programs",
         }}
         body={{
-            label: "Get started building quickly by using our template React Native dApp.",
+            label: "Jump into building with our template React Native dApp.",
             translateId: "learn-programs",
         }}
         iconPath="img/rocket-icon2.png"
@@ -64,7 +64,7 @@ Learn to how to develop Solana Mobile dApps in your preferred programming langua
             translateId: "development-setup",
         }}
         body={{
-            label: "Reference our collection of sample apps to learn how to use the Solana Mobile Stack.",
+            label: "Reference our collection of sample apps that use the Solana Mobile Stack.",
             translateId: "development-setup-body",
         }}
         iconPath="img/bookshelf-circle-icon.png"
