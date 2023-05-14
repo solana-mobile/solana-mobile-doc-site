@@ -1,7 +1,7 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# React Native Project Setup
+# React Native dApp Setup
 
 ### Prerequisites
 

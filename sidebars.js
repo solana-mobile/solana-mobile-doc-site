@@ -79,13 +79,18 @@ const sidebars = {
       items: [
         {
           type: 'doc',
-          id: 'android-native/quickstart',
-          label: 'Quickstart'
+          id: 'android-native/overview',
+          label: 'Overview'
         },
         {
           type: 'doc',
-          id: 'android-native/mwa_integration',
-          label: 'Integrate with MWA'
+          id: 'android-native/setup',
+          label: 'Setup'
+        },
+        {
+          type: 'doc',
+          id: 'android-native/quickstart',
+          label: 'Quickstart'
         },
         {
           type: 'link',

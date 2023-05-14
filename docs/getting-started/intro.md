@@ -19,25 +19,25 @@ Learn how to develop Solana Mobile dApps in your preferred programming language.
 
 <CardLayout>
     <Card
-        to="/react-native/quickstart"
+        to="/react-native/overview"
         header={{
-            label: "React Native Quickstart",
+            label: "React Native SDK",
             translateId: "developer-programs",
         }}
         body={{
-            label: "Quickly set up a React Native project and start building on Solana Mobile with our Javascript SDKs.",
+            label: "Learn about the React Native SDK and how to quickly start building on Solana Mobile.",
             translateId: "learn-programs",
         }}
         iconPath="img/react-native-96.svg"
     />
     <Card
-        to="/android-native/quickstart"
+        to="/android-native/overview"
         header={{
-            label: "Android Quickstart",
+            label: "Android SDK",
             translateId: "development-setup",
         }}
         body={{
-            label: "Quickly set up an Android project and start building on Solana Mobile with our Android SDK.",
+            label: "Learn how to build on native Android and build an app with full Android capabilities.",
             translateId: "development-setup-body",
         }}
         iconPath="img/android_icon.svg"

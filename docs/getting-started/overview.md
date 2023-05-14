@@ -28,8 +28,8 @@ Mobile Wallet Adapter SDK is available for developers using **React Native**, **
 The quickest path to using MWA is starting with our [React Native Scaffold Mobile dApp](/react-native/quickstart#clone-solana-mobile-dapp-scaffold) that comes with prebuilt components. This is a great option for developers already familiar with React, web development, or the Solana web stack.
 
 **Resources**
-- **Installation/Setup:** [React Native](/react-native/setup) - [Android](/android-native/quickstart) - [Flutter](/additional-sdks/flutter_sdk)
-- **Quickstart Guides:** [React Native](/react-native/quickstart) - [Android (Kotlin)](/android-native/mwa_integration)
+- **Installation/Setup:** [React Native](/react-native/setup) - [Android](/android-native/setup) - [Flutter](/additional-sdks/flutter_sdk)
+- **Quickstart Guides:** [React Native](/react-native/quickstart) - [Android (Kotlin)](/android-native/quickstart)
 - **Tutorials:** [React Native Hello World dApp](react-native/hello_world_tutorial)
 - [Sample App Collection](/sample-apps/sample_app_overview)
 
