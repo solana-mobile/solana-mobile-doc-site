@@ -25,6 +25,8 @@ The scaffold is a ready-to-go React Native dApp that comes with:
 - Wallet authorization/connecting and airdrop request functionality.
 - Premade React UI Components like `ConnectWalletButton`, `RequestAirdropButton`, `SignMessageButton`.
 
+After cloning, you can quickly build your first dApp following this [tutorial!](/react-native/first_app_tutorial)
+
 
 ### Setting up a new React Native project
 

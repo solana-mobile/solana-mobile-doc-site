@@ -4,7 +4,7 @@ import TabItem from '@theme/TabItem';
 # React Native Quickstart
 
 This guide covers basic use cases and teaches you how to use our React Native SDK in your mobile app.
-For a more comprehensive guide of how to build a complete app, check out our React Native [starter tutorial](/react-native/hello_world_tutorial).
+For a more comprehensive guide of how to build your first  dApp, check out our React Native [starter tutorial](/react-native/first_app_tutorial).
 
 ### What you will learn
 - How to use [**Mobile Wallet Adapter**](/react-native/overview#library-overview) to:
@@ -104,7 +104,7 @@ After authorized with a wallet, you can now request signing services within `tra
 - `signMessages`
 - `signTransactions`
 
-In `signTransactions`, we use using [**System Program**](https://docs.solana.com/developing/runtime-facilities/programs#system-program) to generate a simple *transfer* instruction that moves SOL around. *System Program* is an example of a Solana [Native Program](https://docs.solana.com/developing/runtime-facilities/programs).
+In `signTransactions`, we use using [**System Program**](https://docs.solana.com/developing/runtime-facilities/programs#system-program) to generate a simple *transfer* instruction that moves SOL around. *System Program* is an example of a Solana [Native Program](https://docs.solana.com/developing/runtime-facilities/programs). To learn more about Solana transactions see the this [deep dive](https://docs.solana.com/developing/programming-model/transactions).
 
 <Tabs>
 <TabItem value="signMessasges" label="signMessages">
@@ -204,7 +204,7 @@ await transact(async (wallet) => {
 
 - Dive into the [**Solana Program Library (SPL)**](https://spl.solana.com/) to learn about more interesting Solana Programs, like the [Token Program](https://spl.solana.com/token) used to create NFTs!
 
-- Follow the [Hello World Tutorial](../react-native/hello_world_tutorial.md) to learn how to write a React Native app, create UI components, and record a public message on the Solana Blockchain.
+- Follow the [First dApp Tutorial](/react-native/first_app_tutorial.md) to learn how to use our scaffold dApp, create UI components, and record a public message on the Solana Blockchain.
 
 - See our collection of [Sample Apps](/sample-apps/sample_app_overview) to reference a full React Native app.
 

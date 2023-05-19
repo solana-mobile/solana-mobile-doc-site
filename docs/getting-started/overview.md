@@ -30,7 +30,7 @@ The quickest path to using MWA is starting with our [React Native Scaffold Mobil
 **Resources**
 - **Installation/Setup:** [React Native](/react-native/setup) - [Android](/android-native/setup) - [Flutter](/additional-sdks/flutter_sdk)
 - **Quickstart Guides:** [React Native](/react-native/quickstart) - [Android (Kotlin)](/android-native/quickstart)
-- **Tutorials:** [React Native Hello World dApp](/react-native/hello_world_tutorial)
+- **Tutorials:** [Build your first dApp](/react-native/first_app_tutorial)
 - [Sample App Collection](/sample-apps/sample_app_overview)
 
 #### Deep dive learning
