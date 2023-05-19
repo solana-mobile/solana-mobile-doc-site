@@ -70,6 +70,11 @@ const sidebars = {
           id: 'react-native/expo',
           label: 'Developing with Expo'
         },
+        {
+          type: 'link',
+          href: 'https://solana-labs.github.io/solana-web3.js/',
+          label: 'web3.js Reference'
+        },
       ]
     },
     {
@@ -95,12 +100,7 @@ const sidebars = {
         {
           type: 'link',
           href: 'https://www.javadoc.io/doc/com.solanamobile/mobile-wallet-adapter-clientlib-ktx/latest/index.html',
-          label: 'Kotlin MWA Reference'
-        },
-        {
-          type: 'link',
-          href: 'https://www.javadoc.io/doc/com.solanamobile/mobile-wallet-adapter-clientlib',
-          label: 'Java MWA Reference'
+          label: 'Kotlin MWA reference'
         },
       ]  
     },
