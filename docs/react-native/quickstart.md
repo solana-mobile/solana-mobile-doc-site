@@ -104,7 +104,7 @@ After authorized with a wallet, you can now request signing services within `tra
 - `signMessages`
 - `signTransactions`
 
-In `signTransactions`, we use using [**System Program**](https://docs.solana.com/developing/runtime-facilities/programs#system-program) to generate a simple *transfer* instruction that moves SOL around. *System Program* is an example of a Solana [Native Program](https://docs.solana.com/developing/runtime-facilities/programs).
+In `signTransactions`, we use using [**System Program**](https://docs.solana.com/developing/runtime-facilities/programs#system-program) to generate a simple *transfer* instruction that moves SOL around. *System Program* is an example of a Solana [Native Program](https://docs.solana.com/developing/runtime-facilities/programs). To learn more about Solana transactions see the this [deep dive](https://docs.solana.com/developing/programming-model/transactions).
 
 <Tabs>
 <TabItem value="signMessasges" label="signMessages">
