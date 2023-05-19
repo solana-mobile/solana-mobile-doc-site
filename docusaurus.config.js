@@ -83,6 +83,11 @@ const config = {
             label: 'Discord',
             position: 'right',
           },
+          {
+            href: 'https://portal.usecontext.io/standalone/FC55OPwlz',
+            label: 'SMS ChatGPT Bot (Beta)',
+            position: 'right',
+          },
         ],
       },
       footer: {
