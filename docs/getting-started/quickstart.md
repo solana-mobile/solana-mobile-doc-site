@@ -67,7 +67,8 @@ The [Mobile Wallet Adapter](https://github.com/solana-mobile/mobile-wallet-adapt
 #### fakewallet
 
 The [fakewallet](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/android/fakewallet) app is a test implementation of a Solana wallet app compatible with 
-the Mobile Wallet Adapter SDK. It does not store persistent keypairs, and the wallet is "reset" each time the app is exited.
+the Mobile Wallet Adapter SDK. It does not store persistent keypairs, and the wallet is "reset" each time the app is exited. For more thorough testing, use a real Solana
+Mobile wallet
 
 <details>
 <summary>Installation steps</summary>
@@ -90,7 +91,9 @@ git clone https://github.com/solana-mobile/mobile-wallet-adapter.git
 
 </details>
 
-#### Production
+#### Solana Mobile Wallets
 
 fakewallet was created for implementation reference and quick testing purposes. For production testing, test your dApp with popular MWA-compatible wallet apps like [Phantom](https://play.google.com/store/apps/details?id=app.phantom) and [Solflare](https://play.google.com/store/apps/details?id=com.solflare.mobile).
+
+For emulator installation, you can launch an emulator that comes with the Google Play Store. From there, you can login to your Google account and search for Phantom or Solflare to install it onto the emulator.
 
