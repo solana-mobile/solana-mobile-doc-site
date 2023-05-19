@@ -10,7 +10,11 @@ Solana developers can continue using popular, well-supported Solana web librarie
 Developers familiar with React development will be able to leverage their existing knowledge and translate it to building mobile apps. Just like React development on web, React Native supports live and hot reloading, which significantly speeds up the development process.
 
 ## Library overview
-You can find the full source code on [Github](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/js/packages).
+
+[**`@solana/web3.js`**](https://solana-labs.github.io/solana-web3.js/)
+
+- The official Solana Javascript SDK that provides helpful abstraction classes around Solana core concepts (like accounts, programs, transactions) and implements
+an RPC `Connection` Client that interacts with the Solana network through the Solana [JSON RPC API](https://docs.solana.com/api/http).
 
 [**`@solana-mobile/mobile-wallet-adapter-protocol`**](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/js/packages/mobile-wallet-adapter-protocol)
 
