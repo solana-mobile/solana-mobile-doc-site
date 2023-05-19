@@ -62,6 +62,11 @@ const sidebars = {
         },
         {
           type: 'doc',
+          id: 'react-native/first_app_tutorial',
+          label: 'Build your first dApp'
+        },
+        {
+          type: 'doc',
           id: 'react-native/hello_world_tutorial',
           label: 'Hello World Tutorial'
         },
