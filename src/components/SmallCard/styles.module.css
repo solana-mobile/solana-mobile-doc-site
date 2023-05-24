@@ -1,0 +1,64 @@
+.cardContainer {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 18px;
+  background-color: var(--card-background);
+  border: 1px solid var(--card-border-color);
+  transition: background-color 0.2s, box-shadow 0.2s, border-color 0.2s;
+  height: auto;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 768px) {
+  .cardContainer {
+      width: 100%;
+  }
+}
+
+[data-theme="dark"] .cardContainer {
+  --card-background: #2c2c2c;
+  --card-border-color: #3b3b3b;
+}
+
+.cardLink {
+  text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  padding: 22px;
+  align-items: center;
+}
+
+.cardHeaderText {
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  transition: color 0.2s; /* Added transition property */
+}
+
+.cardIcon {
+  width: 32px;
+  height: 32px;
+  margin-right: 8px;
+}
+/* Hover */ 
+
+.cardContainer:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--outline-color);
+}
+
+[data-theme="light"] .cardContainer:hover {
+  --outline-color: var(--ifm-color-primary-light);
+}
+
+[data-theme="dark"] .cardContainer:hover {
+  --outline-color: var(--ifm-color-primary-light);
+}
+
+.cardLink:hover {
+  text-decoration: none;
+}
+
+
+.cardContainer:hover .cardHeaderText {
+  color: var(--ifm-color-primary-light);
+}
