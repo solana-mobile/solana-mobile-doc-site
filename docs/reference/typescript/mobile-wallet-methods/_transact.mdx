@@ -12,6 +12,8 @@ import {
 
 ## transact
 
+This is the first step in using the Mobile Wallet API.
+
 Starts a Mobile Wallet Adapter session with a locally installed MWA-compatible wallet.
 
 <DocSideBySide>
@@ -31,13 +33,11 @@ Configuration object containing the following fields:
 
 <Field name="baseUri" type="string" optional={true} >
 
-URI used for custom wallet association
-
-<Values values={["base58", "base64", "base64+zstd", "jsonParsed"]} />
+URI used for custom wallet association.
 
 <details>
 
-As per [spec](https://solana-mobile.github.io/mobile-wallet-adapter/spec/spec.html#endpoint-specific-uris), during session establishment, the wallet may return a custom URI to use for future session stablishments.
+As per [spec](https://solana-mobile.github.io/mobile-wallet-adapter/spec/spec.html#endpoint-specific-uris), during session establishment, the wallet may return a custom URI scheme to use for future session establishments.
 The dApp can choose to use this custom URI by suppyling it through this parameter.
 </details>
 

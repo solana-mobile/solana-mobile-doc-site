@@ -56,4 +56,8 @@ import Transact from "./mobile-wallet-methods/\_transact.mdx"
 
 <Transact />
 
+import WalletAuthorize from "./mobile-wallet-methods/\_walletAuthorize.mdx"
+
+<WalletAuthorize />
+
 
