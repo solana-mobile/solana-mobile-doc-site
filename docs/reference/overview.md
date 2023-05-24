@@ -7,14 +7,14 @@ import SmallCard from "../../src/components/SmallCard"
 import Card from "../../src/components/Card"
 import CardLayout from "../../src/layouts/CardLayout"
 
-Explore the API references for the various client libraries that are used by the Solana Mobile Stack.
+Explore the API references for the various libraries that are used in the Solana Mobile Stack.
 
 ## Mobile Wallet Adapter
 See the API for the various client libraries implemented for [Mobile Wallet Adapter](/getting-started/overview#mobile-wallet-adapter).
 
 <CardLayout autoFitEnabled={false}>
     <SmallCard
-        to="/reference/typescript"
+        to="/reference/typescript/mobile-wallet-adapter"
         header={{
             label: "Typescript",
             translateId: "typescript-reference",
@@ -25,15 +25,15 @@ See the API for the various client libraries implemented for [Mobile Wallet Adap
         to="/reference/kotlin/mobile-wallet-adapter"
         header={{
             label: "Kotlin",
-            translateId: "development-setup",
+            translateId: "kotlin-reference",
         }}
         iconPath="img/kotlin-icon.png"
     />
     <SmallCard
-        to="/reference/flutter/mobile-wallet-adapter"
+        to="/additional-sdks/flutter_sdk"
         header={{
             label: "Flutter",
-            translateId: "development-setup",
+            translateId: "flutter-reference",
         }}
         iconPath="img/flutter-icon.svg"
     />
