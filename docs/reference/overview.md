@@ -1,5 +1,5 @@
 ---
-title: Client Library API Reference
+title: Client Library API
 displayed_sidebar: referenceSidebar
 ---
 
@@ -9,7 +9,8 @@ import CardLayout from "../../src/layouts/CardLayout"
 
 Explore the API references for the various client libraries that are used by the Solana Mobile Stack.
 
-## Mobile Wallet Adapter Clients
+## Mobile Wallet Adapter
+See the API for the various client libraries implemented for [Mobile Wallet Adapter](/getting-started/overview#mobile-wallet-adapter).
 
 <CardLayout autoFitEnabled={false}>
     <SmallCard
@@ -39,6 +40,8 @@ Explore the API references for the various client libraries that are used by the
 </CardLayout>
 
 ## Solana RPC Clients
+
+These clients provide a library to interact with Solana nodes through the Solana [JSON RPC API](https://docs.solana.com/api).
 
 <CardLayout autoFitEnabled={false}>
     <SmallCard
