@@ -64,3 +64,7 @@ import WalletReauthorize from "./mobile-wallet-methods/\_walletReauthorize.mdx"
 
 <WalletReauthorize />
 
+import WalletGetCapabilities from "./mobile-wallet-methods/\_walletGetCapabilities.mdx"
+
+<WalletGetCapabilities />
+
