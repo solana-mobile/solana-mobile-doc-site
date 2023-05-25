@@ -7,13 +7,15 @@ import {
   Values,
   CodeSnippets,
 } from "../../../../src/components/CodeDocBlock";
+import Link from "@docusaurus/Link";
+
 
 <DocBlock>
 
-## Web3MobileWallet.authorize
+## Web3MobileWallet.reauthorize
 
-Non-privileged method. Requests authorization from the connected wallet for access to privileged methods
-within the session. 
+Non-privileged method. Like `authorize`, this method attempts to put the current session in an authorized state, but
+provides a previously issued `auth_token`. The session is authorized with the privileges associated with the specified `auth_token`.
 
 <DocSideBySide>
 
@@ -21,9 +23,8 @@ within the session.
 
 ### Parameters:
 
-<Parameter type={"cluster: string"} required={true}>
-  The Solana network cluster with which the dapp intends to interact; supported values include "mainnet-beta", 
-  "testnet", "devnet".
+<Parameter type={"auth_token: string"} required={true}>
+  A string representing a unique identifying token previously issued by the wallet to the dapp.
 </Parameter>
 
 <Parameter type={"identity: object"} optional={true}>
@@ -53,9 +54,10 @@ the display name for this dapp.
 
 ### Result:
 
-The result will be a JSON object containing the following fields:
+The result will be a JSON object as defined in `authorize`, but the values may be updated and differ
+from the values originally provided in the `authorize` response for the auth token.
 
-- `auth_token: string` - A string representing a unique identifying token issued by the wallet to the dapp. Use this on future connections to reauthorize access to privileged methods.
+- `auth_token: string` -  a string representing a unique identifying token issued by the wallet to the dapp.
 - `accounts` - one or more value objects that represent the accounts to which this auth token corresponds. These objects hold the following properties:
   - `address: string` - a base64-encoded address for this account.
   - `label: string (optional)` - a human-readable string that describes the account.
@@ -69,15 +71,15 @@ The result will be a JSON object containing the following fields:
 
 ```tsx
 const result = await transact(async (wallet: Web3MobileWallet) => {
-    const authResult = wallet.authorize({
-      cluster: 'devnet',
-      identity: {
-        name: 'Example dApp',
-        uri:  'https://yourdapp.com'
-        icon: "favicon.ico", // Resolves to https://yourdapp.com/favicon.ico
-      },
-    }));
-    return authResult;
+  const authResult = wallet.reauthorize({
+    auth_token: '<previously_stored_auth_token>'
+    identity: {
+      name: 'Example dApp',
+      uri:  'https://yourdapp.com'
+      icon: "favicon.ico", // Resolves to https://yourdapp.com/favicon.ico
+    },
+  }));
+  return authResult;
 });
 ```
 
