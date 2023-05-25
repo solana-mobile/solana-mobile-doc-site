@@ -68,3 +68,6 @@ import WalletGetCapabilities from "./mobile-wallet-methods/\_walletGetCapabiliti
 
 <WalletGetCapabilities />
 
+import WalletSignTransactions from "./mobile-wallet-methods/\_walletSignTransactions.mdx"
+
+<WalletSignTransactions />
