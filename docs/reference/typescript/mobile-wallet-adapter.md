@@ -75,3 +75,7 @@ import WalletSignTransactions from "./mobile-wallet-methods/\_walletSignTransact
 import WalletSignAndSendTransactions from "./mobile-wallet-methods/\_walletSignAndSendTransactions.mdx"
 
 <WalletSignAndSendTransactions />
+
+import WalletSignMessages from "./mobile-wallet-methods/\_walletSignMessages.mdx"
+
+<WalletSignMessages />
