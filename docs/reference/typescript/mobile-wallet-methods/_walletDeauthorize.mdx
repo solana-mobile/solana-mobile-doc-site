@@ -1,0 +1,55 @@
+import {
+  DocBlock,
+  DocSideBySide,
+  CodeParams,
+  Parameter,
+  Field,
+  Values,
+  CodeSnippets,
+} from "../../../../src/components/CodeDocBlock";
+
+<DocBlock>
+
+## Web3MobileWallet.deauthorize
+
+Non-privileged method. This method will make the provided `auth_token` invalid for use (if it ever was valid).
+
+If, during the current session, the specified auth token was returned by the most recent call to authorize or reauthorize, 
+the session will be placed into the unauthorized state.
+<DocSideBySide>
+
+<CodeParams>
+
+### Parameters:
+
+<Parameter type={"auth_token: string"} required={true}>
+  An auth token string previously returned by a call to `authorize`, `reauthorize`, or `clone_authorization`, which will
+  be deauthorized.
+</Parameter>
+
+### Result:
+
+The result will be an empty JSON object.
+
+</CodeParams>
+
+<CodeSnippets>
+
+### Code sample:
+
+```tsx
+const result = await transact(async (wallet: Web3MobileWallet) => {
+  const authToken = getPreviouslyStoredAuthToken()
+  return await wallet.deauthorize({auth_token: authToken});
+});
+```
+
+### Result:
+
+```json
+{}
+```
+
+</CodeSnippets>
+</DocSideBySide>
+</DocBlock>
