@@ -57,7 +57,7 @@ const config = {
       image: 'img/solana-mobile-stack-social-card.png',
       colorMode: {
         defaultMode: 'dark',
-        disableSwitch: true,
+        disableSwitch: false,
         respectPrefersColorScheme: false,
       },
       navbar: {
