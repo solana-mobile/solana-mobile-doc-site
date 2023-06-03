@@ -7,7 +7,7 @@
   transition: all 0.4s ease-out;
   border-radius: 6px;
   color:black;
-  background-color: rgb(37, 194, 160)
+  background-color: var(--ifm-color-primary-dark);
 }
 
 .ctaButton:hover {
