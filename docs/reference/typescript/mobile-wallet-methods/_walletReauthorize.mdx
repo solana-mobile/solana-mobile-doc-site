@@ -1,0 +1,101 @@
+import {
+  DocBlock,
+  DocSideBySide,
+  CodeParams,
+  Parameter,
+  Field,
+  Values,
+  CodeSnippets,
+} from "../../../../src/components/CodeDocBlock";
+import Link from "@docusaurus/Link";
+
+
+<DocBlock>
+
+## Web3MobileWallet.reauthorize
+
+Non-privileged method. Like `authorize`, this method attempts to put the current session in an authorized state, but
+provides a previously issued `auth_token`. The session is authorized with the privileges associated with the specified `auth_token`.
+
+<DocSideBySide>
+
+<CodeParams>
+
+### Parameters:
+
+<Parameter type={"auth_token: string"} required={true}>
+  A string representing a unique identifying token previously issued by the wallet to the dapp.
+</Parameter>
+
+<Parameter type={"identity: object"} optional={true}>
+
+A JSON object containing the following fields:
+
+<Field name="uri" type="string" optional={true} >
+
+A URI representing the web address associated with the dapp making this authorization request. 
+If present, it must be an absolute, hierarchical URI.
+
+</Field>
+
+<Field name="icon" type="string" optional={true} >
+
+A relative path (from `uri`) to an image asset file of an icon identifying the dapp making this authorization request.
+
+</Field>
+
+<Field name="name" type="string" optional={true} >
+
+the display name for this dapp.
+
+</Field>
+
+</Parameter>
+
+### Result:
+
+The result will be a JSON object as defined in `authorize`, but the values may be updated and differ
+from the values originally provided in the `authorize` response for the auth token.
+
+- `auth_token: string` -  a string representing a unique identifying token issued by the wallet to the dapp.
+- `accounts` - one or more value objects that represent the accounts to which this auth token corresponds. These objects hold the following properties:
+  - `address: string` - a base64-encoded address for this account.
+  - `label: string (optional)` - a human-readable string that describes the account.
+  - `wallet_uri_base: string (optional)` - A custom URI specified by the wallet that the dapp should use for subsequent connections. 
+
+</CodeParams>
+
+<CodeSnippets>
+
+### Code sample:
+
+```tsx
+const result = await transact(async (wallet: Web3MobileWallet) => {
+  const authResult = wallet.reauthorize({
+    auth_token: '<previously_stored_auth_token>'
+    identity: {
+      name: 'Example dApp',
+      uri:  'https://yourdapp.com'
+      icon: "favicon.ico", // Resolves to https://yourdapp.com/favicon.ico
+    },
+  }));
+  return authResult;
+});
+```
+
+### Result:
+
+```json
+{
+  "auth_token": "<auth_token>",
+  "accounts": [
+      {"address": "<address>", "label": "<label>"},
+      ...
+  ],
+  "wallet_uri_base": "<wallet_uri_base>",
+}
+```
+
+</CodeSnippets>
+</DocSideBySide>
+</DocBlock>

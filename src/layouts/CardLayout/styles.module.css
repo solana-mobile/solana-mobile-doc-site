@@ -1,4 +1,4 @@
-.cardLayout {
+.cardLayoutAutoFit {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-gap: 16px;
@@ -10,4 +10,14 @@
   .cardLayout {
     grid-template-columns: 1fr;
   }
+  .cardLayoutNormal {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cardLayoutNormal {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 16px;
+  margin-bottom: 16px;
 }

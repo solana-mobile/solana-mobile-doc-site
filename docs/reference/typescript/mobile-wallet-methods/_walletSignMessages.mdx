@@ -1,0 +1,73 @@
+import {
+  DocBlock,
+  DocSideBySide,
+  CodeParams,
+  Parameter,
+  Field,
+  Values,
+  CodeSnippets,
+} from "../../../../src/components/CodeDocBlock";
+import Link from "@docusaurus/Link";
+
+
+<DocBlock>
+
+## Web3MobileWallet.signMessages
+
+Privileged method. Request to sign the given messages with the private keys for the requested authorized account.
+
+<DocSideBySide>
+
+<CodeParams>
+
+### Parameters:
+
+<Parameter type={"addresses: string[]"} required={true}>
+  One or more base64-encoded addresses of the accounts which should be used to sign message. 
+  These should be a subset of the addresses returned by authorize or reauthorize for the current session's authorization.
+</Parameter>
+
+<Parameter type={"payloads: Uint8Array[]"} required={true}>
+  One or more byte arrays where each byte array is a message payload to sign.
+</Parameter>
+
+### Result:
+
+- `Uint8Array[]` - the corresponding base64-encoded signed message payloads.
+
+</CodeParams>
+
+<CodeSnippets>
+
+### Code sample:
+
+```tsx
+ const result = return await transact(async (wallet: Web3MobileWallet) => {
+  // First, request for authorization from the wallet.
+  const authorizationResult = await authorizeSession(wallet);
+
+  // Construct a message byte array
+  const message = 'Hello world!';
+  const messageBuffer = new Uint8Array(
+    message.split('').map(c => c.charCodeAt(0)),
+  );
+
+  // Sign the payload with the provided address from authorization.
+  const signedMessages = await wallet.signMessages({
+    addresses: [authorizationResult.address],
+    payloads: [messageBuffer],
+  });
+
+  return signedMessages;
+});
+```
+
+### Result:
+
+```json
+[<signed_messages>, ...],
+```
+
+</CodeSnippets>
+</DocSideBySide>
+</DocBlock>

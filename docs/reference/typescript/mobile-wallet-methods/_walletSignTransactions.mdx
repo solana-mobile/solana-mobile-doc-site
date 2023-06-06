@@ -1,0 +1,80 @@
+import {
+  DocBlock,
+  DocSideBySide,
+  CodeParams,
+  Parameter,
+  Field,
+  Values,
+  CodeSnippets,
+} from "../../../../src/components/CodeDocBlock";
+import Link from "@docusaurus/Link";
+
+
+<DocBlock>
+
+## Web3MobileWallet.signTransactions
+
+Privileged method. Request to sign the given transactions with the private keys for the requested authorized account.
+
+<DocSideBySide>
+
+<CodeParams>
+
+### Parameters:
+
+<Parameter type={"transactions: Transaction[]"} required={true}>
+  An array of one or more transactions to sign. The transaction are of type `Transaction` or `VersionedTransaction` from
+  the <Link to="/reference/typescript/web3js">web3.js library</Link>.
+</Parameter>
+
+### Result:
+
+- `Transaction[]` - the corresponding Transactions signed with the private keys for the requested authorized account addresses.
+
+</CodeParams>
+
+<CodeSnippets>
+
+### Code sample:
+
+```tsx
+const result = await transact(async (wallet: Web3MobileWallet) => {
+  const authResult = await wallet.authorize({
+    cluster: 'devnet',
+    identity: APP_IDENTITY,
+  }));
+  
+  const publicKey = getPublicKeyFromAuth(authResult)
+
+  // Create a web3.js Transaction that transfers
+  // lamports to a randomly created address.
+  const keypair = Keypair.generate();
+  const randomTransferTransaction = new Transaction({
+    ...latestBlockhash,
+    feePayer: publicKey,
+  }).add(
+    SystemProgram.transfer({
+      fromPubkey: publicKey,
+      toPubkey: keypair.publicKey,
+      lamports: 1_000,
+    }),
+  );
+
+  // Signs the Transactions with the private key of the account 
+  // corresponding to `publicKey`
+  const signedTransactions = await wallet.signTransactions({
+        transactions: [randomTransferTransaction],
+  });
+  return signedTransactions;
+});
+```
+
+### Result:
+
+```json
+[<signed_transaction>, ...],
+```
+
+</CodeSnippets>
+</DocSideBySide>
+</DocBlock>

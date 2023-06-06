@@ -17,7 +17,7 @@ You don't need a Saga device or physical device to build on Solana Mobile. The s
 ## Quickstart 
 Learn how to develop Solana Mobile dApps in your preferred programming language.
 
-<CardLayout>
+<CardLayout autoFitEnabled={true}>
     <Card
         to="/react-native/overview"
         header={{
@@ -44,7 +44,7 @@ Learn how to develop Solana Mobile dApps in your preferred programming language.
     />
 </CardLayout>
 
-<CardLayout>
+<CardLayout autoFitEnabled={true}>
     <Card
         to="/react-native/quickstart#clone-solana-mobile-dapp-scaffold"
         header={{
@@ -75,7 +75,7 @@ Learn how to develop Solana Mobile dApps in your preferred programming language.
 
 Explore the full Solana Mobile SDK or learn about the Solana blockchain itself.
 
-<CardLayout>
+<CardLayout autoFitEnabled={true}>
     <Card
         to="/getting-started/overview"
         header={{

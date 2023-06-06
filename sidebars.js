@@ -131,6 +131,48 @@ const sidebars = {
       label: 'Sample App Collection',
       id: 'sample-apps/sample_app_overview',
     },
+    {
+      type: 'doc',
+      label: 'API Reference',
+      id: 'reference/overview',
+    },
+  ],
+  // other sidebars
+  referenceSidebar: [
+    {
+        type: 'doc',
+        id: 'reference/overview',
+        label: 'Overview'
+    },
+    {
+      type: 'category',
+      label: 'Typescript',
+      collapsible: false,
+      items: [
+        {
+          type: 'doc',
+          id: 'reference/typescript/mobile-wallet-adapter',
+          label: 'Mobile Wallet Adapter'
+        },
+        {
+          type: 'doc',
+          id: 'reference/typescript/web3js',
+          label: '@solana/web3.js'
+        }
+      ]  
+    },
+    {
+      type: 'category',
+      label: 'Kotlin',
+      collapsible: false,
+      items: [
+        {
+          type: 'doc',
+          id: 'reference/kotlin/mobile-wallet-adapter',
+          label: 'Mobile Wallet Adapter'
+        }
+      ]  
+    },
   ]
 };
 

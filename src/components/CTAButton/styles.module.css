@@ -1,27 +1,28 @@
 .ctaButton {
-  padding: 0.50rem 1.25rem;
+  padding: 12px 12px 12px 12px;
   text-align: center;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 16px;
   text-decoration: none !important;
-  border-bottom: none;
-  transition: all 0.4s ease-out;
-  border-radius: 25px;
-  color:white;
-  background-color: var(--ifm-color-primary-darker);
-}
-  
-.ctaButton:hover {
-  background-color: #267191;
+  transition: all 0.3s ease-out;
+  border-radius: 6px;
+  color:black;
+  background-color: var(--ifm-color-primary-dark);
 }
 
-  .ActionButton {
-    padding: 0.50rem 1.25rem;
-    text-align: center;
-    font-weight: 600;
-    font-size: 1rem;
-    text-decoration: none !important;
-    border-bottom: none;
-    transition: all 0.4s ease-out;
-    border-radius: 25px;
-  }
+.ctaButton:hover {
+  color: black;
+  background-color: white
+}
+
+[data-theme="light"] .ctaButton {
+  color:black;
+  background-color: #6d6fe8;
+}
+
+[data-theme="light"] .ctaButton:hover {
+  color: black;
+  background-color: #8d8fef;
+}
+
+
