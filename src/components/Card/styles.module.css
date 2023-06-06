@@ -20,6 +20,10 @@
   --card-border-color: #3b3b3b;
 }
 
+[data-theme="light"] .cardContainer {
+  --card-border-color: #2c2c2c;
+}
+
 .cardLink {
   display: block;
   padding: 16px;
@@ -30,13 +34,22 @@
   display: flex;
   color: white;
   transition: color 0.2s; /* Added transition property */
+}
 
+[data-theme="light"] .cardHeader {
+  display: flex;
+  color: black;
+  transition: color 0.2s; /* Added transition property */
 }
 
 .cardBody {
   color: #ffffffb3;
   transition: color 0.2s; /* Added transition property */
+}
 
+[data-theme="light"] .cardBody {
+  color: #000000;
+  transition: color 0.2s; /* Added transition property */
 }
 
 .cardIcon {
