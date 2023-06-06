@@ -22,7 +22,7 @@ The publisher policies of the Solana dApp Store are intended to mirror those of 
 ### General
 
 - All references to “Google Play”, “Google Play Store”, or similar instead refer to “Solana dApp Store”
-- All references to “Developer Distribution Agreement”, “DDA”, or similar instead refer to the "[Solana dApp Store Developer Agreement](DEVELOPER-AGREEMENT.pdf)"
+- All references to “Developer Distribution Agreement”, “DDA”, or similar instead refer to the Solana dApp Store Developer Agreement, linked in the navigation.
 
 ### Restricted Content
 
