@@ -23,7 +23,7 @@ Make sure to read and understand the Solana dApp Store Developer Agreement, link
 
 Publishing your app to the Solana dApp Store involves two steps - minting NFTs representing your app on-chain, and submitting a request to the publisher portal to have your app listed in the catalog.
 
-Check out the [publishing walkthrough guide](docs/PUBLISHING.md) for step-by-step instructions on how to mint an app’s NFTs and submit publisher portal requests.
+Check out the [publishing walkthrough guide](./publishing) for step-by-step instructions on how to mint an app’s NFTs and submit publisher portal requests.
 
 ## 4. Wait for a decision on your app
 
@@ -33,15 +33,11 @@ After submitting, we’ll review your app against our [policies](./policy). Plea
 
 ## Frequently asked questions
 
-We all have questions - some of them might even be answered in our [FAQ](docs/FAQ.md). If not, don’t despair - check out the [Get support](#get-support) section below and get in touch with the Solana Mobile community and team.
+We all have questions - some of them might even be answered in our [FAQ](./faq). If not, don’t despair - check out the [Get support](#get-support) section below and get in touch with the Solana Mobile community and team.
 
 ## Building apps
 
 Building apps for Saga starts just like building any other app for Android, whether that be a [native app with Kotlin or Java](https://developer.android.com/), a cross-platform app with [React Native](https://reactnative.dev/), or another framework. Check out [solanamobile.com/developers](http://solanamobile.com/developers) or our [Discord](#discord) for more details.
-
-## Technical details
-
-Want to know how your app is represented on-chain by NFTs? Check out the [specification](publishing-spec/SPEC.md).
 
 # Get support
 

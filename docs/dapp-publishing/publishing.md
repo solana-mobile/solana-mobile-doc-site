@@ -12,7 +12,7 @@ The publishing tool is designed for CI/CD usage - all steps, including submittin
 
 ## Setup
 
-Please follow the instructions in [SETUP.md](SETUP.md) to get setup with the publishing CLI tooling.
+Please follow the [setup](./setup) instructions to get setup with the publishing CLI tooling.
 
 ## RPC endpoints
 
@@ -30,8 +30,8 @@ It is recommended that you put your dApp publishing files next to your dApp, and
 
 #### 1. Collect your publishing assets
 
-Having followed the instructions in [SETUP.md](SETUP.md), collect the file paths for all your publishing assets (e.g., APK file, icons, screenshot images) relative to the directory that was  just created.
 
+Having followed the instructions in [setup](./setup), collect the file paths for all your publishing assets (e.g., APK file, icons, screenshot images) relative to the directory that was  just created.
 Some best practices for the assets & files you'll be providing:
 
 - Icon(s) should be 512px by 512px dimensions.

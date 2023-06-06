@@ -121,13 +121,13 @@ const sidebars = {
         },
         {
           type: 'doc',
-          id: 'dapp-publishing/setup',
-          label: 'Publishing Tools Setup'
+          id: 'dapp-publishing/publishing',
+          label: 'Publishing to the dApp Store'
         },
         {
           type: 'doc',
-          id: 'dapp-publishing/publishing',
-          label: 'Publishing to the dApp Store'
+          id: 'dapp-publishing/setup',
+          label: 'Publishing Tools Setup'
         },
         {
           type: 'doc',
