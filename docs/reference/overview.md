@@ -45,7 +45,7 @@ These clients provide a library to interact with Solana nodes through the Solana
 
 <CardLayout autoFitEnabled={false}>
     <SmallCard
-        to="/reference/typescript"
+        to="/reference/typescript/web3js"
         header={{
             label: "web3.js",
             translateId: "typescript-reference",

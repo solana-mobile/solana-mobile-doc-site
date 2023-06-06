@@ -4,7 +4,7 @@
   font-weight: 600;
   font-size: 16px;
   text-decoration: none !important;
-  transition: all 0.4s ease-out;
+  transition: all 0.3s ease-out;
   border-radius: 6px;
   color:black;
   background-color: var(--ifm-color-primary-dark);
@@ -14,4 +14,15 @@
   color: black;
   background-color: white
 }
+
+[data-theme="light"] .ctaButton {
+  color:black;
+  background-color: #6d6fe8;
+}
+
+[data-theme="light"] .ctaButton:hover {
+  color: black;
+  background-color: #8d8fef;
+}
+
 
