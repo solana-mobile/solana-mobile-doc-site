@@ -17,7 +17,7 @@ Connect to wallet apps and sign transactions and messages with the Mobile Wallet
 ### Install dependencies
 
 - [**`@solana-mobile/mobile-wallet-adapter-protocol`**](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/js/packages/mobile-wallet-adapter-protocol) 
-   - Base library that implements the MWA client.
+   - Base library that implements the MWA client. Include this, but only import `transact` from the wrapper library.
 
 - [**`@solana-mobile/mobile-wallet-adapter-protocol-web3js`**](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/js/packages/mobile-wallet-adapter-protocol-web3js)
     - A convenience wrapper for the base library that enables with `web3.js` primitives like `Transaction`.
