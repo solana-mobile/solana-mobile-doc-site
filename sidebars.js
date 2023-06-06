@@ -136,6 +136,11 @@ const sidebars = {
         },
         {
           type: 'doc',
+          id: 'dapp-publishing/faq',
+          label: 'FAQ'
+        },
+        {
+          type: 'doc',
           id: 'dapp-publishing/policy',
           label: 'Publisher Policy'
         },

@@ -5,19 +5,19 @@ We’re glad you’re ready to learn about publishing your Web3 apps on the Sola
 
 What do we mean by fee-free? We mean that no fees are collected by Solana Mobile Inc. from users of the dApp Store. There may still be network transaction fees or app-specific fees associated with usage of the Solana dApp Store, or of apps installed by it. None of these fees are collected by, or on behalf of, Solana Mobile Inc.
 
-Want to know more? Read more [about the Solana dApp Store](docs/ABOUT.md).
+Want to know more? Read more [about the Solana dApp Store](./about).
 
 # Getting started
 
 ## 1. Read the publisher policies
 
-We’ve created the Solana dApp Store to be the best home for Web3 and crypto apps. Our [policies](docs/PUBLISHER-POLICY.md) exist to protect users from illegal, harmful, and misleading content, without restricting the abilities of apps to use crypto features, like trading NFTs or other digital goods.
+We’ve created the Solana dApp Store to be the best home for Web3 and crypto apps. Our [policies](./policy) exist to protect users from illegal, harmful, and misleading content, without restricting the abilities of apps to use crypto features, like trading NFTs or other digital goods.
 
 All apps submitted to the Solana dApp Store must comply with these policies. If you have concerns about an app in the Solana dApp Store catalog, please report it to [concerns@dappstore.solanamobile.com](mailto:concerns@dappstore.solanamobile.com).
 
 ## 2. Read the Solana dApp Store Developer Agreement
 
-Make sure to read and understand the [Solana dApp Store Developer Agreement](docs/DEVELOPER-AGREEMENT.pdf). These terms apply to all submissions made to the Solana dApp Store publisher portal.
+Make sure to read and understand the Solana dApp Store Developer Agreement, linked in the navigation. These terms apply to all submissions made to the Solana dApp Store publisher portal.
 
 ## 3. Publish
 
@@ -27,7 +27,7 @@ Check out the [publishing walkthrough guide](docs/PUBLISHING.md) for step-by-ste
 
 ## 4. Wait for a decision on your app
 
-After submitting, we’ll review your app against our [policies](docs/PUBLISHER-POLICY.md). Please make sure to provide a valid email address, so that we can reach out to you with any questions about your submission.
+After submitting, we’ll review your app against our [policies](./policy). Please make sure to provide a valid email address, so that we can reach out to you with any questions about your submission.
 
 # Learn more
 
