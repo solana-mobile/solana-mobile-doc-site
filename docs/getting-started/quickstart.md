@@ -13,7 +13,7 @@ build a mobile app on Solana.
 Currently, the Solana Mobile SDK is primarily supported for Android apps built in React Native and Android Native. 
 In particular,  **Mobile Wallet Adapter** has a React Native and an Android library maintained by the Solana Mobile team.
 
-<CardLayout>
+<CardLayout autoFitEnabled={true}>
     <Card
         to="/react-native/quickstart"
         header={{
