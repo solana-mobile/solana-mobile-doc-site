@@ -14,14 +14,14 @@ In this tutorial, you'll learn how to build a React Native dApp that sends a mes
 - View your message on the [Solana Explorer](https://explorer.solana.com/)!
 
 ## Prerequisites
-Read the [prerequisite setup](../getting-started/quickstart) guide before starting the tutorial. 
+Read the [prerequisite setup](../getting-started/development-setup) guide before starting the tutorial. 
 You'll need:
 - a running Android emulator or device to build and launch your app.
 - an MWA-compatible wallet installed on the same device.
 - an IDE/Editor of your choice.
 
 
-This tutorial will be using the [fakewallet](../getting-started/quickstart#install-test-wallet-app) app to test your app's integration with Mobile Wallet Adapter.
+This tutorial will be using the [fakewallet](../getting-started/development-setup#3-install-a-wallet-app) app to test your app's integration with Mobile Wallet Adapter.
 
 
 ## Clone the React Native dApp Scaffold

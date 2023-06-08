@@ -30,8 +30,8 @@ const sidebars = {
         },
         {
           type: 'doc',
-          id: 'getting-started/quickstart',
-          label: 'Quickstart'
+          id: 'getting-started/development-setup',
+          label: 'Development Setup'
         },
         {
           type: 'doc',
