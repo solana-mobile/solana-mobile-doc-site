@@ -10,7 +10,7 @@ The SDK allows developers to create rich mobile experiences and seamless UX for 
 Read on to learn more about each SDK in the stack, or watch this [SMS presentation video](https://www.youtube.com/watch?v=QldXwIczBAE) from the Vancouver Hacker House.
 
 :::note
-You don't need a Saga device or physical device to build on Solana Mobile. The stack is compatible with any Android device. See [**prerequisite setup**](quickstart#prerequisite-setup) to set up your development environment and start building!
+You don't need a Saga device or physical device to build on Solana Mobile. The stack is compatible with any Android device. See [**prerequisite setup**](development-setup) to set up your development environment and start building!
 :::
 
 ### Mobile Wallet Adapter

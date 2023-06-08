@@ -11,7 +11,7 @@ The **Solana Mobile Stack (SMS)** is an open source collection of libraries that
 The SDK is primarily developed and maintained by the [Solana Mobile](https://github.com/solana-mobile) team, but welcomes contributions from the community!
 
 :::note
-You don't need a Saga device or physical device to build on Solana Mobile. The stack is compatible with any Android device. See [**prerequisite setup**](quickstart#prerequisite-setup) to set up your development environment and start building!
+You don't need a Saga device or physical device to build on Solana Mobile. The stack is compatible with any Android device. See [**prerequisite setup**](development-setup) to set up your development environment and start building!
 :::
 
 ## Quickstart 
