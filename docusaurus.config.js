@@ -46,6 +46,11 @@ const config = {
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
+        gtag: {
+          // this GA code is safe to be published
+          trackingID: "G-PBF6HZVSRX",
+          anonymizeIP: true,
+        },
       }),
     ],
   ],
