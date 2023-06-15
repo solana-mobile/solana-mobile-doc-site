@@ -111,53 +111,6 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'dApp Store Publishing',
-      collapsible: true,
-      items: [
-        {
-          type: 'doc',
-          id: 'dapp-publishing/intro',
-          label: 'Introduction'
-        },
-        {
-          type: 'doc',
-          id: 'dapp-publishing/publishing',
-          label: 'Publishing to the dApp Store'
-        },
-        {
-          type: 'doc',
-          id: 'dapp-publishing/setup',
-          label: 'Publishing Tools Setup'
-        },
-        {
-          type: 'doc',
-          id: 'dapp-publishing/about',
-          label: 'Why Publish on the dApp Store?'
-        },
-        {
-          type: 'doc',
-          id: 'dapp-publishing/faq',
-          label: 'FAQ'
-        },
-        {
-          type: 'doc',
-          id: 'dapp-publishing/policy',
-          label: 'Publisher Policy'
-        },
-        {
-          type: 'link',
-          href: 'https://github.com/solana-mobile/dapp-publishing/blob/main/docs/DEVELOPER-AGREEMENT.pdf',
-          label: 'Developer Agreement'
-        },
-        {
-          type: 'link',
-          href: 'https://github.com/solana-mobile/dapp-publishing/blob/main/docs/TERMS-OF-USE.pdf',
-          label: 'Solana dApp Store TOU'
-        }
-      ]
-    },
-    {
-      type: 'category',
       label: 'Additional SDKs',
       collapsible: true,
       items: [
@@ -178,49 +131,20 @@ const sidebars = {
       label: 'Sample App Collection',
       id: 'sample-apps/sample_app_overview',
     },
-    {
+    { // dApp publishing entrypoint
+      type: 'doc',
+      label: 'dApp Store Publishing',
+      id: 'dapp-publishing/intro',
+    },
+    { // Reference entrypoint
       type: 'doc',
       label: 'API Reference',
       id: 'reference/overview',
     },
   ],
   // other sidebars
-  referenceSidebar: [
-    {
-        type: 'doc',
-        id: 'reference/overview',
-        label: 'Overview'
-    },
-    {
-      type: 'category',
-      label: 'Typescript',
-      collapsible: false,
-      items: [
-        {
-          type: 'doc',
-          id: 'reference/typescript/mobile-wallet-adapter',
-          label: 'Mobile Wallet Adapter'
-        },
-        {
-          type: 'doc',
-          id: 'reference/typescript/web3js',
-          label: '@solana/web3.js'
-        }
-      ]  
-    },
-    {
-      type: 'category',
-      label: 'Kotlin',
-      collapsible: false,
-      items: [
-        {
-          type: 'doc',
-          id: 'reference/kotlin/mobile-wallet-adapter',
-          label: 'Mobile Wallet Adapter'
-        }
-      ]  
-    },
-  ]
+  ...require("./sidebars/dappStoreSidebar.js"),
+  ...require("./sidebars/referenceSidebar.js"),
 };
 
 module.exports = sidebars;
