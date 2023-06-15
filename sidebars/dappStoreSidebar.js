@@ -26,17 +26,22 @@ module.exports = {
                 {
                     type: 'doc',
                     id: 'dapp-publishing/setup',
-                    label: 'Publishing CLI Installation'
+                    label: '1. CLI Tool Installation'
                 },
                 {
                     type: 'doc',
-                    id: 'dapp-publishing/setup',
-                    label: 'Submit your dApp'
+                    id: 'dapp-publishing/prepare',
+                    label: '2. Prepare for publishing'
                 },
                 {
                     type: 'doc',
-                    id: 'dapp-publishing/setup',
-                    label: 'Publishing subsequent dApp releases'
+                    id: 'dapp-publishing/submit',
+                    label: '3. Submit your dApp'
+                },
+                {
+                    type: 'doc',
+                    id: 'dapp-publishing/publishing_releases',
+                    label: '4. Publishing subsequent dApp releases'
                 },
             ]  
         },
