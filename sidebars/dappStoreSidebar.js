@@ -6,22 +6,39 @@ module.exports = {
         {
             type: 'doc',
             id: 'dapp-publishing/intro',
-            label: 'Introduction'
-        },
-        {
-            type: 'doc',
-            id: 'dapp-publishing/publishing',
-            label: 'Publishing to the dApp Store'
-        },
-        {
-            type: 'doc',
-            id: 'dapp-publishing/setup',
-            label: 'Publishing Tools Setup'
+            label: 'dApp Store Intro'
         },
         {
             type: 'doc',
             id: 'dapp-publishing/about',
             label: 'Why Publish on the dApp Store?'
+        },
+        {
+            type: 'category',
+            label: 'Publish your dApp',
+            collapsible: true,
+            items: [
+                {
+                    type: 'doc',
+                    id: 'dapp-publishing/publishing',
+                    label: 'Overview'
+                },
+                {
+                    type: 'doc',
+                    id: 'dapp-publishing/setup',
+                    label: 'Publishing CLI Installation'
+                },
+                {
+                    type: 'doc',
+                    id: 'dapp-publishing/setup',
+                    label: 'Submit your dApp'
+                },
+                {
+                    type: 'doc',
+                    id: 'dapp-publishing/setup',
+                    label: 'Publishing subsequent dApp releases'
+                },
+            ]  
         },
         {
             type: 'doc',
