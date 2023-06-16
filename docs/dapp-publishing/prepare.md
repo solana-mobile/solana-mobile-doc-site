@@ -1,15 +1,14 @@
 # Prepare your dApp for publishing
 
-### Where do the asssets & files for my dApp go?
+## Where do the asssets & files for my dApp go?
 
 It is recommended that you put your dApp publishing files next to your dApp, and source control them together. This guide assumes that your dApp is built with Android Studio, and the root directory for the project which builds your APKs is `${APP_ROOT}`.
 
-### Configure the publishing details for your dApp
+## Configure the publishing details for your dApp
 
-#### 1. Collect your publishing assets
+### 1. Collect your publishing assets
 
-
-Having followed the instructions in [setup](./setup), collect the file paths for all your publishing assets (e.g., APK file, icons, screenshot images) relative to the directory that was  just created.
+Once everything is setup, collect the file paths for all your publishing assets (e.g., APK file, icons, screenshot images) relative to the directory that was just created.
 Some best practices for the assets & files you'll be providing:
 
 - Icon(s) should be 512px by 512px dimensions.
@@ -17,7 +16,7 @@ Some best practices for the assets & files you'll be providing:
 - You may choose portrait or landscape orientation for your images, we only ask that all the images you provide have consistent orientation.
 - Make sure your dApp APK is localized properly, and that your build.gradle file identifies the languages & locales that your dApp supports. See [the Android developer documentation](https://developer.android.com/guide/topics/resources/multilingual-support#specify-the-languages-your-app-supports) for more details.
 
-#### 2. Populate the configuration file
+### 2. Populate the configuration file
 
 Populate the initial contents of the configuration file created during setup. By default, the file name is `config.yaml`. Replace all fields in `<< >>` with details for your dApp. Remove any fields that don't apply (for e.g., `saga_features`, `google_store_package`, etc).
 
@@ -27,28 +26,32 @@ There are 3 sections to fill out: `publisher`, `app`, and `release`:
 - The `app` section represents a single logical app produced by a publisher. A single publisher will always have at least one app, but if you publish multiple different apps under a single identity, there will be one for each of your apps.
 - The `release` section is the most important, and describes all the metadata for a single release of an app, including its display name, description, icons, screenshots, etc. The text you enter in the `catalog` subsection, along with the icon and screenshots in the `media` subsections, are what application stores will use to display details about your app to the end user, so be as descriptive as you can.
 
-**IMPORTANT:** Each of the above regions of the configuration file have an `address` field. You do not need to modify this field nor should you remove it from the configuration file.
+:::info
+Each of the above regions of the configuration file have an `address` field. You do not need to modify this field nor should you remove it from the configuration file.
+:::
 
-_NOTE: You may need to provide details in the `testing_instructions` field of the configuration file that you would not want published on-chain. Rest assured, this data is not published as part of the on-chain metadata._.
+:::tip
+You may need to provide details in the `testing_instructions` field of the configuration file that you would not want published on-chain. Rest assured, this data is not published as part of the on-chain metadata.
+:::
 
-#### 3. Localization of store details (Optional)
+### 3. Localization of store details (Optional)
 
 The configuration file allows for localization of the details/copy you provide that describes your app. To be clear, this localized text is different from the strings localized *within your app itself*. Localized store details will be presented to users browsing dApp stores based on the locale they have chosen on their device. If a user's device is set to a locale you have provided, they will be presented that localized text.
 
 As a tangible example, here's how you would localize details strings for French (France). This would be placed at the same hierarchical level alongside the default `en-US` locale text:
 
-   ```
-   release:
-     catalog:
-       fr-FR:
-         name: >-
-           <<NAME_OF_APP_IN_FRENCH_(FRANCE)>>
-         short_description: >-
-           <<SHORT_APP_DESCRIPTION_IN_FRENCH_(FRANCE)>>
-         long_description: >-
-           <<LONG_APP_DESCRIPTION_IN_FRENCH_(FRANCE)>>
-         new_in_version: >-
-           <<WHATS_NEW_IN_THIS_VERSION_IN_FRENCH_(FRANCE)>>
-         saga_features: >-
-           <<ANY_FEATURES_ONLY_AVAILBLE_WHEN_RUNNING_ON_SAGA_IN_FRENCH_(FRANCE)>>
-   ```
+```yaml
+release:
+ catalog:
+   fr-FR:
+     name: >-
+       <<NAME_OF_APP_IN_FRENCH_(FRANCE)>>
+     short_description: >-
+       <<SHORT_APP_DESCRIPTION_IN_FRENCH_(FRANCE)>>
+     long_description: >-
+       <<LONG_APP_DESCRIPTION_IN_FRENCH_(FRANCE)>>
+     new_in_version: >-
+       <<WHATS_NEW_IN_THIS_VERSION_IN_FRENCH_(FRANCE)>>
+     saga_features: >-
+       <<ANY_FEATURES_ONLY_AVAILBLE_WHEN_RUNNING_ON_SAGA_IN_FRENCH_(FRANCE)>>
+```
