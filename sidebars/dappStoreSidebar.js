@@ -9,11 +9,6 @@ module.exports = {
             label: 'dApp Store Intro'
         },
         {
-            type: 'doc',
-            id: 'dapp-publishing/about',
-            label: 'Why Publish on the dApp Store?'
-        },
-        {
             type: 'category',
             label: 'Publish your dApp',
             collapsible: true,
