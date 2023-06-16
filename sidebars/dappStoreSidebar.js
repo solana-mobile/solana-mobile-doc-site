@@ -57,13 +57,13 @@ module.exports = {
                     label: 'Publisher Policy'
                 },
                 {
-                    type: 'link',
-                    href: 'https://github.com/solana-mobile/dapp-publishing/blob/main/docs/DEVELOPER-AGREEMENT.pdf',
+                    type: 'doc',
+                    id: 'dapp-publishing/agreement',
                     label: 'Developer Agreement'
                 },
                 {
-                    type: 'link',
-                    href: 'https://github.com/solana-mobile/dapp-publishing/blob/main/docs/TERMS-OF-USE.pdf',
+                    type: 'doc',
+                    id: 'dapp-publishing/tou',
                     label: 'Solana dApp Store TOU'
                 }
             ]
