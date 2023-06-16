@@ -59,3 +59,8 @@ The two flags for this command (`--requestor-is-authorized` and `--complies-with
 
 After submitting, please check the email address specified in the `publisher` section of your configuration file; you will receive correspondence from the Solana dApp Publisher Portal to that account.
 
+
+## 4. Wait for a decision on your app
+
+After submitting, we’ll review your app against our [policies](./policy). Please make sure to provide a valid email address, so that we can reach out to you with any questions about your submission.
+

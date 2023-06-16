@@ -12,6 +12,7 @@ module.exports = {
             type: 'category',
             label: 'Publish your dApp',
             collapsible: true,
+            collapsed: false,
             items: [
                 {
                     type: 'doc',
@@ -46,19 +47,31 @@ module.exports = {
             label: 'FAQ'
         },
         {
+            type: 'category',
+            label: 'Terms & Agreements',
+            collapsible: true,
+            items: [
+                {
+                    type: 'doc',
+                    id: 'dapp-publishing/policy',
+                    label: 'Publisher Policy'
+                },
+                {
+                    type: 'link',
+                    href: 'https://github.com/solana-mobile/dapp-publishing/blob/main/docs/DEVELOPER-AGREEMENT.pdf',
+                    label: 'Developer Agreement'
+                },
+                {
+                    type: 'link',
+                    href: 'https://github.com/solana-mobile/dapp-publishing/blob/main/docs/TERMS-OF-USE.pdf',
+                    label: 'Solana dApp Store TOU'
+                }
+            ]
+        },
+        {
             type: 'doc',
-            id: 'dapp-publishing/policy',
-            label: 'Publisher Policy'
+            id: 'dapp-publishing/support',
+            label: 'Support'
         },
-        {
-            type: 'link',
-            href: 'https://github.com/solana-mobile/dapp-publishing/blob/main/docs/DEVELOPER-AGREEMENT.pdf',
-            label: 'Developer Agreement'
-        },
-        {
-            type: 'link',
-            href: 'https://github.com/solana-mobile/dapp-publishing/blob/main/docs/TERMS-OF-USE.pdf',
-            label: 'Solana dApp Store TOU'
-        }
     ]
   };
