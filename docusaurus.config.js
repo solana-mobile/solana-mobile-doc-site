@@ -132,6 +132,13 @@ const config = {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
       },
+      algolia: {
+        // This API key is "search-only" and safe to be published
+        apiKey: "c52fd1c2b00a7f8d578b7d2b36430a44",
+        appId: "QHX7ZKLF5I",
+        indexName: "solanamobile",
+        contextualSearch: true,
+      },
     }),
 };
 
