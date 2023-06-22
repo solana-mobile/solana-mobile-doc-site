@@ -44,13 +44,3 @@ The `dapp-store` CLI handles all the tasks necessary for creating and minting NF
 You can find the NFT spec documentation [here](https://github.com/solana-mobile/dapp-publishing/tree/main/publishing-spec)
 
 </details>
-
-[//]: # (## Technical Overview)
-[//]: # ()
-[//]: # (Publishers, applications, and releases on the Saga Dapp Store are all represented as NFTs, with some modifications.)
-[//]: # ()
-[//]: # ("Publishers" are Metaplex Certified Collection &#40;MCC&#41; NFTs that have can have many "apps" associated with them.)
-[//]: # ()
-[//]: # ("Apps" are _also_ MCC NFTs that can have many "releases" associated with them.)
-[//]: # ()
-[//]: # ("Releases" are immutable Metaplex NFTs that can only be issued once per-version. Any new releases must be re-issued as a new NFT.)

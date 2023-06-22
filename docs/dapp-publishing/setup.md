@@ -29,7 +29,7 @@ echo "ANDROID_TOOLS_DIR=\"<path_to_android_sdk_version_build_tools_dir>\"" > .en
 
 ## Getting Started
 
-In your application folder (e.g., `example`):
+In your application folder (e.g., `android-app`):
 
 ```shell
 mkdir publishing
