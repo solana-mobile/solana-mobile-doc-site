@@ -43,8 +43,8 @@ module.exports = {
         },
         {
             type: 'doc',
-            id: 'dapp-publishing/faq',
-            label: 'FAQ'
+            id: 'dapp-publishing/qanda',
+            label: 'Q & A'
         },
         {
             type: 'category',

@@ -1,5 +1,5 @@
 
-# Frequently asked questions
+# Questions & Answers
 
 <details>
 <summary>What does it mean for the Solana dApp Store to be “fee-free”?</summary>
