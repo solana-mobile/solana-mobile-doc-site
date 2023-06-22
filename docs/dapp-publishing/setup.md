@@ -2,16 +2,16 @@
 
 ## Prerequisites
 
-- Node 18+
-- PNPM
-- Android SDK build tools
+### Node.js
+
+Please run all CLI tooling with Node version 18 or greater.
 
 ```shell
 corepack enable
 corepack prepare pnpm@`npm info pnpm --json | jq -r .version` --activate
 ```
 
-Corepack requires a version to enable, so if you don't have [jq](https://stedolan.github.io/jq/) installed, you can [install it](https://formulae.brew.sh/formula/jq), or just manually get the current version of pnpm with `npm info pnpm` and use it like this:
+If you don't have [jq](https://stedolan.github.io/jq/) installed, you can [install it](https://formulae.brew.sh/formula/jq), or manually get the current version of pnpm with `npm info pnpm` and use like this:
 
 ```shell
 corepack prepare pnpm@7.13.4 --activate
@@ -27,7 +27,7 @@ The path to the SDK build tools can be provided either directly to subcommands t
 echo "ANDROID_TOOLS_DIR=\"<path_to_android_sdk_version_build_tools_dir>\"" > .env
 ```
 
-## Usage
+## Getting Started
 
 In your application folder (e.g., `example`):
 
@@ -41,32 +41,6 @@ npx dapp-store init
 npx dapp-store --help
 ```
 
-or with `yarn`
+## CLI Updates
 
-```shell
-mkdir publishing
-cd publishing
-
-yarn init
-yarn add @solana-mobile/dapp-store-cli
-yarn run dapp-store init
-yarn run dapp-store --help
-```
-
-## Technical Overview
-
-Publishers, applications, and releases on the Saga Dapp Store are all represented as NFTs, with some modifications.
-
-"Publishers" are Metaplex Certified Collection (MCC) NFTs that have can have many "apps" associated with them.
-
-"Apps" are _also_ MCC NFTs that can have many "releases" associated with them.
-
-"Releases" are immutable Metaplex NFTs that can only be issued once per-version. Any new releases must be re-issued as a new NFT.
-
-## Editor's Note
-
-The `dapp-store` CLI handles rote tasks like uploading assets to file storage and i18n. However, it is by no means the only way to create these NFTs; all information about the requirements are specified in this repository, and the packages have been designed to be portable to other client contexts besides the CLI.
-
-### CLI Updates
-
-The CLI will automatically check for updated versions on npm and restrict operations if the version bump is significant enough. If your CI/CD deployments fail be sure to check if there is a required update.
+The CLI will automatically check for updated versions on npm and restrict operations on a periodic basis. If your CI/CD deployments fail, be sure to check if there is a required update.
