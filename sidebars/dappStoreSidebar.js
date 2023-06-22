@@ -32,12 +32,12 @@ module.exports = {
                 {
                     type: 'doc',
                     id: 'dapp-publishing/submit',
-                    label: '3. Submit your dApp'
+                    label: '3. Mint & Submit your dApp'
                 },
                 {
                     type: 'doc',
                     id: 'dapp-publishing/publishing_releases',
-                    label: '4. Publishing subsequent dApp releases'
+                    label: '4. Publish subsequent dApp releases'
                 },
             ]  
         },

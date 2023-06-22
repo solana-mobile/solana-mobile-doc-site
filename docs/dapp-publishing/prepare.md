@@ -1,9 +1,5 @@
 # Prepare your dApp for publishing
 
-## Where do the asssets & files for my dApp go?
-
-It is recommended that you put your dApp publishing files next to your dApp, and source control them together. This guide assumes that your dApp is built with Android Studio, and the root directory for the project which builds your APKs is `${APP_ROOT}`.
-
 ## Configure the publishing details for your dApp
 
 ### 1. Collect your publishing assets
@@ -15,6 +11,10 @@ Some best practices for the assets & files you'll be providing:
 - We recommend screenshot/preview images to be 1080p resolution (1920px by 1080px).
 - You may choose portrait or landscape orientation for your images, we only ask that all the images you provide have consistent orientation.
 - Make sure your dApp APK is localized properly, and that your build.gradle file identifies the languages & locales that your dApp supports. See [the Android developer documentation](https://developer.android.com/guide/topics/resources/multilingual-support#specify-the-languages-your-app-supports) for more details.
+
+:::tip
+It is recommended that you put your dApp publishing files next to your dApp, and source control them together.
+:::
 
 ### 2. Populate the configuration file
 
