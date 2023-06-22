@@ -12,7 +12,7 @@ The publishing tool is designed for CI/CD usage - all steps, including submittin
 
 ## Agreement & Policies
 
-Before you get started with publishing process, you should read the following documents:
+Before you get started with the publishing process, you should read the following documents:
 
 - [Publisher Policy](policy)
 - [Developer Agreement](agreement)
