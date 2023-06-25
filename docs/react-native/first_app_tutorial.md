@@ -26,12 +26,12 @@ This tutorial will be using the [fakewallet](../getting-started/development-setu
 
 ## Clone the React Native dApp Scaffold
 
-This dApp will build off the **[React Native Scaffold dApp](/react-native/setup#clone-solana-mobile-dapp-scaffold)** which already has a simple user interface that allows you to connect to a mobile wallet, request an airdrop, and sign transactions. 
+This dApp will build off the **[React Native Scaffold dApp](/react-native/setup#solana-mobile-dapp-scaffold)** which already has a simple user interface that allows you to connect to a mobile wallet, request an airdrop, and sign transactions. 
 
-#### Step 1. In your terminal, clone the repo.
+#### Step 1. Initialize a template app
 
 ```shell
-git clone https://github.com/solana-mobile/SolanaMobileDAppScaffold.git
+npx react-native init FirstDappTutorial --template https://github.com/solana-mobile/solana-mobile-dapp-scaffold.git
 ```
 
 #### Step 2. Enter the directory and install the project dependencies.
@@ -40,14 +40,14 @@ git clone https://github.com/solana-mobile/SolanaMobileDAppScaffold.git
 <TabItem value="yarn" label="yarn">
 
 ```shell
-cd SolanaMobileDAppScaffold && yarn install 
+cd FirstDappTutorial && yarn install 
 ```
 
 </TabItem>
 <TabItem value="npm" label="npm">
 
 ```shell
-cd SolanaMobileDAppScaffold && npm install 
+cd FirstDappTutorial && npm install 
 ```
 
 </TabItem>

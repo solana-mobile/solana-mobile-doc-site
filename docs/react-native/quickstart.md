@@ -204,7 +204,7 @@ await transact(async (wallet) => {
 
 - Dive into the [**Solana Program Library (SPL)**](https://spl.solana.com/) to learn about more interesting Solana Programs, like the [Token Program](https://spl.solana.com/token) used to create NFTs!
 
-- Follow the [First dApp Tutorial](/react-native/first_app_tutorial.md) to learn how to use our scaffold dApp, create UI components, and record a public message on the Solana Blockchain.
+- Follow the [First dApp Tutorial](/react-native/first_app_tutorial.md) to learn how to use our starter dApp scaffold, create UI components, and record a public message on the Solana Blockchain.
 
 - See our collection of [Sample Apps](/sample-apps/sample_app_overview) to reference a full React Native app.
 
