@@ -48,7 +48,7 @@ module.exports = {
         },
         {
             type: 'category',
-            label: 'Terms & Agreements',
+            label: 'Terms & Agreement',
             collapsible: true,
             items: [
                 {
