@@ -72,6 +72,11 @@ const sidebars = {
         },
         {
           type: 'doc',
+          id: 'react-native/anchor_counter_tutorial',
+          label: 'Anchor Program Tutorial'
+        },
+        {
+          type: 'doc',
           id: 'react-native/expo',
           label: 'Developing with Expo'
         },
