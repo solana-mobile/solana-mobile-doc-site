@@ -12,7 +12,7 @@ Connect to wallet apps and sign transactions and messages with the Mobile Wallet
 
 <CTAButton label="API Reference" to="https://www.javadoc.io/doc/com.solanamobile/mobile-wallet-adapter-clientlib-ktx/latest/index.html" />
 
-<br/><br/>
+<br/>
 
 ### Install dependencies
 

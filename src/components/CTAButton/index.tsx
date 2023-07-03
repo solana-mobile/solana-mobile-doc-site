@@ -10,9 +10,11 @@ to: string;
 
 const CTAButton: React.FC<CTAButtonProps> = ({ label, to }) => {
    return (
+      <div className={styles.container}>
       <Link className={styles.ctaButton} to={to}>
          <Translate>{label}</Translate>
       </Link>
+      </div>
    );
 }
 

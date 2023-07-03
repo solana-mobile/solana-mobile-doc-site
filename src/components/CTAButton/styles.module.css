@@ -10,6 +10,11 @@
   background-color: var(--ifm-color-primary-dark);
 }
 
+.container {
+  margin-bottom: 24px;
+  margin-top: 12px;
+}
+
 .ctaButton:hover {
   color: black;
   background-color: white
