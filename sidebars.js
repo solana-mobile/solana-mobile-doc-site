@@ -72,8 +72,8 @@ const sidebars = {
         },
         {
           type: 'doc',
-          id: 'react-native/anchor_counter_tutorial',
-          label: 'Anchor Program Tutorial'
+          id: 'react-native/anchor_integration',
+          label: 'Anchor Integration Guide'
         },
         {
           type: 'doc',
