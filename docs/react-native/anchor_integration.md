@@ -6,6 +6,8 @@ import CTAButton from "../../src/components/CTAButton";
 
 This guide will show you how to integrate an Anchor Program into your React Native dApp, using the [Anchor Counter dApp](https://github.com/solana-mobile/tutorial-apps/tree/main/AnchorCounterDapp) as reference.
 
+<CTAButton label="Example App Repo" to="https://github.com/solana-mobile/tutorial-apps/tree/main/AnchorCounterDapp" />
+
 ## What you will learn
 - How to import an Anchor Program into a React Native project
 - How to create an Anchor Wallet and Provider with Mobile Wallet Adapter
