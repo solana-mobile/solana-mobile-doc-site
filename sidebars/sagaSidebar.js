@@ -5,8 +5,8 @@ module.exports = {
     sagaSidebar: [
         {
             type: 'doc',
-            id: 'saga/saga_overview',
-            label: 'Saga Overview'
+            id: 'saga/release-notes',
+            label: 'Overview'
         },
         {
             type: 'category',
