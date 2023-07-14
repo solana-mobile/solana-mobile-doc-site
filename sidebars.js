@@ -72,6 +72,11 @@ const sidebars = {
         },
         {
           type: 'doc',
+          id: 'react-native/anchor_integration',
+          label: 'Anchor Integration Guide'
+        },
+        {
+          type: 'doc',
           id: 'react-native/expo',
           label: 'Developing with Expo'
         },

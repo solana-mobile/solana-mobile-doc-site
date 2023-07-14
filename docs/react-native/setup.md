@@ -11,12 +11,12 @@ Follow the [prerequisite setup](../getting-started/development-setup#prerequisit
 If you're planning on developing React Native on Windows, you should consider setting up your dev environment with [WSL2](https://learn.microsoft.com/en-us/windows/wsl/install) to avoid build issues installing our libraries.
 :::
 
-### Clone Solana Mobile dApp Scaffold
+### Solana Mobile dApp Scaffold
 
-The fastest way to start building React Native on Solana is cloning our [Solana Mobile React Native dApp Scaffold](https://github.com/solana-mobile/SolanaMobileDAppScaffold):
+The fastest way to start building React Native on Solana is building off our [React Native Template dApp](https://github.com/solana-mobile/solana-mobile-dapp-scaffold):
 
 ```shell
-git clone https://github.com/solana-mobile/SolanaMobileDAppScaffold.git
+npx react-native init MySolanaDapp --template https://github.com/solana-mobile/solana-mobile-dapp-scaffold.git
 ```
 
 The scaffold is a ready-to-go React Native dApp that comes with:
@@ -25,7 +25,7 @@ The scaffold is a ready-to-go React Native dApp that comes with:
 - Wallet authorization/connecting and airdrop request functionality.
 - Premade React UI Components like `ConnectWalletButton`, `RequestAirdropButton`, `SignMessageButton`.
 
-After cloning, you can quickly build your first dApp following this [tutorial!](/react-native/first_app_tutorial)
+After initializing a template, you can quickly build your first dApp following this [tutorial!](/react-native/first_app_tutorial)
 
 
 ### Setting up a new React Native project

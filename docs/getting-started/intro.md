@@ -46,9 +46,9 @@ Learn how to develop Solana Mobile dApps in your preferred programming language.
 
 <CardLayout autoFitEnabled={true}>
     <Card
-        to="/react-native/quickstart#clone-solana-mobile-dapp-scaffold"
+        to="/react-native/quickstart#solana-mobile-dapp-scaffold"
         header={{
-            label: "React Native Scaffold dApp",
+            label: "React Native Template dApp",
             translateId: "developer-programs",
         }}
         body={{

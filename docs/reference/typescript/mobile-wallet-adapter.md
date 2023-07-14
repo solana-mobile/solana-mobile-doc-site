@@ -12,7 +12,7 @@ Connect to wallet apps and sign transactions and messages with the Mobile Wallet
 
 <CTAButton label="API Reference" to="#mobile-wallet-api-methods" />
 
-<br/><br/>
+<br/>
 
 ### Install dependencies
 
