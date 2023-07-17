@@ -12,6 +12,12 @@ Some best practices for the assets & files you'll be providing:
 - You may choose portrait or landscape orientation for your images, we only ask that all the images you provide have consistent orientation.
 - Make sure your dApp APK is localized properly, and that your build.gradle file identifies the languages & locales that your dApp supports. See [the Android developer documentation](https://developer.android.com/guide/topics/resources/multilingual-support#specify-the-languages-your-app-supports) for more details.
 
+:::warning Important
+It is very important that you publish a release build of your Android APK signed with a unique signing key. This key will be used for all releases that you submit to the dApp store, and cannot be shared with releases on a different Android app store. You can learn more about this process [here](https://developer.android.com/studio/publish/app-signing#opt-out).
+
+Apps submitted as debug builds or release builds signed by anything other than a unique key cannot be accepted.
+:::
+
 :::tip
 It is recommended that you put your dApp publishing files next to your dApp, and source control them together.
 :::
@@ -42,16 +48,19 @@ As a tangible example, here's how you would localize details strings for French 
 
 ```yaml
 release:
- catalog:
-   fr-FR:
-     name: >-
-       <<NAME_OF_APP_IN_FRENCH_(FRANCE)>>
-     short_description: >-
-       <<SHORT_APP_DESCRIPTION_IN_FRENCH_(FRANCE)>>
-     long_description: >-
-       <<LONG_APP_DESCRIPTION_IN_FRENCH_(FRANCE)>>
-     new_in_version: >-
-       <<WHATS_NEW_IN_THIS_VERSION_IN_FRENCH_(FRANCE)>>
-     saga_features: >-
-       <<ANY_FEATURES_ONLY_AVAILBLE_WHEN_RUNNING_ON_SAGA_IN_FRENCH_(FRANCE)>>
+    catalog:
+        en-US:
+          name: Name of app in English
+          ...
+        fr-FR:
+            name: >-
+              Name of app in French (France)
+            short_description: >-
+              Short app description in French (France)
+            long_description: |
+              Long app description in French (France)
+            new_in_version: >-
+              New version features in French (France)
+            saga_features: >-
+              Saga features in French (France)
 ```
