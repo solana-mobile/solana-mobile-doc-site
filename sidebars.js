@@ -150,6 +150,7 @@ const sidebars = {
   // other sidebars
   ...require("./sidebars/dappStoreSidebar.js"),
   ...require("./sidebars/referenceSidebar.js"),
+  ...require("./sidebars/sagaSidebar.js"),
 };
 
 module.exports = sidebars;
