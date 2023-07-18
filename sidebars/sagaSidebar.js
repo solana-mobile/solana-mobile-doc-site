@@ -16,7 +16,7 @@ module.exports = {
             items: [
                 {
                     type: 'doc',
-                    id: 'saga/release-notes/MR1',
+                    id: 'saga/release-notes/mr1',
                     label: 'MR1'
                 },
             ]  
