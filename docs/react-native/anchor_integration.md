@@ -48,18 +48,22 @@ To create an `AnchorWallet`, use Mobile Wallet Adapter `transact` to implement t
 ```tsx
 import * as anchor from '@coral-xyz/anchor';
 import { transact, Web3MobileWallet } from '@solana-mobile/mobile-wallet-adapter-protocol-web3js';
-import {useAuthorization} from './AuthorizationProvider';
 
-const {authorizeSession, selectedAccount} = useAuthorization();
+const storedAuthToken = maybeGetStoredAuthToken(); // dummy placeholder function
 const anchorWallet = useMemo(() => {
-    if (!authorizeSession || !selectedAccount) {
-        return null;
-    }
-
     return {
         signTransaction: async (transaction: Transaction) => {
             return transact(async (wallet: Web3MobileWallet) => {
-                await authorizeSession(wallet);
+                const authorizationResult = await (storedAuthToken
+                    ? wallet.reauthorize({
+                        auth_token: storedAuthToken,
+                        identity: APP_IDENTITY,
+                    })
+                    : wallet.authorize({
+                    cluster: RPC_ENDPOINT,
+                    identity: APP_IDENTITY,
+                    })
+                );
                 const signedTransactions = await wallet.signTransactions({
                     transactions: [transaction],
                 });
@@ -79,7 +83,7 @@ const anchorWallet = useMemo(() => {
             return selectedAccount.publicKey;
         },
     } as anchor.Wallet;
-}, [authorizeSession, selectedAccount]);
+}, [storedAuthToken]);
 ```
 
 ## Importing an Anchor Program in Typescript
@@ -152,24 +156,33 @@ With an instantiated `Program`, you can now:
 
 ```tsx
 import {BasicCounter} from '../basic-counter/target/types/basic_counter';
-import {useAuthorization} from './providers/AuthorizationProvider';
-import {useCounterProgram} from './providers/CounterProgramProvider';
+import {useCounterProgram} from './hooks/useCounterProgram';
 
-const {counterProgram, counterAccountPubkey} = useCounterProgram();
+const storedAuthToken = maybeGetStoredAuthToken();
+const {counterProgram, counterPDA} = useCounterProgram(
+    connection,
+    anchorWallet,
+);
 const signIncrementTransaction = useCallback(
-    async (program: Program<BasicCounter>) => {
+    async () => {
         return await transact(async (wallet: Web3MobileWallet) => {
-            const [authorizationResult, latestBlockhash] = await Promise.all([
-                authorizeSession(wallet),
-                connection.getLatestBlockhash(),
-            ]);
+            const authorizationResult = await (storedAuthToken
+                ? wallet.reauthorize({
+                    auth_token: storedAuthToken,
+                    identity: APP_IDENTITY,
+                })
+                : wallet.authorize({
+                    cluster: RPC_ENDPOINT,
+                    identity: APP_IDENTITY,
+                }));
+            const latestBlockhash = await connection.getLatestBlockhash();
 
             // Generate the increment ix from the Anchor program
-            const incrementInstruction = await program.methods
+            const incrementInstruction = await counterProgram.methods
                 .increment()
                 .accounts({
-                    counter: counterAccountPubkey,
-                    authority: selectedAccount?.publicKey,
+                    counter: counterPDA,
+                    authority: authorizationResult.publicKey,
                 })
                 .instruction();
 
@@ -179,7 +192,7 @@ const signIncrementTransaction = useCallback(
                 feePayer: authorizationResult.publicKey,
             }).add(incrementInstruction);
 
-            // Request a signed transaction from user's wallet
+            // Sign a transaction and receive
             const signedTransactions = await wallet.signTransactions({
                 transactions: [incrementTransaction],
             });
@@ -187,15 +200,8 @@ const signIncrementTransaction = useCallback(
             return signedTransactions[0];
         });
     },
-    [
-        authorizeSession,
-        connection,
-        counterAccountPubkey,
-        selectedAccount?.publicKey,
-    ],
+    [storedAuthToken, connection, counterPDA],
 );
-
-const signedTransaction = await signIncrementTransaction(counterProgram)
 ```
 
 ## Submit Transactions from your Anchor Program
@@ -210,28 +216,29 @@ To submit a `Transaction` to RPC, you can:
 
 ```tsx
 const incrementCounter = useCallback(
-    async (program: Program<BasicCounter>) => {
-        // Submit an increment method Transaction to RPC.
-        const signature = await program.methods
+    async () => {
+        // Submit an increment transaction to the RPC endpoint
+        const signature = await counterProgram.methods
         .increment()
         .accounts({
-            counter: counterAccountPubkey,
-            authority: selectedAccount?.publicKey,
+            counter: counterPDA,
+            authority: authorityPublicKey,
         })
         .rpc();
 
         return signature;
     },
-    [counterAccountPubkey, selectedAccount?.publicKey],
+    [counterProgram, authorityPublicKey, counterPDA],
 );
-const signature = await incrementCounter(counterProgram)
 ```
 
 ### Manually submitting to an RPC:
 
+Instead of submitting using `rpc()`, you can also choose to build the transaction and separately submit it to
+the RPC.
+
 ```tsx
-// Construct a signed Transaction like from the previous section, then submit to RPC
-// using web3.js `connection` client.
+// Construct a signed transaction, then submit to RPC using web3.js `connection` client.
 const signedTransaction = await signIncrementTransaction(counterProgram)
 connection.sendTransaction(signedTransaction)
 ```
