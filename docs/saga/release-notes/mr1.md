@@ -63,3 +63,13 @@ MR1 brings Saga a new display calibration profile with increased color accuracy.
 
 The fingerprint sensor’s performance during enrollment has been improved, as has idle/standby battery life and general thermal management. Carrier-specific improvements for Verizon and AT&T are also present. Lastly, Saga’s fastboot recovery mode now defaults to the recovery menu. 
 
+## Factory image
+These files are for use only on your personal Saga device and may not be disassembled, decompiled, reverse engineered, modified or redistributed by you or used in any way except as specifically set forth in the license terms that came with your device.
+
+Downloading of the system image and use of the device software is subject to Solana Mobile's [Terms of Service](https://solanamobile.com/tos). By continuing, you agree to Solana Mobile's [Terms of Service](https://solanamobile.com/tos) and [Privacy Policy](https://solanamobile.com/privacy-policy). Your downloading of the system image and use of the device software may also be subject to certain third-party terms of service, which can be found in Settings > About phone > Legal information, or as otherwise provided.
+
+[MR1 (TKQ1.221220.425)](https://saga-images.s3.amazonaws.com/saga_global_fastboot_TKQ1.221220.425.zip)  
+_(SHA-256 checksum: `99f56e7d357c1dd70f48ce9497802f3aee83734da827d7299bb47f012ecb8209`)_  
+[Kernel sources](https://github.com/osomprivacy)
+
+**NOTE: These images are not compatible with Saga dev kits (a.k.a. DVT-1). Flashing this image to a Saga dev kit will result in a non-functional and non-recoverable device.**
