@@ -77,6 +77,11 @@ const sidebars = {
         },
         {
           type: 'doc',
+          id: 'react-native/metaplex_integration',
+          label: 'Metaplex Integration Guide'
+        },
+        {
+          type: 'doc',
           id: 'react-native/expo',
           label: 'Developing with Expo'
         },
