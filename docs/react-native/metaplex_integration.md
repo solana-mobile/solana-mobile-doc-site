@@ -33,11 +33,11 @@ npm install @metaplex-foundation/js
 
 ### Polyfill installation
 
-The JS SDK was originally written to be run in a Browser/Node environment, so certain dependencies aren't immediately available on React Native. These polyfill libraries will fill in the missing libraries and enable React Native compatibility.
+The Metaplex JS SDK was originally written for a Browser/Node environment, so certain dependencies aren't immediately available on React Native. These polyfill libraries will fill in the missing libraries and enable React Native compatibility.
 
 #### 1. Install polyfills
 ```shell
-yarn add 
+yarn add \
     assert \
     crypto-browserify \
     readable-stream \
@@ -45,7 +45,7 @@ yarn add
     react-native-url-polyfill
 ```
 
-#### 2. Add polyfi;ls to resolver in metro.config.js
+#### 2. Add polyfills to resolver in metro.config.js
 Adding the `resolver` property lets the Metro know which packages to substitute with when seeing a `require`.
 ```js
 module.exports = {
@@ -80,7 +80,111 @@ import {name as appName} from './app.json';
 AppRegistry.registerComponent(appName, () => App);
 ```
 
-## Creating a Metaplex instance
+## Usage
+
+### Creating a Metaplex Instance
+
+The entry point to the JavaScript SDK is a `Metaplex` instance that will give you access to its API. It provides a convenient API to interact with on-chain programs, simplifying actions like minting an NFT.
+
+It accepts a Connection instance from @solana/web3.js that will be used to communicate with the cluster.
+
+```tsx
+import {Metaplex} from '@metaplex-foundation/js';
+
+const metaplex = Metaplex.make(connection);
+```
+
+### Using MWA as an Identity Driver
+
+Metaplex also allows you to further customize who the SDK should interact on behalf of, by providing an "Identity Driver". You can use the Mobile Wallet Adapter methods to implement an Identity Driver.
+
+#### Create an MWA Identity Signer:
+
+```tsx
+import {IdentitySigner, Metaplex} from '@metaplex-foundation/js';
+import {
+  transact,
+  Web3MobileWallet,
+} from '@solana-mobile/mobile-wallet-adapter-protocol-web3js';
+import {Connection, Transaction} from '@solana/web3.js';
+
+const mwaIdentitySigner: IdentitySigner = {
+    publicKey: signersPublicKey,
+    signMessage: async (message: Uint8Array): Promise<Uint8Array> => {
+        return await transact(async (wallet: Web3MobileWallet) => {
+            const authResult = await wallet.authorize({
+                cluster: RPC_ENDPOINT,
+                identity: APP_IDENTITY,
+            }); 
+            
+            // Optionally, double check authResult returns the matching account to 'signersPublicKey'
+
+            const signedMessages = await wallet.signMessages({
+                addresses: [selectedAccount.publicKey.toBase58()],
+                payloads: [message],
+            });
+
+            return signedMessages[0];
+        });
+    },
+    signTransaction: async (
+        transaction: Transaction,
+    ): Promise<Transaction> => {
+        return await transact(async (wallet: Web3MobileWallet) => {
+            const authResult = await wallet.authorize({
+                cluster: RPC_ENDPOINT,
+                identity: APP_IDENTITY,
+             });
+
+            // Optionally, double check authResult returns the matching account to 'signersPublicKey'
+
+            const signedTransactions = await wallet.signTransactions({
+                transactions: [transaction],
+            });
+
+            return signedTransactions[0];
+        });
+    },
+    signAllTransactions: async (
+        transactions: Transaction[],
+    ): Promise<Transaction[]> => {
+        return transact(async (wallet: Web3MobileWallet) => {
+            const authResult = await wallet.authorize({
+                cluster: RPC_ENDPOINT,
+                identity: APP_IDENTITY,
+            })
+
+            // Optionally, double check authResult returns the matching account to 'signersPublicKey'
+
+            const signedTransactions = await wallet.signTransactions({
+                transactions: transactions,
+            });
+            return signedTransactions;
+        });
+    },
+};
+```
+
+#### Using the Identity Driver  
+Then you need to wrap the implemented `IdentitySigner` within a `MetaplexPlugin`. Now you can call the `use` method on the Metaplex instance and supply the identity driver plugin.
+
+The Metaplex instance requires passing in a `MetaplexPlugin`, so you need to first create a plugin that wraps the identity signer. Lastly, you can call the `use` method on the `Metaplex` instance and supply the identity driver plugin.
+
+```tsx
+// Create a Metaplex Plugin for the identity driver
+const mobileWalletAdapterIdentity = (
+  mwaIdentitySigner: IdentitySigner,
+): MetaplexPlugin => ({
+  install(metaplex: Metaplex) {
+    metaplex.identity().setDriver(mwaIdentitySigner);
+  },
+});
+
+// Finally, create the Metaplex instance with the identity driver.
+const metaplex = Metaplex.make(connection).use(
+    mobileWalletAdapterIdentity(mwaIdentitySigner),
+);
+```
 
 ## Minting an NFT
 
