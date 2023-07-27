@@ -92,7 +92,7 @@ const config = {
                 label: 'Android'
               },
               {
-                to: 'getting-started/intro',
+                to: 'getting-started/intro', 
                 label: 'Flutter'
               },
             ],

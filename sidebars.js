@@ -19,9 +19,14 @@ const sidebars = {
   // But you can create a sidebar manually
   documentationSidebar: [
     {
+      type: 'html',
+      value: 'Getting Started',
+      className: 'sdk-sidebar-header',
+    },
+    {
       type: 'doc',
       id: 'getting-started/intro',
-      label: 'Introduction'
+      label: 'Introduction',
     },
     {
       type: 'doc',
@@ -39,31 +44,7 @@ const sidebars = {
     },
     {
       type: 'html',
-      value: 'Core Technology',
-      className: 'sdk-sidebar-header',
-    },
-    {
-      type: 'html',
-      value: 'Mobile Wallet Adapter',
-      defaultStyle: true,
-    },
-    {
-      type: 'html',
-      value: 'Seed Vault',
-      defaultStyle: true,
-    },
-    {
-      type: 'html',
-      value: 'Solana Pay',
-      defaultStyle: true,
-    },
-    {
-      type: 'html',
-      value: '<div class="sidebar-divider" />',
-    },
-    {
-      type: 'html',
-      value: 'Development Guides',
+      value: 'SDK Guides',
       className: 'sdk-sidebar-header',
     },
     {

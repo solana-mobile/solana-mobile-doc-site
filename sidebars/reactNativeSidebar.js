@@ -19,14 +19,18 @@ module.exports = {
             label: 'Quickstart'
         },
         {
-            type: 'doc',
-            id: 'react-native/first_app_tutorial',
-            label: 'Build your first dApp'
+            type: 'html',
+            value: '<div class="sidebar-divider" />',
+        },
+        {
+            type: 'html',
+            value: 'Guides',
+            className: 'sdk-sidebar-header',
         },
         {
             type: 'doc',
-            id: 'react-native/hello_world_tutorial',
-            label: 'Hello World Tutorial'
+            id: 'react-native/expo',
+            label: 'Developing with Expo'
         },
         {
             type: 'doc',
@@ -39,13 +43,41 @@ module.exports = {
             label: 'Metaplex Integration Guide'
         },
         {
+            type: 'html',
+            value: '<div class="sidebar-divider" />',
+        },
+        {
+            type: 'html',
+            value: 'Tutorials',
+            className: 'sdk-sidebar-header',
+        },
+        {
             type: 'doc',
-            id: 'react-native/expo',
-            label: 'Developing with Expo'
+            id: 'react-native/first_app_tutorial',
+            label: 'Build your first dApp'
+        },
+        {
+            type: 'doc',
+            id: 'react-native/hello_world_tutorial',
+            label: 'Hello World Tutorial'
+        },
+        {
+            type: 'html',
+            value: '<div class="sidebar-divider" />',
+        },
+        {
+            type: 'html',
+            value: 'Reference',
+            className: 'sdk-sidebar-header',
+        },
+        {
+            type: 'ref',
+            id: 'reference/typescript/mobile-wallet-adapter',
+            label: 'Mobile Wallet Adapter Reference'
         },
         {
             type: 'link',
-            href: 'https://solana-labs.github.io/solana-web3.js/',
+            href: '/reference/typescript/web3js',
             label: 'web3.js Reference'
         },
     ]

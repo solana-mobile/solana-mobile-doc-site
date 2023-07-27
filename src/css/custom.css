@@ -35,7 +35,7 @@
 .sidebar-divider {
     height: 1px; /* Thickness of the divider */
     background-color: rgb(96, 96, 96); /* Color of the divider */
-    margin: 10px 2px 0px 2px;
+    margin: 10px 0px 0px 2px;
 }
 
 .sdk-sidebar-header {
