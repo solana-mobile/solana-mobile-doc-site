@@ -2,7 +2,7 @@
 
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 module.exports = {
-    unrealSidebar: [
+    unitySidebar: [
         {
             type: 'doc',
             id: 'unity/unity_sdk',

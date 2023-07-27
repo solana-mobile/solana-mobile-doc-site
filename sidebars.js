@@ -21,7 +21,7 @@ const sidebars = {
     {
       type: 'html',
       value: 'Getting Started',
-      className: 'sdk-sidebar-header',
+      className: 'sidebar-section-header',
     },
     {
       type: 'doc',
@@ -44,8 +44,8 @@ const sidebars = {
     },
     {
       type: 'html',
-      value: 'SDK Guides',
-      className: 'sdk-sidebar-header',
+      value: 'SDK',
+      className: 'sidebar-section-header',
     },
     {
       type: 'ref',
@@ -79,7 +79,7 @@ const sidebars = {
     {
       type: 'html',
       value: 'Resources',
-      className: 'sdk-sidebar-header',
+      className: 'sidebar-section-header',
     },
     {
       type: 'doc',

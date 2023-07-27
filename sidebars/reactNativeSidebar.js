@@ -4,6 +4,11 @@
 module.exports = {
     reactNativeSidebar: [
         {
+            type: 'html',
+            value: 'React Native SDK',
+            className: 'react-native sidebar-header',
+        },
+        {
             type: 'doc',
             id: 'react-native/overview',
             label: 'Overview'
@@ -25,7 +30,7 @@ module.exports = {
         {
             type: 'html',
             value: 'Guides',
-            className: 'sdk-sidebar-header',
+            className: 'sidebar-section-header',
         },
         {
             type: 'doc',
@@ -49,17 +54,12 @@ module.exports = {
         {
             type: 'html',
             value: 'Tutorials',
-            className: 'sdk-sidebar-header',
+            className: 'sidebar-section-header',
         },
         {
             type: 'doc',
             id: 'react-native/first_app_tutorial',
             label: 'Build your first dApp'
-        },
-        {
-            type: 'doc',
-            id: 'react-native/hello_world_tutorial',
-            label: 'Hello World Tutorial'
         },
         {
             type: 'html',
@@ -68,7 +68,7 @@ module.exports = {
         {
             type: 'html',
             value: 'Reference',
-            className: 'sdk-sidebar-header',
+            className: 'sidebar-section-header',
         },
         {
             type: 'ref',

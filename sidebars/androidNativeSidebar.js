@@ -4,6 +4,11 @@
 module.exports = {
     androidNativeSidebar: [
         {
+            type: 'html',
+            value: 'Android SDK',
+            className: 'android-native sidebar-header',
+        },
+        {
             type: 'doc',
             id: 'android-native/overview',
             label: 'Overview'
