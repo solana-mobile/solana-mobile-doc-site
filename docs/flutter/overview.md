@@ -1,12 +1,17 @@
----
-title: Flutter
----
-
 # Flutter
+
+import CTAButton from "../../src/components/CTAButton";
+
 
 Flutter is an open source mobile app development framework created by Google. It uses the Dart programming language and allows developers to create cross-platform applications for Android and iOS using a single codebase.
 
 ## Solana Mobile Flutter SDK
+
+
+The Solana Mobile Flutter SDK is an open source collection of Flutter plugins that brings the core SMS technologies like **Mobile Wallet Adapter** onto Flutter.
+It is actively maintained by the [Espresso Cash](https://www.espressocash.com/) team.
+
+<CTAButton label="View on GitHub" to="https://github.com/espresso-cash/espresso-cash-public/tree/master" />
 
 :::note
 The Solana Flutter SDK is a community-developed and maintained project and **it is not an official library**. 
@@ -17,9 +22,6 @@ Thank you to the [Espresso Cash](https://github.com/espresso-cash/espresso-cash-
 active maintanence of this library!
 :::
 
-
-The Solana Mobile Flutter SDK is an open source collection of Flutter plugins that brings the core SMS technologies like **Mobile Wallet Adapter** onto Flutter.
-It is actively maintained by the [Espresso Cash](https://www.espressocash.com/) team.
 
 ### [Solana Dart Library](https://pub.dev/packages/solana)
 

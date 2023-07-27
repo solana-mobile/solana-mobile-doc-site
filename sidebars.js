@@ -104,7 +104,7 @@ const sidebars = {
   // other sidebars
   ...require("./sidebars/androidNativeSidebar.js"),
   ...require("./sidebars/reactNativeSidebar.js"),
-  ...require("./sidebars/flutterSideBar.js"),
+  ...require("./sidebars/flutterSidebar.js"),
   ...require("./sidebars/unitySidebar.js"),
   ...require("./sidebars/unrealSidebar.js"),
   ...require("./sidebars/dappStoreSidebar.js"),
