@@ -76,9 +76,49 @@ const config = {
             type: 'doc',
             docId: 'getting-started/intro',
             position: 'left',
-            label: 'Documentation',
+            label: 'Overview',
           },
           {
+            type: 'dropdown',
+            position: 'left',
+            label: 'SDKs',
+            items: [
+              {
+                to: 'react-native/overview',
+                label: 'React Native'
+              },
+              {
+                to: 'android-native/overview',
+                label: 'Android'
+              },
+              {
+                to: 'flutter/overview', 
+                label: 'Flutter'
+              },
+              {
+                to: 'unity/unity_sdk', 
+                label: 'Unity'
+              },
+              {
+                to: 'unreal/unreal_sdk', 
+                label: 'Unreal Engine'
+              },
+            ],
+          },
+          {
+            type: 'doc',
+            docId: 'dapp-publishing/intro',
+            position: 'left',
+            label: 'dApp Store',
+          },
+          {
+            type: 'doc',
+            docId: 'saga/release-notes',
+            position: 'left',
+            label: 'Saga',
+          },
+          {
+            
             href: 'https://github.com/solana-mobile',
             label: 'GitHub',
             position: 'right',
@@ -86,11 +126,6 @@ const config = {
           {
             href: 'https://discord.gg/solanamobile',
             label: 'Discord',
-            position: 'right',
-          },
-          {
-            href: 'https://portal.usecontext.io/standalone/FC55OPwlz',
-            label: 'SMS ChatGPT Bot (Beta)',
             position: 'right',
           },
         ],

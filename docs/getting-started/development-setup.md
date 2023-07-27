@@ -94,7 +94,7 @@ the capabilities supported by each, the state of development, and how to get sta
 
 <CardLayout autoFitEnabled={true}>
     <Card
-        to="/additional-sdks/flutter_sdk"
+        to="/flutter/overview"
         header={{
             label: "Flutter",
             translateId: "flutter-headr",
@@ -106,7 +106,7 @@ the capabilities supported by each, the state of development, and how to get sta
         iconPath="img/flutter-icon.svg"
     />
     <Card
-        to="/additional-sdks/unity_intro"
+        to="/unity/unity_sdk"
         header={{
             label: "Unity",
             translateId: "unity-header",
@@ -118,7 +118,7 @@ the capabilities supported by each, the state of development, and how to get sta
         iconPath="img/unity-logo.png"
     />
     <Card
-        to="https://github.com/CryptoCavemen/solana-saga-unreal-sdk"
+        to="/unreal/unreal_sdk"
         header={{
             label: "Unreal Engine",
             translateId: "unreal-header",
