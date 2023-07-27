@@ -30,7 +30,7 @@ See the API for the various client libraries implemented for [Mobile Wallet Adap
         iconPath="img/kotlin-icon.png"
     />
     <SmallCard
-        to="/additional-sdks/flutter_sdk"
+        to="/flutter/overview"
         header={{
             label: "Flutter",
             translateId: "flutter-reference",

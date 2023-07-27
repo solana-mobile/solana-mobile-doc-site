@@ -72,7 +72,7 @@ const sidebars = {
     {
       type: 'ref',
       id: 'unreal/unreal_sdk',
-      label: 'Unreal',
+      label: 'Unreal Engine',
     },   
     
      /* Resources Section */
