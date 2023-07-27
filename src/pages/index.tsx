@@ -62,7 +62,7 @@ function HeaderHero() {
       <SolanaMobileStackLogo />
       <>
         <h1 className={styles.title}>Solana Mobile Stack</h1>
-        <p className={styles.tagline}>Learn to build Solana Mobile dApps</p>
+        <p className={styles.tagline}>Build for the Web3 mobile era.</p>
         <div className={styles.buttons}>
           <HomeCallToAction />
         </div>
