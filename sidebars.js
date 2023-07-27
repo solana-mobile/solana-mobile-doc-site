@@ -19,122 +19,86 @@ const sidebars = {
   // But you can create a sidebar manually
   documentationSidebar: [
     {
-      type: 'category',
-      label: 'Getting Started',
-      collapsible: false,
-      items: [
-        {
-          type: 'doc',
-          id: 'getting-started/intro',
-          label: 'Introduction'
-        },
-        {
-          type: 'doc',
-          id: 'getting-started/development-setup',
-          label: 'Development Setup'
-        },
-        {
-          type: 'doc',
-          id: 'getting-started/overview',
-          label: 'SMS Overview'
-        },
-      ],
+      type: 'doc',
+      id: 'getting-started/intro',
+      label: 'Introduction'
     },
     {
-      type: 'category',
-      label: 'React Native SDK',
-      collapsible: true,
-      items: [
-        {
-          type: 'doc',
-          id: 'react-native/overview',
-          label: 'Overview'
-        },
-        {
-          type: 'doc',
-          id: 'react-native/setup',
-          label: 'Setup'
-        },
-        {
-          type: 'doc',
-          id: 'react-native/quickstart',
-          label: 'Quickstart'
-        },
-        {
-          type: 'doc',
-          id: 'react-native/first_app_tutorial',
-          label: 'Build your first dApp'
-        },
-        {
-          type: 'doc',
-          id: 'react-native/hello_world_tutorial',
-          label: 'Hello World Tutorial'
-        },
-        {
-          type: 'doc',
-          id: 'react-native/anchor_integration',
-          label: 'Anchor Integration Guide'
-        },
-        {
-          type: 'doc',
-          id: 'react-native/metaplex_integration',
-          label: 'Metaplex Integration Guide'
-        },
-        {
-          type: 'doc',
-          id: 'react-native/expo',
-          label: 'Developing with Expo'
-        },
-        {
-          type: 'link',
-          href: 'https://solana-labs.github.io/solana-web3.js/',
-          label: 'web3.js Reference'
-        },
-      ]
+      type: 'doc',
+      id: 'getting-started/development-setup',
+      label: 'Development Setup'
     },
     {
-      type: 'category',
-      label: 'Android Native SDK',
-      collapsible: true,
-      items: [
-        {
-          type: 'doc',
-          id: 'android-native/overview',
-          label: 'Overview'
-        },
-        {
-          type: 'doc',
-          id: 'android-native/setup',
-          label: 'Setup'
-        },
-        {
-          type: 'doc',
-          id: 'android-native/quickstart',
-          label: 'Quickstart'
-        },
-        {
-          type: 'link',
-          href: 'https://www.javadoc.io/doc/com.solanamobile/mobile-wallet-adapter-clientlib-ktx/latest/index.html',
-          label: 'Kotlin MWA reference'
-        },
-      ]  
+      type: 'doc',
+      id: 'getting-started/overview',
+      label: 'SMS Overview'
     },
     {
-      type: 'category',
-      label: 'Additional SDKs',
-      collapsible: true,
-      items: [
-        {
-          type: 'doc',
-          id: 'additional-sdks/unity_intro',
-          label: 'Unity SDK'
-        },
-        {
-          type: 'doc',
-          id: 'additional-sdks/flutter_sdk',
-          label: 'Flutter SDK'
-        },
-      ]  
+      type: 'html',
+      value: '<div class="sidebar-divider" />',
+    },
+    {
+      type: 'html',
+      value: 'Core Technology',
+      className: 'sdk-sidebar-header',
+    },
+    {
+      type: 'html',
+      value: 'Mobile Wallet Adapter',
+      defaultStyle: true,
+    },
+    {
+      type: 'html',
+      value: 'Seed Vault',
+      defaultStyle: true,
+    },
+    {
+      type: 'html',
+      value: 'Solana Pay',
+      defaultStyle: true,
+    },
+    {
+      type: 'html',
+      value: '<div class="sidebar-divider" />',
+    },
+    {
+      type: 'html',
+      value: 'Development Guides',
+      className: 'sdk-sidebar-header',
+    },
+    {
+      type: 'ref',
+      id: 'react-native/overview',
+      label: 'React Native'
+    },
+    {
+      type: 'ref',
+      id: 'android-native/overview',
+      label: 'Android'
+    },
+    {
+      type: 'ref',
+      id: 'flutter/overview',
+      label: 'Flutter'
+    },
+    {
+      type: 'ref',
+      id: 'unity/unity_sdk',
+      label: 'Unity'
+    },
+    {
+      type: 'ref',
+      id: 'unreal/unreal_sdk',
+      label: 'Unreal'
+    },
+    {
+      type: 'html',
+      value: '<div class="sidebar-divider" />',
+    },
+    {
+      type: 'html',
+      value: 'Resources',
+      className: 'sdk-sidebar-header',
     },
     {
       type: 'doc',
@@ -153,6 +117,11 @@ const sidebars = {
     },
   ],
   // other sidebars
+  ...require("./sidebars/androidNativeSidebar.js"),
+  ...require("./sidebars/reactNativeSidebar.js"),
+  ...require("./sidebars/flutterSideBar.js"),
+  ...require("./sidebars/unitySidebar.js"),
+  ...require("./sidebars/unrealSidebar.js"),
   ...require("./sidebars/dappStoreSidebar.js"),
   ...require("./sidebars/referenceSidebar.js"),
   ...require("./sidebars/sagaSidebar.js"),
