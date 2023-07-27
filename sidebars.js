@@ -62,17 +62,17 @@ const sidebars = {
     {
       type: 'ref',
       id: 'flutter/overview',
-      label: 'Flutter'
+      label: 'Flutter',
     },
     {
       type: 'ref',
       id: 'unity/unity_sdk',
-      label: 'Unity'
+      label: 'Unity',
     },
     {
       type: 'ref',
       id: 'unreal/unreal_sdk',
-      label: 'Unreal'
+      label: 'Unreal',
     },   
     
      /* Resources Section */

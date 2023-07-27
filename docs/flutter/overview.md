@@ -8,16 +8,32 @@ Flutter is an open source mobile app development framework created by Google. It
 
 ## Solana Mobile Flutter SDK
 
-The Solana Mobile Flutter SDK is an open source collection of Flutter plugins that brings the core SMS technologies like **Mobile Wallet Adapter** onto Flutter.
-It is actively maintained by the [Espresso Cache](https://www.espressocash.com/) team.
+:::note
+The Solana Flutter SDK is a community-developed and maintained project and **it is not an official library**. 
+Please be understanding if certain areas are still under development. Your 
+contributions are always welcome to help address any issues you may encounter.
 
-## Quickstart
-### [Example Flutter Solana Mobile dApp](https://github.com/espresso-cash/espresso-cash-public/tree/master/packages/solana_mobile_client/example)
+Thank you to the [Espresso Cash](https://github.com/espresso-cash/espresso-cash-public/tree/master) team for your
+active maintanence of this library!
+:::
+
+
+The Solana Mobile Flutter SDK is an open source collection of Flutter plugins that brings the core SMS technologies like **Mobile Wallet Adapter** onto Flutter.
+It is actively maintained by the [Espresso Cash](https://www.espressocash.com/) team.
+
+### [Solana Dart Library](https://pub.dev/packages/solana)
+
+Dart implementation of Solana JSON RPC API client. Provides convenient interface for the RPC methods.
+
+### [Flutter Mobile Wallet Adapter](https://pub.dev/packages/solana_mobile_client)
+
+Reference implementation of the Mobile Wallet Adapter (Client) specification for Flutter, providing the MWA API (authorization, signing, etc)
+
+## Resources
+
+### [Flutter Example dApp](https://github.com/espresso-cash/espresso-cash-public/tree/master/packages/solana_mobile_client/example)
 An example Flutter app showing how to integrate Mobile Wallet Adapter and connect to wallets, enabling transaction signing and sending.
 
-### [Flutter Mobile Wallet Adapter Plugin](https://github.com/espresso-cash/espresso-cash-public/tree/master/packages/solana_mobile_client)
-An open source implementation of Mobile Wallet Adapter client library as a Flutter Plugin.
+### Community
 
-## Community
-
-Join the official [Solana Dart Discord](https://discord.gg/Q9aFs3Ydmd) to participate in discussion, ask technical questions, and stay tuned for developments.
+Join the community led [Solana Dart Discord](https://discord.gg/Q9aFs3Ydmd) to participate in discussion, ask technical questions, and stay tuned for developments.
