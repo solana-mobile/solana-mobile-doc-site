@@ -38,6 +38,8 @@ const sidebars = {
       id: 'getting-started/overview',
       label: 'SMS Overview'
     },
+
+    /* SDK Section **/
     {
       type: 'html',
       value: '<div class="sidebar-divider" />',
@@ -71,7 +73,9 @@ const sidebars = {
       type: 'ref',
       id: 'unreal/unreal_sdk',
       label: 'Unreal'
-    },
+    },   
+    
+     /* Resources Section */
     {
       type: 'html',
       value: '<div class="sidebar-divider" />',
