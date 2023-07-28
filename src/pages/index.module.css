@@ -66,6 +66,14 @@
   text-align: center;
 }
 
+[data-theme='light'] .HeaderHero .tagline {
+  font-size: 36px;
+  line-height: 1.3;
+  color: black;
+  font-weight: 500;
+  text-align: center;
+}
+
 .HeaderHero .buttons {
   margin-top: 40px;
 }
@@ -153,7 +161,7 @@
   background-color: #14F195;
 }
 
-.ActionButton.primary:hover {
+[data-theme='dark'] .ActionButton.primary:hover {
   color: black;
   background-color: white;
 }
@@ -161,12 +169,23 @@
 .ActionButton.secondary {
   margin-left: 5px;
   color: #14F195;
-  border-color: #14F195;
   border: 1px solid #14F195;
 }
 
-.ActionButton.secondary:hover {
+[data-theme='dark'] .ActionButton.secondary:hover {
   margin-left: 5px;
   color: white;
   border: 1px solid white;
+}
+
+[data-theme='light'] .ActionButton.primary {
+  margin-right: 5px;
+  color: black;
+  background-color: #14F195;
+}
+
+[data-theme='light'] .ActionButton.secondary {
+  margin-left: 5px;
+  color: #00cd78;
+  border: 1px solid #00cd78;
 }
