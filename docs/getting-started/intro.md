@@ -1,17 +1,23 @@
 --- 
 hide_table_of_contents: false
-title: Solana Mobile Documentation
+title: Introduction
 ---
 
 import Card from "../../src/components/Card"
 import CardLayout from "../../src/layouts/CardLayout"
 
-The **Solana Mobile Stack (SMS)** is an open source collection of libraries that provides key technologies for building Mobile dApps that can interact with the Solana network. This documentation site provides guides, tutorials, and references to help developers get started with building on Solana Mobile.
+Welcome to the **Solana Mobile Documentation** site! 
 
-The SDK is primarily developed and maintained by the [Solana Mobile](https://github.com/solana-mobile) team, but welcomes contributions from the community!
+The documentation site serves as a comprehensive knowledge center for developers that want to build with the **Solana Mobile Stack (SMS)**. 
+
+Here, you can find an excellent collection of guides, tutorials, and references aimed at assisting developers as they build Web3 mobile dApps. 
+In addition, there are also resources for developers wanting to publish on the [Solana dApp Store](/dapp-publishing/intro).
+
+
+These resources are actively maintained by the [Solana Mobile](https://github.com/solana-mobile) team, but welcomes [contributions from the community](https://github.com/solana-mobile/solana-mobile-doc-site)!
 
 :::note
-You don't need a Saga device or physical device to build on Solana Mobile. The stack is compatible with any Android device. See [**prerequisite setup**](development-setup) to set up your development environment and start building!
+You don't need a Saga device or physical device to start developing. The stack is compatible with any Android device. See [**prerequisite setup**](development-setup) to set up your development environment and start building!
 :::
 
 ## Quickstart 

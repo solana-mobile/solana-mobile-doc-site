@@ -30,14 +30,15 @@ const sidebars = {
     },
     {
       type: 'doc',
-      id: 'getting-started/development-setup',
-      label: 'Development Setup'
+      id: 'getting-started/overview',
+      label: 'The Solana Mobile Stack'
     },
     {
       type: 'doc',
-      id: 'getting-started/overview',
-      label: 'SMS Overview'
+      id: 'getting-started/development-setup',
+      label: 'Development Setup'
     },
+
 
     /* SDK Section **/
     {
