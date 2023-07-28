@@ -4,9 +4,9 @@ title: Solana Mobile Stack Overview
 
 ## What's in the Solana Mobile Stack?
 
-The **Solana Mobile Stack (SMS)** is a collection of key technologies for building Android applications that can interact with the Solana blockchain.
+The **Solana Mobile Stack (SMS)** is a collection of key technologies for building mobile applications that can interact with the Solana blockchain.
 
-Read on to learn about the core technologies of the stack and how they fit into the overall web3 development ecosystem.
+Read on to learn about the core technologies of the stack and how each fit into the web3 mobile landscape.
 
 ## Mobile Wallet Adapter
 
@@ -20,7 +20,6 @@ dApps that implement MWA are able to connect to [any compatible MWA Wallet App](
 ### Using the SDK
 
 Solana Mobile maintains an official [Mobile Wallet Adapter SDK](https://github.com/solana-mobile/mobile-wallet-adapter) that implements the protocol, originally written as a Android Kotlin/Java library. 
-
 
 The SDK is also ported other frameworks and is available for:
 - React Native
