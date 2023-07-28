@@ -5,12 +5,13 @@ module.exports = {
     sagaSidebar: [
         {
             type: 'doc',
-            id: 'saga/release-notes',
+            id: 'saga/overview',
             label: 'Overview'
         },
         {
             type: 'category',
             label: 'Release Notes',
+            link: {type: 'doc', id: 'saga/release-notes/index'},
             collapsible: true,
             collapsed: false,
             items: [

@@ -113,7 +113,7 @@ const config = {
           },
           {
             type: 'doc',
-            docId: 'saga/release-notes',
+            docId: 'saga/overview',
             position: 'left',
             label: 'Saga',
           },
