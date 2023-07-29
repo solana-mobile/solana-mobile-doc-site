@@ -3,9 +3,54 @@ title: Sample App Collection
 hide_table_of_contents: true
 ---
 
+import SampleAppCardLayout from "../../src/layouts/SampleAppCardLayout"
+import SampleAppCard from "../../src/components/SampleAppCard"
+
 A list of open-source sample apps in different languages/frameworks to help you get started! 
 - If you're new to using the mobile wallet adapter SDK or looking for a reference point for your own implementation, explore these sample apps.
 - By exploring these sample apps, you can get a better understanding of the capabilities of the Mobile Wallet Adapter SDK and how it can be integrated into a project.
+
+
+### Hello World Apps
+These are simple Hello World Apps that show basic usage of Mobile Wallet Adapter and send message to the Solana blockchain with the Memo program.
+
+<SampleAppCardLayout autoFitEnabled={false}>
+    <SampleAppCard 
+        title="Hello World: React Native" 
+        sampleAppLink="https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/examples/example-react-native-app"
+        description="This is a simple Hello World React Native App" 
+        imageUrl="img/solana-mobile-stack-social-card.png" 
+        tags={[
+                "React Native", 
+                "MWA",
+                "web3.js",
+            ]}
+    />
+    <SampleAppCard 
+        title="Hello World: Android" 
+        sampleAppLink="https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/examples/example-react-native-app"
+        description="This is a simple Hello World React Native App" 
+        imageUrl="img/solana-mobile-stack-social-card.png" 
+        tags={[
+                "React Native", 
+                "MWA",
+                "web3.js",
+            ]}
+    />
+    <SampleAppCard 
+        title="Hello World: Android (RxJava)" 
+        sampleAppLink="https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/examples/example-react-native-app"
+        description="This is a simple Hello World React Native App" 
+        imageUrl="img/solana-mobile-stack-social-card.png" 
+        tags={[
+                "React Native", 
+                "MWA",
+                "web3.js",
+            ]}
+    />
+</SampleAppCardLayout>
+
+
 
 
 | Name | Description | Technologies |

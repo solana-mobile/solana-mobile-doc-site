@@ -87,9 +87,9 @@ const sidebars = {
       className: 'sidebar-section-header',
     },
     {
-      type: 'doc',
+      type: 'link',
+      href: '/sample-apps/sample_app_overview',
       label: 'Sample App Collection',
-      id: 'sample-apps/sample_app_overview',
     },
     { // dApp publishing entrypoint
       type: 'doc',
