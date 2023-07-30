@@ -1,7 +1,7 @@
 .sampleAppCard {
   display: flex;
   min-width: 300px;
-  height: 300px;
+  height: 350;
   flex-direction: column;  /* To stack image, body, and footer vertically */
   border-radius: 20px;
   overflow: hidden;
@@ -31,7 +31,7 @@
 
 .cardBody h2 {
   margin-bottom: 10px;
-  font-size: 18px;
+  font-size: 16px;
   color: var(--ifm-color-primary)
 }
 
