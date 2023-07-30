@@ -1,23 +1,6 @@
-.cardLayoutAutoFit {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300, 1fr));
-  grid-gap: 16px;
-  margin-bottom: 16px;
-}
-
-/* Switch to columns when screen width is less than 768px */
-@media screen and (max-width: 768px) {
-  .cardLayout {
-    grid-template-columns: 1fr;
-  }
-  .cardLayoutNormal {
-    grid-template-columns: 1fr;
-  }
-}
-
 .cardLayoutNormal {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-gap: 16px;
   margin-bottom: 16px;
 }

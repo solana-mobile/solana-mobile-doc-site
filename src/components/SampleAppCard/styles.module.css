@@ -1,13 +1,13 @@
 .sampleAppCard {
   display: flex;
-  width: 300px;
+  min-width: 300px;
   height: 300px;
   flex-direction: column;  /* To stack image, body, and footer vertically */
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   text-decoration: none;
-  background-color: rgb(36, 37, 38)
+  background-color: rgb(36, 37, 38);
 }
 
 .cardImage {

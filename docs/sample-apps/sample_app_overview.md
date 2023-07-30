@@ -12,9 +12,9 @@ A list of open-source sample apps in different languages/frameworks to help you 
 
 
 ### Hello World Apps
-These are simple Hello World Apps that show basic usage of Mobile Wallet Adapter and send message to the Solana blockchain with the Memo program.
+These are simple mobile dApps that show basic usage of Mobile Wallet Adapter and send a message to the Solana blockchain with the Memo program.
 
-<SampleAppCardLayout autoFitEnabled={false}>
+<SampleAppCardLayout>
     <SampleAppCard 
         title="Hello World: React Native" 
         sampleAppLink="https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/examples/example-react-native-app"
@@ -39,6 +39,17 @@ These are simple Hello World Apps that show basic usage of Mobile Wallet Adapter
     />
     <SampleAppCard 
         title="Hello World: Android (RxJava)" 
+        sampleAppLink="https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/examples/example-react-native-app"
+        description="This is a simple Hello World React Native App" 
+        imageUrl="img/solana-mobile-stack-social-card.png" 
+        tags={[
+                "React Native", 
+                "MWA",
+                "web3.js",
+            ]}
+    />
+    <SampleAppCard 
+        title="Anchor Counter Program dApp" 
         sampleAppLink="https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/examples/example-react-native-app"
         description="This is a simple Hello World React Native App" 
         imageUrl="img/solana-mobile-stack-social-card.png" 

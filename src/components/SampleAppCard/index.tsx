@@ -13,7 +13,6 @@ interface SampleAppCardProps {
 
 const SampleAppCard: React.FC<SampleAppCardProps> = ({ title, sampleAppLink, description, imageUrl, tags } ) => {
   return (
-   
       <div className={styles.sampleAppCard}>
           <div className={styles.cardImage}>
             <img src={useBaseUrl(imageUrl)} alt={title} />
