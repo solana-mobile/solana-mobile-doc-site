@@ -3,20 +3,128 @@ title: Sample App Collection
 hide_table_of_contents: true
 ---
 
+import SampleAppCardLayout from "../../src/layouts/SampleAppCardLayout"
+import SampleAppCard from "../../src/components/SampleAppCard"
+
 A list of open-source sample apps in different languages/frameworks to help you get started! 
 - If you're new to using the mobile wallet adapter SDK or looking for a reference point for your own implementation, explore these sample apps.
 - By exploring these sample apps, you can get a better understanding of the capabilities of the Mobile Wallet Adapter SDK and how it can be integrated into a project.
 
 
-| Name | Description | Technologies |
-| ------ | -----------| -----------|
-| [example-react-native-app](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/examples/example-react-native-app) | An example dApp that showcases usage of the MWA Javascript SDK to connect to a wallet, request an airdrop, and write a message to Solana. | React Native, `@solana-mobile/mobile-wallet-adapter-protocol` |
-| [example-client-lib-ktx-app](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/examples/example-clientlib-ktx-app) | An example Kotlin dApp displaying usage of Mobile Wallet Adapter `clientlib-ktx`. | Kotlin, `clientlib-ktx` |
-| [example-client-lib-rxjava-app](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/examples/example-clientlib-rxjava-app) | An example Kotlin dApp that showcases usage of the Mobile Wallet Adapter `clientlib-rxjava`. | Kotlin, `clientlib-rxjava` |
-|[Kotlin Fake dApp](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/android/fakedapp) | An example Kotlin dApp that demonstrates integration with Mobile Wallet Adapter for signing and sending messages/transactions to the Solana Network | Kotlin, `clientlib-ktx` |
-| [Minty Fresh](https://github.com/solana-mobile/Minty-fresh) | A full fledged Kotlin Android dApp that enables users to mint NFTs directly from images on your phone  | Kotlin, NFT, `clientlib-ktx` |
-| [Fake Wallet App](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/android/fakewallet) | A Kotlin wallet app that can be used to test integration with Mobile Wallet Adapter | Kotlin, `walletlib` |
+## React Native
 
+<SampleAppCardLayout>
+    <SampleAppCard 
+        title="Hello World: React Native" 
+        sampleAppLink="https://github.com/solana-mobile/tutorial-apps/tree/main/first-mobile-dapp"
+        description="A React Native app that writes a message on the blockchain." 
+        imageUrl="sample_app_imgs/hello_world_react_native.png" 
+        tags={[
+                "React Native", 
+            ]}
+    />
+    <SampleAppCard 
+        title="Anchor Counter Program" 
+        sampleAppLink="https://github.com/solana-mobile/tutorial-apps/tree/main/AnchorCounterDapp"
+        description="Generate an IDL and interact with an on-chain Anchor program." 
+        imageUrl="sample_app_imgs/anchor_counter_program.png" 
+        tags={[
+                "React Native", 
+                "Anchor",
+            ]}
+    />
+    <SampleAppCard 
+        title="Mobile NFT Minter" 
+        sampleAppLink="https://github.com/solana-mobile/tutorial-apps/tree/main/MobileNFTMinter"
+        description="Mint photos as NFTs with Metaplex SDK and IPFS hosting." 
+        imageUrl="sample_app_imgs/mobile_nft_minter.png" 
+        tags={[
+                "React Native",
+                "Metaplex",
+                "IPFS",
+            ]}
+    />
+    <SampleAppCard 
+        title="Advanced Hello World Example" 
+        sampleAppLink="https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/examples/example-react-native-app"
+        description="A reference app with MWA Auth Token persistent storage, using the SWR library." 
+        imageUrl="sample_app_imgs/advanced_hello_world_react_native.png" 
+        tags={[
+                "React Native", 
+                "SWR",
+            ]}
+    />
+</SampleAppCardLayout>
 
+## Android
 
+<SampleAppCardLayout>
+    <SampleAppCard 
+        title="Hello World: Android" 
+        sampleAppLink="https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/examples/example-clientlib-ktx-app"
+        description="A Kotlin app that writes a message on the blockchain." 
+        imageUrl="sample_app_imgs/hello_world_android.png" 
+        tags={[
+                "Kotlin", 
+            ]}
+    />
+    <SampleAppCard 
+        title="Hello World: Android (RxJava)" 
+        sampleAppLink="https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/examples/example-clientlib-rxjava-app"
+        description="A Kotlin app showcasing MWA with the RxJava library."
+        imageUrl="sample_app_imgs/hello_world_rxjava.png" 
+        tags={[
+                "Kotlin", 
+                "RxJava",
+            ]}
+    />
+    <SampleAppCard 
+        title="MintyFresh"
+        sampleAppLink="https://github.com/solana-mobile/Minty-fresh/tree/main"
+        description="A full fledged production dApp. Mint NFTs directly from your phone." 
+        imageUrl="sample_app_imgs/mintyfresh.png" 
+        tags={[
+                "Kotlin", 
+                "Metaplex",
+                "Jetpack Compose",
+            ]}
+    />
 
+</SampleAppCardLayout>
+
+## Testing Apps
+
+These are reference apps that also serve as development tools to test MWA integration.
+
+<SampleAppCardLayout>
+    <SampleAppCard 
+        title="fake dapp" 
+        sampleAppLink="https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/android/fakedapp"
+        description="A Kotlin app with UI to simulate MWA methods." 
+        imageUrl="img/solana-mobile-stack-social-card.png" 
+        tags={[
+                "Kotlin", 
+            ]}
+    />
+    <SampleAppCard 
+        title="fake wallet" 
+        sampleAppLink="https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/android/fakewallet"
+        description="An unsafe, reference Kotlin wallet supporting MWA."
+        imageUrl="img/solana-mobile-stack-social-card.png" 
+        tags={[
+                "Kotlin", 
+                "walletlib",
+            ]}
+    />
+    <SampleAppCard 
+        title="Example RN wallet"
+        sampleAppLink="https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/examples/example-react-native-wallet"
+        description="An unsafe RN wallet with MWA bottom sheet signing." 
+        imageUrl="img/solana-mobile-stack-social-card.png" 
+        tags={[
+                "React Native", 
+                "walletlib",
+            ]}
+    />
+
+</SampleAppCardLayout>

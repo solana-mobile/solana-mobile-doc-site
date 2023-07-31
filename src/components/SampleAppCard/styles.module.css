@@ -1,0 +1,96 @@
+.sampleAppCard {
+  display: flex;
+  min-width: 300px;
+  height: 350;
+  flex-direction: column;  /* To stack image, body, and footer vertically */
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
+  background-color: rgb(36, 37, 38);
+}
+
+[data-theme="light"] .sampleAppCard {
+  border: 1px solid black;
+  background-color: white;
+}
+
+.cardImage {
+  height: 150px;
+  width: 100%;
+  border-bottom: 1px solid black;
+  overflow: hidden;
+}
+
+.cardImage img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.cardBody {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cardBody h2 {
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: var(--ifm-color-primary)
+}
+
+/* underline animation */
+.cardBody h2 a {
+  position: relative;
+  text-decoration: none;
+  color: var(--ifm-color-primary);
+}
+
+.cardBody h2 a:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 1px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--ifm-color-primary);
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.cardBody h2 a:hover:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.cardBody p {
+  font-size: 14px;
+  color: #eee;
+}
+
+[data-theme="light"] .cardBody p {
+  color: black;
+}
+
+.tagSection {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;  /* To add space between tags */
+}
+
+.tag {
+  font-size: 0.675rem;
+  color: white;
+  border: 1px solid white;
+  padding: 0px 8px 0px 8px;
+  border-radius: 12px;
+  align-items: center;
+}
+
+[data-theme="light"] .tag {
+  border: 1px solid black;
+ color: black;
+}

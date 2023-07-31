@@ -88,8 +88,8 @@ const sidebars = {
     },
     {
       type: 'doc',
-      label: 'Sample App Collection',
       id: 'sample-apps/sample_app_overview',
+      label: 'Sample App Collection',
     },
     { // dApp publishing entrypoint
       type: 'doc',
