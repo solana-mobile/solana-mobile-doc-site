@@ -18,7 +18,7 @@ A list of open-source sample apps in different languages/frameworks to help you 
         title="Hello World: React Native" 
         sampleAppLink="https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/examples/example-react-native-app"
         description="A React Native app that writes a message on the blockchain." 
-        imageUrl="img/solana-mobile-stack-social-card.png" 
+        imageUrl="sample_app_imgs/hello_world_react_native.png" 
         tags={[
                 "React Native", 
             ]}
@@ -26,8 +26,8 @@ A list of open-source sample apps in different languages/frameworks to help you 
     <SampleAppCard 
         title="Anchor Counter Program" 
         sampleAppLink="https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/examples/example-react-native-app"
-        description="Creating and interacting with an on-chain Anchor Counter program." 
-        imageUrl="img/solana-mobile-stack-social-card.png" 
+        description="Generate an IDL and interact with an on-chain Anchor program." 
+        imageUrl="sample_app_imgs/anchor_counter_program.png" 
         tags={[
                 "React Native", 
                 "Anchor",
@@ -36,8 +36,8 @@ A list of open-source sample apps in different languages/frameworks to help you 
     <SampleAppCard 
         title="Mobile NFT Minter" 
         sampleAppLink="https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/examples/example-react-native-app"
-        description="A React Native app interacting with an on-chain Anchor Counter program." 
-        imageUrl="img/solana-mobile-stack-social-card.png" 
+        description="Mint photos as NFTs with Metaplex SDK and IPFS hosting." 
+        imageUrl="sample_app_imgs/mobile_nft_minter.png" 
         tags={[
                 "React Native",
                 "Metaplex",
@@ -48,7 +48,7 @@ A list of open-source sample apps in different languages/frameworks to help you 
         title="Advanced Hello World Example" 
         sampleAppLink="https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/examples/example-react-native-app"
         description="A reference app with MWA Auth Token persistent storage, using the SWR library." 
-        imageUrl="img/solana-mobile-stack-social-card.png" 
+        imageUrl="sample_app_imgs/advanced_hello_world_react_native.png" 
         tags={[
                 "React Native", 
                 "SWR",
@@ -63,7 +63,7 @@ A list of open-source sample apps in different languages/frameworks to help you 
         title="Hello World: Android" 
         sampleAppLink="https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/examples/example-react-native-app"
         description="A Kotlin app that writes a message on the blockchain." 
-        imageUrl="img/solana-mobile-stack-social-card.png" 
+        imageUrl="sample_app_imgs/hello_world_android.png" 
         tags={[
                 "Kotlin", 
             ]}
@@ -72,7 +72,7 @@ A list of open-source sample apps in different languages/frameworks to help you 
         title="Hello World: Android (RxJava)" 
         sampleAppLink="https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/examples/example-react-native-app"
         description="A Kotlin app showcasing MWA with the RxJava library."
-        imageUrl="img/solana-mobile-stack-social-card.png" 
+        imageUrl="sample_app_imgs/hello_world_rxjava.png" 
         tags={[
                 "Kotlin", 
                 "RxJava",
@@ -82,7 +82,7 @@ A list of open-source sample apps in different languages/frameworks to help you 
         title="MintyFresh"
         sampleAppLink="https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/examples/example-react-native-app"
         description="A full fledged production dApp. Mint NFTs directly from your phone." 
-        imageUrl="img/solana-mobile-stack-social-card.png" 
+        imageUrl="sample_app_imgs/mintyfresh.png" 
         tags={[
                 "Kotlin", 
                 "Metaplex",
