@@ -5,14 +5,20 @@
   flex-direction: column;  /* To stack image, body, and footer vertically */
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
   text-decoration: none;
   background-color: rgb(36, 37, 38);
+}
+
+[data-theme="light"] .sampleAppCard {
+  border: 1px solid black;
+  background-color: white;
 }
 
 .cardImage {
   height: 150px;
   width: 100%;
+  border-bottom: 1px solid black;
   overflow: hidden;
 }
 
@@ -65,6 +71,10 @@
   color: #eee;
 }
 
+[data-theme="light"] .cardBody p {
+  color: black;
+}
+
 .tagSection {
   display: flex;
   flex-wrap: wrap;
@@ -80,3 +90,7 @@
   align-items: center;
 }
 
+[data-theme="light"] .tag {
+  border: 1px solid black;
+ color: black;
+}
