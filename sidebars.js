@@ -35,6 +35,11 @@ const sidebars = {
     },
     {
       type: 'doc',
+      id: 'getting-started/mobile-dapp-architecture',
+      label: 'Mobile dApp Architecture'
+    },
+    {
+      type: 'doc',
       id: 'getting-started/development-setup',
       label: 'Development Setup'
     },
