@@ -32,6 +32,11 @@
   --sidebar-header-color: gray;
 }
 
+/* Image Styles */
+.diagram-image {
+  border-radius: 8px;
+}
+
 /* Sidebar Styles */
 
 .back-to-home-sidebar-item {
