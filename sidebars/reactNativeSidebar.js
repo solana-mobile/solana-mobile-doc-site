@@ -23,6 +23,8 @@ module.exports = {
             id: 'react-native/quickstart',
             label: 'Quickstart'
         },
+
+        /* Guides Section */
         {
             type: 'html',
             value: '<div class="sidebar-divider" />',
@@ -47,6 +49,8 @@ module.exports = {
             id: 'react-native/metaplex_integration',
             label: 'Metaplex Integration Guide'
         },
+
+        /* Tutorials Section */
         {
             type: 'html',
             value: '<div class="sidebar-divider" />',
@@ -61,6 +65,13 @@ module.exports = {
             id: 'react-native/first_app_tutorial',
             label: 'Build your first dApp'
         },
+        {
+            type: 'doc',
+            id: 'react-native/mobile_nft_minter_tutorial',
+            label: 'Mobile NFT Photo Minter'
+        },
+
+        /* Reference Section */
         {
             type: 'html',
             value: '<div class="sidebar-divider" />',
