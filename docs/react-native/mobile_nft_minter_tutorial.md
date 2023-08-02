@@ -85,7 +85,7 @@ about missing/undefined methods, double check you installed the polyfills correc
 
 The end to end procedure of minting a photo NFT roughly follows these steps:
 1. Select a photo and upload it to a storage provider.
-2. Upload a JSON object containing metadata that conforms to the [Metaplex Token Metadata Standard](https://docs.metaplex.com/programs/token-metadata/changelog/v1.0), to a storage provider.
+2. Upload a JSON object containing metadata that conforms to the [Metaplex NFT Standard](https://docs.metaplex.com/programs/token-metadata/token-standard#the-non-fungible-standard), to a storage provider.
 3. Submit a transaction to the network that creates your NFT on chain.
 
 ## Uploading to IPFS with NFT.storage
@@ -171,7 +171,7 @@ You can view your uploaded asset on an [IPFS gateway](https://docs.ipfs.tech/con
 View an [example](https://ipfs.io/ipfs/bafkreicdv4jt7oaah73kvjfnm4f2yd5klbnyehlkpi33kxjakdo6encepe) of an uploaded photo on ipfs.io.
 
 ### Uploading the metadata 
-Next, we need to construct a metadata object that conforms to the [Metaplex Metadata Standard](https://docs.metaplex.com/programs/token-metadata/changelog/v1.0), then
+Next, we need to construct a metadata object that conforms to the [Metaplex NFT Standard](https://docs.metaplex.com/programs/token-metadata/token-standard#the-non-fungible-standard), then
 upload it to the same `/upload` endpoint.
 
 Metadata fields:
@@ -257,5 +257,53 @@ const getCid = async (bytes: Buffer) => {
 };
 ```
 
+## Minting the NFT
 
-## Minting the NFT!
+At this point we have completed the IPFS uploading steps and all that is left is to mint the NFT on chain. To do so,
+we'll use the Metaplex JS SDK.
+
+### Create a Metaplex Instance
+
+To interact with Metaplex onchain programs, instantiate a `Metaplex` instance provided by the SDK.
+
+Follow this [section](../react-native/metaplex_integration#using-mwa-as-an-identity-driver) in the Metaplex guide, to create an MWA Identity Signer plugin. We'll need
+this so that the `Metaplex` instance will be able to request wallet signing through MWA.
+
+:::info
+In the example app, this is handled in two files: 
+- [`mwaPlugin`](https://github.com/solana-mobile/tutorial-apps/blob/main/MobileNFTMinter/metaplex-util/mwaPlugin.ts): A helper file that installs a `MetaplexPlugin` using MWA as an identity signer.
+- [`useMetaplex`](https://github.com/solana-mobile/tutorial-apps/blob/main/MobileNFTMinter/metaplex-util/useMetaplex.tsx): A React hook that vends a `Metaplex` instance with
+the `mobileWalletAdapterIdentity` installed.
+:::
+
+Like in the example app, create the `Metaplex` instance with the `useMetaplex` hook.
+```tsx
+import useMetaplex from '../metaplex-util/useMetaplex';
+
+const {metaplex} = useMetaplex(connection, selectedAccount, authorizeSession);
+```
+
+### Create the NFT
+
+With the `metaplex` instance, we can now access the `nfts()` module that provides [a collection of functions](https://docs.metaplex.com/programs/token-metadata/getting-started#javascript-sdk) that
+make it simple to interact with on chain programs and submit transactions.
+
+To mint an NFT, call the `create` function which takes in a JSON object corresponding to the [Token Metadata Standard](https://docs.metaplex.com/programs/token-metadata/changelog/v1.0#token-metadata-program).
+
+This will prompt the user to sign a transaction using MWA, then submit the transaction to the specified RPC.
+
+```tsx
+const {nft, response} = await metaplex.nfts().create({
+    name: nftName,
+    uri: `https://ipfs.io/ipfs/${metadataUploadData.value.cid}`,
+    sellerFeeBasisPoints: 0,
+    tokenOwner: selectedAccount?.publicKey,
+});
+
+console.log(nft.address.toBase58())
+console.log(response.signature)
+```
+
+**Congrats!** 
+
+Your NFT should now be minted and viewable on chain! You can view it on a block explorer by pasting in the String from `nft.address.toBase58()`.
