@@ -72,7 +72,49 @@ a developer friendly API to interact with onchain programs.
 Carefully follow the [Metaplex installation](../react-native/metaplex_integration#installation) steps
 here to make sure you install the package along with all the necessary polyfill libraries.
 
-### 3. Launch the app
+### 3. Install dependencies
+
+In addition to the Metaplex JS SDK, the app will use several other libraries that handle other usecases, like file reading,
+IPFS, etc. Some of these are opinionated, so feel free to swap out a library with one of your choice.
+
+<details>
+<summary>A brief overview of each dependency:</summary>
+
+- [`rn-fetch-blob`](https://github.com/joltup/rn-fetch-blob): A React Native file system reader for converting photos to bytes.
+- [`react-native-image-picker`](https://github.com/react-native-image-picker/react-native-image-picker): Provides a convenient Photo selector UI.
+- [`react-native-config`](https://github.com/luggit/react-native-config):Used to store and expose the NFT.storage API key to Javascript.
+- [`multiformats`](https://github.com/multiformats/js-multiformats): A low-level JS library that provides an API/interface to compute CIDs in IPFS format.
+
+</details>
+
+<Tabs>
+<TabItem value="yarn" label="yarn">
+
+```shell
+yarn install \
+    rn-fetch-blob \
+    react-native-image-picker \
+    react-native-config \
+    multiformats
+```
+
+</TabItem>
+<TabItem value="npm" label="npm">
+
+```shell
+npm install \
+    rn-fetch-blob \
+    react-native-image-picker \
+    react-native-config \
+    multiformats
+```
+
+</TabItem>
+</Tabs>
+
+
+
+### 4. Launch the app
 
 ```shell
 npx react-native run-android
@@ -134,6 +176,10 @@ The steps:
 :::info
 In the example app, this is handled in a separate helper function [`uploadToIPFS`](https://github.com/solana-mobile/tutorial-apps/blob/main/MobileNFTMinter/ipfs/uploadToIPFS.ts#L7), which is called
 later within the larger the [`mintNft`](https://github.com/solana-mobile/tutorial-apps/blob/main/MobileNFTMinter/components/NftMinter.tsx#L61) function. 
+:::
+:::caution
+During this step, you'll need to provide your own API key from NFT.storage. In the example app, the `NFT_STORAGE_API_KEY` value is set through
+an environment variable config, using the `react-native-config` library.
 :::
 
 ```tsx
@@ -291,6 +337,11 @@ make it simple to interact with on chain programs and submit transactions.
 To mint an NFT, call the `create` function which takes in a JSON object corresponding to the [Token Metadata Standard](https://docs.metaplex.com/programs/token-metadata/changelog/v1.0#token-metadata-program).
 
 This will prompt the user to sign a transaction using MWA, then submit the transaction to the specified RPC.
+
+:::info
+In the example app, this step happens at the end of [`mintNft`](https://github.com/solana-mobile/tutorial-apps/blob/main/MobileNFTMinter/components/NftMinter.tsx#L84C1-L90C59). 
+We return the NFT address and present a [clickable explorer link](https://github.com/solana-mobile/tutorial-apps/blob/main/MobileNFTMinter/components/NftMinter.tsx#L159).
+:::
 
 ```tsx
 const {nft, response} = await metaplex.nfts().create({
