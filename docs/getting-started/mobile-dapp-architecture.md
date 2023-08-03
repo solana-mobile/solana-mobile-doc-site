@@ -21,7 +21,7 @@ To begin the protocol, a dApp initiates first contact with a mobile wallet and e
 With the current SDKs, the MWA session is initiated through Android intents, with the dApp broadcasting an intent 
 with the `solana-wallet://` scheme.
 
-  <img src="/diagrams/session_establishment.png" alt="Full Architecture Diagram" className="diagram-image"/>
+  <img src="/diagrams/session_establishment.png" alt="Session Establishment Diagram" className="diagram-image"/>
   <br /><br />
 
 A wallet then receives the intent and starts a websocket connection, thus establishing a channel for commmunication. 
@@ -35,7 +35,10 @@ This example case outlines an MWA session where the dApp:
 3. Requests transaction signing, receiving a transaction signed with the authorized pubKey.
 
 
-  <img src="/diagrams/authorize_and_sign.png" alt="Full Architecture Diagram" className="diagram-image"/>
+<img src="/diagrams/authorize_and_sign.png" alt="Authorize and Sign Diagram" className="diagram-image"/>
+
+For a more detailed diagram that shows the full communication exchange, refer to this [section in the spec](https://solana-mobile.github.io/mobile-wallet-adapter/spec/spec.html#authorize-and-sign-transaction).
+
 
 ## Submitting to the Solana network
 
@@ -44,4 +47,12 @@ a cluster and an RPC endpoint then sends the transaction payload, following the 
 
 For certain usecases, the dApp may choose to communicate with the RPC through the [Websocket API](https://docs.solana.com/api/websocket)
 
-  <img src="/diagrams/submit_rpc.png" alt="Full Architecture Diagram" className="diagram-image"/>
+  <img src="/diagrams/submit_rpc.png" alt="Submit to RPC Diagram" className="diagram-image"/>
+
+### Sign and Send Transaction
+
+An alternative option for submitting transactions is for the dApp to send a `sign_and_send_transaction` MWA request to a wallet. This request
+type sends a unsigned transaction to the wallet. If authorized, the wallet will then sign the transaction and send it to the network with its
+own implementation.
+
+  <img src="/diagrams/sign_and_send.png" alt="Sign and Send Diagram" className="diagram-image"/>
