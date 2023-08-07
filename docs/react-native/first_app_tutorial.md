@@ -74,14 +74,14 @@ Now lets quickly go over the features of the dApp Scaffold. If you want to skip 
 Clicking on the *Connect Wallet* button will 'connect' you to a locally installed MWA-compatible wallet. It uses the Mobile Wallet Adapter 
 SDK to request [`authorization`](/react-native/quickstart#authorizing-a-wallet) from the wallet and receives your wallet account's info, like the public key.
 
-On click, it starts a wallet session with `transact` and calls `authorizeSession` from the `AuthorizationProvider` class.
+On click, it starts a wallet session with `transact` and calls `authorizeSession` from the [`AuthorizationProvider`](https://github.com/solana-mobile/tutorial-apps/blob/main/first-mobile-dapp/components/AuthorizationProvider.tsx) class.
 ```tsx
 await transact(async wallet => {
     await authorizeSession(wallet);
 });
 ```
 
-`AuthorizationProvider` is a helper class that manages wallet authorization. It calls `wallet.authorize()` on first connect, and for subsequent connects it re-uses
+[`AuthorizationProvider`](https://github.com/solana-mobile/tutorial-apps/blob/main/first-mobile-dapp/components/AuthorizationProvider.tsx) is a helper class that manages wallet authorization. It calls `wallet.authorize()` on first connect, and for subsequent connects it re-uses
 the `authToken` in `wallet.reauthorize()`.
 
 ```tsx
