@@ -51,7 +51,6 @@ yarn add \
   @solana/web3.js \
   @solana-mobile/mobile-wallet-adapter-protocol-web3js \
   @solana-mobile/mobile-wallet-adapter-protocol \
-  @solana/wallet-adapter-react \
   react-native-get-random-values \
   buffer
 ```
@@ -65,7 +64,6 @@ npm install \
   @solana/web3.js \
   @solana-mobile/mobile-wallet-adapter-protocol-web3js \
   @solana-mobile/mobile-wallet-adapter-protocol \
-  @solana/wallet-adapter-react \
   react-native-get-random-values \
   buffer
 ```
@@ -79,7 +77,6 @@ npm install \
 - `@solana-mobile/mobile-wallet-adapter-protocol`: A React Native/Javascript API enabling interaction with MWA-compatible wallets.
 - `@solana-mobile/mobile-wallet-adapter-protocol-web3js`: A convenience wrapper to use common primitives from [@solana/web3.js](https://github.com/solana-labs/solana-web3.js) – such as `Transaction` and `Uint8Array`.
 - `@solana/web3.js`: Solana Web Library for interacting with Solana network through the [JSON RPC API](https://docs.solana.com/api/http).
-- `@solana/wallet-adapter-react`: Solana Web Library where we can re-use certain React components/hooks like `ConnectionProvider`.
 - `react-native-get-random-values` Secure random number generator polyfill for `web3.js` underlying Crypto library on React Native. 
 - `buffer` Buffer polyfill also needed for `web3.js` on React Native.
 
