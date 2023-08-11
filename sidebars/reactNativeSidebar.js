@@ -41,6 +41,11 @@ module.exports = {
         },
         {
             type: 'doc',
+            id: 'react-native/storing_mwa_auth',
+            label: 'Caching MWA authorization'
+        },
+        {
+            type: 'doc',
             id: 'react-native/anchor_integration',
             label: 'Anchor Integration Guide'
         },
