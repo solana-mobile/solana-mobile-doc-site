@@ -45,15 +45,27 @@ A list of open-source sample apps in different languages/frameworks to help you 
             ]}
     />
     <SampleAppCard 
+        title="Simple Storage dApp" 
+        sampleAppLink="https://github.com/solana-mobile/tutorial-apps/tree/main/SimpleStorageDapp"
+        description="Basic MWA Auth Token persistence with AsyncStorage." 
+        imageUrl="sample_app_imgs/simple_storage_dapp.jpg" 
+        tags={[
+                "React Native", 
+                "AsyncStorage",
+            ]}
+    />
+    <SampleAppCard 
         title="Advanced Hello World Example" 
         sampleAppLink="https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/examples/example-react-native-app"
-        description="A reference app with MWA Auth Token persistent storage, using the SWR library." 
+        description="MWA persistence with AsyncStorage and the SWR library." 
         imageUrl="sample_app_imgs/advanced_hello_world_react_native.png" 
         tags={[
                 "React Native", 
+                "AsyncStorage",
                 "SWR",
             ]}
     />
+
 </SampleAppCardLayout>
 
 ## Android
