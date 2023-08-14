@@ -76,7 +76,7 @@ const App = () => {
             }
         })();
     }, []);
-    
+
     /* ...*/
 }
 ```
@@ -134,5 +134,22 @@ const handleDisconnectPress = useCallback(() => {
     });
 }, [currentAccount]);
 ```
+
+## Reference Apps
+
+The following reference apps showcase implementing MWA authorization in a dApp.
+
+### [SimpleStorageDapp](https://github.com/solana-mobile/tutorial-apps/tree/main/SimpleStorageDapp)
+
+This reference app makes a small change to the Solana Mobile dApp Scaffold adding an authorization cache with `AsyncStorage`. The current authorization
+is managed through the [AuthorizationProvider](https://github.com/solana-mobile/tutorial-apps/blob/main/SimpleStorageDapp/components/providers/AuthorizationProvider.tsx) component.
+
+### [example-react-native-app](https://github.com/solana-mobile/mobile-wallet-adapter/blob/main/examples/example-react-native-app/App.tsx#L31)
+
+This reference app implements an `AsyncStorage` provider with the [`swr`](https://swr.vercel.app/) data fetching library. The caching and parsing logic
+is defined in [`App`](https://github.com/solana-mobile/mobile-wallet-adapter/blob/main/examples/example-react-native-app/App.tsx#L78) component while
+the current authorization is provided with the [`useAuthorization`](https://github.com/solana-mobile/mobile-wallet-adapter/blob/main/examples/example-react-native-app/utils/useAuthorization.tsx) hook.
+
+
 
 
