@@ -1,5 +1,6 @@
 ---
 title: Solana Mobile Stack Overview
+displayed_sidebar: documentationSidebar
 ---
 
 ## What's in the Solana Mobile Stack?
@@ -17,6 +18,15 @@ dApps that implement MWA are able to connect to [any compatible MWA Wallet App](
 
 **Why this is important**: Developers no longer need to build in support for each individual wallet, and instead can just integrate once and use a single unified API to be compatible with every compliant Solana wallet!
 
+### Supported Platforms
+
+| Mobile Platform                            | Is MWA Supported? | Notes                                                                 |
+| ------------------------------------------ | ----------------- | --------------------------------------------------------------------- |
+| Android                                    | ✅                | Full support for dApps and Wallet apps.                               |
+| Mobile Web - Chrome (Android)              | ✅                | Automatic integration if using `@solana/wallet-adapter-react`.        |
+| iOS                                        | ❌                | MWA is not currently available for any iOS platform (app or browser). |
+| Mobile Web - Safari, Firefox, Opera, Brave | ❌                | These browsers currently do not support MWA on Android (or iOS).      |
+
 ### Using the SDK
 
 Solana Mobile maintains an official [Mobile Wallet Adapter SDK](https://github.com/solana-mobile/mobile-wallet-adapter) that implements the protocol, originally written as a Android Kotlin/Java library.
@@ -29,15 +39,6 @@ The SDK is also ported other frameworks and is available for:
 - Unreal Engine
 
 Explore the _Development_ section of the site to learn how to integrate the MWA SDK into the framework of your choice.
-
-### Supported Platforms
-
-| Mobile Platform                            | Is MWA Supported? | Notes                                                                 |
-| ------------------------------------------ | ----------------- | --------------------------------------------------------------------- |
-| Android                                    | ✅                | Full support for dApps and Wallet apps.                               |
-| Mobile Web - Chrome (Android)              | ✅                | Automatic integration if using `@solana/wallet-adapter-react`.        |
-| iOS                                        | ❌                | MWA is not currently available for any iOS platform (app or browser). |
-| Mobile Web - Safari, Firefox, Opera, Brave | ❌                | These browsers currently do not support MWA on Android (or iOS).      |
 
 ### Deep dive learning
 
