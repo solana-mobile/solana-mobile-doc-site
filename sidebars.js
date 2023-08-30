@@ -29,9 +29,27 @@ const sidebars = {
       label: 'Introduction',
     },
     {
-      type: 'doc',
-      id: 'getting-started/overview',
-      label: 'The Solana Mobile Stack'
+      type: 'category',
+      label: 'The Solana Mobile Stack',
+      collapsible: true,
+      collapsed: true,
+      items: [
+        {
+          type: 'link',
+          href: '/getting-started/overview#mobile-wallet-adapter',
+          label: 'Mobile Wallet Adapter'
+        },
+        {
+          type: 'link',
+          href: '/getting-started/overview#seed-vault',
+          label: 'Seed Vault'
+        },
+        {
+          type: 'link',
+          href: '/getting-started/overview#solana-dapp-store',
+          label: 'Solana dApp Store'
+        },
+      ]
     },
     {
       type: 'doc',
