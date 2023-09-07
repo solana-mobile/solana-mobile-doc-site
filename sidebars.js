@@ -24,9 +24,26 @@ const sidebars = {
       className: 'sidebar-section-header',
     },
     {
-      type: 'doc',
-      id: 'getting-started/intro',
+      type: 'category',
       label: 'Introduction',
+      link: {
+        type: 'doc',
+        id: 'getting-started/intro',
+      },
+      collapsible: true,
+      collapsed: false,
+      items: [
+        {
+          type: 'doc',
+          id: 'getting-started/introduction-to-solana',
+          label: 'Introduction to Solana'
+        },
+        {
+          type: 'doc',
+          id: 'getting-started/web3-and-mobile',
+          label: 'Web3 and Mobile'
+        },
+      ]
     },
     {
       type: 'category',
