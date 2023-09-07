@@ -15,19 +15,17 @@
   margin-top: 12px;
 }
 
-.ctaButton:hover {
+[data-theme="dark"] .ctaButton:hover {
   color: black;
   background-color: white
 }
 
 [data-theme="light"] .ctaButton {
   color:black;
-  background-color: #6d6fe8;
+  background-color: white;
+  border: solid;
+  border-color: black;
+  border-width: 1px;
+  border-radius: 1;
 }
-
-[data-theme="light"] .ctaButton:hover {
-  color: black;
-  background-color: #8d8fef;
-}
-
 
