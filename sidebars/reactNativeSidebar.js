@@ -14,15 +14,23 @@ module.exports = {
             label: 'Overview'
         },
         {
-            type: 'doc',
-            id: 'react-native/setup',
-            label: 'Setup'
-        },
-        {
-            type: 'doc',
-            id: 'react-native/expo',
-            label: 'Developing with Expo'
-        },
+            type: 'category',
+            label: 'Setup',
+            collapsible: true,
+            collapsed: false,
+            items: [
+                {
+                    type: 'doc',
+                    id: 'react-native/setup',
+                    label: 'React Native'
+                },
+                {
+                    type: 'doc',
+                    id: 'react-native/expo',
+                    label: 'Expo'
+                },
+            ]
+          },
         {
             type: 'doc',
             id: 'react-native/quickstart',
