@@ -1,4 +1,4 @@
-# Expo Template dApp
+# Solana Expo dApp Template
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -32,7 +32,14 @@ npx create-expo-app --template @solana-mobile/solana-mobile-expo-template
 ### Build the APK
 
 For Solana Mobile development, we need to use an Expo custom development build, rather than Expo Go.
-See the Expo guide for more details on why this is needed.
+
+#### Local vs EAS builds
+
+The `eas build` command deploys a job to the EAS Build service that builds your APK using Expo's build infrastructure.
+
+You can also run the build process locally by adding the `--local` flag that runs, which builds and generates the APK on your computer. You'll need Android Studio and Java correctly setup for this step.
+
+See the Expo official documentation for [`eas build`](https://docs.expo.dev/build-reference/android-builds/) and [local builds](https://docs.expo.dev/build-reference/local-builds/).
 
 <Tabs>
 <TabItem value="build-local" label="Build locally">

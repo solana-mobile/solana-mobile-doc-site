@@ -20,9 +20,15 @@ module.exports = {
         },
         {
             type: 'doc',
+            id: 'react-native/expo',
+            label: 'Developing with Expo'
+        },
+        {
+            type: 'doc',
             id: 'react-native/quickstart',
             label: 'Quickstart'
         },
+
         /* Starter Templates Section */
         {
             type: 'html',
@@ -40,8 +46,8 @@ module.exports = {
         },
         {
             type: 'doc',
-            id: 'react-native/expo-template-app',
-            label: 'Expo Template dApp'
+            id: 'react-native/expo-dapp-template',
+            label: 'Expo dApp Template'
         },
 
         /* Guides Section */
@@ -53,11 +59,6 @@ module.exports = {
             type: 'html',
             value: 'Guides',
             className: 'sidebar-section-header',
-        },
-        {
-            type: 'doc',
-            id: 'react-native/expo',
-            label: 'Developing with Expo'
         },
         {
             type: 'doc',
