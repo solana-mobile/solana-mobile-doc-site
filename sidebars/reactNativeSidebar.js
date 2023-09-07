@@ -23,6 +23,26 @@ module.exports = {
             id: 'react-native/quickstart',
             label: 'Quickstart'
         },
+        /* Starter Templates Section */
+        {
+            type: 'html',
+            value: '<div class="sidebar-divider" />',
+        },
+        {
+            type: 'html',
+            value: 'Template Apps',
+            className: 'sidebar-section-header',
+        },
+        {
+            type: 'doc',
+            id: 'react-native/react-native-scaffold',
+            label: 'React Native dApp Scaffold'
+        },
+        {
+            type: 'doc',
+            id: 'react-native/expo-template-app',
+            label: 'Expo Template dApp'
+        },
 
         /* Guides Section */
         {
