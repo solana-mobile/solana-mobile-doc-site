@@ -14,14 +14,48 @@ module.exports = {
             label: 'Overview'
         },
         {
-            type: 'doc',
-            id: 'react-native/setup',
-            label: 'Setup'
-        },
+            type: 'category',
+            label: 'Setup',
+            collapsible: true,
+            collapsed: false,
+            items: [
+                {
+                    type: 'doc',
+                    id: 'react-native/setup',
+                    label: 'React Native'
+                },
+                {
+                    type: 'doc',
+                    id: 'react-native/expo',
+                    label: 'Expo'
+                },
+            ]
+          },
         {
             type: 'doc',
             id: 'react-native/quickstart',
             label: 'Quickstart'
+        },
+
+        /* Starter Templates Section */
+        {
+            type: 'html',
+            value: '<div class="sidebar-divider" />',
+        },
+        {
+            type: 'html',
+            value: 'Template Apps',
+            className: 'sidebar-section-header',
+        },
+        {
+            type: 'doc',
+            id: 'react-native/react-native-scaffold',
+            label: 'React Native dApp Scaffold'
+        },
+        {
+            type: 'doc',
+            id: 'react-native/expo-dapp-template',
+            label: 'Expo dApp Template'
         },
 
         /* Guides Section */
@@ -33,11 +67,6 @@ module.exports = {
             type: 'html',
             value: 'Guides',
             className: 'sidebar-section-header',
-        },
-        {
-            type: 'doc',
-            id: 'react-native/expo',
-            label: 'Developing with Expo'
         },
         {
             type: 'doc',

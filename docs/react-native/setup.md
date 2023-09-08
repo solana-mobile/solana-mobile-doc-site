@@ -20,13 +20,13 @@ npx react-native init MySolanaDapp --template https://github.com/solana-mobile/s
 ```
 
 The scaffold is a ready-to-go React Native dApp that comes with:
+
 - The Mobile Wallet Adapter SDK and `@solana/web3.js`.
 - Required polyfills like `react-native-get-random-values` and `Buffer` installed.
 - Wallet authorization/connecting and airdrop request functionality.
 - Premade React UI Components like `ConnectWalletButton`, `RequestAirdropButton`, `SignMessageButton`.
 
 After initializing a template, you can quickly build your first dApp following this [tutorial!](/react-native/first_app_tutorial)
-
 
 ### Setting up a new React Native project
 
@@ -58,7 +58,6 @@ yarn add \
 </TabItem>
 <TabItem value="npm" label="npm">
 
-
 ```shell
 npm install \
   @solana/web3.js \
@@ -77,11 +76,10 @@ npm install \
 - `@solana-mobile/mobile-wallet-adapter-protocol`: A React Native/Javascript API enabling interaction with MWA-compatible wallets.
 - `@solana-mobile/mobile-wallet-adapter-protocol-web3js`: A convenience wrapper to use common primitives from [@solana/web3.js](https://github.com/solana-labs/solana-web3.js) – such as `Transaction` and `Uint8Array`.
 - `@solana/web3.js`: Solana Web Library for interacting with Solana network through the [JSON RPC API](https://docs.solana.com/api/http).
-- `react-native-get-random-values` Secure random number generator polyfill for `web3.js` underlying Crypto library on React Native. 
+- `react-native-get-random-values` Secure random number generator polyfill for `web3.js` underlying Crypto library on React Native.
 - `buffer` Buffer polyfill also needed for `web3.js` on React Native.
 
 </details>
-
 
 #### Step 3: Update index.js with polyfills
 
@@ -92,23 +90,25 @@ Make sure you place these imports before your App component import!
 :::
 
 ```javascript
-import {Buffer} from 'buffer';
-import 'react-native-get-random-values'
+import "react-native-get-random-values";
+import { Buffer } from "buffer";
+global.Buffer = Buffer;
 
 // Place the App component import below your polyfill imports!
-import App from './App';
+import App from "./App";
 ```
 
 #### Step 4: Run the app on device/emulator
 
-Make sure your device/emulator is set up by following the [official React Native documentation](https://reactnative.dev/docs/running-on-device). 
+Make sure your device/emulator is set up by following the [official React Native documentation](https://reactnative.dev/docs/running-on-device).
 
 In your project folder run:
+
 ```
 npx react-native run-android
 ```
-The Metro Bundler terminal UI will pop up then select the Android option. Your app should build and launch on your emulator. 
 
+The Metro Bundler terminal UI will pop up then select the Android option. Your app should build and launch on your emulator.
 
 ## Next Steps
 

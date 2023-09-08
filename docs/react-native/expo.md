@@ -1,44 +1,104 @@
-# Developing with Expo
+# Expo dApp Setup
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-## Overview
+## What is Expo?
 
-[Expo](https://expo.dev/) is a popular open-source platform that simplifies the development, building, and deployment process for React Native applications. Expo apps have their own managed development flow with Expo Go, and utilize the Expo SDK.
+[Expo](https://expo.dev/) is a popular open-source platform that simplifies the development, building, and deployment process for React Native applications. Expo apps have their own managed development flow with Expo Go, and utilizes the Expo SDK.
 
+## Expo Development for Solana Mobile
 
+The React Native resources, guides, and tutorials for Solana Mobile development **are all applicable for Expo as well**! After the initial setup, the development of an Expo app and a React Native app are very similar.
 
-:::tip
-The [Expo Go](https://github.com/expo/fyi/blob/main/whats-in-the-sdk.md) development flow is limited to certain hand-picked modules and does not support further customized native code, like our React Native SDK. 
+## Expo dApp Template
 
-Instead, we'll need to use a [custom development build](https://docs.expo.dev/develop/development-builds/create-a-build) which makes our React Native SDK fully compatible with Expo.
+The quickest option to get started with Expo development is using the [Solana Mobile Expo dApp Template](/react-native/expo-dapp-template). Run a single command to download and initialize a Solana Expo dApp with pre-installed libraries and UI components.
 
-The steps below walkthrough how to get the Expo example running!
-:::
+Follow the [guide](/react-native/expo-dapp-template) to learn how to initialize and run the template.
 
-## Expo MWA Proof of Concept
+## Manual Installation
 
-Check out this [repo](https://github.com/solana-mobile/expo-react-native-mwa-proof-of-concept) to see a custom Expo development build configured with `@solana-mobile/mobile-wallet-adapter-protocol`.
+If you want to create a new Expo project from scratch then follow these steps. If you want to integrate an existing project with the SDK, then skip to [installing the dependencies](#step-2-install-dependencies).
 
-## Installation
+As a prerequisite, follow the [React Native official documentation](https://reactnative.dev/docs/environment-setup) and set up your environment for Android.
 
-This guide will walkthrough how to set up and build an Expo app with a custom development build. 
-
-### Clone the Expo Proof of Concept repo
+#### Step 1: Initialize a new Expo project
 
 ```shell
-git clone https://github.com/solana-mobile/expo-react-native-mwa-proof-of-concept.git
+npx create-expo-app
 ```
 
-### Build the Expo app
+Enter your app project name then move into the newly generated folder.
 
-You can use the Expo `eas build` command to build your custom development build APK and install it on device/emulator. 
+#### Step 2: Install dependencies
 
+<Tabs>
+<TabItem value="yarn" label="yarn">
+
+```shell
+yarn add \
+  @solana/web3.js \
+  @solana-mobile/mobile-wallet-adapter-protocol-web3js \
+  @solana-mobile/mobile-wallet-adapter-protocol \
+  react-native-get-random-values \
+  buffer
+```
+
+</TabItem>
+<TabItem value="npm" label="npm">
+
+```shell
+npm install \
+  @solana/web3.js \
+  @solana-mobile/mobile-wallet-adapter-protocol-web3js \
+  @solana-mobile/mobile-wallet-adapter-protocol \
+  react-native-get-random-values \
+  buffer
+```
+
+</TabItem>
+</Tabs>
+
+<details>
+<summary>A brief overview of each dependency:</summary>
+
+- `@solana-mobile/mobile-wallet-adapter-protocol`: A React Native/Javascript API enabling interaction with MWA-compatible wallets.
+- `@solana-mobile/mobile-wallet-adapter-protocol-web3js`: A convenience wrapper to use common primitives from [@solana/web3.js](https://github.com/solana-labs/solana-web3.js) – such as `Transaction` and `Uint8Array`.
+- `@solana/web3.js`: Solana Web Library for interacting with Solana network through the [JSON RPC API](https://docs.solana.com/api/http).
+- `react-native-get-random-values` Secure random number generator polyfill for `web3.js` underlying Crypto library on React Native.
+- `buffer` Buffer polyfill also needed for `web3.js` on React Native.
+
+</details>
+
+#### Step 3: Update App.js with polyfills
+
+To load the polyfills, we open the entrypoint file (`App.js`/`App.tsx`) in the root of the project and add the following two lines to the top of the file:
+
+```javascript
+import "react-native-get-random-values";
+import { Buffer } from "buffer";
+global.Buffer = Buffer;
+```
+
+#### Step 4. Build and run the app
+
+Now the project is properly installed and configured, all that's left is to build a custom development APK, install it, then launch the Expo dev client.
+Follow the steps on the next section.
+
+### Running the app
+
+#### Custom Development Build
+
+The traditional [Expo Go](https://github.com/expo/fyi/blob/main/whats-in-the-sdk.md) development flow is only limited to certain hand-picked modules and does not support further customized native code, which Solana Mobile SDKs need.
+
+Instead, we'll need to use a [custom development build](https://docs.expo.dev/develop/development-builds/create-a-build) which makes Solana Mobile React Native libraries (i.e Mobile Wallet Adapter) fully compatible with Expo.
+
+Full steps of building and running a custom development build below.
 
 #### Local vs EAS builds
 
-The `eas build` command deploys a job to the EAS Build service that builds your APK using Expo's build infrastructure. 
+The `eas build` command deploys a job to the EAS Build service that builds your APK using Expo's build infrastructure.
 
 You can also run the build process locally by adding the `--local` flag that runs, which builds and generates the APK on your computer. You'll need Android Studio and Java correctly setup for this step.
 
@@ -50,17 +110,22 @@ See the Expo official documentation for [`eas build`](https://docs.expo.dev/buil
 #### Configure `eas.json`
 
 Ensure your development profile has the `developmentClient` field set to true.
+
 ```json
 "development": {
     "developmentClient": true,
     "distribution": "internal"
 },
 ```
+
 #### Build locally
+
 Run the build locally with the specified profile and `--local` flag.
+
 ```shell
 npx eas build --profile development --platform android --local
 ```
+
 <details>
 <summary>Troubleshooting:</summary>
 
@@ -68,11 +133,13 @@ npx eas build --profile development --platform android --local
 
 Follow the [React Native CLI setup instructions](https://reactnative.dev/docs/environment-setup) to make sure your local environment is setup for Android development.
 You'll need:
+
 - JDK version 11
 - Android SDK installed and configured through Android Studio SDK Manager
 - ANDROID_HOME environment variable
 
 #### Missing Android NDK
+
 If you are seeing errors about missing Android NDK, make sure you've installed Android NDK in Android Studio. You can do this following:
 `File -> Project Structure -> SDK Location -> "Android NDK Location" -> Download Android NDK`
 
@@ -80,19 +147,15 @@ If you are seeing errors about missing Android NDK, make sure you've installed A
 
 </details>
 
-#### Install the custom development build APK
-
-After successfully building locally, the APK should be generated and outputted to the same directory you ran the command. Install that APK into your device/emulator.
-
 </TabItem>
-<TabItem value="eas-build" label="eas build">
-
+<TabItem value="eas-build" label="EAS build">
 
 #### Build with eas build
 
 You can use Expo's build service to build your app. Make sure you have an Expo account and have logged in with `expo login`.
 
 In the repo, run the command:
+
 ```shell
 eas build
 ```
@@ -102,22 +165,16 @@ After it's finished building you should receive a QR code and download URL to th
 </TabItem>
 </Tabs>
 
-### Start Expo dev client
+#### Install the custom development build APK
 
-After you have installed the custom development build on your device/emulator, you need to start and connect an Expo dev client to the app. 
+After successfully building locally, the APK should be generated and outputted to the same directory you ran the command. Install that APK into your device/emulator (drag and drop APK file into emulator).
 
-Run:
+#### Run the app
+
+At this point, the APK should be installed onto your emulator or device. You can launch the app and connect it to the development client with:
+
 ```shell
 npx expo start --dev-client
 ```
 
-On your emulator/device, launch your app and select the newly created development server. Now you can edit your code and see changes reflected immediately!
-
-
-
-
-
-
-
-
-
+This will launch the template app and you can select the newly created development server. Now you can edit your code and see changes reflected immediately!

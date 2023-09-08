@@ -25,7 +25,7 @@ Although our recommendation is to always create a native mobile app for the best
 **Browser Compatibility**
 
 - Android Chrome ✅
-  - Supports MWA automatically if using the `[wallet-adapter-react](https://github.com/solana-labs/wallet-adapter)` library.
+  - Supports MWA automatically if using the [`wallet-adapter-react`](https://github.com/solana-labs/wallet-adapter) library.
 - iOS Safari 🟨
   - Does not support MWA due to iOS limitations.
   - Wallet signing only possible if user has a Safari Extension wallet, like [Glow Wallet](https://glow.app/).
