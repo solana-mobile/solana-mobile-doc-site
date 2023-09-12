@@ -13,8 +13,13 @@ For a more comprehensive guide of how to build your first dApp, check out our Re
   - Request wallet authorization and reauthorization.
   - Sign transactions and messages
 - How to use [**web3.js**](https://solana-labs.github.io/solana-web3.js/) to:
+
   - Connect to a Solana RPC endpoint.
   - Construct a Solana transaction for signing.
+
+## Install libraries and polyfills
+
+Follow [React Native Setup](/react-native/setup#step-2-install-dependencies) or [Expo Setup](/react-native/expo#step-2-install-dependencies) to install dependencies and polyfills.
 
 ## Connect to a wallet
 
@@ -238,6 +243,11 @@ const signedTransaction = await transact((wallet) => {
 const signature = await sendTransaction(transaction, connection);
 
 await connection.confirmTransaction(signature, "confirmed");
+
+if (confirmationResult.value.err) {
+  // Transaction was unsuccessfully submitted.
+  throw new Error(JSON.stringify(confirmationResult.value.err));
+}
 ```
 
 The result from `sendTransaction` is a base58 encoded transaction signature. Using `confirmTransaction`, you can check that the transaction was `confirmed` by the network. For other commitment levels, read about [Commitment Status](https://docs.solana.com/cluster/commitments).
