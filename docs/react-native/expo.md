@@ -73,13 +73,82 @@ npm install \
 
 #### Step 3: Update App.js with polyfills
 
-To load the polyfills, we open the entrypoint file (`App.js`/`App.tsx`) in the root of the project and add the following two lines to the top of the file:
+##### For Expo SDK 48 and below
+
+For basic Expo apps, the entrypoint file is usually in the root of the project (i.e: `App.js`, `App.tsx`, `index.js`).
+
+If using or Expo Router _and_ Expo SDK Version 49+ is different, see the specific instructions below.
+
+Add the following two lines to the top of the file:
 
 ```javascript
 import "react-native-get-random-values";
 import { Buffer } from "buffer";
 global.Buffer = Buffer;
 ```
+
+<details>
+<summary>Polyfills: Expo SDK Version 49+ and Expo Router</summary>
+
+If you are using Expo SDK Version 49+ and Expo Router, the `expo-crypto` package will replace `react-native-get-random-values` and you'll create your own entrypoint file for polyfilling.
+
+#### Install expo-crypto
+
+`expo-crypto` is an official SDK by Expo that provides the polyfill functionality we need for libraries like `@solana/web3.js`. See official
+docs for [installation instructions](https://docs.expo.dev/versions/latest/sdk/crypto/).
+
+```shell
+npx expo install expo-crypto
+```
+
+#### Entrypoint file polyfills
+
+In the root of your project create a new entrypoint file (i.e `index.js`). In this new file,
+you can initialize the polyfills at the top of the file.
+
+In this case, we polyfill the global `Crypto` object with `getRandomValues` from `expo-crypto`.
+
+Paste the following code:
+
+```javascript
+// index.js
+import { getRandomValues as expoCryptoGetRandomValues } from "expo-crypto";
+import { Buffer } from "buffer";
+global.Buffer = Buffer;
+
+// getRandomValues polyfill
+class Crypto {
+  getRandomValues = expoCryptoGetRandomValues;
+}
+
+const webCrypto = typeof crypto !== "undefined" ? crypto : new Crypto();
+
+(() => {
+  if (typeof crypto === "undefined") {
+    Object.defineProperty(window, "crypto", {
+      configurable: true,
+      enumerable: true,
+      get: () => webCrypto,
+    });
+  }
+})();
+
+import "expo-router/entry";
+```
+
+Then at the end, import `"expo-router/entry"` to ensure the app is using Expo Router.
+
+#### Update package.json entrypoint
+
+Lastly, in `package.json`, update the `main` field to point to the new entrypoint file.
+
+```json
+{
+  "main": "node_modules/expo/AppEntry.js"
+}
+```
+
+</details>
 
 #### Step 4. Build and run the app
 
