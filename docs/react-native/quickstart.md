@@ -1,5 +1,6 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import CTAButton from "../../src/components/CTAButton";
 
 # React Native Quickstart
 
@@ -23,6 +24,8 @@ Follow [React Native Setup](/react-native/setup#step-2-install-dependencies) or 
 
 ## Connect to a wallet
 
+<CTAButton label="API Reference" to="/reference/typescript/mobile-wallet-adapter#transact" />
+
 To connect to a wallet, use the [`transact`](https://github.com/solana-mobile/mobile-wallet-adapter/blob/main/js/packages/mobile-wallet-adapter-protocol-web3js/src/transact.ts) function from `@solana-mobile/mobile-wallet-adapter-protocol-web3js`.
 
 The `transact` method starts a session with a locally installed MWA-compatible wallet app. Within the callback, use
@@ -43,6 +46,8 @@ The former provides convenient wrappers around common ` web3.js` Solana types li
 :::
 
 ## Authorizing a wallet
+
+<CTAButton label="API Reference" to="/reference/typescript/mobile-wallet-adapter#web3mobilewalletauthorize" />
 
 After starting a session with a wallet app with `transact`, you should first request authorization for your app with a call to [`authorize`](<https://www.javadoc.io/doc/com.solanamobile/mobile-wallet-adapter-clientlib-ktx/latest/com/solana/mobilewalletadapter/clientlib/AdapterOperations.html#authorize(Uri,Uri,String,RpcCluster)>).
 
@@ -82,6 +87,8 @@ Once authorized with a wallet, the app can request the wallet to sign transactio
 In practice, most wallet apps only support single account authorization, so there will be at most 1 item in `accounts`.
 
 ### Reauthorization for subsequent connections
+
+<CTAButton label="API Reference" to="/reference/typescript/mobile-wallet-adapter#web3mobilewalletreauthorize" />
 
 For subsequent connections to the wallet app, you can skip the authorization step by sending a `reauthorize` request
 with a previously stored `authToken`. If still valid, `reauthorize` will bypass the need to explicitly grant authorization again.
@@ -196,6 +203,8 @@ const randomTransferTransaction = new Transaction({
 
 ## Signing Transactions
 
+<CTAButton label="API Reference" to="/reference/typescript/mobile-wallet-adapter#web3mobilewalletsigntransactions" />
+
 After creating a `VersionedTransaction` or `Transaction`, you can request a wallet to sign it within `transact`.
 
 <Tabs>
@@ -304,6 +313,8 @@ const signedTx = await transact(async (wallet) => {
 </Tabs>
 
 ## Signing messages
+
+<CTAButton label="API Reference" to="/reference/typescript/mobile-wallet-adapter#web3mobilewalletsignmessages" />
 
 Mobile Wallet Adapter provides an API to request message signing. In this case, a _message_ is any payload of bytes.
 
@@ -414,6 +425,8 @@ on the ledger.
 Using `confirmTransaction`, you can check that the transaction was `confirmed` by the network. For other commitment levels, read about [Commitment Status](https://docs.solana.com/cluster/commitments).
 
 ### Sign and Send with MWA
+
+<CTAButton label="API Reference" to="/reference/typescript/mobile-wallet-adapter#web3mobilewalletsignandsendtransactions" />
 
 An alternative option for submitting transactions is for the dApp to send a `signAndSendTransactions` MWA request to a wallet.
 
