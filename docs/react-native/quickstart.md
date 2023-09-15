@@ -66,7 +66,7 @@ const authorizationResult = await transact(async (wallet: AuthorizeAPI) => {
   const authorizationResult = await wallet.authorize({
     cluster: 'devnet',
     identity: APP_IDENTITY,
-  }));
+  });
 
   return authorizationResult;
 });
@@ -115,52 +115,142 @@ await transact(async (wallet: AuthorizeAPI & ReauthorizeAPI) => {
 });
 ```
 
-## Signing Transactions and Messages
+## Building Transactions
 
-After authorized with a wallet, you can now request signing services within `transact` with:
+A client interacts with the Solana network by submitting a _transaction_ to the cluster. Transactions
+allow a client to invoke instructions of on-chain [_Programs_](https://docs.solana.com/developing/intro/programs).
 
-- `signMessages`
-- `signTransactions`
-
-In `signTransactions`, we use using [**System Program**](https://docs.solana.com/developing/runtime-facilities/programs#system-program) to generate a simple _transfer_ instruction that moves SOL around. _System Program_ is an example of a Solana [Native Program](https://docs.solana.com/developing/runtime-facilities/programs). To learn more about Solana transactions see the this [deep dive](https://docs.solana.com/developing/programming-model/transactions).
+For a full explanation, see the core docs overview of a [_transaction_](https://docs.solana.com/developing/programming-model/transactions).
 
 <Tabs>
-<TabItem value="signMessasges" label="signMessages">
+<TabItem value="versionedTransaction" label="Versioned Transactions">
+
+A [versioned transaction](https://docs.solana.com/developing/versioned-transactions) is a new format for transactions required for use by clients.
+We'll create a `VersionedTransaction` from the `@solana/web3.js` library.
+
+As an example, we'll be invoking the _transfer_ instruction from the _System Program_.
+The System Program is an example of a Solana [Native Program](https://docs.solana.com/developing/runtime-facilities/programs).
 
 ```tsx
-import {transact} from '@solana-mobile/mobile-wallet-adapter-protocol-web3js';
+import {
+  Connection,
+  PublicKey,
+  TransactionInstruction,
+  VersionedTransaction,
+  TransactionMessage,
+  SystemProgram,
+} from "@solana/web3.js";
 
-// If we have one, retrieve an authToken from a previous authorization.
-const storedAuthToken = maybeGetStoredAuthToken(); // dummy placeholder function
-const message = 'Hello world!'
-const messageBuffer = new Uint8Array(
-  message.split('').map(c => c.charCodeAt(0)),
-);
+// Create a list of Program instructions to execute.
+const instructions = [
+  SystemProgram.transfer({
+    fromPubkey: fromPublicKey,
+    toPubkey: toPublicKey,
+    lamports: 1_000,
+  }),
+];
 
-const signedMessages = await transact(async (wallet) => {
-  // First, request for authorization from the wallet.
-  const authorizationResult = await (storedAuthToken
-    ? wallet.reauthorize({
-        auth_token: storedAuthToken,
-        identity: APP_IDENTITY,
-      })
-    : wallet.authorize({
-      cluster: 'devnet',
-      identity: APP_IDENTITY,
-  }));
+// Connect to an RPC endpoint and get the latest blockhash, to include in
+// the transaction.
+const latestBlockhash = await connection.getLatestBlockhash();
 
-  // Sign the payload with the provided address from authorization.
-  const signedMessages = wallet.signMessages({
-    addresses: [authorizationResult.address].
-    payloads: [messageBuffer]
+// Create the "message" of a transaction and compile to `V0Message` format.
+const txMessage = new TransactionMessage({
+  payerKey: fromPublicKey,
+  recentBlockhash: latestBlockhash.blockhash,
+  instructions,
+}).compileToV0Message();
+
+// Construct the Versioned Transaction passing in the message.
+const versionedTransaction = new VersionedTransaction(txMessage);
+```
+
+</TabItem>
+<TabItem value="legacyTransaction" label="Legacy Transactions">
+
+For backwards compatiblity, you can still construct legacy transactions with `@solana/web3.js`.
+
+```tsx
+import {
+  Connection,
+  PublicKey,
+  Transaction,
+  SystemProgram,
+} from "@solana/web3.js";
+
+const latestBlockhash = await connection.getLatestBlockhash();
+const randomTransferTransaction = new Transaction({
+  ...latestBlockhash,
+  feePayer: fromPublicKey,
+}).add(
+  SystemProgram.transfer({
+    fromPubkey: fromPublicKey,
+    toPubkey: toPublicKey,
+    lamports: 1_000,
   })
+);
+```
 
-  return signedMessages;
+</TabItem>
+</Tabs>
+
+## Signing Transactions
+
+After creating a `VersionedTransaction` or `Transaction`, you can request a wallet to sign it within `transact`.
+
+<Tabs>
+<TabItem value="versionedTransaction" label="Versioned Transactions">
+
+```tsx
+import { transact } from "@solana-mobile/mobile-wallet-adapter-protocol-web3js";
+import { toByteArray } from "react-native-quick-base64";
+
+const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
+const signedTx = await transact(async (wallet) => {
+  // Authorize the wallet session
+  const authorizationResult = await wallet.authorize({
+    cluster: "devnet",
+    identity: APP_IDENTITY,
+  });
+
+  // Convert base64 address to web3.js PublicKey class
+  const authorizedPubkey = new PublicKey(
+    toByteArray(authorizationResult.accounts[0].address)
+  );
+
+  // Construct an instruction to transfer 1,000 lamports to a randomly generated account
+  const randomKeypair = Keypair.generate();
+  const instructions = [
+    SystemProgram.transfer({
+      fromPubkey: authorizedPubkey,
+      toPubkey: randomKeypair.publicKey,
+      lamports: 1_000,
+    }),
+  ];
+
+  // Connect to an RPC endpoint and get the latest blockhash, to include in
+  // the transaction.
+  const latestBlockhash = await connection.getLatestBlockhash();
+
+  // Construct the Versioned message and transaction.
+  const txMessage = new TransactionMessage({
+    payerKey: fromPublicKey,
+    recentBlockhash: latestBlockhash.blockhash,
+    instructions,
+  }).compileToV0Message();
+  const versionedTransaction = new VersionedTransaction(txMessage);
+
+  // Request to sign the transaction
+  const signedTxs = await wallet.signTransactions({
+    transactions: [versionedTransaction],
+  });
+
+  return signedTxs[0];
 });
 ```
 
 </TabItem>
-<TabItem value="signTransactions" label="signTransactions">
+<TabItem value="legacyTransaction" label="Legacy Transactions">
 
 ```tsx
 import {transact} from '@solana-mobile/mobile-wallet-adapter-protocol-web3js';
@@ -172,24 +262,19 @@ import {
   Transaction,
 } from '@solana/web3.js';
 
-// If we have one, retrieve an authToken from a previous authorization.
-const storedAuthToken = maybeGetStoredAuthToken(); // dummy placeholder function
+const connection = new Connection(clusterApiUrl('devnet'), 'confirmed');
+const signedTx = await transact(async (wallet) => {
+  // Authorize the wallet session
+  const authorizationResult = wallet.authorize({
+    cluster: 'devnet',
+    identity: APP_IDENTITY,
+  });
 
-const signedTransaction = await transact(async (wallet) => {
-  // First, request for authorization from the wallet.
-  const authorizationResult = await (storedAuthToken
-    ? wallet.reauthorize({
-        auth_token: storedAuthToken,
-        identity: APP_IDENTITY,
-      })
-    : wallet.authorize({
-      cluster: 'devnet',
-      identity: APP_IDENTITY,
-    }));
+  // Convert base64 address to web3.js PublicKey class
+  const authorizedPubkey = new PublicKey(toByteArray(authorizationResult.accounts[0].address));
 
   // Connect to an RPC endpoint and get the latest blockhash, to include in
   // the transaction.
-  const connection = new Connection(clusterApiUrl('devnet'), 'confirmed');
   const latestBlockhash = await connection.getLatestBlockhash();
 
   // Construct a transaction. This transaction uses web3.js `SystemProgram`
@@ -197,10 +282,10 @@ const signedTransaction = await transact(async (wallet) => {
   const keypair = Keypair.generate();
   const randomTransferTransaction = new Transaction({
     ...latestBlockhash,
-    feePayer: authorizationResult.publicKey,
+    feePayer: authorizedPubkey,
   }).add(
     SystemProgram.transfer({
-      fromPubkey: authorizationResult.publicKey,
+      fromPubkey: authorizedPubkey,
       toPubkey: keypair.publicKey,
       lamports: 1_000,
     }),
@@ -208,7 +293,7 @@ const signedTransaction = await transact(async (wallet) => {
 
   // Sign and return the transactions.
   const signedTransactions: await wallet.signTransactions({
-    transactions: [memoProgramTransaction],
+    transactions: [randomTransferTransaction],
   });
 
   return signedTransactions[0];
@@ -218,11 +303,76 @@ const signedTransaction = await transact(async (wallet) => {
 </TabItem>
 </Tabs>
 
+## Signing messages
+
+Mobile Wallet Adapter provides an API to request message signing. In this case, a _message_ is any payload of bytes.
+
+```tsx
+import {transact} from '@solana-mobile/mobile-wallet-adapter-protocol-web3js';
+
+// Convert 'Hello world!' to a byte array.
+const message = 'Hello world!'
+const messageBuffer = new Uint8Array(
+  message.split('').map(c => c.charCodeAt(0)),
+);
+
+const signedMessages = await transact(async (wallet) => {
+  // Authorize the wallet session.
+  const authorizationResult = await wallet.authorize({
+      cluster: 'devnet',
+      identity: APP_IDENTITY,
+  });
+
+  // Sign the payload with the provided address from authorization.
+  const signedMessages = wallet.signMessages({
+    addresses: [authorizationResult.address].
+    payloads: [messageBuffer]
+  })
+
+  return signedMessages;
+});
+```
+
 ## Send a Transaction
 
-Once a `Transaction` is signed by the appropriate accounts, it can be submitted to the Solana network via RPC.
+After a `Transaction` is signed by the appropriate accounts, it can be submitted to the Solana network via RPC.
 
-Use the `Connection` class that provides an RPC functions conforming to the Solana [JSON RPC API](https://docs.solana.com/api/http).
+<Tabs>
+<TabItem value="versionedTransaction" label="Versioned Transactions">
+
+```tsx
+import { transact } from "@solana-mobile/mobile-wallet-adapter-protocol-web3js";
+import {
+  sendTransaction,
+  clusterApiUrl,
+  Connection,
+  VersionedTransaction,
+  confirmTransaction,
+} from "@solana/web3.js";
+
+const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
+const signedTx: VersionedTransaction = await transact((wallet) => {
+  /* ...signing code from above... */
+});
+
+// After sending, a transaction signature is returned.
+const txSignature = await connection.sendTransaction(signedTx);
+
+// Confirm the transaction was successful.
+const confirmationResult = await connection.confirmTransaction(
+  txSignature,
+  "confirmed"
+);
+
+if (confirmationResult.value.err) {
+  throw new Error(JSON.stringify(confirmationResult.value.err));
+} else {
+  console.log("Transaction successfully submitted!");
+}
+```
+
+</TabItem>
+<TabItem value="legacyTransaction" label="Legacy Transactions">
 
 ```tsx
 import { transact } from "@solana-mobile/mobile-wallet-adapter-protocol-web3js";
@@ -235,22 +385,33 @@ import {
 } from "@solana/web3.js";
 
 const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
-
-const signedTransaction = await transact((wallet) => {
+const signedTx: Transaction = await transact((wallet) => {
   /* ...signing code from above... */
 });
 
-const signature = await sendTransaction(transaction, connection);
+// After sending, a transaction signature is returned.
+const txSignature = await sendTransaction(signedTx, connection);
 
-await connection.confirmTransaction(signature, "confirmed");
+// Confirm the transaction was successful.
+const confirmationResult = await connection.confirmTransaction(
+  txSignature,
+  "confirmed"
+);
 
 if (confirmationResult.value.err) {
-  // Transaction was unsuccessfully submitted.
   throw new Error(JSON.stringify(confirmationResult.value.err));
+} else {
+  console.log("Transaction successfully submitted!");
 }
 ```
 
-The result from `sendTransaction` is a base58 encoded transaction signature. Using `confirmTransaction`, you can check that the transaction was `confirmed` by the network. For other commitment levels, read about [Commitment Status](https://docs.solana.com/cluster/commitments).
+</TabItem>
+</Tabs>
+
+The result from sending a transaction is a base58 transaction signature (or transaction ID). This transaction signature can be used to uniquely identify your transaction
+on the ledger.
+
+Using `confirmTransaction`, you can check that the transaction was `confirmed` by the network. For other commitment levels, read about [Commitment Status](https://docs.solana.com/cluster/commitments).
 
 ### Sign and Send with MWA
 
@@ -258,6 +419,48 @@ An alternative option for submitting transactions is for the dApp to send a `sig
 
 This request sends an unsigned transaction to the wallet. If authorized, the wallet will then sign the transaction and send it to the network with its own implementation.
 
+<Tabs>
+<TabItem value="versionedTransaction" label="Versioned Transactions">
+
+```tsx
+import { transact } from "@solana-mobile/mobile-wallet-adapter-protocol-web3js";
+import {
+  sendTransaction,
+  clusterApiUrl,
+  Connection,
+  VersionedTransaction,
+  confirmTransaction,
+} from "@solana/web3.js";
+
+const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
+const txSignature = await transact((wallet) => {
+  /* ...transaction code from above... */
+
+  // Send the unsigned transaction, the wallet will sign and submit it to the network,
+  // returning the transaction signature.
+  const transactionSignatures = await wallet.signAndSendTransactions({
+    transactions: [versionedTransaction],
+  });
+
+  return transactionSignatures[0];
+});
+
+// Confirm the transaction was successful.
+const confirmationResult = await connection.confirmTransaction(
+  txSignature,
+  "confirmed"
+);
+
+if (confirmationResult.value.err) {
+  throw new Error(JSON.stringify(confirmationResult.value.err));
+} else {
+  console.log("Transaction successfully submitted!");
+}
+```
+
+</TabItem>
+<TabItem value="legacyTransaction" label="Legacy Transactions">
+
 ```tsx
 import { transact } from "@solana-mobile/mobile-wallet-adapter-protocol-web3js";
 import {
@@ -269,33 +472,8 @@ import {
 } from "@solana/web3.js";
 
 const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
-
-const signature = await transact((wallet) => {
-  const authorizationResult = await(
-    storedAuthToken
-      ? wallet.reauthorize({
-          auth_token: storedAuthToken,
-          identity: APP_IDENTITY,
-        })
-      : wallet.authorize({
-          cluster: "devnet",
-          identity: APP_IDENTITY,
-        })
-  );
-
-  const latestBlockhash = await connection.getLatestBlockhash();
-
-  const keypair = Keypair.generate();
-  const randomTransferTransaction = new Transaction({
-    ...latestBlockhash,
-    feePayer: authorizationResult.publicKey,
-  }).add(
-    SystemProgram.transfer({
-      fromPubkey: authorizationResult.publicKey,
-      toPubkey: keypair.publicKey,
-      lamports: 1_000,
-    })
-  );
+const txSignature = await transact((wallet) => {
+  /* ...transaction code from above... */
 
   // Send the unsigned transaction, the wallet will sign and submit it to the network,
   // returning the transaction signature.
@@ -306,16 +484,21 @@ const signature = await transact((wallet) => {
   return transactionSignatures[0];
 });
 
+// Confirm the transaction was successful.
 const confirmationResult = await connection.confirmTransaction(
-  signature,
+  txSignature,
   "confirmed"
 );
 
 if (confirmationResult.value.err) {
-  // Transaction was unsuccessfully submitted.
   throw new Error(JSON.stringify(confirmationResult.value.err));
+} else {
+  console.log("Transaction successfully submitted!");
 }
 ```
+
+</TabItem>
+</Tabs>
 
 ## Next Steps
 
