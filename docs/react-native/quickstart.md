@@ -122,6 +122,24 @@ await transact(async (wallet: AuthorizeAPI & ReauthorizeAPI) => {
 });
 ```
 
+### Deauthorizing a wallet
+
+<CTAButton label="API Reference" to="http://localhost:3000/reference/typescript/mobile-wallet-adapter#web3mobilewalletdeauthorize" />
+
+A dApp can revoke authorization or "disconnect" from a wallet by sending a `deauthorize` request.
+This will invalidate the previously provided `authToken` from the wallet.
+
+```tsx
+await transact(async (wallet) => {
+  if (!previouslyStoredAuthToken) {
+    return;
+  }
+
+  // Pass in the prior auth token to invalidate it.
+  await wallet.deauthorize({ auth_token: previouslyStoredAuthToken });
+});
+```
+
 ## Building Transactions
 
 A client interacts with the Solana network by submitting a _transaction_ to the cluster. Transactions
