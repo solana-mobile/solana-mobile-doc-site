@@ -1,4 +1,4 @@
---- 
+---
 title: Sample App Collection
 hide_table_of_contents: true
 ---
@@ -6,10 +6,10 @@ hide_table_of_contents: true
 import SampleAppCardLayout from "../../src/layouts/SampleAppCardLayout"
 import SampleAppCard from "../../src/components/SampleAppCard"
 
-A list of open-source sample apps in different languages/frameworks to help you get started! 
+A list of open-source sample apps in different languages/frameworks to help you get started!
+
 - If you're new to using the mobile wallet adapter SDK or looking for a reference point for your own implementation, explore these sample apps.
 - By exploring these sample apps, you can get a better understanding of the capabilities of the Mobile Wallet Adapter SDK and how it can be integrated into a project.
-
 
 ## React Native
 
@@ -42,6 +42,18 @@ A list of open-source sample apps in different languages/frameworks to help you 
                 "React Native",
                 "Metaplex",
                 "IPFS",
+            ]}
+    />
+     <SampleAppCard 
+        title="Idle Farming Game" 
+        sampleAppLink="https://github.com/solana-mobile/tutorial-apps/tree/main/FarmingIdleGame"
+        description="A fully on-chain idle game with a global leaderboard, upgrades, and burner wallet." 
+        imageUrl="sample_app_imgs/idle_farming_game.jpg" 
+        tags={[
+                "Expo", 
+                "Zustand", 
+                "Expo Router", 
+                "Anchor", 
             ]}
     />
     <SampleAppCard 
