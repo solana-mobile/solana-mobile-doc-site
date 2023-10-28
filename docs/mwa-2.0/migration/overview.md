@@ -12,11 +12,11 @@ TODO: summary of spec changes
 
 #### Android Kotlin SDK
 
-If you are consuming our Android Koltin SDK for dApp endpoints, `clientlib-ktx`, follow the migration guide [here]().
+If you are consuming our Android Koltin SDK for dApp endpoints, `clientlib-ktx`, follow the migration guide [here](dapps/clientlib).
 
 #### Android Java SDK
 
-If you are consuming our Android Java SDK for dApp endpoints, `clientlib`, follow the migration guide [here]().
+If you are consuming our Android Java SDK for dApp endpoints, `clientlib`, follow the migration guide [here](dapps/clientlib-ktx).
 
 #### React Native SDK
 
@@ -26,7 +26,7 @@ TODO
 
 #### Android Java SDK
 
-If you are consuming our Android Java SDK for wallet endpoints, `walletlib`, follow the migration guide [here]().
+If you are consuming our Android Java SDK for wallet endpoints, `walletlib`, follow the migration guide [here](wallets/walletlib).
 
 ## Migrating A Custom Implelemtation of the Mobile Wallet Adapter 1.0 Protocol
 
