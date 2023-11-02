@@ -6,7 +6,7 @@ To update to clientlib 2.0, simply add the latest dependency in your gradle file
 
 ```
 dependencies {
-    implementation 'com.solanamobile:mobile-wallet-adapter-clientlib-ktx:2.0.0-alpha5'
+    implementation 'com.solanamobile:mobile-wallet-adapter-clientlib:2.0.0-alpha5'
 }
 ```
 
