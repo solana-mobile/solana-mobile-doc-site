@@ -18,10 +18,6 @@ If you are consuming our Android Koltin SDK for dApp endpoints, `clientlib-ktx`,
 
 If you are consuming our Android Java SDK for dApp endpoints, `clientlib`, follow the migration guide [here](dapps/clientlib-ktx).
 
-#### React Native SDK
-
-TODO
-
 ### Wallet Developers
 
 #### Android Java SDK
