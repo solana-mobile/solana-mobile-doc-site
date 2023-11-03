@@ -114,7 +114,12 @@ const sidebars = {
       type: 'ref',
       id: 'unreal/unreal_sdk',
       label: 'Unreal Engine',
-    },   
+    },
+    {
+      type: 'doc',
+      id: 'solana-kmp/solana-kmp',
+      label: 'SolanaKMP',
+    },
     
      /* Resources Section */
     {
