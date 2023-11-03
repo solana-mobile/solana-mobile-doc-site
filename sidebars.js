@@ -116,7 +116,7 @@ const sidebars = {
       label: 'Unreal Engine',
     },
     {
-      type: 'ref',
+      type: 'doc',
       id: 'solana-kmp/solana-kmp',
       label: 'SolanaKMP',
     },
