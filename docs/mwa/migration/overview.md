@@ -4,8 +4,6 @@
 
 The mobile wallet adapter protocol sepcification has been updated to support new features and capabilities and refine the protocol based on feedback from dApps and wallets using the protocol. This new specification aims to be backwards compatible with [Mobile Wallet Adapter 1.0](https://solana-mobile.github.io/mobile-wallet-adapter/spec/spec1.0.html), with a few caveats.  
 
-TODO: summary of spec changes
-
 ## Migrating from 1.x.x SDKs
 
 ### Dapp Developers
@@ -23,7 +21,3 @@ If you are consuming our Android Java SDK for dApp endpoints, `clientlib`, follo
 #### Android Java SDK
 
 If you are consuming our Android Java SDK for wallet endpoints, `walletlib`, follow the migration guide [here](wallets/walletlib).
-
-## Migrating A Custom Implelemtation of the Mobile Wallet Adapter 1.0 Protocol
-
-TODO: protocol migration guide
