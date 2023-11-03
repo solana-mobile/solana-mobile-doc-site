@@ -50,6 +50,10 @@ If interested, you can deep dive into the protocol [specification](https://solan
 
 If you're developing a MWA-compatible wallet app, see the [`walletlib`](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/android/walletlib) Android Library that implements the wallet side of the MWA protocol. Most of the resources on this website are geared towards dApp developers, rather than Wallet developers, so if you have more questions, get in touch with the team directly for support on [Discord](https://discord.com/invite/solanamobile).
 
+### Migrating to MWA 2.0
+
+Check out the [2.0 migration guide](../mwa/migration/overview.md) to migrate from 1.x vresion of Mobile Wallet Adapter to the latest version. 
+
 ## Seed Vault
 
 The [**Seed Vault**](https://github.com/solana-mobile/seed-vault-sdk) is a system service providing secure key custody to _Wallet apps_. By integrating with secure execution environments available on mobile devices (such as secure operating modes of the processor and/or secure auxiliary coprocessors), Seed Vault helps to keep your secrets safe, by moving them to the highest privileged environment available on the device. Your keys, seeds, and secrets never leave the secure execution environment, while UI components built into Android handle interaction with the user to provide a secure transaction signing experience to users.
