@@ -117,7 +117,7 @@ const sidebars = {
     },
     {
       type: 'ref',
-      id: 'solana-km-/solana-kmp',
+      id: 'solana-kmp/solana-kmp',
       label: 'SolanaKMP',
     },
     
