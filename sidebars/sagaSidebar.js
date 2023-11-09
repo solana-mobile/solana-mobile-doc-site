@@ -20,7 +20,12 @@ module.exports = {
                     id: 'saga/release-notes/mr1',
                     label: 'MR1'
                 },
-            ]  
+                {
+                    type: 'doc',
+                    id: 'saga/release-notes/mr2',
+                    label: 'MR2'
+                },
+            ]
         },
     ]
   };
