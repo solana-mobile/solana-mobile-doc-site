@@ -15,21 +15,27 @@ hide_table_of_contents: false
 
 This article aims to address questions around the state of **wallet signing** and **key custody** on iOS.
 
-That is -- **How can iOS mobile dApps enable native transaction signing?**
-
 We commonly see the same questions and ideas being raised across different social medias and platforms, so one goal of this article is to share all the insights from the Solana Mobile team's research into different iOS solutions.
 
-## Mobile Wallet Adapter
+## Current State
 
-First, we need to understand why the current implementation of MWA (Mobile Wallet Adapter) is incompatible with iOS.
+First, we need to understand the current meta of custody and signing for dApps.
 
-In the MWA Android SDKs, _local web sockets_ are used to establish a persistent background connection between the dApp and the wallet app. This is an on-going two way channel that allows the dApp to seamlessly exchange messages with the wallet, asking for authorization, signing, etc.
+In the current meta, dApps begin with the assumption that the user's web3 assets and funds are stored within a separate wallet app, like the Phantom or Solflare mobile app. In this model, anytime the dApp needs a transaction signed, the dApp must communicate and request signing from the wallet app.
+
+On Android, this dApp-Wallet communication is solved with Mobile Wallet Adapter, but it does not work the same way on iOS.
+
+### Mobile Wallet Adapter
+
+Let's understand why the current implementation of MWA (Mobile Wallet Adapter) is **incompatible with iOS**.
+
+In the MWA Android SDKs, _local web sockets_ are used to establish a persistent background connection between the dApp and the wallet app. This is an on-going, encrypted, two way channel that allows the dApp to seamlessly exchange messages with the wallet, asking for authorization, signing, etc.
 
 On iOS, this type of persistent communication is not possible because of the strict limitations around iOS app background execution. In short, the operating system will terminate the connection between the dApp and wallet during the MWA protocol.
 
 ## Issues with Deep Linking
 
-One potential solution that has been brought up is wallet communication through the use of _deep links_ (called [_Universal Links_](https://developer.apple.com/documentation/xcode/allowing-apps-and-websites-to-link-to-your-content?language=objc) on iOS, but we'll refer to them as deep links throughout this document).
+Instead of MWA, one potential solution that has been suggested is wallet communication through the use of _deep links_ (called [_Universal Links_](https://developer.apple.com/documentation/xcode/allowing-apps-and-websites-to-link-to-your-content?language=objc) on iOS, but we'll refer to them as deep links throughout this article).
 
 While deep links may appear like a viable solution, they fundamentally cannot provide the same functionality as an MWA persistent connection while also delivering a good user experience.
 
