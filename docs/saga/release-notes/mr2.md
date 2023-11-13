@@ -24,8 +24,8 @@ These files are for use only on your personal Saga device and may not be disasse
 
 Downloading of the system image and use of the device software is subject to Solana Mobile's [Terms of Service](https://solanamobile.com/tos). By continuing, you agree to Solana Mobile's [Terms of Service](https://solanamobile.com/tos) and [Privacy Policy](https://solanamobile.com/privacy-policy). Your downloading of the system image and use of the device software may also be subject to certain third-party terms of service, which can be found in Settings > About phone > Legal information, or as otherwise provided.
 
-[MR2 (TKQ1.221220.499)](https://saga-images.s3.amazonaws.com/ingot-13_user_fastboot_files_TKQ1.221220.499-signed_RBP_0x2.zip)
-_(SHA-256 checksum: `11d26cbe576d0059c8e0542d2ebdce1d8baf354b952c4b3b5743403f0bf9a09e`)_
+[MR2 (TKQ1.221220.499)](https://saga-images.s3.amazonaws.com/saga_global_fastboot_TKQ1.221220.499.zip)
+_(SHA-256 checksum: `8b71bbfbd562fb4a42977f3871d23bcfbc70d8b0c6ee3fbc1d77fe9fb2312c05`)_
 [Kernel sources](https://github.com/osomprivacy)
 
 **NOTE: These images are not compatible with Saga dev kits (a.k.a. DVT-1). Flashing this image to a Saga dev kit will result in a non-functional and non-recoverable device.**
