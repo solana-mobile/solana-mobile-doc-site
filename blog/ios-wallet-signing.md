@@ -15,29 +15,23 @@ hide_table_of_contents: false
 
 This article aims to address questions around the state of **wallet signing** and **key custody** on iOS.
 
+That is -- How can iOS mobile dApps enable native transaction signing?
+
 We commonly see the same questions and ideas being raised across different social medias and platforms, so one goal of this article is to share all the insights from the Solana Mobile team's research into different iOS solutions.
 
-## Current State
+## Mobile Wallet Adapter
 
-First, we need to understand the current meta of custody and signing for dApps.
+First, we need to understand why the current implementation of MWA (Mobile Wallet Adapter) is incompatible with iOS.
 
-In the current meta, dApps begin with the assumption that the user's web3 assets and funds are stored within a separate wallet app, like the Phantom or Solflare mobile app. In this model, anytime the dApp needs a transaction signed, the dApp must communicate and request signing from the wallet app.
-
-On Android, this dApp-Wallet communication is solved with Mobile Wallet Adapter, but it does not work the same way on iOS.
-
-### Mobile Wallet Adapter
-
-Let's understand why the current implementation of MWA (Mobile Wallet Adapter) is **incompatible with iOS**.
-
-In the MWA Android SDKs, _local web sockets_ are used to establish a persistent background connection between the dApp and the wallet app. This is an on-going, encrypted, two way channel that allows the dApp to seamlessly exchange messages with the wallet, asking for authorization, signing, etc.
+In the MWA Android SDKs, _local web sockets_ are used to establish a persistent background connection between the dApp and the wallet app. This is an on-going two way channel that allows the dApp to seamlessly exchange messages with the wallet, asking for authorization, signing, etc.
 
 On iOS, this type of persistent communication is not possible because of the strict limitations around iOS app background execution. In short, the operating system will terminate the connection between the dApp and wallet during the MWA protocol.
 
 ## Issues with Deep Linking
 
-Instead of MWA, one potential solution that has been suggested is wallet communication through the use of _deep links_ (called [_Universal Links_](https://developer.apple.com/documentation/xcode/allowing-apps-and-websites-to-link-to-your-content?language=objc) on iOS, but we'll refer to them as deep links throughout this article).
+One potential solution that has been brought up is wallet communication through the use of _deep links_ (technically called [_Universal Links_](https://developer.apple.com/documentation/xcode/allowing-apps-and-websites-to-link-to-your-content?language=objc) on iOS, but we'll refer to them as deep links throughout this document).
 
-While deep links may appear like a viable solution, they fundamentally cannot provide the same functionality as an MWA persistent connection while also delivering a good user experience.
+While deep links may sound like a viable solution, they fundamentally cannot provide the same functionality as an MWA persistent connection while also delivering a good user experience.
 
 These are the issues with deep linking as a replacement for MWA on iOS:
 
@@ -45,7 +39,7 @@ These are the issues with deep linking as a replacement for MWA on iOS:
 
 A typical MWA session requires multiple back and forth message exchanges between a wallet and dApp. This is problematic with deep links because each message triggers a full app switch, which leads to excessive app switches within a full session.
 
-To illustrate this let's look at signing flows, with a hypothetical idealized deep link implementation. In reality, a deep link request/response API would be more convoluted than a simple `deepLinkWalletToX` method, discussed later.
+To illustrate this let's look at signing flows, with a hypothetical idealized deep link implementation (In reality, a deep link request/response API would be more convoluted than a simple `deepLinkWalletToX` method, discussed later).
 
 ```ts
 /** Signing a single transaction */
@@ -59,9 +53,7 @@ if (walletAddress) {
 }
 ```
 
-For a simple signing case, the number of context switches is acceptable.
-
-But with every additional request, we have to do an additional context switch. This quickly can become jarring for users as the # of requests increases
+With every additional request, we have to do an additional context switch. This quickly can become jarring for users as the # of requests increases
 
 ```tsx
 /** Signing two separate transactions */
@@ -128,7 +120,7 @@ This is bad UX that can be unexpected, confusing, and frustrating behavior for t
 
 ##### Master Wallet List Solution?
 
-A potential solution for the wallet selection issue is for each wallet to designate their own custom deep link scheme to handle MWA requests on iOS (ie: `wallet-name://mwa/...`). Then the dApp would then fetch some _master list_ of all wallet links, check if they're available on the user's device, then show a UI that allows users to choose the wallet (essentially creating a _Chooser dialog_ UI for your dApp).
+A potential solution is for each wallet to designate their own custom deep link scheme to handle MWA requests on iOS (ie: `wallet-name://mwa/...`). Then the dApp would then fetch some _master list_ of all wallet links, check if they're available on the user's device, then show a UI that allows users to choose the wallet (essentially creating a _Chooser dialog_ UI for your dApp).
 
 The master list should have 3 qualities:
 
@@ -142,13 +134,11 @@ The master wallet list solution introduces 2 UX issues:
 
 **Cluttered Chooser UI**
 
-Within this hypothetical Chooser UI, users would have to search through the entire master list of wallets to find their desired wallet. There isn't a way a dApp can narrow down the options to only installed wallets, while maintaining requirement 3. (\*\*See _footnote_ 1, on why we can't narrow the wallet options).
-
-This is a bad user experience that can be observed in the Ethereum ecosystem's usage of WalletConnect, that presents a excessive master list of wallets during the selection step.
+Within this hypothetical Chooser UI, users would have to search through the entire master list of wallets to find their desired wallet. There isn't a way a dApp can narrow down the options to only installed wallets, while maintaining requirement 3. (\*\*See footnote 1, on why we can't narrow the selection). This is a bad user experience and this issue can be seen in the Ethereum ecosystem with the prevalent usage of WalletConnect.
 
 **Manual Maintenance Burden**
 
-There is a manual maintenance burden in keeping this master list of wallets up to date. Manually maintained lists of wallets is a pattern the Solana ecosystem is moving away from, exemplified by the deprecation of Wallet Adapter in favor of the generalized Wallet Standard on the web.
+There is a manual maintenance burden in keeping this master list of wallets up to date. In general, manually maintained lists of wallets is a pattern the Solana ecosystem is moving away from, exemplified by the deprecation of Wallet Adapter in favor of the generalized Wallet Standard on the web.
 
 ### 3. Hacky response handling
 
@@ -178,7 +168,7 @@ func application(_ app: UIApplication, open url: URL, options:
 		// Then parse the "response" from the url query params.
 		let connectData = parseConnectResponse(url)
 
-		// How do you "send" this data back to the component/screen/UI you
+		// How do you send this data back to the component/screen/UI you
 		// initially sent the request from?
     }
 
@@ -199,7 +189,7 @@ func application(_ app: UIApplication, open url: URL, options:
 		// Then parse the "response" from the url query params.
 		let connectData = parseConnectResponse(url)
 
-		// Somehow publish this response data back to the callee
+		// Post this response data back to the callee
 		NotificationCenter.default.post(name: .didReceiveConnectResponse,
 			bject: nil, userInfo: ["connectData": connectData])
     }
@@ -210,41 +200,74 @@ func application(_ app: UIApplication, open url: URL, options:
 
 Using deep links as a communication protocol between two apps is **fundamentally going against what they were designed for**. Although possible, it leads to precarious implementations and can even expose a risk during the Apple app review process. Apple cares about user experience and may be inclined to reject apps that heavily rely on this improper usage of deep links.
 
-## Potential iOS Solutions
+## Solutions
 
-If deep links are not the solution for iOS wallet signing, then what is?
+There is still a way forward to enable iOS transaction signing and custody while also delivering a good user experience.
 
-### iOS Safari Web Extension
+As discussed above, iOS presents challenges in enabling inter-app communication. This is problematic for the _traditional model_ of key custody, where a wallet app stores the key pair. In the past year, we have seen dApps are exploring different models of key custody for product spaces where the traditional model have too much friction.
 
-Through the use of a Solana wallet with a [_Safari Web Extension_](https://github.com/solana-mobile/SolanaSafariWalletExtension), iOS users can request wallet signing in the _iOS Safari browser_. Although it does not solve the full problem of transaction signing for a native app, it at least provides a smooth signing UX on the mobile browser.
+##### Traditional Key Custody Model
 
-The user can receive signing from their installed native iOS wallet all within the Safari browser. An example of this is [Glow iOS wallet](https://glow.app/). The Glow app is a native iOS wallet that also provides a Safari Web Extension for wallet signing while browsing Safari.
+- Keypair is stored in the wallet app
+- dApp needs to request approval for each action
+- Born out of DeFi and NFT related use cases
+
+##### Alternative Key Custody Model
+
+- Keypair can be stored per app
+- No inter-app communication required
+- Enables newer use cases like Gaming
+
+For these alternative key custody solutions, there is a viable solution forward for iOS dApps. Let's approach the solutions from two perspectives: dApp developers and wallet apps.
+
+### Solutions for dApp developers
+
+#### Wallet-as-a-service
+
+A growing solution for native iOS apps is to use a _wallet-as-a-service_ provider.
+
+In general, these services enable dApps to have a "per-app" wallet for each user, rather than relying on a user having a self-custody wallet app. The provider is involved managing/storing the keypair with their own implementation (ie: MPC-TSS, MPC-SSS).
+
+The relevant advantages of this solution:
+
+1. Users can onboard quicker, reducing the additional step of installing another app.
+2. Uses patterns like Social and Email login that are familiar to Web2 users.
+3. No inter-app communication required, so this model works on iOS.
+
+There are many different provider services and each offer varying levels of security, decentralization, and UX. A dApp developer should research and evaluate the trade-offs of this solution and make the correct decision for their product space.
+
+Further discussion about the technical implementation of wallet-as-a-service providers are out of scope for this blog post, but [this article from Particle Network](https://blog.particle.network/embedded-web3-wallets-how-to-choose-a-wallet-service) gives an in-depth comparison of the different providers, implementations, and tradeoffs.
+
+#### Passkeys
+
+Passkeys are an emerging solution for key custody across mobile and desktop devices. In short, passkeys use public key cryptography to securely store secrets for apps and websites. Passkeys are a generalized solution to store secrets like account passwords, but can be used for web3 purposes (ie: storing keypairs).
+
+The advantages of passkeys:
+
+1. Users do not need to remember a _password_ to access their secrets. Instead they use biometrics like FaceID or fingerprint scanning to unlock their secrets, which is arguably both more convenient and secure for users.
+2. Phishing resistant. Passkeys are intrinsically linked with the app or website they were created for, so people can never be tricked into using their passkey to sign in to a fraudulent app or website.
+
+For a more detailed understanding of how passkeys actually store and manage a secret on a device, read the official [Apple docs](https://support.apple.com/guide/iphone/use-passkeys-to-sign-in-to-apps-and-websites-iphf538ea8d0/ios) and [Android docs](https://developers.google.com/identity/passkeys).
+
+### Solutions for Wallet apps
+
+As discussed previously, iOS presents challenges in establishing the inter-app communication necessary for a wallet app. With Safari Web Extensions, however, a wallet app can provide a good UX for their iOS users browsing on _Mobile Web._
+
+#### iOS Safari Web Extension
+
+iOS users can request wallet signing in the iOS Safari browser through the use of a Solana wallet with a [_Safari Web Extension_](https://github.com/solana-mobile/SolanaSafariWalletExtension). The user can receive signing from their installed native iOS app all within the Safari browser. An example of this is [Glow iOS wallet](https://glow.app/). The Glow app is a native iOS wallet that also provides a Safari Web Extension for wallet signing while browsing Safari.
 
 From the dApp perspective, no additional work needs to be done to be compatible with a Safari Web Extension. They work similarly to the typical desktop Chrome extension wallet, so as long as your web dApp uses standard Solana wallet adapter libraries, it will automatically detect a Safari Web Extension wallet on iOS.
 
-Solana wallet teams need to adopt and integrate Safari Web Extensions into their wallets, and unlock iOS mobile browser signing for the whole ecosystem. To promote this, Solana Mobile has provided an open-source example of an iOS wallet app that implements a [Safari Web Extension](https://github.com/solana-mobile/SolanaSafariWalletExtension).
-
-### Wallet-as-a-service
-
-_Wallet-as-a-service_ is a custody solution where key storage and signing is managed through a 3rd party service.
-
-These services enable dApps to have a "per-app" wallet for each user, rather than relying on a user already having an installed self-custody wallet app (like Phantom, Glow, etc). This means, an iOS app can integrate one of these services and receive transaction signing, without the problem of dApp to wallet app communication.
-
-These managed wallet services offer a range of varying custody levels, depending on their implementation. Usually, they provide a form of "social login", where the user can login to the dApp with their email. Behind the scenes, the provider usually manages key custody through some MPC or custodial storage solution.
-
-Examples of this type of managed wallet service are [Web3Auth](https://web3auth.io/), [Magic](https://web3auth.io/), and [Metakeep](https://metakeep.xyz/#why-metakeep).
-
-### Passkeys
-
-Passkeys are an emerging solution for dApp key custody across mobile and desktop devices. In short, passkeys use public key cryptography to store secrets locally on a device within the secure element. On mobile devices, passkeys can be used by an app through system-level APIs. Passkeys are a generalized solution to store secrets, but can be used for web3 purposes (ie: storing keypairs).
-
-An advantage of using passkeys is that users do not need a _password_ to access their secrets. Instead they use biometrics like FaceID or fingerprint scanning to unlock their secrets, which is arguably more convenient and secure for users.
-
-This is a promising solution that balances the tradeoff of self-custody, convenience, and security.
+Solana wallet teams need to adopt and integrate Safari Web Extensions into their wallets, and unlock iOS mobile browser signing for the whole ecosystem. To promote this, Solana Mobile has provided an [open-source example](https://github.com/solana-mobile/SolanaSafariWalletExtension) of an iOS wallet app that implements a Safari Web Extension.
 
 ## Concluding thoughts
 
-Although, MWA in its current form does not work on iOS, there are a growing number of solutions in its place. As a dApp developer, you should research the different solutions for your use case, and think about this early in your design roadmap. Evaluate the different tradeoffs for each solution and, ultimately, focus on creating the best UX possible.
+Although, MWA in its current form does not work on iOS, there are a growing number of solutions in its place.
+
+As a dApp developer, research the different types of solutions presented and decide which creates the best UX for your product space. Perhaps, deeplinks are simple enough to work for your use-case.
+
+As a wallet developer, we urge you to implement a Safari Web Extension alongside your wallet app to unlock iOS signing on the mobile browser. As mentioned above, use the [open-source example wallet implementation](https://github.com/solana-mobile/SolanaSafariWalletExtension) as a reference and get in contact with the Solana Mobile team.
 
 ###### Footnotes
 
