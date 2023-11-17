@@ -7,7 +7,17 @@ authors:
     title: Developer Relations @ Solana Mobile
     url: https://twitter.com/MikeSulistio
     image_url: https://pbs.twimg.com/profile_images/1678828535514038272/6HR0mgOd_400x400.jpg
-tags: [mobile-wallet-adapter, iOS, MWA, custody, transaction, signing]
+tags:
+  [
+    mobile-wallet-adapter,
+    iOS,
+    MWA,
+    custody,
+    transaction,
+    signing,
+    Safari Web Extension,
+    passkeys,
+  ]
 hide_table_of_contents: false
 ---
 
@@ -216,7 +226,7 @@ As discussed above, iOS presents challenges in enabling inter-app communication.
 
 - Keypair can be stored per app
 - No inter-app communication required
-- Enables newer use cases like Gaming
+- Enables newer use cases that need less friction (e.g: gaming)
 
 For these alternative key custody solutions, there is a viable solution forward for iOS dApps. Let's approach the solutions from two perspectives: dApp developers and wallet apps.
 
@@ -240,14 +250,14 @@ Further discussion about the technical implementation of wallet-as-a-service pro
 
 #### Passkeys
 
-Passkeys are an emerging solution for key custody across mobile and desktop devices. In short, passkeys use public key cryptography to securely store secrets for apps and websites. Passkeys are a generalized solution to store secrets like account passwords, but can be used for web3 purposes (ie: storing keypairs).
+Passkeys are an emerging solution for key custody across mobile and desktop devices. In short, passkeys use public key cryptography to securely store secrets for apps and websites. They are a generalized solution to store secrets like account passwords, but can be used for web3 purposes (ie: storing keypairs). For iOS, Apple provides a system level API for developers to integrate passkeys into an app.
 
 The advantages of passkeys:
 
 1. Users do not need to remember a _password_ to access their secrets. Instead they use biometrics like FaceID or fingerprint scanning to unlock their secrets, which is arguably both more convenient and secure for users.
 2. Phishing resistant. Passkeys are intrinsically linked with the app or website they were created for, so people can never be tricked into using their passkey to sign in to a fraudulent app or website.
 
-For a more detailed understanding of how passkeys actually store and manage a secret on a device, read the official [Apple docs](https://support.apple.com/guide/iphone/use-passkeys-to-sign-in-to-apps-and-websites-iphf538ea8d0/ios) and [Android docs](https://developers.google.com/identity/passkeys).
+For a more detailed understanding of how passkeys actually store and manage a secret on a device, read the official [Apple docs](https://developer.apple.com/documentation/authenticationservices/public-private_key_authentication/supporting_passkeys/) and [Android docs](https://developers.google.com/identity/passkeys).
 
 ### Solutions for Wallet apps
 
@@ -255,17 +265,17 @@ As discussed previously, iOS presents challenges in establishing the inter-app c
 
 #### iOS Safari Web Extension
 
-iOS users can request wallet signing in the iOS Safari browser through the use of a Solana wallet with a [_Safari Web Extension_](https://github.com/solana-mobile/SolanaSafariWalletExtension). The user can receive signing from their installed native iOS app all within the Safari browser. An example of this is [Glow iOS wallet](https://glow.app/). The Glow app is a native iOS wallet that also provides a Safari Web Extension for wallet signing while browsing Safari.
+iOS users can request wallet signing in the iOS Safari browser through the use of a Solana wallet with a [_Safari Web Extension_](https://developer.apple.com/documentation/safariservices/safari_web_extensions). A Safari Web Extension allows a web page to communicate with an installed iOS wallet app and securely receive signing from that iOS wallet app. The wallet can present their own custom approval UI all within the Safari browser. An example of this is [Glow iOS wallet](https://glow.app/). The Glow app is a native iOS wallet that also provides a Safari Web Extension for wallet signing while browsing Safari.
 
-From the dApp perspective, no additional work needs to be done to be compatible with a Safari Web Extension. They work similarly to the typical desktop Chrome extension wallet, so as long as your web dApp uses standard Solana wallet adapter libraries, it will automatically detect a Safari Web Extension wallet on iOS.
+As a dApp, no additional implementation work needs to be done to be compatible with a Safari Web Extension. They work just like the typical desktop Chrome extension wallet and will be detected by the standard Solana wallet adapter libraries.
 
-Solana wallet teams need to adopt and integrate Safari Web Extensions into their wallets, and unlock iOS mobile browser signing for the whole ecosystem. To promote this, Solana Mobile has provided an [open-source example](https://github.com/solana-mobile/SolanaSafariWalletExtension) of an iOS wallet app that implements a Safari Web Extension.
+As a wallet, the implementation will be relatively light, if the wallet has an existing Chrome extension implementation. The wallet can make adjustments to convert their Chrome extension wallet into a Safari Web Extension.
 
-## Concluding thoughts
+To proliferate this UX in the ecosytem, Solana Mobile has provided an [open-source example](https://github.com/solana-mobile/SolanaSafariWalletExtension) of an iOS wallet app that implements a Safari Web Extension. The example includes a native iOS wallet app with basic keypair storage and a Javascript Safari Web Extension that implements a Solana Standard Wallet. Wallet teams can use this example as a reference on how to adapt their Chrome extension to a Safari Web Extension, and unlock iOS browser signing for their users.
 
-Although, MWA in its current form does not work on iOS, there are a growing number of solutions in its place.
+## Conclusion
 
-As a dApp developer, research the different types of solutions presented and decide which creates the best UX for your product space. Perhaps, deeplinks are simple enough to work for your use-case.
+As a dApp developer, research the different types of solutions presented and decide which creates the best UX for your product space. Evaluate each solution's tradeoff of convenience, trust, and security.
 
 As a wallet developer, we urge you to implement a Safari Web Extension alongside your wallet app to unlock iOS signing on the mobile browser. As mentioned above, use the [open-source example wallet implementation](https://github.com/solana-mobile/SolanaSafariWalletExtension) as a reference and get in contact with the Solana Mobile team.
 
