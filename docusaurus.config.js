@@ -42,7 +42,11 @@ const config = {
           routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
         },
-        blog: false,
+        blog: {
+          blogTitle: 'Solana Mobile Blog',
+          blogDescription: 'A curated feed of thought pieces, articles, and writings from Solana Mobile',
+          postsPerPage: 'ALL',
+        },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
@@ -117,8 +121,8 @@ const config = {
             position: 'left',
             label: 'Saga',
           },
+          {to: 'blog', label: 'Blog', position: 'right'},
           {
-            
             href: 'https://github.com/solana-mobile',
             label: 'GitHub',
             position: 'right',
@@ -163,7 +167,7 @@ const config = {
         copyright: `Copyright © ${new Date().getFullYear()} Solana Mobile, Inc.`,
       },
       prism: {
-        additionalLanguages: ['kotlin', 'json'],
+        additionalLanguages: ['kotlin', 'json', 'swift'],
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
       },
