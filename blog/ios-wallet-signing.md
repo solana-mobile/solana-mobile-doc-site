@@ -33,7 +33,7 @@ We commonly see the same questions and ideas being raised across different socia
 
 First, we need to understand why the current implementation of MWA (Mobile Wallet Adapter) is incompatible with iOS.
 
-In the MWA Android SDKs, web socket servers are used to establish a persistent background connection between the dApp and the wallet app. This is an on-going two way channel that allows the dApp to seamlessly exchange messages with the wallet, asking for authorization, signing, etc.
+In the MWA Android SDKs, web socket servers are used to establish a persistent background connection between the dApp and the wallet app. This is an ongoing two-way channel that allows the dApp to seamlessly exchange messages with the wallet, asking for authorization, signing, etc.
 
 On iOS, this type of persistent communication is not possible because of the strict limitations around iOS app background execution. When an iOS app is backgrounded, the operating system will suspend the app, thus disabling any on-going network communication from the app. This means the MWA implementation using local (or even remote) web sockets is not possible on iOS.
 
@@ -41,7 +41,7 @@ On iOS, this type of persistent communication is not possible because of the str
 
 One potential solution that has been brought up is wallet communication through the use of _deep links_ (technically called [_Universal Links_](https://developer.apple.com/documentation/xcode/allowing-apps-and-websites-to-link-to-your-content?language=objc) on iOS, but we'll refer to them as deep links throughout this document).
 
-While deep links may sound like a viable solution, they fundamentally cannot provide the same functionality as an MWA persistent connection while also delivering a good user experience.
+While deep links may sound like a viable solution, they fundamentally cannot provide the same functionality as an MWA persistent connection, nor can they deliver a good user experience.
 
 These are the issues with deep linking as a replacement for MWA on iOS:
 
@@ -276,7 +276,7 @@ As discussed previously, iOS presents challenges in establishing the inter-app c
 
 #### iOS Safari Web Extension
 
-iOS users can request wallet signing in the iOS Safari browser through the use of a Solana wallet with a [_Safari Web Extension_](https://developer.apple.com/documentation/safariservices/safari_web_extensions). A Safari Web Extension allows a web page to communicate with an installed iOS wallet app and securely receive signing from that iOS wallet app. The wallet can present their own custom approval UI all within the Safari browser. An example of this is [Glow iOS wallet](https://glow.app/). The Glow app is a native iOS wallet that also provides a Safari Web Extension for wallet signing while browsing Safari.
+iOS users can request wallet signing in the iOS Safari browser through the use of a Solana wallet with a [_Safari Web Extension_](https://developer.apple.com/documentation/safariservices/safari_web_extensions). A Safari Web Extension allows a web page to communicate with an installed iOS wallet app and securely receive signing from that iOS wallet app. The wallet can present their own custom approval UI all within the Safari browser. An example of this is the [Glow iOS wallet](https://glow.app/). The Glow app is a native iOS wallet that also provides a Safari Web Extension for wallet signing while browsing Safari.
 
 As a dApp, no additional implementation work needs to be done to be compatible with a Safari Web Extension. They work just like the typical desktop Chrome extension wallet and will be detected by the standard Solana wallet adapter libraries.
 
