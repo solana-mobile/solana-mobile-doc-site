@@ -33,9 +33,9 @@ We commonly see the same questions and ideas being raised across different socia
 
 First, we need to understand why the current implementation of MWA (Mobile Wallet Adapter) is incompatible with iOS.
 
-In the MWA Android SDKs, _local web sockets_ are used to establish a persistent background connection between the dApp and the wallet app. This is an on-going two way channel that allows the dApp to seamlessly exchange messages with the wallet, asking for authorization, signing, etc.
+In the MWA Android SDKs, web socket servers are used to establish a persistent background connection between the dApp and the wallet app. This is an on-going two way channel that allows the dApp to seamlessly exchange messages with the wallet, asking for authorization, signing, etc.
 
-On iOS, this type of persistent communication is not possible because of the strict limitations around iOS app background execution. In short, the operating system will terminate the connection between the dApp and wallet during the MWA protocol.
+On iOS, this type of persistent communication is not possible because of the strict limitations around iOS app background execution. When an iOS app is backgrounded, the operating system will suspend the app, thus disabling any on-going network communication from the app. This means the MWA implementation using local (or even remote) web sockets is not possible on iOS.
 
 ## Issues with Deep Linking
 
@@ -140,11 +140,15 @@ The master list should have 3 qualities:
 
 **This solution seems promising at first, but runs into major pitfalls**.
 
-The master wallet list solution introduces 2 UX issues:
+The master wallet list solution introduces several issues:
 
-**Cluttered Chooser UI**
+**Inconsistent Selection UX**
 
-Within this hypothetical Chooser UI, users would have to search through the entire master list of wallets to find their desired wallet. There isn't a way a dApp can narrow down the options to only installed wallets, while maintaining requirement 3. (\*\*See footnote 1, on why we can't narrow the selection). This is a bad user experience and this issue can be seen in the Ethereum ecosystem with the prevalent usage of WalletConnect.
+If every app implements their own selection UI, then wallet selection UX will be inconsistent across the entire Solana mobile dApp ecosystem. Inconsistent UX will be confusing and frustrating to users, especially those unfamiliar and new to web3 patterns.
+
+**Cluttered Selection UI**
+
+Within this hypothetical selection UI, users would have to search through the entire master list of wallets to find their desired wallet. There isn't a way a dApp can narrow down the options to only installed wallets, while maintaining requirement 3. (\*\*See footnote 1, on why we can't narrow the selection). This is a bad user experience and this issue can be seen in the Ethereum ecosystem with the prevalent usage of WalletConnect.
 
 **Manual Maintenance Burden**
 
@@ -250,12 +254,19 @@ Further discussion about the technical implementation of wallet-as-a-service pro
 
 #### Passkeys
 
-Passkeys are an emerging solution for key custody across mobile and desktop devices. In short, passkeys use public key cryptography to securely store secrets for apps and websites. They are a generalized solution to store secrets like account passwords, but can be used for web3 purposes (ie: storing keypairs). For iOS, Apple provides a system level API for developers to integrate passkeys into an app.
+Passkeys are an emerging solution for key custody across mobile and desktop devices. Passkeys use public key cryptography to securely store secrets for apps and websites. A public key is stored on the server, while the private key is securely stored on the device. They are a generalized solution to store secrets like account passwords, but can be used in a roundabout manner for web3 purposes (ie: storing keypairs). For iOS, Apple provides a system level API for developers to integrate passkeys into an app.
 
 The advantages of passkeys:
 
 1. Users do not need to remember a _password_ to access their secrets. Instead they use biometrics like FaceID or fingerprint scanning to unlock their secrets, which is arguably both more convenient and secure for users.
 2. Phishing resistant. Passkeys are intrinsically linked with the app or website they were created for, so people can never be tricked into using their passkey to sign in to a fraudulent app or website.
+
+Passkeys are a relatively new and developing technology, so there are some challenges that affect usage on each platform:
+
+1. Currently, passkey support is not consistent across platforms. In general, the web, specifically Safari, has the best passkey support. Android has a more limited API, and not all
+   browsers support the same features/API. Although, it's reasonable to expect that passkey API and support grow more standardized, aligned, and stable.
+
+2. Passkeys do not support ed25519 signing/key storage directly. Instead, the ed25519 keypair itself is encrypted with another scheme, then placed into the passkey. This means when the passkey is retrieved for signing, the ed25519 keypair is exposed to the dApp.
 
 For a more detailed understanding of how passkeys actually store and manage a secret on a device, read the official [Apple docs](https://developer.apple.com/documentation/authenticationservices/public-private_key_authentication/supporting_passkeys/) and [Android docs](https://developers.google.com/identity/passkeys).
 
