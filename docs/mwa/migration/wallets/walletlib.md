@@ -29,7 +29,7 @@ To update to `walletlib` 2.0, simply add the latest dependency in your gradle fi
 
 ```groovy
 dependencies {
-    implementation 'com.solanamobile:mobile-wallet-adapter-walletlib:2.0.0-alpha5'
+    implementation 'com.solanamobile:mobile-wallet-adapter-walletlib:2.0.0-beta1'
 }
 ```
 
@@ -112,7 +112,7 @@ Constructor for `AuthorizationResult`:
 
 ```kotlin
 public AuthorizationResult(@NonNull String authToken,
-                            @NonNull @Size(min = 1) AuthorizedAccount account,
+                            @NonNull AuthorizedAccount account,
                             @Nullable Uri walletUriBase,
                             @Nullable SignInResult signInResult);
 ```
