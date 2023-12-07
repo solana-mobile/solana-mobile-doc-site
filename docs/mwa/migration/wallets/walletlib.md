@@ -9,7 +9,10 @@ Wallets can update their application following this migration guide.
 
 - Introduction of [feature identifiers](https://solana-mobile.github.io/mobile-wallet-adapter/spec/spec.html#feature-identifiers).
 - Introduction of [chain identifiers](https://solana-mobile.github.io/mobile-wallet-adapter/spec/spec.html#chain-identifiers).
-- API changes to the `authorize` RPC request specfication to support new identifiers and an `authToken` parameter.
+- API changes to the `authorize` RPC request specfication adding new parameters:
+  - Sign In With Solana payload
+  - Chain and feature identifiers
+  - An `authToken` parameter.
 - API changes to the `MobileWalletAdapterConfig` object returned by `getCapabilities` RPC request.
 - Mandatory support of the `signAndSendTransactions` RPC request.
   - Additional optional parameters added to `signAndSendTransactions`.
@@ -29,7 +32,7 @@ dependencies {
 
 There will be no breaking changes and the 2.0 implementation will be immediately backwards compatible with legacy clients.
 
-### Authorize ([spec](https://solana-mobile.github.io/mobile-wallet-adapter/spec/spec.html#authorize))
+### Authorize ([2.0 spec](https://solana-mobile.github.io/mobile-wallet-adapter/spec/spec.html#authorize))
 
 #### AuthorizeRequest
 
@@ -40,22 +43,47 @@ AuthorizeRequest {
     @Nullable Uri identityUri;
     @Nullable Uri iconUri;
     @Nullable String identityName;
-    @Nullable String authToken;     // New
-    @Nullable String chain;         // New
-    @Nullable String[] features;    // New
+    @Nullable String authToken;                      // New
+    @Nullable String chain;                          // New
+    @Nullable String[] features;                     // New
     @Nullable String[] addresses;
+    @Nullable SignInWithSolana.Payload signInPayload // New
 }
 ```
 
 New parameters:
 
-- `authToken`: The client can now include an optional `authToken` in `authorize`. If provided, the wallet should attempt to reauthorize the session with it.
-- `chain`: A identifier used to distinguish the requested blockchain network (e.g `solana:mainnet`). Replaces the deprecated `cluster` parameter.
-- `features`: An array of feature identifiers, representing features requested by the client.
+- `authToken`: An optional `authToken` where if provided, the wallet should attempt to reauthorize the session with it.
+- `signInPayload`: An object containing the payload portion of a [Sign In With Solana message](https://siws.web3auth.io/spec).
+- `chain`: A [chain identifier](https://solana-mobile.github.io/mobile-wallet-adapter/spec/spec.html#chain-identifiers) to distinguish the requested blockchain network. Replaces the deprecated `cluster` parameter.
+  - Supported Solana network chains: `solana:mainnet`, `solana:testnet`, and `solana:devnet`.
+- `features`: An array of [feature identifiers](https://solana-mobile.github.io/mobile-wallet-adapter/spec/spec.html#feature-identifiers), representing features requested by the client.
+
+#### Parameter: `authToken`
+
+An optional `authToken` where if present, the wallet should attempt to reauthorize the session using it. The wallet implementation will likely be able to re-use their `reauthorize` logic
+to handle this case. This aims to replace the `reauthorize` RPC request and reduce the confusion between `authorize`/`reauthorize` for dApps developers.
+
+#### Parameter: Sign In With Solana
+
+An optional object containing the payload portion of a [Sign In With Solana message](https://siws.web3auth.io/spec).
+
+If present, the wallet should present the SIWS message to the user and, if approved, include a `SignInResult` object in the response to the dapp endpoint.
+
+```kotlin
+public class SignInResult {
+    @NonNull public final byte[] publicKey;
+    @NonNull public final byte[] signedMessage;
+    @NonNull public final byte[] signature;
+    @Nullable public final String signatureType;
+}
+```
 
 #### AuthorizationResult
 
-Similarly, the `AuthorizationResult` object that is returned to the dapp endpoint now supports multiple accounts. Rather than returning the public key and label for a single account, the `AuthorizationResult` now returns a list of `AuthorizedAccount` objects with the following structure:
+The `AuthorizationResult` object that is returned to the dapp endpoint is now constructed by passing in an `AuthorizedAccount`, rather than a public key and label.
+
+In the near future, `AuthorizationResult` will be updated again to support multiple accounts and store be a list of `AuthorizedAccount` objects.
 
 ```kotlin
 AuthorizedAccount {
@@ -66,7 +94,7 @@ AuthorizedAccount {
 }
 ```
 
-### Sign And Send Transactions
+### Sign And Send Transactions ([2.0 spec](https://solana-mobile.github.io/mobile-wallet-adapter/spec/spec.html#sign_and_send_transactions))
 
 Suport for the `sign_and_send_transactions` request has been made mandatory in the Mobile Wallet Adapter 2.0 specification. Wallets must now implement this method according to [the spec](https://solana-mobile.github.io/mobile-wallet-adapter/spec/spec.html#sign_and_send_transactions). The optional transaction parameters have also been expanded to allows dapps to further specify how transactions should be sent to the RPC by the wallet endpoint.
 
