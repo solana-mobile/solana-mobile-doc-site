@@ -96,13 +96,41 @@ AuthorizedAccount {
 
 ### Sign And Send Transactions ([2.0 spec](https://solana-mobile.github.io/mobile-wallet-adapter/spec/spec.html#sign_and_send_transactions))
 
-Suport for the `sign_and_send_transactions` request has been made mandatory in the Mobile Wallet Adapter 2.0 specification. Wallets must now implement this method according to [the spec](https://solana-mobile.github.io/mobile-wallet-adapter/spec/spec.html#sign_and_send_transactions). The optional transaction parameters have also been expanded to allows dapps to further specify how transactions should be sent to the RPC by the wallet endpoint.
+Suport for the `sign_and_send_transactions` request has been made mandatory in the Mobile Wallet Adapter 2.0 specification. Wallets must now implement this method according to [the spec](https://solana-mobile.github.io/mobile-wallet-adapter/spec/spec.html#sign_and_send_transactions).
+
+The optional transaction parameters have also been expanded to allows dapps to further specify how transactions should be sent to the RPC by the wallet endpoint.
+
+Additional optional parameters in `SignAndSendTransactionRequest`:
+
+```java
+public class SignAndSendTransactionRequest
+    extends BaseVerifiableIdentityRequest<MobileWalletAdapterServer.SignAndSendTransactionsRequest> {
+
+    /* ... */
+
+    @Nullable
+    public Integer getMinContextSlot();
+    @Nullable
+    public String getCommitment();      // New
+    @Nullable
+    public Boolean getSkipPreflight();  // New
+    @Nullable
+    public Integer getMaxRetries();     // New
+    @Nullable
+    public Boolean getWaitForCommitmentToSendNextTransaction(); // New
+
+    /* ... */
+
+}
+```
+
+For an explanation on each parameter, see the [spec](https://solana-mobile.github.io/mobile-wallet-adapter/spec/spec.html#method-3).
 
 ## `MobileWalletAdapterConfig`
 
 The configuration object that is used when setting up an MWA session has been updated. The boolean feature flags `supportsSignAndSendTransactions` and `supportsCloneAuthorization` have been replaced with the cooresponding feature IDs `solana:signAndSendTransaction` and `solana:cloneAuthorization` and exosed through the new feature extension API.
 
-```kotlin
+```java
 MobileWalletAdapterConfig(
     boolean supportsSignAndSendTransactions,
     boolean supportsCloneAuthorization,

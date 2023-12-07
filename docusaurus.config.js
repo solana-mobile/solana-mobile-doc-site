@@ -167,7 +167,7 @@ const config = {
         copyright: `Copyright © ${new Date().getFullYear()} Solana Mobile, Inc.`,
       },
       prism: {
-        additionalLanguages: ['kotlin', 'json', 'swift'],
+        additionalLanguages: ['kotlin', 'json', 'swift', 'java'],
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
       },
