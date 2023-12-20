@@ -1,9 +1,12 @@
 # Saga Genesis Token
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 ## Introduction
 
 The Saga Genesis Token is a unique, non-transferable NFT that aims to represent a verified owner of a Saga device.
-It is minted only once per device through the Saga dApp Store after initial device setup.
+It is minted only once per device through the dApp Store after initial device setup.
 
 The Genesis Token is a Soulbound NFT, meaning that it cannot be transfered out of the wallet that it was initially minted to.
 
@@ -20,23 +23,109 @@ Although likely, this does not mean that every Genesis Token user is interacting
 ### Collection NFT address
 
 The Saga Genesis Token Collection NFT address is `46pcSL5gmjBrPqGKFaLbbCmR6iVuLJbnQy13hAe7s6CC`. Each Saga Genesis Token NFT metadata will
-have a `collection` field with this address.
+have a `collection` field with this address, along with the `verified` flag set to `true`.
 
-To learn more about Collection NFTs read the official Metaplex [documentation](https://docs.metaplex.com/programs/token-metadata/certified-collections#collection-nfts).
+To better understand how Collection NFTs verify a normal NFT, read the official Metaplex [documentation](https://docs.metaplex.com/programs/token-metadata/certified-collections#collection-nfts).
 
 ### View on an explorer
 
-You can view a real Saga Genesis Token on-chain [with an explorer](https://solscan.io/collection/4a2d96b22ab0c8f01cb5ce5bc960b627c2a8271529ae5132d5352b7c86b3b54d) by querying the collection NFT address.
+You can view a real Saga Genesis Token on-chain with an explorer by querying an [individual NFT mint address](https://solscan.io/token/DMcJLbYGT9UAiYXMoHMjsoLCW1MRJ12YDnU967pAvByg) or filtering by
+[collection NFT address](https://solscan.io/collection/4a2d96b22ab0c8f01cb5ce5bc960b627c2a8271529ae5132d5352b7c86b3b54d).
 
 ## Verify a Saga Genesis Token holder
 
-For certain use cases, like airdrops or token gated content for Saga users, you will want to verify the Saga Genesis Token NFT.
+For certain use cases, like airdrop rewards or token gated content for Saga users, you will need to verify ownership of the Saga Genesis Token NFT.
+
+:::tip
+Follow the [Rewarding Saga Users guide](google.com) to learn the best practices for distributing rewards to Saga users confidently and securely.
+:::
 
 ### Verifying individual ownership
 
-To verify a user (or public key address) owns a Genesis Token NFT, there are two parts:
+To verify that a specific user owns a Saga Genesis Token, you can query an RPC provider that supports the [_DAS (Digital Asset Standards)_ API](https://github.com/metaplex-foundation/digital-asset-standard-api).
 
-1. Verify that the wallet owns a Saga Genesis Token NFT
-2. Verify the the user actually owns the wallet by signing a message.
+Given the user's wallet address you can use the _searchAssets_ DAS API method to check ownership of a Saga Genesis Token NFT.
+
+<Tabs>
+<TabItem value="Javascript" label="Javascript">
+
+```javascript
+const url = `https://your.rpc.com/?api-key=<api_key>`;
+
+const searchAssets = async () => {
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      jsonrpc: "2.0",
+      id: "my-id",
+      method: "searchAssets",
+      params: {
+        ownerAddress: "<user-wallet-address>", // user's wallet address
+        grouping: [
+          "collection",
+          "46pcSL5gmjBrPqGKFaLbbCmR6iVuLJbnQy13hAe7s6CC", // Genesis Token Collection NFT Address
+        ],
+        page: 1, // Starts at 1
+        limit: 1000,
+      },
+    }),
+  });
+  const { result } = await response.json();
+  if (result?.total === 1) {
+    console.log("Wallet contains a Saga Genesis Token!");
+  } else {
+    console.log("Wallet does not contain a Saga Genesis Token.");
+  }
+};
+searchAssets();
+```
+
+</TabItem>
+</Tabs>
+
+The above is a modification of the example from the [Helius DAS API documentation](https://docs.helius.dev/compression-and-das-api/digital-asset-standard-das-api/search-assets).
 
 ### Fetching master list of holders
+
+For use cases, like snapshots and airdropping, you can query for the entire list of current holders.
+
+To fetch the entire collection list of Saga Genesis Token holders, you can use the `getAssetsByGroup` DAS API method. In the following example,
+the paginated response is a list of Saga Genesis Token Assets and metadata.
+
+<Tabs>
+<TabItem value="Javascript" label="Javascript">
+
+```javascript
+const url = "https://your.rpc.com/?api-key=<api-key>";
+
+const getAssetsByGroup = async () => {
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      jsonrpc: "2.0",
+      id: "my-id",
+      method: "getAssetsByGroup",
+      params: {
+        groupKey: "collection",
+        groupValue: "46pcSL5gmjBrPqGKFaLbbCmR6iVuLJbnQy13hAe7s6CC", // Genesis Token Collection NFT Address
+        page: 1, // Starts at 1
+        limit: 1000,
+      },
+    }),
+  });
+  const { result } = await response.json();
+  console.log("Page 1 of Saga Genesis Token Assets: ", result.items);
+};
+getAssetsByGroup();
+```
+
+</TabItem>
+</Tabs>
+
+The above is a modification of the example from the [Helius DAS API documentation](https://docs.helius.dev/compression-and-das-api/digital-asset-standard-das-api/get-assets-by-group).
