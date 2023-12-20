@@ -46,6 +46,11 @@ const sidebars = {
       ]
     },
     {
+      type: 'doc',
+      id: 'getting-started/saga-genesis-token',
+      label: 'Saga Genesis Token'
+    },
+    {
       type: 'category',
       label: 'The Solana Mobile Stack',
       collapsible: true,
