@@ -5,10 +5,8 @@ import TabItem from '@theme/TabItem';
 
 ## Introduction
 
-The Saga Genesis Token is a unique, non-transferable NFT that aims to represent a verified owner of a Saga device.
+The Saga Genesis Token is a unique, non-transferable NFT that represents a verified owner of a Saga device.
 It is minted only once per device through the dApp Store after initial device setup.
-
-The Genesis Token is a Soulbound NFT, meaning that it cannot be transfered out of the wallet that it was initially minted to.
 
 ## NFT Details
 
@@ -106,7 +104,7 @@ The above is a modification of the example from the [Helius DAS API documentatio
 
 ## Fetching complete mint list of holders
 
-For use cases, like snapshots and airdropping, you can query for the entire list of current holders.
+For use cases like snapshots and airdropping, you can query for the entire list of current holders.
 
 To fetch the entire collection list of Saga Genesis Token holders, you can use the `getAssetsByGroup` DAS API method. In the following example,
 the paginated response is a list of Saga Genesis Token Assets and metadata.
