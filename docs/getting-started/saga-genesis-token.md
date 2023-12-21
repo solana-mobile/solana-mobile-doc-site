@@ -37,7 +37,7 @@ You can view a real Saga Genesis Token on-chain with an explorer by querying an 
 For certain use cases, like airdrop rewards or token gated content for Saga users, you will need to verify ownership of the Saga Genesis Token NFT.
 
 :::tip
-Follow the [Rewarding Saga Users guide](google.com) to learn the best practices for distributing rewards to Saga users confidently and securely.
+Follow the [Rewarding Saga Users guide](/blog/rewarding-saga-users) to learn the best practices for distributing rewards to Saga users confidently and securely.
 :::
 
 ### Verifying individual ownership
@@ -54,11 +54,11 @@ If you are implementing this flow on web, you can use the standard Solana web li
 this [integration guide](https://github.com/phantom/sign-in-with-solana?tab=readme-ov-file#dapp-integration).
 
 If you are implementing this flow within a mobile app, you will need to manually implement SIWS using [Mobile Wallet
-Adapter](http://localhost:3000/react-native/quickstart#signing-messages) (`authorize` + `signMessage`).
+Adapter](/react-native/quickstart#signing-messages) (`authorize` + `signMessage`).
 
 #### Verify the Saga Genesis Token
 
-After proving that the user own's the wallet, you need to verify that the user's wallet actually contains a Saga Genesis Token. There are different ways to do this, but the simplest is to query an RPC provider that supports the [_DAS (Digital Asset Standards)_ API](https://github.com/metaplex-foundation/digital-asset-standard-api).
+After proving that the user owns the wallet, you need to verify that the user's wallet actually contains a Saga Genesis Token. There are different ways to do this, but the simplest is to query an RPC provider that supports the [_DAS (Digital Asset Standards)_ API](https://github.com/metaplex-foundation/digital-asset-standard-api).
 
 Given the user's wallet address you can use the _searchAssets_ DAS API method to check ownership of a Saga Genesis Token NFT.
 
@@ -104,7 +104,7 @@ searchAssets();
 
 The above is a modification of the example from the [Helius DAS API documentation](https://docs.helius.dev/compression-and-das-api/digital-asset-standard-das-api/search-assets).
 
-### Fetching master list of holders
+## Fetching complete mint list of holders
 
 For use cases, like snapshots and airdropping, you can query for the entire list of current holders.
 
