@@ -42,7 +42,23 @@ Follow the [Rewarding Saga Users guide](google.com) to learn the best practices 
 
 ### Verifying individual ownership
 
-To verify that a specific user owns a Saga Genesis Token, you can query an RPC provider that supports the [_DAS (Digital Asset Standards)_ API](https://github.com/metaplex-foundation/digital-asset-standard-api).
+For token gated content and rewards, the user can explicitly claim their Saga Genesis Token reward. The user should prove
+ownership of a Saga Genesis Token and only then should they receive the rewards/content.
+
+#### Sign in with Solana
+
+To receive token gated content and rewards, a user first needs to prove that they own a Saga Genesis Token.
+You should use _Sign in with Solana_ to verify that the connecting user truly owns the wallet that contains the Saga Genesis Token.
+
+If you are implementing this flow on web, you can use the standard Solana web libraries like `wallet-adapter-react`, following
+this [integration guide](https://github.com/phantom/sign-in-with-solana?tab=readme-ov-file#dapp-integration).
+
+If you are implementing this flow within a mobile app, you will need to manually implement SIWS using [Mobile Wallet
+Adapter](http://localhost:3000/react-native/quickstart#signing-messages) (`authorize` + `signMessage`).
+
+#### Verify the Saga Genesis Token
+
+After proving that the user own's the wallet, you need to verify that the user's wallet actually contains a Saga Genesis Token. There are different ways to do this, but the simplest is to query an RPC provider that supports the [_DAS (Digital Asset Standards)_ API](https://github.com/metaplex-foundation/digital-asset-standard-api).
 
 Given the user's wallet address you can use the _searchAssets_ DAS API method to check ownership of a Saga Genesis Token NFT.
 
