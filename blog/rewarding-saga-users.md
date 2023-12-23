@@ -45,12 +45,31 @@ If you want to target Saga users, the best way is to identify and verify wallets
 
 For complete details, view the full [Saga Genesis Token documentation](/getting-started/saga-genesis-token).
 
+## Choosing a distribution method
+
+It is important to evaluate trade-offs when choosing a distribution method for rewards and make the right choice for your
+usecase.
+
+### Airdrop rewards
+
+With airdrops, the dApp snapshots and collects all the wallets of current owners of Saga Genesis Tokens. Then the rewards can be immediately distributed to these owners, with no additional friction from the user end.
+
+If you are choosing to airdrop rewards, keep in mind that, as of the time this article was written, not all Saga owners have minted their Genesis Tokens yet!
+
+### Reward Claims
+
+With _reward claims_, the dApp implements a flow where users navigate to some platform, verify their ownership of a Saga Genesis Token, and claim the reward. This way, rewards can be received on a rolling basis.
+
+Although there is a setup cost to implement this flow, the dApp can also use the opportunity to drive traffic to their platform, whether that is a website or even better -- their newly launched Saga mobile app!
+
+Now we'll discuss how to to implement a rewards claim with best practices that help keep users safe.
+
 ## Verify a Saga Genesis Token holder
 
-For certain use cases, like airdrop rewards or token-gated content for Saga users, you will need to verify ownership of the Saga Genesis Token NFT. This
-claiming flow can happen on a webpage or a mobile app, and it is crucial to implement this in a trustworthy and safe manner.
+For certain use cases, like rewards claiming or token-gated content for Saga users, you will need to verify ownership of the Saga Genesis Token NFT. This
+verification flow can happen on a webpage or a mobile app, and it is crucial to implement this in a trustworthy and secure manner.
 
-Roughly, these are the steps to verify a Saga user:
+Roughly, these are the steps to verify a valid claim by a Saga user:
 
 1. User uses _Sign in with Solana_ to prove ownership of a wallet.
 2. The Sign in output is verified on the dApp's backend server.
@@ -105,6 +124,8 @@ For use cases like snapshots and airdropping, you can query for the entire list 
 To fetch the entire collection list of Saga Genesis Token holders, you can use the `getAssetsByGroup` DAS API method.
 
 For code snippets and implementation examples, view [this section of Saga Genesis Token documentation](/getting-started/saga-genesis-token#fetching-complete-mint-list-of-holders).
+
+Alternatively, there are many [third-party/community created tools](https://docs.metaplex.com/guides/mint-lists) to generate a mint list.
 
 ## Get in touch
 

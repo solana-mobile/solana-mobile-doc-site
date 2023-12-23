@@ -32,7 +32,7 @@ You can view a real Saga Genesis Token on-chain with an explorer by querying an 
 
 ## Verify a Saga Genesis Token holder
 
-For certain use cases, like airdrop rewards or token gated content for Saga users, you will need to verify ownership of the Saga Genesis Token NFT.
+For certain use cases, like rewards claiming or token gated content for Saga users, you will need to verify ownership of the Saga Genesis Token NFT.
 
 :::tip
 Follow the [Rewarding Saga Users guide](/blog/rewarding-saga-users) to learn the best practices for distributing rewards to Saga users confidently and securely.
@@ -102,7 +102,7 @@ searchAssets();
 
 The above is a modification of the example from the [Helius DAS API documentation](https://docs.helius.dev/compression-and-das-api/digital-asset-standard-das-api/search-assets).
 
-## Fetching complete mint list of holders
+## Fetching a mint list of holders
 
 For use cases like snapshots and airdropping, you can query for the entire list of current holders.
 
@@ -143,3 +143,5 @@ getAssetsByGroup();
 </Tabs>
 
 The above is a modification of the example from the [Helius DAS API documentation](https://docs.helius.dev/compression-and-das-api/digital-asset-standard-das-api/get-assets-by-group).
+
+Alternatively, there are many [third-party/community created tools](https://docs.metaplex.com/guides/mint-lists) to generate a mint list.
