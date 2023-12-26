@@ -51,8 +51,10 @@ For certain usecases, the dApp may choose to communicate with the RPC through th
 
 ### Sign and Send Transaction
 
-An alternative option for submitting transactions is for the dApp to send a `sign_and_send_transaction` MWA request to a wallet. This request
+For submitting transactions, it is encouraged for the dApp to send a `sign_and_send_transaction` MWA request to the wallet. This request
 type sends a unsigned transaction to the wallet. If authorized, the wallet will then sign the transaction and send it to the network with its
-own implementation.
+own implementation. Depending on the wallet app, this can include applying its own priority fee.
+
+Relying on the wallet reduces the risk of replay attacks with [durable nonce based transactions](https://docs.solana.com/implemented-proposals/durable-tx-nonces), which can be abused with `sign_transactions`.
 
   <img src="/diagrams/sign_and_send.svg" alt="Sign and Send Diagram" className="diagram-image"/>
