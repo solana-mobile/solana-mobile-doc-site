@@ -33,10 +33,14 @@ Once a session is established, the dApp can now begin sending MWA Requests to re
 This example case outlines an MWA session where the dApp:
 
 1. Establishes a session with a wallet.
-2. Requests authorization, elevating the session to an "authorized state" and receiving an authorized pubKey.
-3. Requests transaction signing, receiving a transaction signed with the authorized pubKey.
+2. Requests authorization, elevating the session to an "authorized state" and receiving a list of authorized accounts and an authToken.
+3. Requests transaction signing, receiving a transaction signed by the authorized accounts.
 
 <img src="/diagrams/authorize_and_sign.svg" alt="Authorize and Sign Diagram" className="diagram-image"/>
+
+In future sessions, the dApp can initiate with the valid authToken to immediately elevate to an "authorizd state", skipping the "connect" step.
+
+While the protocol technically supports multiple accounts, most wallet apps only implement a single account authorization per session.
 
 For a more detailed diagram that shows the full communication exchange, refer to this [section in the spec](https://solana-mobile.github.io/mobile-wallet-adapter/spec/spec.html#authorize-and-sign-transaction).
 
