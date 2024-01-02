@@ -226,7 +226,7 @@ You can use Expo's build service to build your app. Make sure you have an Expo a
 In the repo, run the command:
 
 ```shell
-eas build
+npx eas build --profile development --platform android
 ```
 
 After it's finished building you should receive a QR code and download URL to the `apk` of your app. You can download this to your emulator/device.
