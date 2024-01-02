@@ -34,10 +34,6 @@ You can view a real Saga Genesis Token on-chain with an explorer by querying an 
 
 For certain use cases, like rewards claiming or token gated content for Saga users, you will need to verify ownership of the Saga Genesis Token NFT.
 
-:::tip
-Follow the [Rewarding Saga Users guide](/blog/rewarding-saga-users) to learn the best practices for distributing rewards to Saga users confidently and securely.
-:::
-
 ### Verifying individual ownership
 
 For token gated content and rewards, the user can explicitly claim their Saga Genesis Token reward. The user should prove
