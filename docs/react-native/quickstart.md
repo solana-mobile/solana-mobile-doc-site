@@ -177,6 +177,7 @@ const instructions = [
 
 // Connect to an RPC endpoint and get the latest blockhash, to include in
 // the transaction.
+const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
 const latestBlockhash = await connection.getLatestBlockhash();
 
 // Create the "message" of a transaction and compile to `V0Message` format.
@@ -261,7 +262,7 @@ const signedTx = await transact(async (wallet) => {
 
   // Construct the Versioned message and transaction.
   const txMessage = new TransactionMessage({
-    payerKey: fromPublicKey,
+    payerKey: authorizedPubkey,
     recentBlockhash: latestBlockhash.blockhash,
     instructions,
   }).compileToV0Message();
