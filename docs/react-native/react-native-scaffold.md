@@ -30,7 +30,7 @@ The `--npm` flag is only needed if you're using Yarn 2 or 3 as the default packa
 
 2. Install dependencies;
 
-- `yarn install` or `npm install`
+- `yarn install`
 
 3. Launch the app on your Android device/emulator.
 
