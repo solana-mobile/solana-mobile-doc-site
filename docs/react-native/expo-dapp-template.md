@@ -34,3 +34,14 @@ Choose your project name then navigate into the directory.
 ### Build and run the app
 
 Follow the **["Running the app"](/react-native/expo#running-the-app)** section in the Expo Setup guide to launch the template as a custom development build.
+
+## Troubleshooting
+
+`The package 'solana-mobile-wallet-adapter-protocol' doesn't seem to be linked.`
+
+- Make sure you are building and installing an Expo development build _NOT_ Expo Go. Follow the instructions here to
+  build a [custom development build](/react-native/expo#custom-development-build).
+
+`TS2307: Cannot find module @solana-mobile/mobile-wallet-adapter-protocol or its corresponding type declarations.`
+
+- This is a bug/issue when using `npm`. Until it is fixed, to mitigate, please install the project using `yarn install`, not `npm install`.
