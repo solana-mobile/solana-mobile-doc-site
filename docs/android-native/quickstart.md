@@ -3,9 +3,74 @@ import TabItem from '@theme/TabItem';
 
 # Kotlin Quickstart
 
-A collection of basic usecases and recipes that are commonly used in Solana Kotlin dApps.
+A collection of code snippets and examples for basic use cases commonly used in Solana Kotlin dApps.
 
-## Connect to a wallet
+## Making RPC requests
+
+## Building transactions
+
+A client interacts with the Solana network by submitting a _transaction_ to the cluster. Transactions
+allow a client to invoke instructions of on-chain [_Programs_](https://docs.solana.com/developing/intro/programs).
+
+For a full explanation, see the core docs overview of a [_transaction_](https://docs.solana.com/developing/programming-model/transactions).
+
+### Example: Memo Program Transaction
+
+The `web3-solana` library provides the abstraction classes like `Transaction` to simplify building Solana transactions.
+
+A transaction instruction is comprised of a program id, a list of accounts, and instruction data specific to the program.
+
+```kotlin
+import com.solana.publickey.*
+import com.solana.transaction.*
+
+// Solana Memo Program
+val memoProgramId = "MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr"
+val memoProgramIdKey = SolanaPublicKey.from(memoProgramId)
+
+// Construct the instruction
+val message = "Hello Solana!"
+val memoInstruction = TransactionInstruction(
+    memoProgramIdKey,
+    // Define the accounts in instruction
+    listOf(AccountMeta(address, true, true)),
+    // Pass in the instruction data as ByteArray
+    message.encodeToByteArray()
+)
+
+// Fetch latest blockhash from RPC
+val blockhash = RecentBlockhashUseCase(rpcUri)
+
+// Build Message and pass into Transaction constructor
+val memoTxMessage = Message.Builder()
+    .addInstruction(memoInstruction)
+    .setRecentBlockhash(blockhash)
+    .build()
+
+val unsignedTx = Transaction(memoTxMessage)
+```
+
+## Using Mobile Wallet Adapter
+
+### Instantiate `MobileWalletAdapter`
+
+To connect to wallets and request transaction signing, instantiate the `MobileWalletAdapter` client.
+
+Define the `ConnectionIdentity` of your dApp so that the wallet app can properly display info to the user when signing.
+
+```kotlin
+// Define dApp's identity metadata
+val solanaUri = Uri.parse("https://solana.com")
+val iconUri = Uri.parse("favicon.ico") // resolves to https://solana.com/favicon.ico
+val identityName = "Solana Kotlin dApp"
+
+// Construct the client
+val mwaClient = MobileWalletAdapter(connectionIdentity = ConnectionIdentity(
+    identityUri = solanaUri,
+    iconUri = iconUri,
+    identityName = identityName
+))
+```
 
 To connect to a wallet, use the [`transact`](https://www.javadoc.io/doc/com.solanamobile/mobile-wallet-adapter-clientlib-ktx/latest/com/solana/mobilewalletadapter/clientlib/MobileWalletAdapter.html) method provided by the `MobileWalletAdapter` class.
 
