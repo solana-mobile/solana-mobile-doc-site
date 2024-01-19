@@ -41,22 +41,26 @@ val memoInstruction = TransactionInstruction(
 // Fetch latest blockhash from RPC
 val blockhash = RecentBlockhashUseCase(rpcUri)
 
-// Build Message and pass into Transaction constructor
+// Build transaction message
 val memoTxMessage = Message.Builder()
     .addInstruction(memoInstruction)
     .setRecentBlockhash(blockhash)
     .build()
 
+// Construct the Transaction object from the message
 val unsignedTx = Transaction(memoTxMessage)
 ```
 
 ## Using Mobile Wallet Adapter
 
-### Instantiate `MobileWalletAdapter`
+The Mobile Wallet Adapter library allows a dApp to connect to MWA-compliant wallet apps installed on the device. Once connected,
+the dApp can request signing from the wallet app.
 
-To connect to wallets and request transaction signing, instantiate the `MobileWalletAdapter` client.
+### Instantiate `MobileWalletAdapter` client
 
-Define the `ConnectionIdentity` of your dApp so that the wallet app can properly display info to the user when signing.
+The `MobileWalletAdapter` object provides methods to connect to wallets and issue MWA requests.
+
+- Define the `ConnectionIdentity` of your dApp so that the wallet app can properly display info to the user when signing.
 
 ```kotlin
 // Define dApp's identity metadata
@@ -65,12 +69,30 @@ val iconUri = Uri.parse("favicon.ico") // resolves to https://solana.com/favicon
 val identityName = "Solana Kotlin dApp"
 
 // Construct the client
-val mwaClient = MobileWalletAdapter(connectionIdentity = ConnectionIdentity(
+val walletAdapter = MobileWalletAdapter(connectionIdentity = ConnectionIdentity(
     identityUri = solanaUri,
     iconUri = iconUri,
     identityName = identityName
 ))
 ```
+
+#### Managing the `authToken`
+
+The `MobileWalletAdapter` object exposes an `authToken` property that it manages throughout its lifetime.
+
+If present, the `authToken` is automatically used by the MWA client when issuing MWA requests (like `connect`, `signMessages`, etc). And if valid,
+the user is able to skip the connection approval dialog for subsequent requests.
+
+The `authToken` is stored by the `MobileWalletAdapter` client the first time you connect to a wallet, but it can also be
+populated manually:
+
+```kotlin
+// Retrieve and use a persisted authToken from a previous session of the app.
+val previouslyStoredAuthToken = maybeGetStoredAuthToken()
+walletAdapter.authToken = previouslyStoredAuthToken
+```
+
+This is especially useful when you want to persist connections after a user closes and re-opens the app.
 
 To connect to a wallet, use the [`transact`](https://www.javadoc.io/doc/com.solanamobile/mobile-wallet-adapter-clientlib-ktx/latest/com/solana/mobilewalletadapter/clientlib/MobileWalletAdapter.html) method provided by the `MobileWalletAdapter` class.
 
@@ -86,6 +108,25 @@ val result = walletAdapterClient.transact(sender) {
     /* ... */
 }
 ```
+
+### Connecting to a wallet
+
+To connect to a wallet, use the `connect` method from the `MobileWalletAdapter` client.
+
+```kotlin
+ // `this` is the current Android activity
+val sender = ActivityResultSender(this)
+
+// Instantiate the MWA client object
+val walletAdapter = MobileWalletAdapter(/* ... */)
+
+// `connect` dispatches an association intent to MWA-compatible wallet apps.
+walletAdapter.connect(sender)
+```
+
+After calling `connect`, the dApp attempts to establish a session with an MWA wallet app.
+
+#### Connecting with `transact`
 
 ## Authorizing a wallet
 
