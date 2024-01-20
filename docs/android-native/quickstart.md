@@ -145,10 +145,10 @@ when (result) {
         val authResult = result.authResult
     }
     is TransactionResult.NoWalletFound -> {
-        print("No MWA compatible wallet app found on device.")
+        println("No MWA compatible wallet app found on device.")
     }
     is TransactionResult.Failure -> {
-        print("Error connecting to wallet: " + result.e.message)
+        println("Error connecting to wallet: " + result.e.message)
     }
 }
 ```
@@ -161,6 +161,40 @@ Under the hood, the `connect` method just calls the `transact` function with an 
 
 ```kotlin
 suspend fun connect(sender: ActivityResultSender) = transact(sender) { }
+```
+
+### Disconnecting from a wallet
+
+A dApp can revoke authorization or disconnect from a wallet by sending a disconnect request. The wallet will invalidate the `authToken` stored by the `MobileWalletAdapter`. This will require the user to approve the connection request once again, when connecting to that wallet.
+
+```kotlin
+ // `this` is the current Android activity
+val sender = ActivityResultSender(this)
+
+// Instantiate the MWA client object
+val walletAdapter = MobileWalletAdapter(/* ... */)
+
+val result = walletAdapter.disconnect(sender)
+
+when (result) {
+    is TransactionResult.Success -> {
+        // On success, the authToken has been successfully invalidated.
+    }
+    is TransactionResult.NoWalletFound -> {
+        println("No MWA compatible wallet app found on device.")
+    }
+    is TransactionResult.Failure -> {
+        println("Error connecting to wallet: " + result.e.message)
+    }
+}
+```
+
+Alternatively, you can directly issue a `deauthorize` request to the wallet and provide a specific `authToken` to invalidate.
+
+```kotlin
+val result = walletAdapter.transact(sender) { authResult ->
+    deauthorize(someAuthToken)
+}
 ```
 
 ### Signing transactions
@@ -196,16 +230,52 @@ when (result) {
         }
     }
     is TransactionResult.NoWalletFound -> {
-        print("No MWA compatible wallet app found on device.")
+        println("No MWA compatible wallet app found on device.")
     }
     is TransactionResult.Failure -> {
-        print("Error during transaction signing: " + result.e.message)
+        println("Error during transaction signing: " + result.e.message)
     }
 }
 ```
 
-The `signTransactions` method accepts an array of serialized transactions and, on success, returns a result with the corresponding
-signed payloads.
+The `signTransactions` method accepts an array of serialized transactions and, on success, returns `signedPayloads` containing the corresponding
+signed payloads serialized as `ByteArrays`.
+
+## Signing messages
+
+To request a wallet to sign a message, use the `signMessagesDetached` method. In this case, a _message_ is any payload of bytes.
+
+```kotlin
+import com.funkatronics.encoders.Base58
+import com.solana.publickey.SolanaPublicKey
+import com.solana.mobilewalletadapter.clientlib.*
+
+ // `this` is the current Android activity
+val sender = ActivityResultSender(this)
+
+// Instantiate the MWA client object
+val walletAdapter = MobileWalletAdapter(/* ... */)
+
+val message = "Sign this message please!"
+val result = walletAdapter.transact(sender) { authResult ->
+    signMessagesDetached(arrayOf(message.toByteArray()), arrayOf((authResult.accounts.first().publicKey)))
+}
+
+when (result) {
+    is TransactionResult.Success -> {
+        val signedMessageBytes = result.successPayload?.messages?.first()?.signatures?.first()
+        signedMessageBytes?.let {
+            println("Message signed: ${Base58.encodeToString(it)}")
+        }
+    }
+    is TransactionResult.NoWalletFound -> {
+        println("No MWA compatible wallet app found on device.")
+    }
+    is TransactionResult.Failure -> {
+        println("Error during transaction signing: " + result.e.message)
+    }
+}
+```
 
 ## Next Steps
 
