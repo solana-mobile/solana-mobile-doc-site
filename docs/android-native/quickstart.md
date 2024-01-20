@@ -83,8 +83,8 @@ The `MobileWalletAdapter` object exposes an `authToken` property that it manages
 If present, the `authToken` is automatically used by the MWA client when issuing MWA requests (like `connect`, `signMessages`, etc). And if valid,
 the user is able to skip the connection approval dialog for subsequent requests.
 
-The `authToken` is stored by the `MobileWalletAdapter` client the first time you connect to a wallet, but it can also be
-populated manually:
+The `authToken` is stored by the `MobileWalletAdapter` client whenever you connect to a wallet, but it can also be
+provided manually:
 
 ```kotlin
 // Retrieve and use a persisted authToken from a previous session of the app.
@@ -94,24 +94,33 @@ walletAdapter.authToken = previouslyStoredAuthToken
 
 This is especially useful when you want to persist connections after a user closes and re-opens the app.
 
-To connect to a wallet, use the [`transact`](https://www.javadoc.io/doc/com.solanamobile/mobile-wallet-adapter-clientlib-ktx/latest/com/solana/mobilewalletadapter/clientlib/MobileWalletAdapter.html) method provided by the `MobileWalletAdapter` class.
+### Establishing an MWA session with `transact`
 
-The `transact` method instantiates a [`Scenario`](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/android/clientlib/src/main/java/com/solana/mobilewalletadapter/clientlib/scenario/Scenario.java) and dispatches an association Intent via [`startActivity()`](<https://developer.android.com/reference/android/app/Activity#startActivity(android.content.Intent)>) that will be received by MWA-compatible wallet apps.
+To establish a session with an MWA wallet, use the `transact` method provided by the `MobileWalletAdapter` object.
 
-This starts a session with a wallet and within the callback, the app can send requests for signing or sending transactions/messages.
+Calling `transact` dispatches an assocication intent to a locally installed MWA wallet app and prompts the
+user to approve or reject the connection request.
+
+Once connected, the user can begin issuing MWA requests and receiving responses from the wallet app.
 
 ```kotlin
-import com.solana.mobilewalletadapter.clientlib.*
+ // `this` is the current Android activity
+val sender = ActivityResultSender(this)
 
-val walletAdapterClient = MobileWalletAdapter()
-val result = walletAdapterClient.transact(sender) {
-    /* ... */
+// Instantiate the MWA client object
+val walletAdapter = MobileWalletAdapter(/* ... */)
+
+// `transact` dispatches an association intent to MWA-compatible wallet apps.
+val result = walletAdapter.transact(sender) { authResult ->
+    /* Once connected, send requests to the wallet in this callback */
 }
 ```
 
+When the session is complete, `transact` returns a `TransactionResult` that can be unwrapped and conditioned upon to handle success and error cases.
+
 ### Connecting to a wallet
 
-To connect to a wallet, use the `connect` method from the `MobileWalletAdapter` client.
+If you only need to connect to a wallet and do not need to send any additional MWA requests, use the `connect` method from the `MobileWalletAdapter` client.
 
 ```kotlin
  // `this` is the current Android activity
@@ -121,12 +130,31 @@ val sender = ActivityResultSender(this)
 val walletAdapter = MobileWalletAdapter(/* ... */)
 
 // `connect` dispatches an association intent to MWA-compatible wallet apps.
-walletAdapter.connect(sender)
+val result = walletAdapter.connect(sender)
+
+when (result) {
+    is TransactionResult.Success -> {
+        // On success, an `AuthorizationResult` type is returned.
+        val authResult = result.authResult
+    }
+    is TransactionResult.NoWalletFound -> {
+        print("No MWA compatible wallet app found on device.")
+    }
+    is TransactionResult.Failure -> {
+        print("Error connecting to wallet: " + result.e.message)
+    }
+}
 ```
 
-After calling `connect`, the dApp attempts to establish a session with an MWA wallet app.
+On successful connection, the `TransactionResult` will contain an `AuthorizationResult` that contains the user's wallet address, `authToken`, etc.
 
-#### Connecting with `transact`
+#### What's the difference with `transact` and `connect`?
+
+Under the hood, the `connect` method just calls the `transact` function with an empty callback, immediately returning the `authResult`.
+
+```kotlin
+suspend fun connect(sender: ActivityResultSender) = transact(sender) { }
+```
 
 ## Authorizing a wallet
 
