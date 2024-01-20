@@ -39,7 +39,7 @@ val memoInstruction = TransactionInstruction(
 )
 
 // Fetch latest blockhash from RPC
-val blockhash = RecentBlockhashUseCase(rpcUri)
+val blockhash = fetchLatestBlockhash(rpcUri)
 
 // Build transaction message
 val memoTxMessage = Message.Builder()
@@ -60,12 +60,18 @@ the dApp can request signing from the wallet app.
 
 The `MobileWalletAdapter` object provides methods to connect to wallets and issue MWA requests.
 
-- Define the `ConnectionIdentity` of your dApp so that the wallet app can properly display info to the user when signing.
+Define the `ConnectionIdentity` of your dApp so that the wallet app can properly display your dApp info to the user.
+
+Parameters:
+
+- `identityName`: The name of your app.
+- `identityUri`: The web URL associated with your app.
+- `iconUri`: A path to your app icon relative to the app uri above.
 
 ```kotlin
 // Define dApp's identity metadata
-val solanaUri = Uri.parse("https://solana.com")
-val iconUri = Uri.parse("favicon.ico") // resolves to https://solana.com/favicon.ico
+val solanaUri = Uri.parse("https://yourdapp.com")
+val iconUri = Uri.parse("favicon.ico") // resolves to https://yourdapp.com/favicon.ico
 val identityName = "Solana Kotlin dApp"
 
 // Construct the client
@@ -94,14 +100,15 @@ walletAdapter.authToken = previouslyStoredAuthToken
 
 This is especially useful when you want to persist connections after a user closes and re-opens the app.
 
-### Establishing an MWA session with `transact`
+### Establishing an MWA session
 
-To establish a session with an MWA wallet, use the `transact` method provided by the `MobileWalletAdapter` object.
+To establish a session, or 'connect', with an MWA wallet, use the `transact` method provided by the `MobileWalletAdapter` object.
 
 Calling `transact` dispatches an assocication intent to a locally installed MWA wallet app and prompts the
 user to approve or reject the connection request.
 
-Once connected, the user can begin issuing MWA requests and receiving responses from the wallet app.
+Once connected, the user can begin issuing MWA requests and receiving responses from the wallet app. The `MobileWalletAdapter`
+object also stores, in memory, the `authToken` from successful connections to be used automatically subsequent sessions.
 
 ```kotlin
  // `this` is the current Android activity
@@ -156,74 +163,49 @@ Under the hood, the `connect` method just calls the `transact` function with an 
 suspend fun connect(sender: ActivityResultSender) = transact(sender) { }
 ```
 
-## Authorizing a wallet
+### Signing transactions
 
-After starting a `Scenario` with a wallet app with `transact`, you should first request authorization for your app with a call to [`authorize`](<https://www.javadoc.io/doc/com.solanamobile/mobile-wallet-adapter-clientlib-ktx/latest/com/solana/mobilewalletadapter/clientlib/AdapterOperations.html#authorize(Uri,Uri,String,RpcCluster)>).
-
-When requesting `authorization`, pass in identity metadata to the request so users can recognize your app during
-the authorization flow.
-
-- `identityName`: The name of your app.
-- `identityUri`: The web URL associated with your app.
-- `iconUri`: A path to your app icon relative to the app uri above.
-
-<Tabs>
-<TabItem value="Kotlin" label="Kotlin">
+To request a wallet to sign a Solana transaction, use the `signTransactions` method. For an example
+of building a transaction, see the 'Building transactions' section.
 
 ```kotlin
+import com.funkatronics.encoders.Base58
+import com.solana.publickey.SolanaPublicKey
 import com.solana.mobilewalletadapter.clientlib.*
 
-val walletAdapterClient = MobileWalletAdapter()
-val result = walletAdapterClient.transact(sender) {
-    // Pass in identity metadata about your app.
-    val identityUri = Uri.parse("https://yourapp.com")
-    val iconUri = Uri.parse("favicon.ico") // Full path resolves to https://yourdapp.com/favicon.ico
-    val identityName = "Example Solana app"
+ // `this` is the current Android activity
+val sender = ActivityResultSender(this)
 
-    // `authorize` prompts the user to accept your authorization request.
-    val authed = client.authorize(identityUri, iconUri, identityName, RpcCluster.Devnet)
+// Instantiate the MWA client object
+val walletAdapter = MobileWalletAdapter(/* ... */)
 
-    // Rest of transact code goes below...
+val result = walletAdapter.transact(sender) { authResult ->
+    // Build a transaction using web3-solana classes
+    val account = SolanaPublicKey(authResult.accounts.first().publicKey)
+    val memoTx = buildMemoTransaction(account, "Hello Solana!");
+
+    // Issue a 'signTransactions' request
+    signTransactions(arrayOf(memoTx.serialize()));
 }
-```
 
-</TabItem>
-</Tabs>
-
-Once authorized with a wallet, the app can request the wallet to sign transactions, messages and send transactions via RPC. `authorize` also returns an [`AuthorizationResult`](https://www.javadoc.io/doc/com.solanamobile/mobile-wallet-adapter-clientlib/latest/com/solana/mobilewalletadapter/clientlib/protocol/MobileWalletAdapterClient.AuthorizationResult.html) that contains metadata from the wallet, like the wallet label and an `authToken`.
-
-### Reauthorization for subsequent connections
-
-For subsequent connections to the wallet app, you can skip the authorization step by sending a `reauthorization` request
-with a previously stored `authToken`. If still valid, `reauthorize` will bypass the need to explicitly grant authorization again.
-
-<Tabs>
-<TabItem value="Kotlin" label="Kotlin">
-
-```kotlin
-import com.solana.mobilewalletadapter.clientlib.*
-
-val walletAdapterClient = MobileWalletAdapter()
-val result = walletAdapterClient.transact(sender) {
-    // Pass in app identity metadata
-    val identityUri = Uri.parse("https://yourapp.com")
-    val iconUri = Uri.parse("favicon.ico")
-    val identityName = "Example Solana app"
-
-    if (hasAuthToken) {
-        // If we've saved an authToken from a previous `AuthorizationResult`, we can skip `authorize`
-        // by sending a `reauthorize` request.
-        val reauthed = reauthorize(identityUri, iconUri, identityName, savedAuthToken)
-    } else {
-        val authed = client.authorize(identityUri, iconUri, identityName, RpcCluster.Devnet)
+when (result) {
+    is TransactionResult.Success -> {
+        val signedTxBytes = result.successPayload?.signedPayloads?.first()
+        signedTxBytes?.let {
+            println("Signed memo transaction: " + Base58.encodeToString(signedTxBytes))
+        }
     }
-
-    // Rest of transact code goes below...
+    is TransactionResult.NoWalletFound -> {
+        print("No MWA compatible wallet app found on device.")
+    }
+    is TransactionResult.Failure -> {
+        print("Error during transaction signing: " + result.e.message)
+    }
 }
 ```
 
-</TabItem>
-</Tabs>
+The `signTransactions` method accepts an array of serialized transactions and, on success, returns a result with the corresponding
+signed payloads.
 
 ## Next Steps
 
