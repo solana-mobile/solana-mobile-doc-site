@@ -197,10 +197,52 @@ val result = walletAdapter.transact(sender) { authResult ->
 }
 ```
 
+### Signing and sending transactions
+
+To request a wallet to sign and then send a Solana transaction, use the `signAndSendTransactions` method. With this method,
+the wallet will handle both signing the transactions then submitting them to the Solana network.
+
+For an example of building a transaction, see the 'Building transactions' guide.
+
+```kotlin
+ // `this` is the current Android activity
+val sender = ActivityResultSender(this)
+
+// Instantiate the MWA client object
+val walletAdapter = MobileWalletAdapter(/* ... */)
+
+val result = walletAdapter.transact(sender) { authResult ->
+    // Build a transaction using web3-solana classes
+    val account = SolanaPublicKey(authResult.accounts.first().publicKey)
+    val memoTx = buildMemoTransaction(account, "Hello Solana!");
+
+    // Issue a 'signTransactions' request
+    signAndSendTransactions(arrayOf(memoTx.serialize()));
+}
+
+when (result) {
+    is TransactionResult.Success -> {
+        val txSignatureBytes = result.successPayload?.signatures?.first()
+        txSignatureBytes?.let {
+            println("Transaction signature: " + Base58.encodeToString(signedTxBytes))
+        }
+    }
+    is TransactionResult.NoWalletFound -> {
+        println("No MWA compatible wallet app found on device.")
+    }
+    is TransactionResult.Failure -> {
+        println("Error during signing and sending transactions: " + result.e.message)
+    }
+}
+```
+
+If successful, the `TransactionResult` will contain an array of `signatures`, with each item corresponding to a transaction
+signature serialized as `ByteArray`.
+
 ### Signing transactions
 
 To request a wallet to sign a Solana transaction, use the `signTransactions` method. For an example
-of building a transaction, see the 'Building transactions' section.
+of building a transaction, see the 'Building transactions' guide.
 
 ```kotlin
 import com.funkatronics.encoders.Base58
@@ -239,9 +281,9 @@ when (result) {
 ```
 
 The `signTransactions` method accepts an array of serialized transactions and, on success, returns `signedPayloads` containing the corresponding
-signed payloads serialized as `ByteArrays`.
+signed payloads serialized as `ByteArray`.
 
-## Signing messages
+### Signing messages
 
 To request a wallet to sign a message, use the `signMessagesDetached` method. In this case, a _message_ is any payload of bytes.
 
