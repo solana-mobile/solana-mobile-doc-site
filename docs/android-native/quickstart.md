@@ -7,6 +7,94 @@ A collection of code snippets and examples for basic use cases commonly used in 
 
 ## Making RPC requests
 
+To interface with the Solana network, a client needs to construct and send [_JSON RPC requests_](https://docs.solana.com/api/http) to an [_RPC endpoint_](https://docs.solana.com/cluster/rpc-endpoints). The [`rpc-core`](https://github.com/solana-mobile/rpc-core) library provides convenient classes and abstractions to build and submit requests according to the JSON-RPC 2.0 specification.
+
+### Creating a JSON RPC Request
+
+The `rpc-core` library defines a `JsonRpc20Request` constructor to conveniently construct a Solana JSON RPC request.
+
+Populate the JSON object with the method name and parameters of a [Solana RPC method](https://docs.solana.com/api/http). The
+constructor also includes a `requestId` parameter, as per JSON-RPC spec.
+
+#### Example: `getLatestBlockhash` RPC request
+
+```kotlin
+fun createBlockhashRequest(commitment: String = "confirmed", requestId: String = "1") =
+    JsonRpc20Request(
+        // JSON RPC Method (ie: `getLatestBlockhash`, `getSignatureForAddresses`)
+        method = "getLatestBlockhash",
+        // Populate with JSON parameters
+        params = buildJsonArray {
+            addJsonObject {
+                put("commitment", commitment)
+            }
+        },
+        requestId
+    )
+```
+
+### Defining the JSON RPC Response
+
+After creating the request, define the expected response payload for that request.
+
+#### Example: `getLatestBlockhash` RPC response
+
+```kotlin
+@Serializable
+class BlockhashResponse(val value: BlockhashInfo)
+
+@Serializable
+class BlockhashInfo(
+    val blockhash: String,
+    val lastValidBlockHeight: Long
+)
+```
+
+### Implement `HttpNetworkDriver`
+
+The `rpc-core` library defines a `HttpNetworkDriver` interface that, when implemented, is used to make network requests.
+
+```kotlin
+interface HttpRequest {
+    val url: String
+    val method: String
+    val properties: Map<String, String>
+    val body: String?
+}
+
+interface HttpNetworkDriver {
+    suspend fun makeHttpRequest(request: HttpRequest): String
+}
+```
+
+You can use a common networking package like the Ktor library to implement the `makeHttpRequest` method. The following
+is an [example implementation](https://github.com/solana-mobile/solana-kotlin-compose-scaffold/blob/main/app/src/main/java/com/example/solanakotlincomposescaffold/networking/HttpDriver.kt) from the [Kotlin Jetpack Compose Scaffold sample app](https://github.com/solana-mobile/solana-kotlin-compose-scaffold/tree/main).
+
+```kotlin
+import com.solana.networking.HttpNetworkDriver
+import com.solana.networking.HttpRequest
+import io.ktor.client.request.*
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.android.Android
+import io.ktor.client.statement.bodyAsText
+import io.ktor.http.HttpMethod
+
+class KtorHttpDriver : HttpNetworkDriver {
+    override suspend fun makeHttpRequest(request: HttpRequest): String =
+        HttpClient(Android).use { client ->
+            client.request(request.url) {
+                method = HttpMethod.parse(request.method)
+                request.properties.forEach { (k, v) ->
+                    header(k, v)
+                }
+                setBody(request.body)
+            }.bodyAsText()
+        }
+}
+```
+
+### Build a JSON-RPC 2.0 Request
+
 ## Building transactions
 
 A client interacts with the Solana network by submitting a _transaction_ to the cluster. Transactions
