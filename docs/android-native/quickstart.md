@@ -1,105 +1,472 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Android Native Quickstart
+# Kotlin Quickstart
 
-:::note
-This page is a work in progress. More content is being worked on and will being added soon!
-:::
+A collection of code snippets and examples for basic use cases commonly used in Solana Kotlin dApps.
 
-### What you will learn
-- How to use [**Mobile Wallet Adapter**](/android-native/overview#library-overview) to:
-  - Connect to a wallet app with `transact`.
-  - Request wallet authorization and reauthorization.
+## Making RPC requests
 
-## Connect to a wallet
+To interface with the Solana network, a client needs to construct and send [_JSON RPC requests_](https://docs.solana.com/api/http) to an [_RPC endpoint_](https://docs.solana.com/cluster/rpc-endpoints). The [`rpc-core`](https://github.com/solana-mobile/rpc-core) library provides convenient classes and abstractions to build and submit requests according to the JSON-RPC 2.0 specification.
 
-To connect to a wallet, use the [`transact`](https://www.javadoc.io/doc/com.solanamobile/mobile-wallet-adapter-clientlib-ktx/latest/com/solana/mobilewalletadapter/clientlib/MobileWalletAdapter.html) method provided by the `MobileWalletAdapter` class. 
+### Creating a JSON RPC Request
 
-The `transact` method instantiates a [`Scenario`](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/android/clientlib/src/main/java/com/solana/mobilewalletadapter/clientlib/scenario/Scenario.java) and dispatches an association Intent via [`startActivity()`](https://developer.android.com/reference/android/app/Activity#startActivity(android.content.Intent)) that will be received by MWA-compatible wallet apps. 
+The `rpc-core` library defines a `JsonRpc20Request` constructor to conveniently construct a Solana JSON RPC request.
 
-This starts a session with a wallet and within the callback, the app can send requests for signing or sending transactions/messages.
+Populate the JSON object with the method name and JSON serialized parameters of a [Solana RPC method](https://docs.solana.com/api/http). The
+constructor also includes a `requestId` parameter, as per JSON-RPC spec.
+
+#### Example: `getLatestBlockhash` RPC request
 
 ```kotlin
-import com.solana.mobilewalletadapter.clientlib.*
+fun createBlockhashRequest(commitment: String = "confirmed", requestId: String = "1") =
+    JsonRpc20Request(
+        // JSON RPC Method (ie: `getLatestBlockhash`, `getSignatureForAddresses`)
+        method = "getLatestBlockhash",
+        // Populate with JSON parameters
+        params = buildJsonArray {
+            addJsonObject {
+                put("commitment", commitment)
+            }
+        },
+        requestId
+    )
+```
 
-val walletAdapterClient = MobileWalletAdapter()
-val result = walletAdapterClient.transact(sender) {
-    /* ... */
+### Defining the JSON RPC Response
+
+After creating the request, create [Kotlin serializable classes](https://kotlinlang.org/docs/serialization.html#libraries) that define the expected response payload for that request.
+
+In the following example, we are defining the expected response of the `getLatestBlockhash` request using the `kotlinx.serialization` library.
+
+#### Example: `getLatestBlockhash` RPC response
+
+```kotlin
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.*
+
+@Serializable
+class BlockhashResponse(val value: BlockhashInfo)
+
+@Serializable
+class BlockhashInfo(
+    val blockhash: String,
+    val lastValidBlockHeight: Long
+)
+
+// Additionally, define an exception in case of failure during request
+class BlockhashException(message: String? = null, cause: Throwable? = null) : RuntimeException(message, cause)
+```
+
+### Implement `HttpNetworkDriver`
+
+The `rpc-core` library defines a `HttpNetworkDriver` interface that is used to make network requests.
+
+```kotlin
+interface HttpRequest {
+    val url: String
+    val method: String
+    val properties: Map<String, String>
+    val body: String?
+}
+
+interface HttpNetworkDriver {
+    suspend fun makeHttpRequest(request: HttpRequest): String
 }
 ```
 
-## Authorizing a wallet
-After starting a `Scenario` with a wallet app with `transact`, you should first request authorization for your app with a call to [`authorize`](https://www.javadoc.io/doc/com.solanamobile/mobile-wallet-adapter-clientlib-ktx/latest/com/solana/mobilewalletadapter/clientlib/AdapterOperations.html#authorize(Uri,Uri,String,RpcCluster)).
+You can use a common networking package like the Ktor library to implement the `makeHttpRequest` method. The following
+is an example from the [Kotlin Jetpack Compose Scaffold sample app](https://github.com/solana-mobile/solana-kotlin-compose-scaffold/blob/main/app/src/main/java/com/example/solanakotlincomposescaffold/networking/HttpDriver.kt).
 
-When requesting `authorization`, pass in identity metadata to the request so users can recognize your app during 
-the authorization flow.
+```kotlin
+import com.solana.networking.HttpNetworkDriver
+import com.solana.networking.HttpRequest
+import io.ktor.client.request.*
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.android.Android
+import io.ktor.client.statement.bodyAsText
+import io.ktor.http.HttpMethod
+
+class KtorHttpDriver : HttpNetworkDriver {
+    override suspend fun makeHttpRequest(request: HttpRequest): String =
+        HttpClient(Android).use { client ->
+            client.request(request.url) {
+                method = HttpMethod.parse(request.method)
+                request.properties.forEach { (k, v) ->
+                    header(k, v)
+                }
+                setBody(request.body)
+            }.bodyAsText()
+        }
+}
+```
+
+### Sending RPC requests
+
+After putting these parts together, use the `Rpc20Driver` class to point to an RPC uri, send
+the request, and receive a response.
+
+```kotlin
+// import com.example.solanakotlincomposescaffold.networking.KtorHttpDriver
+import com.solana.networking.Rpc20Driver
+import com.solana.rpccore.JsonRpc20Request
+import com.solana.transaction.Blockhash
+import java.util.UUID
+
+fun getLatestBlockhash(): Blockhash {
+    // Create the Rpc20Driver and specify the RPC uri and network driver
+    val rpc = Rpc20Driver("https://api.devnet.solana.com", KtorHttpDriver())
+
+    // Construct the RPC request
+    val requestId = UUID.randomUUID().toString()
+    val request = createBlockhashRequest(commitment, requestId)
+
+    // Send the request and provide the serializer for the expected response
+    val response = rpc.makeRequest(request, BlockhashResponse.serializer())
+
+    response.error?.let { error ->
+        throw BlockhashException("Could not fetch latest blockhash: ${error.code}, ${error.message}")
+    }
+
+    // Unwrap the response to receive the base58 blockhash string
+    val base58Blockhash = response.result?.value?.blockhash
+
+    // Return a `Blockhash` object from the web3-solana library
+    Blockhash.from(base58Blockhash
+        ?: throw BlockhashException("Could not fetch latest blockhash: UnknownError"))
+}
+```
+
+## Building transactions
+
+A client interacts with the Solana network by submitting a _transaction_ to the cluster. Transactions
+allow a client to invoke instructions of on-chain [_Programs_](https://docs.solana.com/developing/intro/programs).
+
+For a full explanation, see the core docs overview of a [_transaction_](https://docs.solana.com/developing/programming-model/transactions).
+
+### Example: Memo Program Transaction
+
+The `web3-solana` library provides the abstraction classes like `Transaction` to simplify building Solana transactions.
+
+A transaction instruction is comprised of a program id, a list of accounts, and instruction data specific to the program.
+
+```kotlin
+import com.solana.publickey.*
+import com.solana.transaction.*
+
+// Solana Memo Program
+val memoProgramId = "MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr"
+val memoProgramIdKey = SolanaPublicKey.from(memoProgramId)
+
+// Construct the instruction
+val message = "Hello Solana!"
+val memoInstruction = TransactionInstruction(
+    memoProgramIdKey,
+    // Define the accounts in instruction
+    listOf(AccountMeta(address, true, true)),
+    // Pass in the instruction data as ByteArray
+    message.encodeToByteArray()
+)
+
+// Fetch latest blockhash from RPC
+val blockhash = fetchLatestBlockhash(rpcUri)
+
+// Build transaction message
+val memoTxMessage = Message.Builder()
+    .addInstruction(memoInstruction)
+    .setRecentBlockhash(blockhash)
+    .build()
+
+// Construct the Transaction object from the message
+val unsignedTx = Transaction(memoTxMessage)
+```
+
+## Using Mobile Wallet Adapter
+
+The Mobile Wallet Adapter library allows a dApp to connect to MWA-compliant wallet apps installed on the device. Once connected,
+the dApp can request signing from the wallet app.
+
+### Instantiate `MobileWalletAdapter` client
+
+The `MobileWalletAdapter` object provides methods to connect to wallets and issue MWA requests.
+
+Define the `ConnectionIdentity` of your dApp so that the wallet app can properly display your dApp info to the user.
+
+Parameters:
+
 - `identityName`: The name of your app.
 - `identityUri`: The web URL associated with your app.
 - `iconUri`: A path to your app icon relative to the app uri above.
 
-<Tabs>
-<TabItem value="Kotlin" label="Kotlin">
+```kotlin
+import com.solana.mobilewalletadapter.clientlib.*
+
+// Define dApp's identity metadata
+val solanaUri = Uri.parse("https://yourdapp.com")
+val iconUri = Uri.parse("favicon.ico") // resolves to https://yourdapp.com/favicon.ico
+val identityName = "Solana Kotlin dApp"
+
+// Construct the client
+val walletAdapter = MobileWalletAdapter(connectionIdentity = ConnectionIdentity(
+    identityUri = solanaUri,
+    iconUri = iconUri,
+    identityName = identityName
+))
+```
+
+#### Managing the `authToken`
+
+The `MobileWalletAdapter` object exposes an `authToken` property that it manages throughout its lifetime.
+
+If present, the `authToken` is automatically used by the MWA client when issuing MWA requests (like `connect`, `signMessages`, etc). And if valid,
+the user is able to skip the connection approval dialog for subsequent requests.
+
+The `authToken` is stored by the `MobileWalletAdapter` client whenever you connect to a wallet, but it can also be
+provided manually:
+
+```kotlin
+// Retrieve and use a persisted authToken from a previous session of the app.
+val previouslyStoredAuthToken = maybeGetStoredAuthToken()
+walletAdapter.authToken = previouslyStoredAuthToken
+```
+
+This is especially useful when you want to persist connections after a user closes and re-opens the app.
+
+### Establishing an MWA session
+
+To establish a session, or 'connect', with an MWA wallet, use the `transact` method provided by the `MobileWalletAdapter` object.
+
+Calling `transact` dispatches an assocication intent to a locally installed MWA wallet app and prompts the
+user to approve or reject the connection request.
+
+Once connected, the user can begin issuing MWA requests and receiving responses from the wallet app. The `MobileWalletAdapter`
+object also stores, in memory, the `authToken` from successful connections to be used automatically subsequent sessions.
 
 ```kotlin
 import com.solana.mobilewalletadapter.clientlib.*
 
-val walletAdapterClient = MobileWalletAdapter()
-val result = walletAdapterClient.transact(sender) {
-    // Pass in identity metadata about your app.
-    val identityUri = Uri.parse("https://yourapp.com")
-    val iconUri = Uri.parse("favicon.ico") // Full path resolves to https://yourdapp.com/favicon.ico
-    val identityName = "Example Solana app"
+ // `this` is the current Android activity
+val sender = ActivityResultSender(this)
 
-    // `authorize` prompts the user to accept your authorization request.
-    val authed = client.authorize(identityUri, iconUri, identityName, RpcCluster.Devnet)
+// Instantiate the MWA client object
+val walletAdapter = MobileWalletAdapter(/* ... */)
 
-    // Rest of transact code goes below...
+// `transact` dispatches an association intent to MWA-compatible wallet apps.
+val result = walletAdapter.transact(sender) { authResult ->
+    /* Once connected, send requests to the wallet in this callback */
 }
 ```
 
-</TabItem>
-</Tabs>
+When the session is complete, `transact` returns a `TransactionResult` that can be unwrapped and conditioned upon to handle success and error cases.
 
-Once authorized with a wallet, the app can request the wallet to sign transactions, messages and send transactions via RPC. `authorize` also returns an [`AuthorizationResult`](https://www.javadoc.io/doc/com.solanamobile/mobile-wallet-adapter-clientlib/latest/com/solana/mobilewalletadapter/clientlib/protocol/MobileWalletAdapterClient.AuthorizationResult.html) that contains metadata from the wallet, like the wallet label and an `authToken`.
+### Connecting to a wallet
 
-### Reauthorization for subsequent connections
-
-For subsequent connections to the wallet app, you can skip the authorization step by sending a `reauthorization` request 
-with a previously stored `authToken`. If still valid, `reauthorize` will bypass the need to explicitly grant authorization again.
-
-<Tabs>
-<TabItem value="Kotlin" label="Kotlin">
+If you only need to connect to a wallet and do not need to send any additional MWA requests, use the `connect` method from the `MobileWalletAdapter` client.
 
 ```kotlin
 import com.solana.mobilewalletadapter.clientlib.*
 
-val walletAdapterClient = MobileWalletAdapter()
-val result = walletAdapterClient.transact(sender) {
-    // Pass in app identity metadata
-    val identityUri = Uri.parse("https://yourapp.com")
-    val iconUri = Uri.parse("favicon.ico")
-    val identityName = "Example Solana app"
+ // `this` is the current Android activity
+val sender = ActivityResultSender(this)
 
-    if (hasAuthToken) {
-        // If we've saved an authToken from a previous `AuthorizationResult`, we can skip `authorize`
-        // by sending a `reauthorize` request.
-        val reauthed = reauthorize(identityUri, iconUri, identityName, savedAuthToken)
-    } else {
-        val authed = client.authorize(identityUri, iconUri, identityName, RpcCluster.Devnet)
+// Instantiate the MWA client object
+val walletAdapter = MobileWalletAdapter(/* ... */)
+
+// `connect` dispatches an association intent to MWA-compatible wallet apps.
+val result = walletAdapter.connect(sender)
+
+when (result) {
+    is TransactionResult.Success -> {
+        // On success, an `AuthorizationResult` type is returned.
+        val authResult = result.authResult
     }
-
-    // Rest of transact code goes below...
+    is TransactionResult.NoWalletFound -> {
+        println("No MWA compatible wallet app found on device.")
+    }
+    is TransactionResult.Failure -> {
+        println("Error connecting to wallet: " + result.e.message)
+    }
 }
 ```
 
-</TabItem>
-</Tabs>
+On successful connection, the `TransactionResult` will contain an `AuthorizationResult` that contains the user's wallet address, `authToken`, etc.
 
-## Next Steps
+#### What's the difference with `transact` and `connect`?
 
-- Reference and learn about [Minty Fresh](https://github.com/solana-mobile/Minty-fresh) a Kotlin Android app where you can take a picture and mint it into NFT.
+Under the hood, the `connect` method just calls the `transact` function with an empty callback, immediately returning the `authResult`.
 
-- Dive into the [**Solana Program Library (SPL)**](https://spl.solana.com/) to learn about more interesting Solana Programs, like the [Token Program](https://spl.solana.com/token) used to create NFTs!
+```kotlin
+suspend fun connect(sender: ActivityResultSender) = transact(sender) { }
+```
 
+### Disconnecting from a wallet
 
+A dApp can revoke authorization or disconnect from a wallet by sending a disconnect request. The wallet will invalidate the `authToken` stored by the `MobileWalletAdapter`. This will require the user to approve the connection request once again, when connecting to that wallet.
+
+```kotlin
+import com.solana.mobilewalletadapter.clientlib.*
+
+ // `this` is the current Android activity
+val sender = ActivityResultSender(this)
+
+// Instantiate the MWA client object
+val walletAdapter = MobileWalletAdapter(/* ... */)
+
+val result = walletAdapter.disconnect(sender)
+
+when (result) {
+    is TransactionResult.Success -> {
+        // On success, the authToken has been successfully invalidated.
+    }
+    is TransactionResult.NoWalletFound -> {
+        println("No MWA compatible wallet app found on device.")
+    }
+    is TransactionResult.Failure -> {
+        println("Error connecting to wallet: " + result.e.message)
+    }
+}
+```
+
+Alternatively, you can directly issue a `deauthorize` request to the wallet and provide a specific `authToken` to invalidate.
+
+```kotlin
+val result = walletAdapter.transact(sender) { authResult ->
+    deauthorize(someAuthToken)
+}
+```
+
+### Signing and sending transactions
+
+To request a wallet to sign and then send a Solana transaction, use the `signAndSendTransactions` method. With this method,
+the wallet will handle both signing the transactions then submitting them to the Solana network.
+
+For an example of building a transaction, see the 'Building transactions' guide.
+
+```kotlin
+import com.funkatronics.encoders.Base58
+import com.solana.publickey.SolanaPublicKey
+import com.solana.mobilewalletadapter.clientlib.*
+
+ // `this` is the current Android activity
+val sender = ActivityResultSender(this)
+
+// Instantiate the MWA client object
+val walletAdapter = MobileWalletAdapter(/* ... */)
+
+val result = walletAdapter.transact(sender) { authResult ->
+    // Build a transaction using web3-solana classes
+    val account = SolanaPublicKey(authResult.accounts.first().publicKey)
+    val memoTx = buildMemoTransaction(account, "Hello Solana!");
+
+    // Issue a 'signTransactions' request
+    signAndSendTransactions(arrayOf(memoTx.serialize()));
+}
+
+when (result) {
+    is TransactionResult.Success -> {
+        val txSignatureBytes = result.successPayload?.signatures?.first()
+        txSignatureBytes?.let {
+            println("Transaction signature: " + Base58.encodeToString(signedTxBytes))
+        }
+    }
+    is TransactionResult.NoWalletFound -> {
+        println("No MWA compatible wallet app found on device.")
+    }
+    is TransactionResult.Failure -> {
+        println("Error during signing and sending transactions: " + result.e.message)
+    }
+}
+```
+
+If successful, the `TransactionResult` will contain a `successPayload` with an array (`signatures`), where each item is a transaction
+signature serialized as `ByteArray`, in corresponding order to the input.
+
+### Signing messages
+
+To request a wallet to sign a message, use the `signMessagesDetached` method. In this case, a _message_ is any payload of bytes.
+
+```kotlin
+import com.funkatronics.encoders.Base58
+import com.solana.publickey.SolanaPublicKey
+import com.solana.mobilewalletadapter.clientlib.*
+
+ // `this` is the current Android activity
+val sender = ActivityResultSender(this)
+
+// Instantiate the MWA client object
+val walletAdapter = MobileWalletAdapter(/* ... */)
+
+val message = "Sign this message please!"
+val result = walletAdapter.transact(sender) { authResult ->
+    signMessagesDetached(arrayOf(message.toByteArray()), arrayOf((authResult.accounts.first().publicKey)))
+}
+
+when (result) {
+    is TransactionResult.Success -> {
+        val signedMessageBytes = result.successPayload?.messages?.first()?.signatures?.first()
+        signedMessageBytes?.let {
+            println("Message signed: ${Base58.encodeToString(it)}")
+        }
+    }
+    is TransactionResult.NoWalletFound -> {
+        println("No MWA compatible wallet app found on device.")
+    }
+    is TransactionResult.Failure -> {
+        println("Error during transaction signing: " + result.e.message)
+    }
+}
+```
+
+If successful, the `TransactionResult` will contain a `successPayload` with an array (`messages`), where each item is a signed message
+payload serialized as a `ByteArray`, in corresponding order to the input.
+
+### Signing transactions (deprecated)
+
+:::caution
+The `signTransactions` method is deprecated according to the Mobile Wallet Adapter 2.0 [specification](https://solana-mobile.github.io/mobile-wallet-adapter/spec/spec.html). Wallet apps
+may still support this method for backwards compatibility, but it is recommended for dApps to use `signAndSendTransactions` instead.
+
+The reason for deprecation is to prevent [_durable transaction nonce_](https://docs.solana.com/implemented-proposals/durable-tx-nonces) based replay attacks and vulnerabilities.
+:::
+
+To request a wallet to sign a Solana transaction, use the `signTransactions` method. For an example
+of building a transaction, see the 'Building transactions' guide.
+
+```kotlin
+import com.funkatronics.encoders.Base58
+import com.solana.publickey.SolanaPublicKey
+import com.solana.mobilewalletadapter.clientlib.*
+
+ // `this` is the current Android activity
+val sender = ActivityResultSender(this)
+
+// Instantiate the MWA client object
+val walletAdapter = MobileWalletAdapter(/* ... */)
+
+val result = walletAdapter.transact(sender) { authResult ->
+    // Build a transaction using web3-solana classes
+    val account = SolanaPublicKey(authResult.accounts.first().publicKey)
+    val memoTx = buildMemoTransaction(account, "Hello Solana!");
+
+    // Issue a 'signTransactions' request
+    signTransactions(arrayOf(memoTx.serialize()));
+}
+
+when (result) {
+    is TransactionResult.Success -> {
+        val signedTxBytes = result.successPayload?.signedPayloads?.first()
+        signedTxBytes?.let {
+            println("Signed memo transaction: " + Base58.encodeToString(signedTxBytes))
+        }
+    }
+    is TransactionResult.NoWalletFound -> {
+        println("No MWA compatible wallet app found on device.")
+    }
+    is TransactionResult.Failure -> {
+        println("Error during transaction signing: " + result.e.message)
+    }
+}
+```
+
+The `signTransactions` method accepts an array of serialized transactions and, on success, returns `signedPayloads` containing the corresponding
+signed payloads serialized as `ByteArray`.

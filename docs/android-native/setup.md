@@ -1,9 +1,7 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Android dApp Setup
-
-## Android Project Setup
+# Kotlin Setup
 
 ### Prerequisites
 
@@ -11,40 +9,63 @@ import TabItem from '@theme/TabItem';
 
 - Follow the [prerequisite setup](../getting-started/development-setup#prerequisite-setup) guide to set up your [Android Device/Emulator](../getting-started/development-setup#2-setup-deviceemulator) and install a MWA-compatible wallet, like [fakewallet](../getting-started/development-setup#3-install-a-wallet-app).
 
+## Solana Mobile Kotlin Compose Scaffold
 
-### Setting up an Android Project 
+The quickest way to start developing on Kotlin is to build off of the [Kotlin Jetpack Compose Scaffold](https://github.com/solana-mobile/solana-kotlin-compose-scaffold) example.
 
-Follow these steps to install the Mobile Wallet Adapter library into a new or existing Android project.
+The scaffold is a basic Solana Android app built with [Jetpack Compose](https://developer.android.com/jetpack/compose) and Material 3 components.
 
-#### Step 1: Navigate to your Android project's build.gradle file
-In Android Studio, navigate to your Android project's module `build.gradle` file.
+It includes:
 
-#### Step 2. Add MWA dependencies
-The Mobile Wallet Adapter SDK is hosted on [Maven repository](https://mvnrepository.com/artifact/com.solanamobile/mobile-wallet-adapter-clientlib), so you just need to add the appropriate library to the dependencies section in your `build.gradle:
+- Core Solana kotlin libraries
+- Pre-built Compose UI components,
+- Code examples of transaction building and RPC requests.
 
-<Tabs>
-<TabItem value="kotlin" label="Kotlin">
+Clone the repo and its ready to launch from Android Studio:
 
-```language-kotlin
-dependencies {
-    // other dependencies here
-    implementation 'com.solanamobile:mobile-wallet-adapter-clientlib-ktx:1.0.5'
-}
+```shell
+git clone https://github.com/solana-mobile/solana-kotlin-compose-scaffold.git
 ```
 
-</TabItem>
-<TabItem value="java" label="Java">
+## Android Project Setup
 
+### Setting up a fresh Android Project
+
+Follow these steps to setup a fresh Android project with the recommended libraries for Solana development.
+
+#### Step 1: Navigate to your Android project's build.gradle file
+
+In Android Studio, navigate to your Android project's module `build.gradle.kts` file.
+
+#### Step 2. Add Solana dependencies
+
+Include the following dependencies to your Android project's `build.gradle.kts` file. These
+are the recommended core Kotlin libraries for Solana transaction building, RPC requests, and wallet signing.
+
+<Tabs>
+<TabItem value="build.gradle.kts" label="build.gradle.kts">
 
 ```groovy
 dependencies {
-    // other dependencies here
-    implementation 'com.solanamobile:mobile-wallet-adapter-clientlib:1.0.5'
+    implementation("com.solanamobile:mobile-wallet-adapter-clientlib-ktx:2.0.0")
+    implementation("com.solanamobile:web3-solana:0.2.2")
+    implementation("com.solanamobile:rpc-core:0.2.4")
+    implementation("io.github.funkatronics:multimult:0.2.0")
 }
 ```
 
 </TabItem>
 </Tabs>
+
+<details>
+<summary>Overview of each dependency:</summary>
+
+- `com.solanamobile:mobile-wallet-adapter-clientlib-ktx`: Mobile Wallet Adapter client library for interacting with MWA-compatible wallets.
+- `com.solanamobile:web3-solana`: Solana Kotlin library providing core Solana primitives like transaction building and public key class.
+- `com.solanamobile:rpc-core:0.2.4`: A Kotlin library providing a generic interface and abstractions for building Solana RPC requests.
+- `io.github.funkatronics:multimult:0.2.0`: Lightweight utility library for Base58 conversions.
+
+</details>
 
 #### Step 3. Build and run your app
 
@@ -52,6 +73,6 @@ Your project's dependencies should be set up and you can try building and run th
 
 ## Next Steps
 
-Congrats! At this point, you have installed the Mobile Wallet Adapter SDK into your project and are ready to start building to interact with the Solana network.
+Congrats! At this point, you have installed the necessary libraries for your project and are ready to start building an app that interacts with the Solana network.
 
-To learn more about how to integrate Mobile Wallet Adapter into your Android Native app, you can reference our [Kotlin sample dApp](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/android/fakedapp/src/main/java/com/solana/mobilewalletadapter/fakedapp).
+Check out the other resources on this site like guides, SDK references, and sample apps to learn more about what you can do.
