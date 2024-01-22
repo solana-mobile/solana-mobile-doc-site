@@ -69,6 +69,8 @@ Parameters:
 - `iconUri`: A path to your app icon relative to the app uri above.
 
 ```kotlin
+import com.solana.mobilewalletadapter.clientlib.*
+
 // Define dApp's identity metadata
 val solanaUri = Uri.parse("https://yourdapp.com")
 val iconUri = Uri.parse("favicon.ico") // resolves to https://yourdapp.com/favicon.ico
@@ -111,6 +113,8 @@ Once connected, the user can begin issuing MWA requests and receiving responses 
 object also stores, in memory, the `authToken` from successful connections to be used automatically subsequent sessions.
 
 ```kotlin
+import com.solana.mobilewalletadapter.clientlib.*
+
  // `this` is the current Android activity
 val sender = ActivityResultSender(this)
 
@@ -130,6 +134,8 @@ When the session is complete, `transact` returns a `TransactionResult` that can 
 If you only need to connect to a wallet and do not need to send any additional MWA requests, use the `connect` method from the `MobileWalletAdapter` client.
 
 ```kotlin
+import com.solana.mobilewalletadapter.clientlib.*
+
  // `this` is the current Android activity
 val sender = ActivityResultSender(this)
 
@@ -168,6 +174,8 @@ suspend fun connect(sender: ActivityResultSender) = transact(sender) { }
 A dApp can revoke authorization or disconnect from a wallet by sending a disconnect request. The wallet will invalidate the `authToken` stored by the `MobileWalletAdapter`. This will require the user to approve the connection request once again, when connecting to that wallet.
 
 ```kotlin
+import com.solana.mobilewalletadapter.clientlib.*
+
  // `this` is the current Android activity
 val sender = ActivityResultSender(this)
 
@@ -205,6 +213,10 @@ the wallet will handle both signing the transactions then submitting them to the
 For an example of building a transaction, see the 'Building transactions' guide.
 
 ```kotlin
+import com.funkatronics.encoders.Base58
+import com.solana.publickey.SolanaPublicKey
+import com.solana.mobilewalletadapter.clientlib.*
+
  // `this` is the current Android activity
 val sender = ActivityResultSender(this)
 
@@ -236,10 +248,56 @@ when (result) {
 }
 ```
 
-If successful, the `TransactionResult` will contain an array of `signatures`, with each item corresponding to a transaction
-signature serialized as `ByteArray`.
+If successful, the `TransactionResult` will contain a `successPayload` with an array (`signatures`), where each item is a transaction
+signature serialized as `ByteArray`, in corresponding order to the input.
 
-### Signing transactions
+### Signing messages
+
+To request a wallet to sign a message, use the `signMessagesDetached` method. In this case, a _message_ is any payload of bytes.
+
+```kotlin
+import com.funkatronics.encoders.Base58
+import com.solana.publickey.SolanaPublicKey
+import com.solana.mobilewalletadapter.clientlib.*
+
+ // `this` is the current Android activity
+val sender = ActivityResultSender(this)
+
+// Instantiate the MWA client object
+val walletAdapter = MobileWalletAdapter(/* ... */)
+
+val message = "Sign this message please!"
+val result = walletAdapter.transact(sender) { authResult ->
+    signMessagesDetached(arrayOf(message.toByteArray()), arrayOf((authResult.accounts.first().publicKey)))
+}
+
+when (result) {
+    is TransactionResult.Success -> {
+        val signedMessageBytes = result.successPayload?.messages?.first()?.signatures?.first()
+        signedMessageBytes?.let {
+            println("Message signed: ${Base58.encodeToString(it)}")
+        }
+    }
+    is TransactionResult.NoWalletFound -> {
+        println("No MWA compatible wallet app found on device.")
+    }
+    is TransactionResult.Failure -> {
+        println("Error during transaction signing: " + result.e.message)
+    }
+}
+```
+
+If successful, the `TransactionResult` will contain a `successPayload` with an array (`messages`), where each item is a signed message
+payload serialized as a `ByteArray`, in corresponding order to the input.
+
+### Signing transactions (deprecated)
+
+:::caution
+The `signTransactions` method is deprecated according to the Mobile Wallet Adapter 2.0 [specification](https://solana-mobile.github.io/mobile-wallet-adapter/spec/spec.html). Wallet apps
+may still support this method for backwards compatibility, but it is recommended for dApps to use `signAndSendTransactions` instead.
+
+The reason for deprecation is to prevent [_durable transaction nonce_](https://docs.solana.com/implemented-proposals/durable-tx-nonces) based replay attacks and vulnerabilities.
+:::
 
 To request a wallet to sign a Solana transaction, use the `signTransactions` method. For an example
 of building a transaction, see the 'Building transactions' guide.
@@ -282,42 +340,6 @@ when (result) {
 
 The `signTransactions` method accepts an array of serialized transactions and, on success, returns `signedPayloads` containing the corresponding
 signed payloads serialized as `ByteArray`.
-
-### Signing messages
-
-To request a wallet to sign a message, use the `signMessagesDetached` method. In this case, a _message_ is any payload of bytes.
-
-```kotlin
-import com.funkatronics.encoders.Base58
-import com.solana.publickey.SolanaPublicKey
-import com.solana.mobilewalletadapter.clientlib.*
-
- // `this` is the current Android activity
-val sender = ActivityResultSender(this)
-
-// Instantiate the MWA client object
-val walletAdapter = MobileWalletAdapter(/* ... */)
-
-val message = "Sign this message please!"
-val result = walletAdapter.transact(sender) { authResult ->
-    signMessagesDetached(arrayOf(message.toByteArray()), arrayOf((authResult.accounts.first().publicKey)))
-}
-
-when (result) {
-    is TransactionResult.Success -> {
-        val signedMessageBytes = result.successPayload?.messages?.first()?.signatures?.first()
-        signedMessageBytes?.let {
-            println("Message signed: ${Base58.encodeToString(it)}")
-        }
-    }
-    is TransactionResult.NoWalletFound -> {
-        println("No MWA compatible wallet app found on device.")
-    }
-    is TransactionResult.Failure -> {
-        println("Error during transaction signing: " + result.e.message)
-    }
-}
-```
 
 ## Next Steps
 
