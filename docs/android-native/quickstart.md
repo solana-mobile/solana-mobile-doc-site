@@ -13,7 +13,7 @@ To interface with the Solana network, a client needs to construct and send [_JSO
 
 The `rpc-core` library defines a `JsonRpc20Request` constructor to conveniently construct a Solana JSON RPC request.
 
-Populate the JSON object with the method name and parameters of a [Solana RPC method](https://docs.solana.com/api/http). The
+Populate the JSON object with the method name and JSON serialized parameters of a [Solana RPC method](https://docs.solana.com/api/http). The
 constructor also includes a `requestId` parameter, as per JSON-RPC spec.
 
 #### Example: `getLatestBlockhash` RPC request
@@ -35,11 +35,16 @@ fun createBlockhashRequest(commitment: String = "confirmed", requestId: String =
 
 ### Defining the JSON RPC Response
 
-After creating the request, define the expected response payload for that request.
+After creating the request, create [Kotlin serializable classes](https://kotlinlang.org/docs/serialization.html#libraries) that define the expected response payload for that request.
+
+In the following example, we are defining the expected response of the `getLatestBlockhash` request using the `kotlinx.serialization` library.
 
 #### Example: `getLatestBlockhash` RPC response
 
 ```kotlin
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.*
+
 @Serializable
 class BlockhashResponse(val value: BlockhashInfo)
 
@@ -48,11 +53,14 @@ class BlockhashInfo(
     val blockhash: String,
     val lastValidBlockHeight: Long
 )
+
+// Additionally, define an exception in case of failure during request
+class BlockhashException(message: String? = null, cause: Throwable? = null) : RuntimeException(message, cause)
 ```
 
 ### Implement `HttpNetworkDriver`
 
-The `rpc-core` library defines a `HttpNetworkDriver` interface that, when implemented, is used to make network requests.
+The `rpc-core` library defines a `HttpNetworkDriver` interface that is used to make network requests.
 
 ```kotlin
 interface HttpRequest {
@@ -68,7 +76,7 @@ interface HttpNetworkDriver {
 ```
 
 You can use a common networking package like the Ktor library to implement the `makeHttpRequest` method. The following
-is an [example implementation](https://github.com/solana-mobile/solana-kotlin-compose-scaffold/blob/main/app/src/main/java/com/example/solanakotlincomposescaffold/networking/HttpDriver.kt) from the [Kotlin Jetpack Compose Scaffold sample app](https://github.com/solana-mobile/solana-kotlin-compose-scaffold/tree/main).
+is an example from the [Kotlin Jetpack Compose Scaffold sample app](https://github.com/solana-mobile/solana-kotlin-compose-scaffold/blob/main/app/src/main/java/com/example/solanakotlincomposescaffold/networking/HttpDriver.kt).
 
 ```kotlin
 import com.solana.networking.HttpNetworkDriver
@@ -93,7 +101,41 @@ class KtorHttpDriver : HttpNetworkDriver {
 }
 ```
 
-### Build a JSON-RPC 2.0 Request
+### Sending RPC requests
+
+After putting these parts together, use the `Rpc20Driver` class to point to an RPC uri, send
+the request, and receive a response.
+
+```kotlin
+// import com.example.solanakotlincomposescaffold.networking.KtorHttpDriver
+import com.solana.networking.Rpc20Driver
+import com.solana.rpccore.JsonRpc20Request
+import com.solana.transaction.Blockhash
+import java.util.UUID
+
+fun getLatestBlockhash(): Blockhash {
+    // Create the Rpc20Driver and specify the RPC uri and network driver
+    val rpc = Rpc20Driver("https://api.devnet.solana.com", KtorHttpDriver())
+
+    // Construct the RPC request
+    val requestId = UUID.randomUUID().toString()
+    val request = createBlockhashRequest(commitment, requestId)
+
+    // Send the request and provide the serializer for the expected response
+    val response = rpc.makeRequest(request, BlockhashResponse.serializer())
+
+    response.error?.let { error ->
+        throw BlockhashException("Could not fetch latest blockhash: ${error.code}, ${error.message}")
+    }
+
+    // Unwrap the response to receive the base58 blockhash string
+    val base58Blockhash = response.result?.value?.blockhash
+
+    // Return a `Blockhash` object from the web3-solana library
+    Blockhash.from(base58Blockhash
+        ?: throw BlockhashException("Could not fetch latest blockhash: UnknownError"))
+}
+```
 
 ## Building transactions
 
