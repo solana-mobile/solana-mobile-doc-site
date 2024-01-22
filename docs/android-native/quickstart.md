@@ -470,9 +470,3 @@ when (result) {
 
 The `signTransactions` method accepts an array of serialized transactions and, on success, returns `signedPayloads` containing the corresponding
 signed payloads serialized as `ByteArray`.
-
-## Next Steps
-
-- Reference and learn about [Minty Fresh](https://github.com/solana-mobile/Minty-fresh) a Kotlin Android app where you can take a picture and mint it into NFT.
-
-- Dive into the [**Solana Program Library (SPL)**](https://spl.solana.com/) to learn about more interesting Solana Programs, like the [Token Program](https://spl.solana.com/token) used to create NFTs!
