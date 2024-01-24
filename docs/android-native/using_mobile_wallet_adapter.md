@@ -294,3 +294,7 @@ when (result) {
 
 The `signTransactions` method accepts an array of serialized transactions and, on success, returns `signedPayloads` containing the corresponding
 signed payloads serialized as `ByteArray`.
+
+## Next Steps
+
+- Browse or clone the [MintyFresh repo](https://github.com/solana-mobile/Minty-fresh/tree/main) to reference best practices for a live, published Kotlin Solana dApp.

@@ -10,13 +10,16 @@ For a full explanation, see the core docs overview of a [_transaction_](https://
 
 ## Example: Memo Program Transaction
 
+In the following example, we are creating a `Transaction` that invokes the [Memo Program](https://spl.solana.com/memo) to publish the message "Hello Solana" on-chain.
+
 The `web3-solana` library provides the abstraction classes like `Transaction` and `AccountMeta` to simplify building Solana transactions.
 
-In the following example, we are creating a `Transaction` that invokes the Memo Program to publish the message "Hello Solana" on-chain.
+### Creating a Memo instruction
 
-### Creating transaction instructions
+A transaction instruction is comprised of a program id, a list of accounts, and instruction data specific to the program.
 
-A transaction instruction is comprised of a program id, a list of accounts, and instruction data specific to the program. We define a list of `AccountMeta` to represent the required accounts, then pass the encoded message as `data` into the `TransactionInstruction` constructor.
+To create an instruction, define a list of `AccountMeta` that represent the accounts required by the instruction.
+Then pass the encoded message as `data` into the `TransactionInstruction` constructor.
 
 ```kotlin
 import com.solana.publickey.*
@@ -37,7 +40,12 @@ val memoInstruction = TransactionInstruction(
 )
 ```
 
-### Creating Transaction
+### Creating the Memo transaction
+
+After creating the instructions, use `Message.Builder()` to assemble the instructions and a _blockhash_ to construct the a _Transaction message_. Then
+pass the transaction message into the `Transaction` constructor.
+
+See the previous _Making RPC Requests_ guide for an example of how to fetch a blockhash.
 
 ```kotlin
 // Fetch latest blockhash from RPC
@@ -52,3 +60,7 @@ val memoTxMessage = Message.Builder()
 // Construct the Transaction object from the message
 val unsignedTx = Transaction(memoTxMessage)
 ```
+
+## Next steps
+
+Read the following _Using Mobile Wallet Adapter_ guide to learn how to sign these transactions and submit them to the Solana network.

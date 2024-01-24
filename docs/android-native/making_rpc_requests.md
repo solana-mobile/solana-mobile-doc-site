@@ -132,3 +132,8 @@ fun getLatestBlockhash(): Blockhash {
         ?: throw BlockhashException("Could not fetch latest blockhash: UnknownError"))
 }
 ```
+
+## Next steps
+
+- Read the following _Building transactions_ guide to learn how to create transactions that interact with on-chain Solana Programs.
+- Browse the [full list](https://docs.solana.com/api/http) of Solana RPC HTTP Methods
