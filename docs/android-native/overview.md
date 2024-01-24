@@ -7,7 +7,36 @@ Kotlin is an [officially supported](https://developer.android.com/kotlin) progra
 
 This section of the site provides a developer guide for building Kotlin Android apps for Solana.
 
-## Quickstart guides
+## Quickstart
+
+<CardLayout autoFitEnabled={true}>
+    <Card
+        to="/react-native/overview"
+        header={{
+            label: "Project Setup",
+            translateId: "setup",
+        }}
+        body={{
+            label: "Setup your Android project with the core Kotlin SDKs for Solana development.",
+            translateId: "setup-body",
+        }}
+        iconPath="img/android_icon.svg"
+    />
+    <Card
+        to="/android-native/overview"
+        header={{
+            label: "Jetpack Compose Starter App",
+            translateId: "compose-scaffold-body",
+        }}
+        body={{
+            label: "Clone the Jetpack Compose Scaffold app to quickly start developing.",
+            translateId: "compose-scaffold",
+        }}
+        iconPath="img/jetpack-compose-icon.png"
+    />
+</CardLayout>
+
+## Core Kotlin SDKs
 
 Read these guides for a collection of code snippets and examples for basic use cases commonly used in Solana Kotlin dApps.
 
@@ -16,11 +45,11 @@ Read these guides for a collection of code snippets and examples for basic use c
         to="/react-native/overview"
         header={{
             label: "JSON RPC Requests",
-            translateId: "developer-programs",
+            translateId: "rpc-requests",
         }}
         body={{
-            label: "Learn the `rpc-core` library to create and send Solana RPC Requests.",
-            translateId: "learn-programs",
+            label: "Learn the rpc-core library to create and send Solana RPC Requests.",
+            translateId: "rpc-requests-body",
         }}
         emoji={"🌐"}
     />
@@ -28,11 +57,11 @@ Read these guides for a collection of code snippets and examples for basic use c
         to="/android-native/overview"
         header={{
             label: "Transaction building",
-            translateId: "development-setup",
+            translateId: "transaction-building",
         }}
         body={{
             label: "Use the web3-core library to construct Solana transactions and Program instructions.",
-            translateId: "development-setup-body",
+            translateId: "transaction-building-body",
         }}
         emoji={"🔧"}
     />
@@ -40,15 +69,14 @@ Read these guides for a collection of code snippets and examples for basic use c
         to="/react-native/setup#solana-mobile-dapp-scaffold"
         header={{
             label: "Mobile Wallet Adapter",
-            translateId: "developer-programs",
+            translateId: "mobile-wallet-adapter",
         }}
         body={{
             label: "Learn how to connect to mobile wallets and request signing services.",
-            translateId: "learn-programs",
+            translateId: "mobile-wallet-adapter-body",
         }}
         emoji={"📱"}
     />
-
 </CardLayout>
 
 ## Benefits of native Android development
@@ -62,3 +90,6 @@ Developing on Android enables convenient and full access to the Android platform
 Native Android apps, as a result of full utilization of the system capabilities, generally have better performance and efficiency. Native apps provide the highest attainable frame rates, computing power, graphics support, etc.
 
 ### Jetpack Compose
+
+Kotlin enables the building of Android apps using [Jetpack Compose](https://developer.android.com/jetpack/compose/why-adopt), a modern toolkit for creating native Android UIs. The Kotlin sample apps
+on this documentation site are all built with Jetpack Compose.
