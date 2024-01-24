@@ -34,6 +34,7 @@
   display: flex;
   color: white;
   transition: color 0.2s; /* Added transition property */
+  align-items: center;
 }
 
 [data-theme="light"] .cardHeader {
@@ -57,6 +58,17 @@
   height: 32px;
   margin-right: 8px
 }
+
+.emojiIcon {
+  margin-right: 8px;
+  font-size: 24px;
+  align-self: center;
+}
+
+.cardHeader h3 {
+  margin: 0;
+}
+
 /* Hover */ 
 
 .cardContainer:hover {

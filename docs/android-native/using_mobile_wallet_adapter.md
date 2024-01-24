@@ -5,9 +5,11 @@ import TabItem from '@theme/TabItem';
 
 The Mobile Wallet Adapter protocol is a spec that enables a secure, communication exchange between a dApp and an MWA-compliant wallet app, installed on the device.
 
+Mobile Wallet Adapter 2.0 is the newest and current version and the complete 2.0 spec is viewable [here](https://solana-mobile.github.io/mobile-wallet-adapter/spec/spec.html).
+
 ## Add dependencies
 
-The `mobile-wallet-adapter-clientlib-ktx` library is Solana Mobile's official implementation of the Mobile Wallet Adapter protocol.
+The `mobile-wallet-adapter-clientlib-ktx` library is Solana Mobile's implementation of the Mobile Wallet Adapter protocol.
 
 It provides a convenient API to connect, issue signing requests to a locally installed wallet app, and receive responses.
 

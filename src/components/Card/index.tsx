@@ -2,7 +2,7 @@ import React from "react";
 import Link from "@docusaurus/Link";
 import styles from "./styles.module.css";
 import Translate from "@docusaurus/Translate";
-import useBaseUrl from '@docusaurus/useBaseUrl';
+import useBaseUrl from "@docusaurus/useBaseUrl";
 
 interface CardProps {
   header: {
@@ -15,14 +15,25 @@ interface CardProps {
   };
   to: string;
   iconPath?: string;
+  emoji?: string;
 }
 
-const Card: React.FC<CardProps> = ({ header, body, to, iconPath }) => {
+const Card: React.FC<CardProps> = ({ header, body, to, iconPath, emoji }) => {
   return (
     <div className={styles.cardContainer}>
       <Link className={styles.cardLink} to={to}>
         <div className={styles.cardHeader}>
-          {iconPath && <img src={useBaseUrl(iconPath)} alt="" className={styles.cardIcon} />}
+          {emoji ? (
+            <div className={styles.emojiIcon}>{emoji}</div>
+          ) : (
+            iconPath && (
+              <img
+                src={useBaseUrl(iconPath)}
+                alt=""
+                className={styles.cardIcon}
+              />
+            )
+          )}
           <h3>
             <Translate description={header.translateId}>
               {header.label}
@@ -37,6 +48,6 @@ const Card: React.FC<CardProps> = ({ header, body, to, iconPath }) => {
       </Link>
     </div>
   );
-}
+};
 
 export default Card;
