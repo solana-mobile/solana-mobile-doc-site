@@ -103,7 +103,7 @@ const sidebars = {
     {
       type: 'ref',
       id: 'android-native/overview',
-      label: 'Android'
+      label: 'Kotlin'
     },
     {
       type: 'ref',
@@ -153,7 +153,7 @@ const sidebars = {
     },
   ],
   // other sidebars
-  ...require("./sidebars/androidNativeSidebar.js"),
+  ...require("./sidebars/kotlinSidebar.js"),
   ...require("./sidebars/reactNativeSidebar.js"),
   ...require("./sidebars/flutterSidebar.js"),
   ...require("./sidebars/unitySidebar.js"),

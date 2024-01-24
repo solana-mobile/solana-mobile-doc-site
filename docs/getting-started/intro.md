@@ -27,11 +27,11 @@ Learn how to develop Solana Mobile dApps in your preferred programming language.
     <Card
         to="/react-native/overview"
         header={{
-            label: "React Native SDK",
+            label: "React Native",
             translateId: "developer-programs",
         }}
         body={{
-            label: "Learn about the React Native SDK and how to quickly start building on Solana Mobile.",
+            label: "Learn about the React Native SDKs and how to quickly start building on Solana Mobile.",
             translateId: "learn-programs",
         }}
         iconPath="img/react-native-96.svg"
@@ -39,14 +39,14 @@ Learn how to develop Solana Mobile dApps in your preferred programming language.
     <Card
         to="/android-native/overview"
         header={{
-            label: "Android SDK",
+            label: "Kotlin",
             translateId: "development-setup",
         }}
         body={{
-            label: "Learn how to build on native Android and build an app with full Android capabilities.",
+            label: "Learn how to build a native Android app using the core Solana Kotlin SDKs.",
             translateId: "development-setup-body",
         }}
-        iconPath="img/android_icon.svg"
+        iconPath="img/kotlin-icon-32.svg"
     />
 </CardLayout>
 

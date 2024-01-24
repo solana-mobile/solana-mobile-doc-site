@@ -4,20 +4,18 @@ import styles from "./styles.module.css";
 import Translate from "@docusaurus/Translate";
 
 interface CTAButtonProps {
-label: string;
-to: string;
+  label: string;
+  to: string;
 }
 
 const CTAButton: React.FC<CTAButtonProps> = ({ label, to }) => {
-   return (
-      <div className={styles.container}>
+  return (
+    <div className={styles.container}>
       <Link className={styles.ctaButton} to={to}>
-         <Translate>{label}</Translate>
+        <Translate>{label}</Translate>
       </Link>
-      </div>
-   );
-}
+    </div>
+  );
+};
 
 export default CTAButton;
-
-

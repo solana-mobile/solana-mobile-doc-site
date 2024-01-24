@@ -93,7 +93,7 @@ const config = {
               },
               {
                 to: 'android-native/overview',
-                label: 'Android'
+                label: 'Kotlin'
               },
               {
                 to: 'flutter/overview', 

@@ -15,9 +15,8 @@ Install Android Studio to build apps and manage your device/emulator, following 
 
 ### 2. Setup Device/Emulator
 
-To test and preview your app as you develop, you can build and deploy your app to an Android device or emulator in Android Studio. 
+To test and preview your app as you develop, you can build and deploy your app to an Android device or emulator in Android Studio.
 Follow official Android developer documentation to [create an emulator](https://developer.android.com/studio/run/emulator) or deploy your app to a [hardware device](https://developer.android.com/studio/run/device).
-
 
 ### 3. Install a wallet app
 
@@ -52,7 +51,6 @@ fakewallet was created for implementation reference and quick testing purposes. 
 
 You can install these onto an emulator by using an emulator with Google Play Store support. From there, you can login to your Google account and search for Phantom or Solflare to install it onto the emulator.
 
-
 ## Choose a development framework
 
 Although, the Solana Mobile Stack is primarily written in native Android, we also have support for popular mobile
@@ -74,16 +72,16 @@ These are our official SDKs that are maintained by the Solana Mobile team.
         iconPath="img/react-native-96.svg"
     />
     <Card
-        to="/android-native/quickstart"
+        to="/android-native/overview"
         header={{
-            label: "Android",
+            label: "Kotlin",
             translateId: "android-native",
         }}
         body={{
-            label: "Develop with native Android to utilize the full capabilities of the Android OS and build a performant native experience.",
+            label: "Develop a Kotlin Android app to utilize the full capabilities of the Android OS and build a performant native experience.",
             translateId: "android-native-body",
         }}
-        iconPath="img/android_icon.svg"
+        iconPath="img/kotlin-icon-32.svg"
     />
 </CardLayout>
 
