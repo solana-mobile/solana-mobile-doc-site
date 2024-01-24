@@ -64,7 +64,7 @@
 }
 
 .android-native.sidebar-header::before {
-  content: url(../../static/img/android-icon-32.svg);
+  content: url(../../static/img/kotlin-icon-32.svg);
   vertical-align: middle;
   margin-right: 6px;
 }
