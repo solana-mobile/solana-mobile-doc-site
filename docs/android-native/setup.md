@@ -1,5 +1,6 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import CTAButton from "../../src/components/CTAButton";
 
 # Kotlin Project Setup
 
@@ -15,17 +16,9 @@ The quickest way to start developing on Kotlin is to build off of the [Solana Je
 
 The scaffold is a basic Solana Android app built with [Jetpack Compose](https://developer.android.com/jetpack/compose) and Material 3 components.
 
-It includes:
+Follow the quickstart guide to install and run the scaffold app.
 
-- Core Solana kotlin libraries
-- Pre-built Compose UI components,
-- Code examples of transaction building and RPC requests.
-
-Clone the repo and its ready to launch from Android Studio:
-
-```shell
-git clone https://github.com/solana-mobile/solana-kotlin-compose-scaffold.git
-```
+<CTAButton label="Quickstart" to="/android-native/quickstart" />
 
 ## Android Project Setup
 

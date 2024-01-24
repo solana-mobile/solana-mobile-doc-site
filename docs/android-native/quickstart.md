@@ -10,8 +10,16 @@ import BuildRunImage from "../../static/kotlin_images/compose-build-run.png";
 
 The quickest way to start building Solana Kotlin dApps is to build off the [Solana Jetpack Compose Scaffold](https://github.com/solana-mobile/solana-kotlin-compose-scaffold).
 
+## Solana Jetpack Compose Scaffold
+
 The scaffold app serves as both a starting implementation and an example reference of how to use the core Kotlin SDKs, like `web3-core`, `rpc-core`,
 and Mobile Wallet Adapter.
+
+It includes:
+
+- Core Solana kotlin libraries
+- Pre-built Compose UI components,
+- Code examples of transaction building and RPC requests.
 
 <ImageRow>
     <img src="/kotlin_images/scaffoldScreenshot1.png" alt="Scaffold dApp Screenshot 1" width="300" />
