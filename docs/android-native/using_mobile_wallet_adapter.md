@@ -1,16 +1,29 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Kotlin Quickstart
+# Using Mobile Wallet Adapter
 
-A collection of code snippets and examples for basic use cases commonly used in Solana Kotlin dApps.
+The Mobile Wallet Adapter protocol is a spec that enables a secure, communication exchange between a dApp and an MWA-compliant wallet app, installed on the device.
 
-## Using Mobile Wallet Adapter
+## Add dependencies
 
-The Mobile Wallet Adapter library allows a dApp to connect to MWA-compliant wallet apps installed on the device. Once connected,
-the dApp can request signing from the wallet app.
+The `mobile-wallet-adapter-clientlib-ktx` library is Solana Mobile's official implementation of the Mobile Wallet Adapter protocol.
 
-### Instantiate `MobileWalletAdapter` client
+It provides a convenient API to connect, issue signing requests to a locally installed wallet app, and receive responses.
+
+<Tabs>
+<TabItem value="build.gradle.kts" label="build.gradle.kts">
+
+```groovy
+dependencies {
+    implementation("com.solanamobile:mobile-wallet-adapter-clientlib-ktx:2.0.0")
+}
+```
+
+</TabItem>
+</Tabs>
+
+## Instantiate `MobileWalletAdapter` client
 
 The `MobileWalletAdapter` object provides methods to connect to wallets and issue MWA requests.
 
@@ -38,7 +51,7 @@ val walletAdapter = MobileWalletAdapter(connectionIdentity = ConnectionIdentity(
 ))
 ```
 
-#### Managing the `authToken`
+### Managing the `authToken`
 
 The `MobileWalletAdapter` object exposes an `authToken` property that it manages throughout its lifetime.
 
@@ -56,7 +69,7 @@ walletAdapter.authToken = previouslyStoredAuthToken
 
 This is especially useful when you want to persist connections after a user closes and re-opens the app.
 
-### Establishing an MWA session
+## Establishing an MWA session
 
 To establish a session, or 'connect', with an MWA wallet, use the `transact` method provided by the `MobileWalletAdapter` object.
 
@@ -115,7 +128,7 @@ when (result) {
 
 On successful connection, the `TransactionResult` will contain an `AuthorizationResult` that contains the user's wallet address, `authToken`, etc.
 
-#### What's the difference with `transact` and `connect`?
+### What's the difference with `transact` and `connect`?
 
 Under the hood, the `connect` method just calls the `transact` function with an empty callback, immediately returning the `authResult`.
 
@@ -123,7 +136,7 @@ Under the hood, the `connect` method just calls the `transact` function with an 
 suspend fun connect(sender: ActivityResultSender) = transact(sender) { }
 ```
 
-### Disconnecting from a wallet
+## Disconnecting from a wallet
 
 A dApp can revoke authorization or disconnect from a wallet by sending a disconnect request. The wallet will invalidate the `authToken` stored by the `MobileWalletAdapter`. This will require the user to approve the connection request once again, when connecting to that wallet.
 
@@ -159,7 +172,7 @@ val result = walletAdapter.transact(sender) { authResult ->
 }
 ```
 
-### Signing and sending transactions
+## Signing and sending transactions
 
 To request a wallet to sign and then send a Solana transaction, use the `signAndSendTransactions` method. With this method,
 the wallet will handle both signing the transactions then submitting them to the Solana network.
@@ -205,7 +218,7 @@ when (result) {
 If successful, the `TransactionResult` will contain a `successPayload` with an array (`signatures`), where each item is a transaction
 signature serialized as `ByteArray`, in corresponding order to the input.
 
-### Signing messages
+## Signing messages
 
 To request a wallet to sign a message, use the `signMessagesDetached` method. In this case, a _message_ is any payload of bytes.
 
@@ -244,7 +257,7 @@ when (result) {
 If successful, the `TransactionResult` will contain a `successPayload` with an array (`messages`), where each item is a signed message
 payload serialized as a `ByteArray`, in corresponding order to the input.
 
-### Signing transactions (deprecated)
+## Signing transactions (deprecated)
 
 :::caution
 The `signTransactions` method is deprecated according to the Mobile Wallet Adapter 2.0 [specification](https://solana-mobile.github.io/mobile-wallet-adapter/spec/spec.html). Wallet apps

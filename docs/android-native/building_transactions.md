@@ -8,11 +8,25 @@ allow a client to invoke instructions of on-chain [_Programs_](https://docs.sola
 
 For a full explanation, see the core docs overview of a [_transaction_](https://docs.solana.com/developing/programming-model/transactions).
 
+## Add dependencies
+
+The [`web3-solana`](https://github.com/solana-mobile/web3-core) library provides the abstraction classes like `Transaction` and `AccountMeta` to simplify building Solana transactions.
+
+<Tabs>
+<TabItem value="build.gradle.kts" label="build.gradle.kts">
+
+```groovy
+dependencies {
+    implementation("com.solanamobile:web3-solana:0.2.2")
+}
+```
+
+</TabItem>
+</Tabs>
+
 ## Example: Memo Program Transaction
 
 In the following example, we are creating a `Transaction` that invokes the [Memo Program](https://spl.solana.com/memo) to publish the message "Hello Solana" on-chain.
-
-The `web3-solana` library provides the abstraction classes like `Transaction` and `AccountMeta` to simplify building Solana transactions.
 
 ### Creating a Memo instruction
 

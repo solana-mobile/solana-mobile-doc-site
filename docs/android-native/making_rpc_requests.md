@@ -3,7 +3,23 @@ import TabItem from '@theme/TabItem';
 
 # Making RPC requests
 
-To interface with the Solana network, a client needs to construct and send [_JSON RPC requests_](https://docs.solana.com/api/http) to an [_RPC endpoint_](https://docs.solana.com/cluster/rpc-endpoints). The [`rpc-core`](https://github.com/solana-mobile/rpc-core) library provides convenient classes and abstractions to build and submit requests according to the JSON-RPC 2.0 specification.
+To interface with the Solana network, a client needs to construct and send [_JSON RPC requests_](https://docs.solana.com/api/http) to an [_RPC endpoint_](https://docs.solana.com/cluster/rpc-endpoints).
+
+## Add dependencies
+
+The [`rpc-core`](https://github.com/solana-mobile/rpc-core) library provides convenient classes and abstractions to build and submit requests according to the JSON-RPC 2.0 specification.
+
+<Tabs>
+<TabItem value="build.gradle.kts" label="build.gradle.kts">
+
+```groovy
+dependencies {
+    implementation("com.solanamobile:rpc-core:0.2.4")
+}
+```
+
+</TabItem>
+</Tabs>
 
 ## Creating a JSON RPC Request
 
