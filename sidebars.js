@@ -103,7 +103,7 @@ const sidebars = {
     {
       type: 'ref',
       id: 'android-native/overview',
-      label: 'Android'
+      label: 'Kotlin'
     },
     {
       type: 'ref',
