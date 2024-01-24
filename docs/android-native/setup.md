@@ -1,7 +1,7 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Kotlin Setup
+# Kotlin Project Setup
 
 ### Prerequisites
 
@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 
 ## Solana Mobile Kotlin Compose Scaffold
 
-The quickest way to start developing on Kotlin is to build off of the [Kotlin Jetpack Compose Scaffold](https://github.com/solana-mobile/solana-kotlin-compose-scaffold) example.
+The quickest way to start developing on Kotlin is to build off of the [Solana Jetpack Compose Scaffold](https://github.com/solana-mobile/solana-kotlin-compose-scaffold) example.
 
 The scaffold is a basic Solana Android app built with [Jetpack Compose](https://developer.android.com/jetpack/compose) and Material 3 components.
 

@@ -11,7 +11,7 @@ This section of the site provides a developer guide for building Kotlin Android 
 
 <CardLayout autoFitEnabled={true}>
     <Card
-        to="/react-native/overview"
+        to="/android-native/setup"
         header={{
             label: "Project Setup",
             translateId: "setup",
@@ -23,7 +23,7 @@ This section of the site provides a developer guide for building Kotlin Android 
         iconPath="img/android_icon.svg"
     />
     <Card
-        to="/android-native/overview"
+        to="/android-native/quickstart"
         header={{
             label: "Jetpack Compose Starter App",
             translateId: "compose-scaffold-body",
@@ -42,7 +42,7 @@ Read these guides for a collection of code snippets and examples for basic use c
 
 <CardLayout autoFitEnabled={true}>
     <Card
-        to="/react-native/overview"
+        to="/android-native/making_rpc_requests"
         header={{
             label: "JSON RPC Requests",
             translateId: "rpc-requests",
@@ -54,7 +54,7 @@ Read these guides for a collection of code snippets and examples for basic use c
         emoji={"🌐"}
     />
     <Card
-        to="/android-native/overview"
+        to="/android-native/building_transactions"
         header={{
             label: "Transaction building",
             translateId: "transaction-building",
@@ -66,7 +66,7 @@ Read these guides for a collection of code snippets and examples for basic use c
         emoji={"🔧"}
     />
     <Card
-        to="/react-native/setup#solana-mobile-dapp-scaffold"
+        to="/android-native/using_mobile_wallet_adapter"
         header={{
             label: "Mobile Wallet Adapter",
             translateId: "mobile-wallet-adapter",

@@ -1,0 +1,9 @@
+.imageRow {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.imageContainer {
+  text-align: center;
+}
