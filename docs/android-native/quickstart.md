@@ -49,47 +49,52 @@ src={BuildRunImage}
 alt="Build and run the app"
 />
 
-If successful, the scaffold app will launch on your emulator/device!
+<br />
+<br />
+
+If successful, the scaffold app will launch on your emulator/device.
+
+Connect with a locally installed wallet app to start interacting with the Solana network! 🎉
 
 ## Further learning
 
-To learn how to use the core Solana Kotlin SDKs, check out these developer guides.
+To learn how to better use the core Solana Kotlin SDKs, check out these developer guides.
 
 <CardLayout autoFitEnabled={true}>
     <Card
-        to="/react-native/overview"
+        to="/android-native/making_rpc_requests"
         header={{
-            label: "RPC Requests",
-            translateId: "developer-programs",
+            label: "JSON RPC Requests",
+            translateId: "rpc-requests",
         }}
         body={{
-            label: "Learn about the React Native SDK and how to quickly start building on Solana Mobile.",
-            translateId: "learn-programs",
+            label: "Learn the rpc-core library to create and send Solana RPC Requests.",
+            translateId: "rpc-requests-body",
         }}
-        iconPath="img/react-native-96.svg"
+        emoji={"🌐"}
     />
     <Card
-        to="/android-native/overview"
+        to="/android-native/building_transactions"
         header={{
             label: "Transaction building",
-            translateId: "development-setup",
+            translateId: "transaction-building",
         }}
         body={{
-            label: "Learn how to build on native Android and build an app with full Android capabilities.",
-            translateId: "development-setup-body",
+            label: "Use the web3-core library to construct Solana transactions and Program instructions.",
+            translateId: "transaction-building-body",
         }}
-        iconPath="img/android_icon.svg"
+        emoji={"🔧"}
     />
     <Card
-        to="/react-native/setup#solana-mobile-dapp-scaffold"
+        to="/android-native/using_mobile_wallet_adapter"
         header={{
             label: "Mobile Wallet Adapter",
-            translateId: "developer-programs",
+            translateId: "mobile-wallet-adapter",
         }}
         body={{
-            label: "Jump into building with our template React Native dApp.",
-            translateId: "learn-programs",
+            label: "Learn how to connect to mobile wallets and request signing services.",
+            translateId: "mobile-wallet-adapter-body",
         }}
-        iconPath="img/rocket-icon2.png"
+        emoji={"📱"}
     />
 </CardLayout>
