@@ -96,7 +96,7 @@ const authorizationResult = await transact(async (wallet: Web3MobileWallet) => {
 console.log("Connected to: " + authorizationResult.accounts[0].address)
 ```
 
-If the user approves, the wallet returns an `AuthorizationResult` response that contains the user's authorized wallet account, an `auth_token`, and `wallet_uri_base`.
+If the user approves, the wallet returns an `AuthorizationResult` response that contains the user's authorized wallet `accounts`, an `auth_token`, and `wallet_uri_base`.
 
 See the [SDK reference](/reference/typescript/mobile-wallet-adapter#web3mobilewalletauthorize) for a full explanation of the `AuthorizationResult` response type.
 
@@ -112,8 +112,6 @@ type AuthorizationResult = Readonly<{
 In practice, most wallet apps currently only support single account authorization, so there will be at most 1 item in `accounts`.
 
 ### Connecting with an `auth_token`
-
-<CTAButton label="API Reference" to="/reference/typescript/mobile-wallet-adapter#web3mobilewalletreauthorize" />
 
 For subsequent sessions with the wallet app, you can skip the authorization step by including an `auth_token` in the `authorize` request.
 
@@ -378,7 +376,7 @@ const messageBuffer = new Uint8Array(
 const signedMessages = await transact(async (wallet) => {
   // Authorize the wallet session.
   const authorizationResult = await wallet.authorize({
-      cluster: 'devnet',
+      cluster: 'solana:devnet',
       identity: APP_IDENTITY,
   });
 
@@ -391,6 +389,8 @@ const signedMessages = await transact(async (wallet) => {
   return signedMessages;
 });
 ```
+
+The response returned will be an `Uint8Array[]`, where each item corresponds to the signed message input.
 
 ## Next Steps
 
