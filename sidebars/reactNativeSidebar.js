@@ -70,6 +70,21 @@ module.exports = {
         },
         {
             type: 'doc',
+            id: 'react-native/making_rpc_requests',
+            label: 'Making RPC requests'
+        },
+        {
+            type: 'doc',
+            id: 'react-native/building_transactions',
+            label: 'Building transactions'
+        },
+        {
+            type: 'doc',
+            id: 'react-native/using_mobile_wallet_adapter',
+            label: 'Using Mobile Wallet Adapter'
+        },
+        {
+            type: 'doc',
             id: 'react-native/storing_mwa_auth',
             label: 'Caching MWA authorization'
         },
