@@ -110,6 +110,83 @@ const randomTransferTransaction = new Transaction({
 </TabItem>
 </Tabs>
 
+## Send a Transaction
+
+After a transaction is signed by the appropriate accounts, it can be submitted to the Solana network via RPC. See the
+next guide, _Using Mobile Walelt Adapter_ to learn how to sign transactions.
+
+<Tabs>
+<TabItem value="versionedTransaction" label="Versioned Transactions">
+
+```tsx
+import { transact } from "@solana-mobile/mobile-wallet-adapter-protocol-web3js";
+import {
+  sendTransaction,
+  clusterApiUrl,
+  Connection,
+  VersionedTransaction,
+  confirmTransaction,
+} from "@solana/web3.js";
+
+const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
+const unsignedTx = new VersionedTransaction(/* ... */);
+const signedTx: VersionedTransaction = await transact((wallet) => {
+  /* ...sign `unsignedTx` with Mobile Wallet Adapter... */
+});
+
+// After sending, a transaction signature is returned.
+const txSignature = await connection.sendTransaction(signedTx);
+
+// Confirm the transaction was successful.
+const confirmationResult = await connection.confirmTransaction(
+  txSignature,
+  "confirmed"
+);
+
+if (confirmationResult.value.err) {
+  throw new Error(JSON.stringify(confirmationResult.value.err));
+} else {
+  console.log("Transaction successfully submitted!");
+}
+```
+
+</TabItem>
+<TabItem value="legacyTransaction" label="Legacy Transactions">
+
+```tsx
+import { transact } from "@solana-mobile/mobile-wallet-adapter-protocol-web3js";
+import {
+  sendTransaction,
+  clusterApiUrl,
+  Connection,
+  Transaction,
+  confirmTransaction,
+} from "@solana/web3.js";
+
+const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
+const signedTx: Transaction = await transact((wallet) => {
+  /* ...signing code from above... */
+});
+
+// After sending, a transaction signature is returned.
+const txSignature = await sendTransaction(signedTx, connection);
+
+// Confirm the transaction was successful.
+const confirmationResult = await connection.confirmTransaction(
+  txSignature,
+  "confirmed"
+);
+
+if (confirmationResult.value.err) {
+  throw new Error(JSON.stringify(confirmationResult.value.err));
+} else {
+  console.log("Transaction successfully submitted!");
+}
+```
+
+</TabItem>
+</Tabs>
+
 ## Next steps
 
 - Read the following _Using Mobile Wallet Adapter_ guide to learn how to sign these transactions and submit them to the Solana network.
