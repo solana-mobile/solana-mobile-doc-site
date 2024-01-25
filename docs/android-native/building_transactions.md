@@ -28,7 +28,7 @@ dependencies {
 
 In the following example, we are creating a `Transaction` that invokes the [Memo Program](https://spl.solana.com/memo) to publish the message "Hello Solana" on-chain.
 
-### Creating a Memo instruction
+### Create an instruction
 
 A transaction instruction is comprised of a program id, a list of accounts, and instruction data specific to the program.
 
@@ -54,7 +54,7 @@ val memoInstruction = TransactionInstruction(
 )
 ```
 
-### Creating the Memo transaction
+### Create the Memo transaction
 
 After creating the instructions, use `Message.Builder()` to assemble the instructions and a _blockhash_ to construct the a _Transaction message_. Then
 pass the transaction message into the `Transaction` constructor.
