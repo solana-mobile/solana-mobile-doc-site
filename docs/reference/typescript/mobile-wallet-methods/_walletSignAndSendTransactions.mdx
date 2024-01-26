@@ -63,7 +63,7 @@ const result = await transact(async (wallet: Web3MobileWallet) => {
     SystemProgram.transfer({
       fromPubkey: publicKey,
       toPubkey: keypair.publicKey,
-      lamports: 1_000,
+      lamports: 1_000_000,
     }),
   );
 
