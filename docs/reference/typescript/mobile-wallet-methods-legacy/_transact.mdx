@@ -1,0 +1,74 @@
+import {
+  DocBlock,
+  DocSideBySide,
+  CodeParams,
+  Parameter,
+  Field,
+  Values,
+  CodeSnippets,
+} from "../../../../src/components/CodeDocBlock";
+
+<DocBlock>
+
+## transact
+
+This is the first step in using the Mobile Wallet API.
+
+Starts a Mobile Wallet Adapter session with a locally installed MWA-compatible wallet.
+
+<DocSideBySide>
+
+<CodeParams>
+
+### Parameters:
+
+<Parameter type={"callback: (wallet: Web3MobileWallet) => TReturn"} required={true}>
+  A callback triggered after session establishment, in which the dApp can issue MWA requests
+  to the wallet app, using the `wallet` object.
+</Parameter>
+
+<Parameter type={"config: WalletAssociationConfig"} optional={true}>
+
+Configuration object containing the following fields:
+
+<Field name="baseUri" type="string" optional={true} >
+
+URI used for custom wallet association.
+
+<details>
+
+As per [spec](https://solana-mobile.github.io/mobile-wallet-adapter/spec/spec.html#endpoint-specific-uris), during session establishment, the wallet may return a custom URI scheme to use for future session establishments.
+The dApp can choose to use this custom URI by suppyling it through this parameter.
+</details>
+
+</Field>
+
+</Parameter>
+
+### Result:
+
+The result will be a `Promise<TReturn>` with `TReturn` equal to what is returned from the
+`callback` parameter.
+
+</CodeParams>
+
+<CodeSnippets>
+
+### Code sample:
+
+```tsx
+const result = await transact(async (wallet: Web3MobileWallet) => {
+    /* ...Issue MWA requests... */
+    return "done";
+});
+```
+
+### Return:
+
+```tsx
+console.log(result) // "done"
+```
+
+</CodeSnippets>
+</DocSideBySide>
+</DocBlock>

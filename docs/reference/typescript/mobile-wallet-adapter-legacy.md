@@ -1,5 +1,5 @@
 ---
-title: Mobile Wallet Adapter Typescript Reference
+title: MWA Typescript Reference (Legacy)
 hide_table_of_contents: true
 ---
 
@@ -14,10 +14,9 @@ Connect to wallet apps and sign transactions and messages with the Mobile Wallet
 
 <br/>
 
-:::tip
-Mobile Wallet Adapter 2.0 is the newest and current version of the Mobile Wallet Adapter protocol.
-
-The complete 2.0 spec is viewable [here](https://solana-mobile.github.io/mobile-wallet-adapter/spec/spec.html) and the legacy API is viewable [here](/reference/typescript/mobile-wallet-adapter-legacy).
+:::caution
+This document references than older version of the Mobile Wallet Adapter protocol. Although the SDK and wallet apps are backwards compatible, it is
+recommended for dApps to use the [new API](/reference/typescript/mobile-wallet-adapter).
 :::
 
 ### Install dependencies
@@ -65,34 +64,34 @@ import {
 
 Reference for the Mobile Wallet API for dApps to connect to wallets and receive signing services.
 
-import Transact from "./mobile-wallet-methods/\_transact.mdx"
+import Transact from "./mobile-wallet-methods-legacy/\_transact.mdx"
 
 <Transact />
 
-import WalletAuthorize from "./mobile-wallet-methods/\_walletAuthorize.mdx"
+import WalletAuthorize from "./mobile-wallet-methods-legacy/\_walletAuthorize.mdx"
 
 <WalletAuthorize />
 
-import WalletReauthorize from "./mobile-wallet-methods/\_walletReauthorize.mdx"
+import WalletReauthorize from "./mobile-wallet-methods-legacy/\_walletReauthorize.mdx"
 
 <WalletReauthorize />
 
-import WalletDeauthorize from "./mobile-wallet-methods/\_walletDeauthorize.mdx"
+import WalletDeauthorize from "./mobile-wallet-methods-legacy/\_walletDeauthorize.mdx"
 
 <WalletDeauthorize />
 
-import WalletGetCapabilities from "./mobile-wallet-methods/\_walletGetCapabilities.mdx"
+import WalletGetCapabilities from "./mobile-wallet-methods-legacy/\_walletGetCapabilities.mdx"
 
 <WalletGetCapabilities />
 
-import WalletSignTransactions from "./mobile-wallet-methods/\_walletSignTransactions.mdx"
+import WalletSignTransactions from "./mobile-wallet-methods-legacy/\_walletSignTransactions.mdx"
 
 <WalletSignTransactions />
 
-import WalletSignAndSendTransactions from "./mobile-wallet-methods/\_walletSignAndSendTransactions.mdx"
+import WalletSignAndSendTransactions from "./mobile-wallet-methods-legacy/\_walletSignAndSendTransactions.mdx"
 
 <WalletSignAndSendTransactions />
 
-import WalletSignMessages from "./mobile-wallet-methods/\_walletSignMessages.mdx"
+import WalletSignMessages from "./mobile-wallet-methods-legacy/\_walletSignMessages.mdx"
 
 <WalletSignMessages />
