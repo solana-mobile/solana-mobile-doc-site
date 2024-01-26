@@ -73,10 +73,6 @@ import WalletAuthorize from "./mobile-wallet-methods/\_walletAuthorize.mdx"
 
 <WalletAuthorize />
 
-import WalletReauthorize from "./mobile-wallet-methods/\_walletReauthorize.mdx"
-
-<WalletReauthorize />
-
 import WalletDeauthorize from "./mobile-wallet-methods/\_walletDeauthorize.mdx"
 
 <WalletDeauthorize />
