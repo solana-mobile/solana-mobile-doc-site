@@ -137,13 +137,13 @@ module.exports = {
             className: 'sidebar-section-header',
         },
         {
-            type: 'doc',
-            id: 'react-native/react-native-scaffold',
+            type: 'link',
+            href: 'https://github.com/solana-mobile/solana-mobile-dapp-scaffold',
             label: 'React Native dApp Scaffold'
         },
         {
-            type: 'doc',
-            id: 'react-native/expo-dapp-template',
+            type: 'link',
+            href: 'https://github.com/solana-mobile/solana-mobile-expo-template',
             label: 'Expo dApp Template'
         },
 
