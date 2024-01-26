@@ -121,7 +121,7 @@ To connect to a wallet and simultaneously verify the user's ownership of the wal
 _SIWS_ combines the `connect` and `signMessage` step and returns a `SolanaSignInOutput` that can be verified by the dApp.
 
 To initiate _SIWS_, include the optional `sign_in_payload` parameter in the `authorize` request. If provided, the wallet
-will prompt the user to sign in by signing the `statement` message.
+will display a dedicated _SIWS_ UI and prompt the user to sign in by signing the `statement` message.
 
 ```tsx
 const signInResult = await transact(async (wallet: Web3MobileWallet) => {

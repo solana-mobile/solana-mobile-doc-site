@@ -1,5 +1,6 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import CTAButton from "../../src/components/CTAButton";
 
 # React Native dApp Setup
 
@@ -11,22 +12,11 @@ Follow the [prerequisite setup](../getting-started/development-setup#prerequisit
 If you're planning on developing React Native on Windows, you should consider setting up your dev environment with [WSL2](https://learn.microsoft.com/en-us/windows/wsl/install) to avoid build issues installing our libraries.
 :::
 
-### Solana Mobile dApp Scaffold
+### React Native dApp Scaffold
 
-The fastest way to start building React Native on Solana is building off our [React Native Template dApp](https://github.com/solana-mobile/solana-mobile-dapp-scaffold):
+The fastest way to start building React Native on Solana is building off our [React Native Template dApp](https://github.com/solana-mobile/solana-mobile-dapp-scaffold). Run a single CLI command to initialize a React Native app with pre-installed Solana libraries and UI components.
 
-```shell
-npx react-native init MySolanaDapp --template https://github.com/solana-mobile/solana-mobile-dapp-scaffold.git
-```
-
-The scaffold is a ready-to-go React Native dApp that comes with:
-
-- The Mobile Wallet Adapter SDK and `@solana/web3.js`.
-- Required polyfills like `react-native-get-random-values` and `Buffer` installed.
-- Wallet authorization/connecting and airdrop request functionality.
-- Premade React UI Components like `ConnectWalletButton`, `RequestAirdropButton`, `SignMessageButton`.
-
-After initializing a template, you can quickly build your first dApp following this [tutorial!](/react-native/first_app_tutorial)
+<CTAButton label="Quickstart" to="https://github.com/solana-mobile/solana-mobile-dapp-scaffold" />
 
 ### Setting up a new React Native project
 
