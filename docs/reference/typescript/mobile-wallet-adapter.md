@@ -81,13 +81,13 @@ import WalletGetCapabilities from "./mobile-wallet-methods/\_walletGetCapabiliti
 
 <WalletGetCapabilities />
 
-import WalletSignTransactions from "./mobile-wallet-methods/\_walletSignTransactions.mdx"
-
-<WalletSignTransactions />
-
 import WalletSignAndSendTransactions from "./mobile-wallet-methods/\_walletSignAndSendTransactions.mdx"
 
 <WalletSignAndSendTransactions />
+
+import WalletSignTransactions from "./mobile-wallet-methods/\_walletSignTransactions.mdx"
+
+<WalletSignTransactions />
 
 import WalletSignMessages from "./mobile-wallet-methods/\_walletSignMessages.mdx"
 
