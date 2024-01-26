@@ -98,9 +98,11 @@ const authorizationResult = await transact(async (wallet: Web3MobileWallet) => {
 console.log("Connected to: " + authorizationResult.accounts[0].address)
 ```
 
+**Authorization Result**
+
 If the user approves, the wallet returns an `AuthorizationResult` response that contains the user's authorized wallet `accounts`, an `auth_token`, and `wallet_uri_base`.
 
-See the [SDK reference](/reference/typescript/mobile-wallet-adapter#web3mobilewalletauthorize) for a full explanation of the `AuthorizationResult` response type.
+In practice, most wallet apps currently only support single account authorization, so there will be at most 1 item in `accounts`.
 
 ```ts
 type AuthorizationResult = Readonly<{
@@ -111,7 +113,38 @@ type AuthorizationResult = Readonly<{
 }>;
 ```
 
-In practice, most wallet apps currently only support single account authorization, so there will be at most 1 item in `accounts`.
+See the [SDK reference](/reference/typescript/mobile-wallet-adapter#web3mobilewalletauthorize) for a full explanation of the `AuthorizationResult` response type.
+
+### Sign in with Solana
+
+To connect to a wallet and simultaneously verify the user's ownership of the wallet, use the [_Sign in with Solana_](https://github.com/phantom/sign-in-with-solana?tab=readme-ov-file#introduction) feature.
+_SIWS_ combines the `connect` and `signMessage` step and returns a `SolanaSignInOutput` that can be verified by the dApp.
+
+To initiate _SIWS_, include the optional `sign_in_payload` parameter in the `authorize` request. If provided, the wallet
+will prompt the user to sign in by signing the `statement` message.
+
+```tsx
+const signInResult = await transact(async (wallet: Web3MobileWallet) => {
+  const authorizationResult = await wallet.authorize({
+    chain: 'solana:devnet',
+    identity: APP_IDENTITY,
+    sign_in_payload: {
+      domain: 'yourdomain.com',
+      statement: 'Sign into React Native Sample App',
+      uri: 'https://yourdomain.com',
+    },
+  });
+
+  return authorizationResult.sign_in_result;
+}
+
+// Verify the `signInResult` on the server side
+```
+
+If approved, the wallet will include a `sign_in_result` payload in the `AuthorizationResult` response. The dApp can then
+verify that the `sign_in_result` was correctly signed by the user's wallet. This verfication step should happen on the server side of the dApp, rather than within the mobile client.
+
+See the [Phantom SIWS docs](https://github.com/phantom/sign-in-with-solana?tab=readme-ov-file#dapp-integration) for more information. It is written for web dApps, but can be extrapolated for mobile dApps.
 
 ### Connecting with an `auth_token`
 
