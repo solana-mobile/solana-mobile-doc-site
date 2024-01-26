@@ -21,14 +21,16 @@ These libraries provide a convenient API to connect, issue signing requests to a
 <TabItem value="yarn" label="yarn">
 
 ```bash
-yarn install @solana/web3.js
+yarn install @solana-mobile/mobile-wallet-adapter-protocol-web3js \
+             @solana-mobile/mobile-wallet-adapter-protocol
 ```
 
 </TabItem>
 <TabItem value="npm" label="npm">
 
 ```bash
-npm install @solana/web3.js
+npm install @solana-mobile/mobile-wallet-adapter-protocol-web3js \
+            @solana-mobile/mobile-wallet-adapter-protocol \
 ```
 
 </TabItem>

@@ -13,14 +13,18 @@ The [@solana/web3.js](https://github.com/solana-labs/solana-web3.js) library pro
 <TabItem value="yarn" label="yarn">
 
 ```bash
-yarn install @solana/web3.js
+yarn install @solana/web3.js \
+             react-native-get-random-values \
+             buffer
 ```
 
 </TabItem>
 <TabItem value="npm" label="npm">
 
 ```bash
-npm install @solana/web3.js
+npm install @solana/web3.js \
+             react-native-get-random-values \
+             buffer
 ```
 
 </TabItem>
@@ -28,8 +32,7 @@ npm install @solana/web3.js
 
 ### Add polyfills
 
-After installing, ensure you have also added these [polyfills](/react-native/setup#step-3-update-indexjs-with-polyfills) to your React native app. These are needed in some parts
-of `@solana/web3.js` because it is originally written as a web/node library and, as a result, certain expected APIs are missing in a React Native environment.
+After installing, ensure you have also added these [polyfills](/react-native/setup#step-3-update-indexjs-with-polyfills) to the `index.js` of your React native app. These are needed in some parts of `@solana/web3.js` because it is originally written as a web/node library and, as a result, certain expected APIs are missing in a React Native environment.
 
 ## Creating a `Connection` client
 
