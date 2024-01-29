@@ -130,12 +130,71 @@ when (result) {
 
 On successful connection, the `TransactionResult` will contain an `AuthorizationResult` that contains the user's wallet address, `authToken`, etc.
 
-### What's the difference with `transact` and `connect`?
+#### What's the difference with `transact` and `connect`?
 
 Under the hood, the `connect` method just calls the `transact` function with an empty callback, immediately returning the `authResult`.
 
 ```kotlin
 suspend fun connect(sender: ActivityResultSender) = transact(sender) { }
+```
+
+## Sign in with Solana
+
+To connect to a wallet and simultaneously verify the user's ownership of the wallet, use the [_Sign in with Solana_](https://github.com/phantom/sign-in-with-solana?tab=readme-ov-file#introduction) feature.
+_SIWS_ combines the `authorize` and `signMessage` step and returns a `SignInResult` that can be verified by the dApp.
+
+To initiate _SIWS_, use the `signIn` method and pass in a `SignInPayload` parameter. If provided, the wallet
+will display a dedicated _SIWS_ UI and prompt the user to sign in by signing the `statement` message.
+
+```kotlin
+import com.solana.mobilewalletadapter.clientlib.*
+
+ // `this` is the current Android activity
+val sender = ActivityResultSender(this)
+
+// Instantiate the MWA client object
+val walletAdapter = MobileWalletAdapter(/* ... */)
+
+// `connect` dispatches an association intent to MWA-compatible wallet apps.
+val result = walletAdapter.signIn(
+    sender,
+    SignInWithSolana.Payload("solana.com", "Sign in to Ktx Sample App")
+)
+
+when (result) {
+    is TransactionResult.Success -> {
+        // On success, an `AuthorizationResult` with a `signInResult` object is returned.
+        val signInresult = result.authResult.signInResult
+    }
+    is TransactionResult.NoWalletFound -> {
+        println("No MWA compatible wallet app found on device.")
+    }
+    is TransactionResult.Failure -> {
+        println("Error connecting to wallet: " + result.e.message)
+    }
+}
+```
+
+### Verifying the sign-in result
+
+If successful, the wallet will respond with an `authResult` that includes a `SignInResult` object, which can be used
+for verifying the sign-in process. The `SignInResult` object will contain the fields outlined in the [SIWS spec](https://github.com/phantom/sign-in-with-solana?tab=readme-ov-file#sign-in-output-fields).
+
+To verify the Sign-In output, use an Ed25519 library to verify that the message was correctly signed by the user's wallet. See `fakedapp` for an [example of message verification in Kotlin](https://github.com/solana-mobile/mobile-wallet-adapter/blob/761c3367e5ed4651fa2661767439abf25a178588/android/fakedapp/src/main/java/com/solana/mobilewalletadapter/fakedapp/MainViewModel.kt#L99C13-L108C18) or an [example with javascript on server-side](https://github.com/phantom/sign-in-with-solana?tab=readme-ov-file#sign-in-output-verification-backend).
+
+### Transact after signing in
+
+Similarly to `connect`, the `signIn` method just wraps an empty `transact` call and includes the provided `signInPayload`.
+
+If you want to sign in to the wallet and and continue issuing additional MWA requests, then you can use
+the include the optional `signInPayload` parameter when using the `transact` method.
+
+```kotlin
+// Sign in to authorize the session, then continue issuing requests.
+val result = walletAdapter.transact(sender,
+             SignInWithSolana.Payload("solana.com", "Sign in to Ktx Sample App")) { authResult ->
+    /* ..Send MWA requests.. */
+}
 ```
 
 ## Disconnecting from a wallet

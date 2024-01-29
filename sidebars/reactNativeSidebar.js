@@ -5,7 +5,7 @@ module.exports = {
     reactNativeSidebar: [
         {
             type: 'html',
-            value: 'React Native SDK',
+            value: 'React Native',
             className: 'react-native sidebar-header',
         },
         {
