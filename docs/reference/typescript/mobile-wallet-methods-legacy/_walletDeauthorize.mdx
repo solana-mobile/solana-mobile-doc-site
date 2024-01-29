@@ -37,9 +37,9 @@ The result will be an empty JSON object.
 
 ### Code sample:
 
-```typescript
-const authToken = getPreviouslyStoredAuthToken()
+```tsx
 const result = await transact(async (wallet: Web3MobileWallet) => {
+  const authToken = getPreviouslyStoredAuthToken()
   return await wallet.deauthorize({auth_token: authToken});
 });
 ```

@@ -1,0 +1,35 @@
+import CTAButton from "../../../src/components/CTAButton";
+
+The **React Native dApp Scaffold** is a ready-to-go React Native dApp that offers:
+
+- Pre-installed standard SDKs like Mobile Wallet Adapter and `@solana/web3.js`
+- Required polyfills like `react-native-get-random-values` and `Buffer` installed.
+- Simple React UI Components like `ConnectWalletButton`, `RequestAirdropButton`, `SignMessageButton`.
+
+<CTAButton label="View on GitHub" to="https://github.com/solana-mobile/solana-mobile-dapp-scaffold" />
+
+## Prerequisites
+
+- React Native and Android Envrionment [setup](https://docs.solanamobile.com/getting-started/development-setup)
+  - An Android device/emulator.
+  - Install an MWA compliant wallet app on your device/emulator.
+
+## Usage
+
+1. Initialize project template.
+
+```
+npx react-native init MySolanaDapp --template @solana-mobile/solana-mobile-dapp-scaffold --npm
+```
+
+:::note
+The `--npm` flag is only needed if you're using Yarn 2 or 3 as the default package manager. Once the template is initialized, you can delete the `package-lock.json` and run `yarn install` to continue using Yarn.
+:::
+
+2. Install dependencies;
+
+- `yarn install`
+
+3. Launch the app on your Android device/emulator.
+
+- `npx react-native run-android`

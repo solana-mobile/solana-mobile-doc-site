@@ -2,6 +2,9 @@ import {
   DocBlock,
   DocSideBySide,
   CodeParams,
+  Parameter,
+  Field,
+  Values,
   CodeSnippets,
 } from "../../../../src/components/CodeDocBlock";
 import Link from "@docusaurus/Link";
@@ -26,10 +29,11 @@ Non-privileged method. This method enumerates the capabilities and limits of the
 The result will be a JSON object as defined in `authorize`, but the values may be updated and differ
 from the values originally provided in the `authorize` response for the auth token.
 
+- `supports_clone_authorization`: true if the `clone_authorization` method is supported, otherwise false
+- `supports_sign_and_send_transactions`: true if the sign_and_send_transactions method is supported, otherwise false
 - `max_transactions_per_request`: (optional) if present, the max number of transaction payloads which can be signed by a single `sign_transactions` or `sign_and_send_transactions` request. If absent, the implementation doesn’t publish a specific limit for this parameter.
 - `max_messages_per_request`: (optional) if present, the max number of transaction payloads which can be signed by a single sign_messages request. If absent, the implementation doesn’t publish a specific limit for this parameter.
 - `supported_transaction_versions`: the Solana network transaction formats supported by this wallet endpoint. Allowed values are those defined for `TransactionVersion` (for e.g., "legacy", 0, etc).
-- `features`: a list of <Link to="https://solana-mobile.github.io/mobile-wallet-adapter/spec/spec.html#feature-identifiers">feature identifiers</Link> for the optional features supported by the wallet. Dapps can assume that mandatory features are supported by the wallet.
 
 </CodeParams>
 
@@ -37,9 +41,10 @@ from the values originally provided in the `authorize` response for the auth tok
 
 ### Code sample:
 
-```typescript
+```tsx
 const result = await transact(async (wallet: Web3MobileWallet) => {
-  return await wallet.getCapabilities();
+  const capabilities = await wallet.getCapabilities();
+  return capabilities;
 });
 ```
 
@@ -47,10 +52,11 @@ const result = await transact(async (wallet: Web3MobileWallet) => {
 
 ```json
 {
-    "max_transactions_per_request": 10,
-    "max_messages_per_request": 10,
-    "supported_transaction_versions": ["legacy", 0],
-    "features": ["<feature_id>"]
+  "supports_clone_authorization": false,
+  "supports_sign_and_send_transactions": true,
+  "max_transactions_per_request": 20,
+  "max_messages_per_request": 15,
+  "supported_transaction_versions": ["legacy", 0]
 }
 ```
 

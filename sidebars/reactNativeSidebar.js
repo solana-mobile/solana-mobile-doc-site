@@ -37,41 +37,62 @@ module.exports = {
             label: 'Quickstart'
         },
 
-        /* Starter Templates Section */
+        /* Development Section */
         {
             type: 'html',
             value: '<div class="sidebar-divider" />',
         },
         {
             type: 'html',
-            value: 'Template Apps',
+            value: 'Core SDK Guides',
             className: 'sidebar-section-header',
         },
         {
-            type: 'doc',
-            id: 'react-native/react-native-scaffold',
-            label: 'React Native dApp Scaffold'
+            type: 'category',
+            label: '@solana/web3.js',
+            collapsible: true,
+            collapsed: false,
+            items: [
+                {
+                    type: 'doc',
+                    id: 'react-native/making_rpc_requests',
+                    label: 'Make RPC requests'
+                },
+                {
+                    type: 'doc',
+                    id: 'react-native/building_transactions',
+                    label: 'Build Solana transactions'
+                },
+            ]
         },
         {
-            type: 'doc',
-            id: 'react-native/expo-dapp-template',
-            label: 'Expo dApp Template'
+            type: 'category',
+            label: 'Mobile Wallet Adapter',
+            collapsible: true,
+            collapsed: false,
+            items: [
+                {
+                    type: 'doc',
+                    id: 'react-native/using_mobile_wallet_adapter',
+                    label: 'Connect to wallets and request signing'
+                },
+                {
+                    type: 'doc',
+                    id: 'react-native/storing_mwa_auth',
+                    label: 'Cache wallet authorization'
+                },
+            ]
         },
 
-        /* Guides Section */
+        /* Additional Guides Section */
         {
             type: 'html',
             value: '<div class="sidebar-divider" />',
         },
         {
             type: 'html',
-            value: 'Guides',
+            value: 'Additional Guides',
             className: 'sidebar-section-header',
-        },
-        {
-            type: 'doc',
-            id: 'react-native/storing_mwa_auth',
-            label: 'Caching MWA authorization'
         },
         {
             type: 'doc',
@@ -103,6 +124,27 @@ module.exports = {
             type: 'doc',
             id: 'react-native/mobile_nft_minter_tutorial',
             label: 'Mobile NFT Photo Minter'
+        },
+
+        /* Starter Templates Section */
+        {
+            type: 'html',
+            value: '<div class="sidebar-divider" />',
+        },
+        {
+            type: 'html',
+            value: 'Template Apps',
+            className: 'sidebar-section-header',
+        },
+        {
+            type: 'link',
+            href: 'https://github.com/solana-mobile/solana-mobile-dapp-scaffold',
+            label: 'React Native dApp Scaffold'
+        },
+        {
+            type: 'link',
+            href: 'https://github.com/solana-mobile/solana-mobile-expo-template',
+            label: 'Expo dApp Template'
         },
 
         /* Reference Section */

@@ -2,20 +2,19 @@
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import CTAButton from "../../src/components/CTAButton";
 
-## What is Expo?
+[Expo](https://expo.dev/) is a popular open-source platform that simplifies the development, building, and deployment process for React Native applications. Expo apps have their own managed development flow and utilize the Expo SDK.
 
-[Expo](https://expo.dev/) is a popular open-source platform that simplifies the development, building, and deployment process for React Native applications. Expo apps have their own managed development flow with Expo Go, and utilizes the Expo SDK.
-
-## Expo Development for Solana Mobile
+### Expo Development for Solana Mobile
 
 The React Native resources, guides, and tutorials for Solana Mobile development **are all applicable for Expo as well**! After the initial setup, the development of an Expo app and a React Native app are very similar.
 
-## Expo dApp Template
+## Expo Starter Template
 
-The quickest option to get started with Expo development is using the [Solana Mobile Expo dApp Template](/react-native/expo-dapp-template). Run a single command to download and initialize a Solana Expo dApp with pre-installed libraries and UI components.
+The quickest option to get started with Expo development is using the [Solana Mobile Expo dApp Template](/react-native/expo-dapp-template). Run a single CLI command to initialize an Expo app with pre-installed Solana libraries and UI components.
 
-Follow the [guide](/react-native/expo-dapp-template) to learn how to initialize and run the template.
+<CTAButton label="Quickstart" to="https://github.com/solana-mobile/solana-mobile-expo-template" />
 
 ## Manual Installation
 
