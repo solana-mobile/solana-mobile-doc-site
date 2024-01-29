@@ -115,62 +115,6 @@ type AuthorizationResult = Readonly<{
 
 See the [SDK reference](/reference/typescript/mobile-wallet-adapter#web3mobilewalletauthorize) for a full explanation of the `AuthorizationResult` response type.
 
-### Sign in with Solana
-
-To connect to a wallet and simultaneously verify the user's ownership of the wallet, use the [_Sign in with Solana_](https://github.com/phantom/sign-in-with-solana?tab=readme-ov-file#introduction) feature.
-_SIWS_ combines the `authorize` and `signMessage` step and returns a `SolanaSignInOutput` that can be verified by the dApp.
-
-To initiate _SIWS_, include the optional `sign_in_payload` parameter in the `authorize` request. If provided, the wallet
-will display a dedicated _SIWS_ UI and prompt the user to sign in by signing the `statement` message.
-
-```tsx
-const signInResult = await transact(async (wallet: Web3MobileWallet) => {
-  const authorizationResult = await wallet.authorize({
-    chain: 'solana:devnet',
-    identity: APP_IDENTITY,
-    sign_in_payload: {
-      domain: 'yourdomain.com',
-      statement: 'Sign into React Native Sample App',
-      uri: 'https://yourdomain.com',
-    },
-  });
-
-  return authorizationResult.sign_in_result;
-}
-
-// Verify the `signInResult`
-```
-
-If approved, the wallet will include a `sign_in_result` payload in the `AuthorizationResult` response. The dApp can then
-verify that the `sign_in_result` was correctly signed by the user's wallet.
-
-The `@solana/wallet-standard-util` library provides a `verifySignIn` helper method for message and signature verification.
-
-```typescript
-import type {
-  SolanaSignInInput,
-  SolanaSignInOutput,
-} from "@solana/wallet-standard-features";
-import { verifySignIn } from "@solana/wallet-standard-util";
-
-export function verifySIWS(
-  input: SolanaSignInInput,
-  output: SolanaSignInOutput
-): boolean {
-  const serialisedOutput: SolanaSignInOutput = {
-    account: {
-      publicKey: new Uint8Array(output.account.publicKey),
-      ...output.account,
-    },
-    signature: new Uint8Array(output.signature),
-    signedMessage: new Uint8Array(output.signedMessage),
-  };
-  return verifySignIn(input, serialisedOutput);
-}
-```
-
-See the [Phantom SIWS docs](https://github.com/phantom/sign-in-with-solana?tab=readme-ov-file#dapp-integration) for more information. It is written for web dApps, but can be extrapolated for mobile dApps.
-
 ### Connecting with an `auth_token`
 
 For subsequent sessions with the wallet app, you can skip the authorization step by including an `auth_token` in the `authorize` request.
@@ -218,6 +162,62 @@ await transact(async (wallet) => {
   await wallet.deauthorize({ auth_token: previouslyStoredAuthToken });
 });
 ```
+
+## Sign in with Solana
+
+To connect to a wallet and simultaneously verify the user's ownership of the wallet, use the [_Sign in with Solana_](https://github.com/phantom/sign-in-with-solana?tab=readme-ov-file#introduction) feature.
+_SIWS_ combines the `authorize` and `signMessage` step and returns a `SolanaSignInOutput` that can be verified by the dApp.
+
+To initiate _SIWS_, include the optional `sign_in_payload` parameter in the `authorize` request. If provided, the wallet
+will display a dedicated _SIWS_ UI and prompt the user to sign in by signing the `statement` message.
+
+```tsx
+const signInResult = await transact(async (wallet: Web3MobileWallet) => {
+  const authorizationResult = await wallet.authorize({
+    chain: 'solana:devnet',
+    identity: APP_IDENTITY,
+    sign_in_payload: {
+      domain: 'yourdomain.com',
+      statement: 'Sign into React Native Sample App',
+      uri: 'https://yourdomain.com',
+    },
+  });
+
+  return authorizationResult.sign_in_result;
+}
+```
+
+### Verifying the sign-in result
+
+If approved, the wallet will include a `sign_in_result` payload in the `AuthorizationResult` response. The dApp can then
+verify that the `sign_in_result` was correctly signed by the user's wallet.
+
+The `@solana/wallet-standard-util` library provides a `verifySignIn` helper method for SIWS message and signature verification.
+
+```typescript
+import type {
+  SolanaSignInInput,
+  SolanaSignInOutput,
+} from "@solana/wallet-standard-features";
+import { verifySignIn } from "@solana/wallet-standard-util";
+
+export function verifySIWS(
+  input: SolanaSignInInput,
+  output: SolanaSignInOutput
+): boolean {
+  const serialisedOutput: SolanaSignInOutput = {
+    account: {
+      publicKey: new Uint8Array(output.account.publicKey),
+      ...output.account,
+    },
+    signature: new Uint8Array(output.signature),
+    signedMessage: new Uint8Array(output.signedMessage),
+  };
+  return verifySignIn(input, serialisedOutput);
+}
+```
+
+See the [Phantom SIWS docs](https://github.com/phantom/sign-in-with-solana?tab=readme-ov-file#dapp-integration) for more information. It is written for web dApps, but can be extrapolated for mobile dApps.
 
 ## Signing and sending a transaction
 
