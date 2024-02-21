@@ -76,15 +76,17 @@ npm install \
 
 For basic Expo apps, the entrypoint file is usually in the root of the project (i.e: `App.js`, `App.tsx`, `index.js`).
 
-If using or Expo Router _and_ Expo SDK Version 49+ is different, see the specific instructions below.
-
-Add the following two lines to the top of the file:
+Add the following two lines to the top of the entrypoint file:
 
 ```javascript
 import "react-native-get-random-values";
 import { Buffer } from "buffer";
 global.Buffer = Buffer;
 ```
+
+##### For Expo SDK Version 49+ and Expo Router
+
+If using Expo Router _and_ Expo SDK Version 49+ the entrypoint and polyfill setup is different. See the specific instructions below.
 
 <details>
 <summary>Polyfills: Expo SDK Version 49+ and Expo Router</summary>
