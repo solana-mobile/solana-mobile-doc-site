@@ -144,9 +144,16 @@ Then at the end, import `"expo-router/entry"` to ensure the app is using Expo Ro
 Lastly, in `package.json`, update the `main` field to point to the new entrypoint file.
 
 ```json
+// Old entrypoint
 {
   "main": "node_modules/expo/AppEntry.js"
 }
+
+// New entrypoint
+{
+  "main": "index.js"
+}
+
 ```
 
 </details>
