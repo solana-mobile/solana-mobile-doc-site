@@ -6,15 +6,23 @@ import CTAButton from "../../src/components/CTAButton";
 
 [Expo](https://expo.dev/) is a popular open-source platform that simplifies the development, building, and deployment process for React Native applications. Expo apps have their own managed development flow and utilize the Expo SDK.
 
-### Expo Development for Solana Mobile
-
-The React Native resources, guides, and tutorials for Solana Mobile development **are all applicable for Expo as well**! After the initial setup, the development of an Expo app and a React Native app are very similar.
+:::tip
+All React Native guides and tutorials for the Solana Mobile SDKs **are all applicable for Expo as well**! After the initial setup, the development of an Expo app and a React Native app are very similar.
+:::
 
 ## Expo Starter Template
 
 The quickest option to get started with Expo development is using the [Solana Mobile Expo dApp Template](/react-native/expo-dapp-template). Run a single CLI command to initialize an Expo app with pre-installed Solana libraries and UI components.
 
-<CTAButton label="Quickstart" to="https://github.com/solana-mobile/solana-mobile-expo-template" />
+Initialize the template with:
+
+```bash
+yarn create expo-app --template @solana-mobile/solana-mobile-expo-template
+```
+
+Then follow the [_Running the app_](#running-the-app) guide below.
+
+<CTAButton label="View on Github" to="https://github.com/solana-mobile/solana-mobile-expo-template" />
 
 ## Manual Installation
 
@@ -179,10 +187,35 @@ The `eas build` command deploys a job to the EAS Build service that builds your 
 
 You can also run the build process locally by adding the `--local` flag that runs, which builds and generates the APK on your computer. You'll need Android Studio and Java correctly setup for this step.
 
-See the Expo official documentation for [`eas build`](https://docs.expo.dev/build-reference/android-builds/) and [local builds](https://docs.expo.dev/build-reference/local-builds/).
+See the Expo official documentation for [local builds](https://docs.expo.dev/build-reference/local-builds/).
 
 <Tabs>
+<TabItem value="eas-build" label="EAS build">
+
+#### Build with eas build
+
+You can use Expo's build service to build your app with no development environment setup required. Make sure you have an Expo account and have logged in with `expo login`.
+
+In the project directory, run the command:
+
+```shell
+npx eas build --profile development --platform android
+```
+
+After it's finished building you should receive a QR code and download URL to the `apk` of your app. You can download this to your emulator/device.
+
+</TabItem>
 <TabItem value="build-local" label="Build locally">
+
+#### Prerequisites
+
+Before building locally, follow the [_React Native CLI Quickstart_ guide](https://reactnative.dev/docs/environment-setup) to set up your development environment.
+
+After following the guide, you should:
+
+- Install and use the recommended JDK 17
+- Install and configure Android Studio
+- Set your `JAVA_HOME` and `ANDROID_HOME` environment variables
 
 #### Configure `eas.json`
 
@@ -223,21 +256,6 @@ If you are seeing errors about missing Android NDK, make sure you've installed A
 ![ndk-download](/img/ndk-download.png)
 
 </details>
-
-</TabItem>
-<TabItem value="eas-build" label="EAS build">
-
-#### Build with eas build
-
-You can use Expo's build service to build your app. Make sure you have an Expo account and have logged in with `expo login`.
-
-In the repo, run the command:
-
-```shell
-npx eas build --profile development --platform android
-```
-
-After it's finished building you should receive a QR code and download URL to the `apk` of your app. You can download this to your emulator/device.
 
 </TabItem>
 </Tabs>
