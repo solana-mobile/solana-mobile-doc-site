@@ -18,8 +18,9 @@ There are two starter templates for React Native:
 - React Native dApp Scaffold
 
 :::tip
-Expo is a development platform that simplifies the development, building, and deployment process for React Native. Read about
-the advantages of developing with Expo [here](react-native/expo).
+Expo is a development platform that simplifies the development, building, and deployment process for React Native.
+
+The SDKs, references, and libraries for React Native are all compatible with Expo!
 :::
 
 ## Quickstart Scaffolds
