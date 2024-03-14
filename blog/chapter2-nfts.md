@@ -1,7 +1,7 @@
 ---
-title: Chapter 2 Leaderboard NFTs
-description: An explanation of the Element NFT collections distributed to Chapter 2 Leaderboard users.
-slug: chapter2-leaderboard-nfts
+title: Chapter 2 NFTs
+description: An article explaning the distribution and technical details of the Chapter 2 NFTs.
+slug: chapter2-nfts
 authors:
   - name: Mike Sulistio
     title: Developer Relations @ Solana Mobile
@@ -17,12 +17,12 @@ import BlogImageRow from "../src/components/BlogImageRow/"
 
 After the sellout of the Saga, Solana Mobile announced [Chapter 2](https://two.solanamobile.com) and launched a storefront where users can purchase preorders.
 
-In this preorder phase, Solana Mobile distributed various _soulbound NFT_ collections, similar in concept to the Saga Genesis token, to customers of Chapter 2.
+In this preorder phase, Solana Mobile distributed various _soulbound NFTs_, similar in concept to the Saga Genesis token, to customers of Chapter 2.
 
 1. Chapter 2 Preorder Token NFT
 2. Chapter 2 Leaderboard Element NFTs
 
-Let's dive into how each NFT collection is distributed and their technical details.
+Let's dive into how each NFT is distributed and their technical details.
 
 ## Chapter 2 Preorder Token
 
@@ -90,21 +90,30 @@ You can provide the mint address in a [_getTokenAccounts_](https://docs.helius.d
 
 The Chapter 2 preorder phase also launched with a referral system where users could refer others to purchase a preorder. The top 1500 users with the most referrals are displayed and ranked on the [Chapter 2 Leaderboard](https://two.solanamobile.com/leaderboard). There were 2 snapshots taken that captured the top 1500 leaderboard ranks at a given time.
 
-The 3 collections of Element NFTs were created to be distributed to these top 1500 leaderboard users at each snapshot.
+3 sets of Element NFTs were created to award top 1500 leaderboard users during each snapshot. Additionally,
+they were required to be claimed by the recipient.
 
 - The _Emerald NFT_ was available to claim by the top 1500 during the **first snapshot**.
 - The _Tanzanite NFT_ was available to claim by the top 1500 during the **second snapshot**.
 - The _Diamond NFT_ was available to claim by the top 1500 of **all time**.
 
-Within each collection, the NFTs are separated by tiers of ranking `1-50`, `51-500`, and `501-1500`. For example, a user can own an Emerald NFT that is rank `501-1500` and also
-own a Tanzanite NFT that has rank `51-500`.
+Within each set, the NFTs are separated by tiers of ranking `1-50`, `51-500`, and `501-1500`. For example, a user can own both an Emerald NFT that is rank `501-1500` and also
+a Tanzanite NFT that has rank `51-500`.
 
 ### NFT Details
 
-### Emerald NFT
+Each Element NFT:
 
-#### Distribution
+- adheres to the Metaplex [Token Standard](https://developers.metaplex.com/token-metadata/token-standard) and is part of a [Verified Collection](https://developers.metaplex.com/token-metadata/collections).
 
-### Emerald NFT
+- is a Soulbound Token that is non-transferable from the wallet claimed by the leaderboard user.
 
-### Emerald NFT
+- contains an attribute with the `trait_type: "Rank"` and a value of either `"1-50"`, `"51-500"`, or `"501-1500"`.
+
+#### Collection Address
+
+Each Element NFT contains a reference to its verified collection address.
+
+- Emerald NFT Collection Address: `7MMBHN5nXK1pEgK3AzaMTcSiDrXdb5AFfcQ6JGGdUGcp`
+- Tanzanite NFT Collection Address: `6SfWQ7bN8JkWbqxAsdnB9N24wSNshdMjGvmArFptQScC`
+- Diamond NFT Collection Address: `DN2eswVVvF3r3gKTPwyXic6QgRcYaMBa52j3FqQswqYd`
