@@ -15,7 +15,7 @@ import BlogImageRow from "../src/components/BlogImageRow/"
 
 # Chapter 2 NFTs
 
-After the sellout of the Saga, Solana Mobile announced [Chapter 2](https://two.solanamobile.com) and launched a storefront where users can purchase preorders.
+Following the sellout of the Saga device, Solana Mobile announced [Chapter 2](https://two.solanamobile.com) and launched a [storefront](https://two.solanamobile.com/preorder) where users can purchase preorders.
 
 In this preorder phase, Solana Mobile distributed various _soulbound NFTs_, similar in concept to the Saga Genesis token, to customers of Chapter 2.
 
@@ -108,7 +108,7 @@ Each Element NFT:
 
 - is a Soulbound Token that is non-transferable from the wallet claimed by the leaderboard user.
 
-- contains an attribute with the `trait_type: "Rank"` and a value of either `"1-50"`, `"51-500"`, or `"501-1500"`.
+- contains a metadata attribute with the `trait_type: "Rank"` and a value of either `"1-50"`, `"51-500"`, or `"501-1500"`.
 
 #### Collection Address
 
