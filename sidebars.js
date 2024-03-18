@@ -105,6 +105,17 @@ const sidebars = {
       id: 'android-native/overview',
       label: 'Kotlin'
     },
+
+    /* SDK Section **/
+    {
+      type: 'html',
+      value: '<div class="sidebar-divider" />',
+    },
+    {
+      type: 'html',
+      value: 'SDKs (Community)',
+      className: 'sidebar-section-header',
+    },
     {
       type: 'ref',
       id: 'flutter/overview',
@@ -119,11 +130,6 @@ const sidebars = {
       type: 'ref',
       id: 'unreal/unreal_sdk',
       label: 'Unreal Engine',
-    },
-    {
-      type: 'doc',
-      id: 'solana-kmp/solana-kmp',
-      label: 'SolanaKMP',
     },
     
      /* Resources Section */
@@ -155,9 +161,6 @@ const sidebars = {
   // other sidebars
   ...require("./sidebars/kotlinSidebar.js"),
   ...require("./sidebars/reactNativeSidebar.js"),
-  ...require("./sidebars/flutterSidebar.js"),
-  ...require("./sidebars/unitySidebar.js"),
-  ...require("./sidebars/unrealSidebar.js"),
   ...require("./sidebars/dappStoreSidebar.js"),
   ...require("./sidebars/referenceSidebar.js"),
   ...require("./sidebars/sagaSidebar.js"),

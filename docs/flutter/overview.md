@@ -1,3 +1,8 @@
+---
+title: Flutter
+displayed_sidebar: documentationSidebar
+---
+
 # Flutter
 
 import CTAButton from "../../src/components/CTAButton";
