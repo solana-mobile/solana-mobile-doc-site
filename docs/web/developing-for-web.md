@@ -18,9 +18,16 @@ Users of these libraries do not need to take any extra steps:
 
 Those libraries automatically bundle the Mobile Wallet Adapter plugin, and enable it when running in a compatible mobile environment.
 
-### Advanced usage
+### Customization
 
 Developers might wish to customize the behavior of this plugin for their app. Specifying the app's name and icon, deciding which address to select in the event the wallet authorizes the app to use more than one, specifying which network cluster to communicate with, and more are made possible by creating an instance of the mobile wallet adapter like this.
+
+:::tip
+It is highly recommended to provide a custom `appIdentity` with your app name and an identifable icon to help
+users understand what app they are interacting with.
+
+If left to default, the user will see an _"Unknown app_" label displayed and a missing icon.
+:::
 
 ```ts
 new SolanaMobileWalletAdapter({
@@ -28,7 +35,7 @@ new SolanaMobileWalletAdapter({
   appIdentity: {
     name: "My app",
     uri: "https://myapp.io",
-    icon: "relative/path/to/icon.png",
+    icon: "relative/path/to/icon.png", // resolves to https://myapp.io/relative/path/to/icon.png
   },
   authorizationResultCache: createDefaultAuthorizationResultCache(),
   cluster: WalletAdapterNetwork.Devnet,
