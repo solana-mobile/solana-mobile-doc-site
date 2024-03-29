@@ -4,6 +4,9 @@ displayed_sidebar: documentationSidebar
 
 # Developing for Web
 
+The Solana Mobile Stack was designed to be compatible on the mobile web. This document will
+explain how to ensure a mobile web app can be integrated with Solana Mobile libraries.
+
 ## Android Web
 
 Mobile Wallet Adapter library is built to also support functionality on the Android Chrome browser.
@@ -80,7 +83,7 @@ This inconsistency can be due to differences in browser configurations for requi
 
 ## iOS Web
 
-Mobile Wallet Adapter is not supported on iOS Safari, or other iOS browsers. This is the same with iOS native apps, and is a limitation of the operating system explained more in-depth in this [blog article](/blog/ios-wallet-signing#mobile-wallet-adapter).
+Mobile Wallet Adapter is not supported on iOS Safari. This is the same with iOS native apps, and is a limitation of the operating system explained more in-depth in this [blog article](/blog/ios-wallet-signing#mobile-wallet-adapter).
 
 ### Workarounds
 
