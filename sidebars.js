@@ -105,8 +105,13 @@ const sidebars = {
       id: 'android-native/overview',
       label: 'Kotlin'
     },
+    {
+      type: 'ref',
+      id: 'web/developing-for-web',
+      label: 'Web'
+    },
 
-    /* SDK Section **/
+    /* Community SDK Section **/
     {
       type: 'html',
       value: '<div class="sidebar-divider" />',
