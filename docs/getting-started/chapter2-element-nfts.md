@@ -11,7 +11,7 @@ tags: [saga, chapter-2, leaderboard, tanzanite, diamond, emerald, NFT]
 hide_table_of_contents: false
 ---
 
-import BlogImageRow from "../src/components/BlogImageRow/"
+import BlogImageRow from "../../src/components/BlogImageRow/"
 
 # Chapter 2 Element NFTs
 
@@ -21,7 +21,13 @@ import BlogImageRow from "../src/components/BlogImageRow/"
   <img src="/blog_imgs/diamond-nft.jpeg" alt="Diamond NFT" width="33%" />
 </BlogImageRow>
 
-### Element NFT holders
+## Introduction
+
+This article provides information about the Solana Mobile Chapter 2 Element NFTs. The non-transferrable Chapter 2 Element NFTs allow for the identification of wallets of referrers with the highest number of successful referrals on the Chapter 2 Leaderboard.
+
+Solana Mobile does not currently have a rewards program in connection with the Chapter 2 Element NFTs. Ecosystem teams are entirely free to decide if (and if so, how) they wish to interact with the holders of these non-transferrable NFTs.
+
+## Element NFT holders
 
 The Chapter 2 preorder phase launched with a referral system where users could refer others to purchase a preorder. The top 1500 people on the [Chapter 2 Leaderboard](https://two.solanamobile.com/leaderboard) were able to claim a soulbound, non-transferrable Element NFT.
 
@@ -29,7 +35,7 @@ The leaderboard rankings were determined by the referrers with the highest numbe
 
 There were 2 snapshots taken that captured the top 1500 leaderboard ranks at a given time.
 
-### Element NFT Collections
+## Element NFT Collections
 
 3 sets of Element NFTs were created to award top 1500 leaderboard users during each snapshot. Additionally,
 they were required to be claimed by the recipient.
@@ -41,9 +47,9 @@ they were required to be claimed by the recipient.
 Within each set, the NFTs are separated by tiers of ranking `1-50`, `51-500`, and `501-1500`. For example, a user can own both an Emerald NFT that is rank `501-1500` and also
 a Tanzanite NFT that has rank `51-500`.
 
-### NFT Details
+## NFT Details
 
-#### Collection Address
+### Collection Address
 
 Each Element NFT contains a reference to its verified collection address.
 
@@ -51,21 +57,21 @@ Each Element NFT contains a reference to its verified collection address.
 - Tanzanite NFT Collection Address: `6SfWQ7bN8JkWbqxAsdnB9N24wSNshdMjGvmArFptQScC`
 - Diamond NFT Collection Address: `DN2eswVVvF3r3gKTPwyXic6QgRcYaMBa52j3FqQswqYd`
 
-#### Metadata
+### Metadata
 
 Each Element NFT adheres to the Metaplex [Token Standard](https://developers.metaplex.com/token-metadata/token-standard) and is part of a [Verified Collection](https://developers.metaplex.com/token-metadata/collections).
 
 Each NFT also contains a rank tier embedded in the NFT metadata `Rank` attribute with value of either `"1-50"`, `"51-500"`, or `"501-1500"`.
 
-### Querying for Element NFT holders
+## Querying for Element NFT holders
 
 You can follow these steps to query an Element NFT collection and save the list into a JSON file:
 
-#### 1. Access your RPC provider
+### 1. Access your RPC provider
 
 Any RPC provider with the DAS (Digital Asset Standard) APIs should work. If you don't have one, the Helius Free plan (helius.dev/pricing) should be sufficient for this query.
 
-#### 2. Add your API Key to the following query
+### 2. Add your API Key to the following query
 
 ```javascript
 import { writeFileSync } from "fs";
@@ -128,7 +134,7 @@ console.log(`Writing to ${OUTPUT_FILE}`);
 writeFileSync(OUTPUT_FILE, JSON.stringify(nfts, null, 2));
 ```
 
-#### Specify the NFT collection
+### 3. Specify the NFT collection
 
 Insert the desired collection address as listed in place of the “Add address here”
 
@@ -136,6 +142,6 @@ Insert the desired collection address as listed in place of the “Add address h
 const NFT_COLLECTION_ADDRESS = "ADD ADDRESS HERE";
 ```
 
-#### 4. Perform the query
+### 4. Perform the query
 
 Run the script to perform the query and you can find the results in the output file `out.json`.
