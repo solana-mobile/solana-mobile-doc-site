@@ -118,6 +118,11 @@ writeFileSync(OUTPUT_FILE, JSON.stringify(tokens, null, 2));
 
 Run the script to perform the query and you can find the results in the output file `out.json`.
 
+:::tip
+This script can return duplicates of the same owner's wallet address. This is because
+it is possible for a single wallet address to own more than one Preorder Token, if they preordered multiple Chapter 2 products.
+:::
+
 ### 4. Further querying (optional)
 
 In order to query a subset of the Preorder Token Holders, you may write a script to fetch wallet activity data using blockchain explorers and analytics tools based on the subset criteria. You can use their APIs to retrieve transaction history, token balances, and other relevant information, such as:
