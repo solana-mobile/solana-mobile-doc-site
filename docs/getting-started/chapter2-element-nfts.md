@@ -29,7 +29,7 @@ Solana Mobile does not currently have a rewards program in connection with the C
 
 ## Element NFT holders
 
-The Chapter 2 preorder phase launched with a referral system where users could refer others to purchase a preorder. The top 1500 people on the [Chapter 2 Leaderboard](https://two.solanamobile.com/leaderboard) were able to claim a soulbound, non-transferrable Element NFT.
+The Chapter 2 preorder phase launched with a referral system where users could refer others to make a deposit toward the future purchase of the Chapter Two device. The top 1500 people on the [Chapter 2 Leaderboard](https://two.solanamobile.com/leaderboard) were able to claim a soulbound, non-transferrable Element NFT.
 
 The leaderboard rankings were determined by the referrers with the highest number of successful referrals, specifically through people preordering Chapter 2 via their unique referral links.
 

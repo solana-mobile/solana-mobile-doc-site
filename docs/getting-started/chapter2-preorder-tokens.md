@@ -21,7 +21,7 @@ import BlogImageRow from "../../src/components/BlogImageRow/"
 
 ## Introduction
 
-This article provides information about the Solana Mobile Chapter 2 Preorder Tokens NFTs. The non-transferrable Chapter 2 Preorder Tokens allow for the identification of wallets that have participated in supporting Chapter 2.
+This article provides information about the Solana Mobile Chapter 2 Preorder Tokens NFTs.The non-transferrable Chapter 2 Preorder Tokens allow for the identification of wallets that have participated in supporting Chapter 2.
 
 Solana Mobile does not currently have a rewards program in connection with the Chapter 2 Preorder Token. Ecosystem teams are entirely free to decide if (and if so, how) they wish to interact with the holders of these non-transferable tokens.
 
@@ -29,7 +29,7 @@ Solana Mobile does not currently have a rewards program in connection with the C
 
 The Chapter 2 Preorder Token NFT is a non-transferable NFT distributed to the wallets of anyone who has preordered Chapter 2.
 
-As of the time this article was written, there are 110,000+ holders of the Preorder Token, but preorder phase is still active and new Tokens are issued in waves.
+As of the time this article was written, there are 110,000+ holders of the Preorder Token. The preorder phase is still active and any new Tokens will be issued in waves.
 
 ## NFT Details
 
@@ -64,8 +64,8 @@ Metadata Pointer
 ## Querying for Chapter 2 Preorder Token holders
 
 :::tip
-This script can return duplicates of the same owner's wallet address. This is because
-it is possible for a single wallet address to own more than one Preorder Token, if they preordered multiple Chapter 2 products.
+This script can return duplicates of the same owner's wallet address.
+This is because it is possible for a single wallet address to own more than one Preorder Token, if they preordered multiple Chapter 2 products.
 :::
 
 You can follow these steps to query the Chapter 2 Preorder Token list and save it into a JSON file:
