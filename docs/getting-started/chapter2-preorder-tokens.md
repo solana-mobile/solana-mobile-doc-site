@@ -63,6 +63,11 @@ Metadata Pointer
 
 ## Querying for Chapter 2 Preorder Token holders
 
+:::tip
+This script can return duplicates of the same owner's wallet address. This is because
+it is possible for a single wallet address to own more than one Preorder Token, if they preordered multiple Chapter 2 products.
+:::
+
 You can follow these steps to query the Chapter 2 Preorder Token list and save it into a JSON file:
 
 ### 1. Access your RPC provider.
@@ -117,11 +122,6 @@ writeFileSync(OUTPUT_FILE, JSON.stringify(tokens, null, 2));
 ### 3. Perform the Query
 
 Run the script to perform the query and you can find the results in the output file `out.json`.
-
-:::tip
-This script can return duplicates of the same owner's wallet address. This is because
-it is possible for a single wallet address to own more than one Preorder Token, if they preordered multiple Chapter 2 products.
-:::
 
 ### 4. Further querying (optional)
 
