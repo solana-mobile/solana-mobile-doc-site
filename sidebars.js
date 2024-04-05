@@ -46,11 +46,6 @@ const sidebars = {
       ]
     },
     {
-      type: 'doc',
-      id: 'getting-started/saga-genesis-token',
-      label: 'Saga Genesis Token'
-    },
-    {
       type: 'category',
       label: 'The Solana Mobile Stack',
       collapsible: true,
@@ -70,6 +65,29 @@ const sidebars = {
           type: 'link',
           href: '/getting-started/overview#solana-dapp-store',
           label: 'Solana dApp Store'
+        },
+      ]
+    },
+    {
+      type: 'category',
+      label: 'Solana Mobile Tokens',
+      collapsible: true,
+      collapsed: true,
+      items: [
+        {
+          type: 'doc',
+          id: 'getting-started/saga-genesis-token',
+          label: 'Saga Genesis Token'
+        },
+        {
+          type: 'doc',
+          id: 'getting-started/chapter2-preorder-tokens',
+          label: 'Chapter 2 Preorder Tokens'
+        },
+        {
+          type: 'doc',
+          id: 'getting-started/chapter2-element-nfts',
+          label: 'Chapter 2 Element NFTs'
         },
       ]
     },
