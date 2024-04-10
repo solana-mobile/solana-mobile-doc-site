@@ -1,4 +1,3 @@
-
 # Mint & Submit your dApp for review
 
 ## Create a Solana keypair for your dapp
@@ -34,6 +33,12 @@ Release JSON valid!
 ```
 
 ## Mint your NFTs
+
+:::tip
+When using CLI version >= `0.7.3`, the following commands will submit a Solana transaction that includes a default priority fee of `500000` lamports.
+
+To customize this value, use param `-p` or `--priority-fee-lamports <priority-fee-lamports>`
+:::
 
 ### 1. Create your publisher NFT
 
@@ -81,8 +86,6 @@ The two flags for this command (`--requestor-is-authorized` and `--complies-with
 
 After submitting, please check the email address specified in the `publisher` section of your configuration file; you will receive correspondence from the Solana dApp Publisher Portal to that account.
 
-
 ## 4. Wait for a decision on your app
 
 After submitting, we’ll review your app based on our policies. Please make sure to provide a valid email address, so that we can reach out to you with any questions about your submission.
-
