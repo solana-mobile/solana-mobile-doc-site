@@ -27,7 +27,7 @@ Be sure to include `new_in_version` details so users can know what to expect wit
 
 The Solana dApp store requires each new release of your dApp to be minted as a release NFT with all the changes discussed in this section.
 
-Run the same CLI command as the "Create the release NFT" step from the [Mint your NFTs](submit#mint-your-nfts) section in these docs.
+Run the same CLI command as the "Create the release NFT" step from the [Mint a release NFT](submit#mint-a-release-nft) section in these docs.
 
 ## 4. Submit an update to the Publisher Portal
 
