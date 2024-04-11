@@ -7,7 +7,7 @@
 Once everything is setup, collect the file paths for all your publishing assets (e.g., APK file, icons, screenshot images) relative to the directory that was just created.
 Some best practices for the assets & files you'll be providing:
 
-- Icon(s) should be 512px by 512px dimensions.
+- Icon(s) must be 512px by 512px dimensions.
 - We recommend screenshot/preview images to be 1080p resolution (1920px by 1080px).
 - You may choose portrait or landscape orientation for your images, we only ask that all the images you provide have consistent orientation.
 - Make sure your dApp APK is localized properly, and that your build.gradle file identifies the languages & locales that your dApp supports. See [the Android developer documentation](https://developer.android.com/guide/topics/resources/multilingual-support#specify-the-languages-your-app-supports) for more details.

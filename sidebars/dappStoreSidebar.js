@@ -31,13 +31,18 @@ module.exports = {
                 },
                 {
                     type: 'doc',
+                    id: 'dapp-publishing/publisher-and-app-nft',
+                    label: '3. Publisher and App NFTs'
+                },
+                {
+                    type: 'doc',
                     id: 'dapp-publishing/submit',
-                    label: '3. Mint & Submit your dApp'
+                    label: '4. Submit your dApp release'
                 },
                 {
                     type: 'doc',
                     id: 'dapp-publishing/publishing_releases',
-                    label: '4. Publish subsequent dApp releases'
+                    label: '5. Publish subsequent dApp releases'
                 },
             ]  
         },
