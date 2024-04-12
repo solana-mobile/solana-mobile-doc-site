@@ -5,18 +5,30 @@
 ### 1. Collect your publishing assets
 
 Once everything is setup, collect the file paths for all your publishing assets (e.g., APK file, icons, screenshot images) relative to the directory that was just created.
-Some best practices for the assets & files you'll be providing:
+
+#### Requirements
+
+Your submission must meet the following requirements to pass app review:
 
 - Icon(s) must be 512px by 512px dimensions.
-- We recommend screenshot/preview images to be 1080p resolution (1920px by 1080px).
-- You may choose portrait or landscape orientation for your images, we only ask that all the images you provide have consistent orientation.
-- Make sure your dApp APK is localized properly, and that your build.gradle file identifies the languages & locales that your dApp supports. See [the Android developer documentation](https://developer.android.com/guide/topics/resources/multilingual-support#specify-the-languages-your-app-supports) for more details.
+  - Follow the [Google Play icon design spec](https://developer.android.com/distribute/google-play/resources/icon-design-specifications) for best practices.
+- Provide a minimum of 4 screenshots/preview images of your app.
+  - All images provided must have consistent orientation (landscape or portrait).
+  - All images provided must have equal aspect ratio.
+- A release build of your Android APK signed with a unique signing key.
 
 :::warning Important
 It is very important that you publish a release build of your Android APK signed with a unique signing key. This key will be used for all releases that you submit to the dApp store, and cannot be shared with releases on a different Android app store. You can learn more about this process [here](https://developer.android.com/studio/publish/app-signing#opt-out).
 
 Apps submitted as debug builds or release builds signed by anything other than a unique key cannot be accepted.
 :::
+
+#### Recommendations
+
+Some best practices for the assets & files you'll be providing:
+
+- We recommend screenshot/preview images to be 1080p resolution (1920px by 1080px).
+- Make sure your dApp APK is localized properly, and that your build.gradle file identifies the languages & locales that your dApp supports. See [the Android developer documentation](https://developer.android.com/guide/topics/resources/multilingual-support#specify-the-languages-your-app-supports) for more details.
 
 :::tip
 It is recommended that you put your dApp publishing files next to your dApp, and source control them together.
@@ -42,7 +54,7 @@ You may need to provide details in the `testing_instructions` field of the confi
 
 ### 3. Localization of store details (Optional)
 
-The configuration file allows for localization of the details/copy you provide that describes your app. To be clear, this localized text is different from the strings localized *within your app itself*. Localized store details will be presented to users browsing dApp stores based on the locale they have chosen on their device. If a user's device is set to a locale you have provided, they will be presented that localized text.
+The configuration file allows for localization of the details/copy you provide that describes your app. To be clear, this localized text is different from the strings localized _within your app itself_. Localized store details will be presented to users browsing dApp stores based on the locale they have chosen on their device. If a user's device is set to a locale you have provided, they will be presented that localized text.
 
 As a tangible example, here's how you would localize details strings for French (France). This would be placed at the same hierarchical level alongside the default `en-US` locale text:
 
