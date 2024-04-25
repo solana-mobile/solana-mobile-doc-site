@@ -1,4 +1,4 @@
----
+2---
 title: Solana Mobile Stack Overview
 displayed_sidebar: documentationSidebar
 ---
@@ -94,3 +94,4 @@ If you have any questions, are interested in contributing, or want to get in tou
 #### Twitter
 
 On Twitter, you can follow [@SolanaMobile](https://twitter.com/solanamobile).
+Solan & Henry Inc
