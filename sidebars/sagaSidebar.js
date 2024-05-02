@@ -30,6 +30,11 @@ module.exports = {
                     id: 'saga/release-notes/2023-12-update',
                     label: 'December 2023 Update'
                 },
+                {
+                    type: 'doc',
+                    id: 'saga/release-notes/mr3',
+                    label: 'MR3'
+                },
             ]
         },
     ]
