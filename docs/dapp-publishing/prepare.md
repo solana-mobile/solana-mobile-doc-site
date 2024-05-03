@@ -4,7 +4,11 @@
 
 ### 1. Collect your publishing assets
 
-Once everything is setup, collect the file paths for all your publishing assets (e.g., APK file, icons, screenshot images) relative to the directory that was just created.
+:::tip Reference
+View the [dApp Publishing Example repo](https://github.com/solana-mobile/dapp-publishing/tree/main/example) for a reference of the assets and configuration file required for publishing.
+:::
+
+Once everything is setup, collect the file paths for all your publishing assets (e.g., APK file, icons, screenshot images, videos) relative to the directory that was just created.
 
 #### Requirements
 
@@ -12,9 +16,15 @@ Your submission must meet the following requirements to pass app review:
 
 - Icon(s) must be 512px by 512px dimensions.
   - Follow the [Google Play icon design spec](https://developer.android.com/distribute/google-play/resources/icon-design-specifications) for best practices.
-- Provide a minimum of 4 screenshots/preview images of your app.
+- Provide a minimum of 4 screenshot images or videos of your app.
+  - We recommend preview images and videos to be 1080p resolution (1920px by 1080px).
+- Image Requirements
+  - All images provided must be at least 1080px in width and height.
   - All images provided must have consistent orientation (landscape or portrait).
   - All images provided must have equal aspect ratio.
+- Videos Requirements
+  - All videos provided must be at least 720px in width and height.
+  - All videos provided must be `.mp4` video file format.
 - A release build of your Android APK signed with a unique signing key.
 
 :::warning Important
@@ -27,7 +37,6 @@ Apps submitted as debug builds or release builds signed by anything other than a
 
 Some best practices for the assets & files you'll be providing:
 
-- We recommend screenshot/preview images to be 1080p resolution (1920px by 1080px).
 - Make sure your dApp APK is localized properly, and that your build.gradle file identifies the languages & locales that your dApp supports. See [the Android developer documentation](https://developer.android.com/guide/topics/resources/multilingual-support#specify-the-languages-your-app-supports) for more details.
 
 :::tip
@@ -43,6 +52,10 @@ There are 3 sections to fill out: `publisher`, `app`, and `release`:
 - The `publisher` section describes you, the app developer.
 - The `app` section represents a single logical app produced by a publisher. A single publisher will always have at least one app, but if you publish multiple different apps under a single identity, there will be one for each of your apps.
 - The `release` section is the most important, and describes all the metadata for a single release of an app, including its display name, description, icons, screenshots, etc. The text you enter in the `catalog` subsection, along with the icon and screenshots in the `media` subsections, are what application stores will use to display details about your app to the end user, so be as descriptive as you can.
+
+:::tip Reference
+View the [dApp Publishing Example repo](https://github.com/solana-mobile/dapp-publishing/blob/main/example/config.yaml) for a reference of a completed configuration file.
+:::
 
 :::info
 Each of the above regions of the configuration file have an `address` field. You do not need to modify this field nor should you remove it from the configuration file.
