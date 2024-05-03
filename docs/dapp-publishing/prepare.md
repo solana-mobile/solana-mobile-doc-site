@@ -17,8 +17,12 @@ Your submission must meet the following requirements to pass app review:
 - Icon(s) must be 512px by 512px dimensions.
   - Follow the [Google Play icon design spec](https://developer.android.com/distribute/google-play/resources/icon-design-specifications) for best practices.
 - Provide a minimum of 4 screenshot images or videos of your app.
+  - We recommend preview images and videos to be 1080p resolution (1920px by 1080px).
+- Images
+  - All images provided must be at least 1080px in width and height.
   - All images provided must have consistent orientation (landscape or portrait).
   - All images provided must have equal aspect ratio.
+- Videos
   - All videos provided must be at least 720px in width and height.
   - All videos provided must be `.mp4` video file format.
 - A release build of your Android APK signed with a unique signing key.
@@ -33,7 +37,6 @@ Apps submitted as debug builds or release builds signed by anything other than a
 
 Some best practices for the assets & files you'll be providing:
 
-- We recommend screenshot/preview images to be 1080p resolution (1920px by 1080px).
 - Make sure your dApp APK is localized properly, and that your build.gradle file identifies the languages & locales that your dApp supports. See [the Android developer documentation](https://developer.android.com/guide/topics/resources/multilingual-support#specify-the-languages-your-app-supports) for more details.
 
 :::tip
