@@ -40,9 +40,22 @@ module.exports = {
                     label: '4. Submit your dApp release'
                 },
                 {
-                    type: 'doc',
-                    id: 'dapp-publishing/publishing_releases',
-                    label: '5. Publish subsequent dApp releases'
+                    type: 'category',
+                    label: 'After publishing',
+                    collapsible: true,
+                    collapsed: false,
+                    items: [
+                        {
+                            type: 'doc',
+                            id: 'dapp-publishing/link-to-dapp-listing-page',
+                            label: 'Link to your dApp listing page'
+                        },
+                        {
+                            type: 'doc',
+                            id: 'dapp-publishing/publishing-updates',
+                            label: 'Publish a dApp update'
+                        }
+                    ]
                 },
             ]  
         },
