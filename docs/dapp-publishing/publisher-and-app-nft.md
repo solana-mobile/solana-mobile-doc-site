@@ -6,7 +6,7 @@ import TabItem from '@theme/TabItem';
 If this is your first time publishing an app on the dApp Store, then you will need to mint a **Publisher NFT** and an **App NFT**.
 
 :::tip
-If you are looking to publish an update version of an existing app, then skip to [this step](/dapp-publishing/publishing_releases).
+If you are looking to publish an update version of an existing app, then skip to [this step](/dapp-publishing/publishing-updates).
 :::
 
 A Publisher NFT:
