@@ -49,6 +49,7 @@ const linkToListing = () => {
 </TabItem>
 <TabItem value="Kotlin" label="Kotlin">
 
+Update the `AndroidManifest.xml` to include `queries`. 
 ```xml
 <manifest
     <queries>
