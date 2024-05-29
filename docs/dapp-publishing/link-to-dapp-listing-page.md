@@ -49,6 +49,21 @@ const linkToListing = () => {
 </TabItem>
 <TabItem value="Kotlin" label="Kotlin">
 
+```xml
+<manifest
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data
+                android:host="details"
+                android:scheme="solanadappstore" />
+        </intent>
+    </queries>
+...
+</manifest>
+```
+
 ```kotlin
 // Create an Android intent to navigate to the listing page
 val intent = Intent(Intent.ACTION_VIEW).apply {
