@@ -118,7 +118,7 @@ module.exports = {
                 },
                 {
                     type: 'doc',
-                    id: 'react-native/polyfill-guides/polyfills',
+                    id: 'react-native/polyfill-guides/anchor',
                     label: 'Anchor'
                 },
                 {
