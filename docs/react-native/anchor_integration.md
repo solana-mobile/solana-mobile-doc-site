@@ -47,9 +47,19 @@ npm install @coral-xyz/anchor@0.28.0
 
 ## Create an Anchor Wallet with Mobile Wallet Adapter
 
+:::tip
+The Anchor Counter Program example app shows how to create an Anchor wallet that is integrated
+with a more complex state management framework.
+
+<CTAButton label="View sample" to="https://github.com/solana-mobile/tutorial-apps/blob/main/AnchorCounterDapp/src/utils/useAnchorWallet.tsx#L23" />
+
+<div />
+
+:::
+
 To create an `AnchorWallet`, use Mobile Wallet Adapter `transact` to implement the required signing functions.
 
-<CTAButton label="See example" to="https://github.com/solana-mobile/tutorial-apps/blob/main/AnchorCounterDapp/components/providers/CounterProgramProvider.tsx#L39" />
+A simple implementation:
 
 ```tsx
 import * as anchor from "@coral-xyz/anchor";
@@ -58,20 +68,15 @@ import {
   Web3MobileWallet,
 } from "@solana-mobile/mobile-wallet-adapter-protocol-web3js";
 
-const storedAuthToken = maybeGetStoredAuthToken(); // dummy placeholder function
 const anchorWallet = useMemo(() => {
   return {
     signTransaction: async (transaction: Transaction) => {
       return transact(async (wallet: Web3MobileWallet) => {
-        const authorizationResult = await (storedAuthToken
-          ? wallet.reauthorize({
-              auth_token: storedAuthToken,
-              identity: APP_IDENTITY,
-            })
-          : wallet.authorize({
+        const authorizationResult = await wallet.authorize({
               cluster: RPC_ENDPOINT,
               identity: APP_IDENTITY,
-            }));
+        }));
+
         const signedTransactions = await wallet.signTransactions({
           transactions: [transaction],
         });
@@ -80,7 +85,11 @@ const anchorWallet = useMemo(() => {
     },
     signAllTransactions: async (transactions: Transaction[]) => {
       return transact(async (wallet: Web3MobileWallet) => {
-        await authorizeSession(wallet);
+        const authorizationResult = await wallet.authorize({
+              cluster: RPC_ENDPOINT,
+              identity: APP_IDENTITY,
+        }));
+
         const signedTransactions = await wallet.signTransactions({
           transactions: transactions,
         });
@@ -88,10 +97,10 @@ const anchorWallet = useMemo(() => {
       });
     },
     get publicKey() {
-      return selectedAccount.publicKey;
+      return userPubKey;
     },
   } as anchor.Wallet;
-}, [storedAuthToken]);
+}, []);
 ```
 
 ## Importing an Anchor Program in Typescript
@@ -117,15 +126,17 @@ Once your IDL has been generated, you can import it and create an instance of yo
 - Import your generated IDL file, in this case from `/target/types/basic_counter.ts`
 - Use the `anchorWallet` from the previous step to create an `AnchorProvider`.
 
-<CTAButton label="See example" to="https://github.com/solana-mobile/tutorial-apps/blob/main/AnchorCounterDapp/components/providers/CounterProgramProvider.tsx#L96" />
+<CTAButton label="See example" to="https://github.com/solana-mobile/tutorial-apps/blob/main/AnchorCounterDapp/src/components/counter/counter-data-access.tsx#L15" />
 
 ```tsx
 import { BasicCounter as BasicCounterProgram } from "../../basic-counter/target/types/basic_counter";
 import { AnchorProvider, Program } from "@coral-xyz/anchor";
 
+const COUNTER_PROGRAM_ID = "ADraQ2ENAbVoVZhvH5SPxWPsF2hH5YmFcgx61TafHuwu";
+
 // Address of the devnet-deployed Counter Program
 const counterProgramId = useMemo(() => {
-  return new PublicKey("5tH6v5gyhxnEjyVDQFjuPrH9SzJ3Rvj1Q4zKphnZsN74");
+  return new PublicKey(COUNTER_PROGRAM_ID);
 }, []);
 
 // Create an AnchorProvider with the anchorWallet.
@@ -140,7 +151,7 @@ const provider = useMemo(() => {
 }, [anchorWallet, connection]);
 
 // Create an instance of your Program.
-const basicCounterProgram = useMemo(() => {
+const counterProgram = useMemo(() => {
   if (!provider) {
     return null;
   }
@@ -153,46 +164,36 @@ const basicCounterProgram = useMemo(() => {
 }, [counterProgramId, provider]);
 ```
 
-## Signed Transactions from your Anchor Program
+## Sign transactions manually with Mobile Wallet Adapter
 
-With an instantiated `Program`, you can now:
+With an instantiated `Program`, you can:
 
 - Generate serialized program instructions.
 - Construct a `Transaction` with the generated instructions.
-- Sign the `Transaction` with Mobile Wallet Adapter.
+- Manually sign the `Transaction` with Mobile Wallet Adapter.
 
-<CTAButton label="See example" to="https://github.com/solana-mobile/tutorial-apps/blob/main/AnchorCounterDapp/components/SignIncrementTxButton.tsx" />
+In the following example, we generate an `incrementInstruction` from the program then sign it within a Mobile Wallet Adapter
+session.
 
 ```tsx
-import { BasicCounter } from "../basic-counter/target/types/basic_counter";
-import { useCounterProgram } from "./hooks/useCounterProgram";
+const {counterProgram, counterPDA} = useCounterProgram();
 
-const storedAuthToken = maybeGetStoredAuthToken();
-const { counterProgram, counterPDA } = useCounterProgram(
-  connection,
-  anchorWallet
-);
-const signIncrementTransaction = useCallback(async () => {
+const signIncrementTransaction = async () => {
   return await transact(async (wallet: Web3MobileWallet) => {
-    const authorizationResult = await (storedAuthToken
-      ? wallet.reauthorize({
-          auth_token: storedAuthToken,
-          identity: APP_IDENTITY,
-        })
-      : wallet.authorize({
-          cluster: RPC_ENDPOINT,
-          identity: APP_IDENTITY,
-        }));
+    const authorizationResult = wallet.authorize({
+      cluster: RPC_ENDPOINT,
+      identity: APP_IDENTITY,
+    }));
+
     const latestBlockhash = await connection.getLatestBlockhash();
 
     // Generate the increment ix from the Anchor program
     const incrementInstruction = await counterProgram.methods
-      .increment()
-      .accounts({
-        counter: counterPDA,
-        authority: authorizationResult.publicKey,
-      })
-      .instruction();
+        .increment(new anchor.BN(amount))
+        .accounts({
+          counter: counterPDA,
+        })
+        .instruction();
 
     // Build a transaction containing the instruction
     const incrementTransaction = new Transaction({
@@ -207,42 +208,31 @@ const signIncrementTransaction = useCallback(async () => {
 
     return signedTransactions[0];
   });
-}, [storedAuthToken, connection, counterPDA]);
+}
 ```
 
-## Submit Transactions from your Anchor Program
+This approach is flexible and allows you to fully utilize the Mobile Wallet Adapter session.
 
-To submit a `Transaction` to RPC, you can:
+## Sign transactions using a Mobile Wallet Adapter signer
 
-- Use the Anchor provided `rpc()` function to sign and submit a `Transaction`.
-- Create a signed transaction (like above) and manually submit to an RPC.
+With an instantiated `Program`, you can also use the Anchor provided `rpc()` function to sign and submit an Anchor transaction to an RPC.
 
-### Using the Anchor rpc() function:
-
-<CTAButton label="See example" to="https://github.com/solana-mobile/tutorial-apps/blob/main/AnchorCounterDapp/components/IncrementCounterButton.tsx#L23" />
+<CTAButton label="See example" to="https://github.com/solana-mobile/tutorial-apps/blob/main/AnchorCounterDapp/src/components/counter/counter-data-access.tsx#L89" />
 
 ```tsx
-const incrementCounter = useCallback(async () => {
+const { counterProgram, counterPDA } = useCounterProgram();
+
+const incrementCounter = async () => {
   // Submit an increment transaction to the RPC endpoint
   const signature = await counterProgram.methods
-    .increment()
+    .increment(new anchor.BN(amount))
     .accounts({
       counter: counterPDA,
-      authority: authorityPublicKey,
     })
     .rpc();
 
   return signature;
-}, [counterProgram, authorityPublicKey, counterPDA]);
+};
 ```
 
-### Manually submitting to an RPC:
-
-Instead of submitting using `rpc()`, you can also choose to build the transaction and separately submit it to
-the RPC.
-
-```tsx
-// Construct a signed transaction, then submit to RPC using web3.js `connection` client.
-const signedTransaction = await signIncrementTransaction(counterProgram);
-connection.sendTransaction(signedTransaction);
-```
+Calling the `rpc()` will generate and sign the transaction using the interface methods (`signTransaction`, `signAllTransactions`) of the Anchor Wallet that the program was instantiated with.
