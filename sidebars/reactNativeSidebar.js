@@ -83,6 +83,7 @@ module.exports = {
                 },
             ]
         },
+        
 
         /* Additional Guides Section */
         {
@@ -103,6 +104,34 @@ module.exports = {
             type: 'doc',
             id: 'react-native/metaplex_integration',
             label: 'Metaplex Integration Guide'
+        },
+        {
+            type: 'category',
+            label: 'Polyfills Reference',
+            collapsible: true,
+            collapsed: true,
+            items: [
+                {
+                    type: 'doc',
+                    id: 'react-native/polyfill-guides/polyfills',
+                    label: 'Overview'
+                },
+                {
+                    type: 'doc',
+                    id: 'react-native/polyfill-guides/polyfills',
+                    label: 'Anchor'
+                },
+                {
+                    type: 'doc',
+                    id: 'react-native/polyfill-guides/polyfills',
+                    label: 'Metaplex'
+                },
+                {
+                    type: 'doc',
+                    id: 'react-native/polyfill-guides/polyfills',
+                    label: 'Metaplex: Umi'
+                },
+            ]
         },
 
         /* Tutorials Section */
