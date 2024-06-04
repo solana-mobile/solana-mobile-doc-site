@@ -105,6 +105,8 @@ module.exports = {
             id: 'react-native/metaplex_integration',
             label: 'Metaplex Integration Guide'
         },
+
+        /* Polyfill Guides Section */
         {
             type: 'category',
             label: 'Polyfills Reference',
@@ -115,6 +117,16 @@ module.exports = {
                     type: 'doc',
                     id: 'react-native/polyfill-guides/polyfills',
                     label: 'Overview'
+                },
+                {
+                    type: 'doc',
+                    id: 'react-native/polyfill-guides/web3-js',
+                    label: 'web3.js'
+                },
+                {
+                    type: 'doc',
+                    id: 'react-native/polyfill-guides/spl-token',
+                    label: 'spl-token'
                 },
                 {
                     type: 'doc',
