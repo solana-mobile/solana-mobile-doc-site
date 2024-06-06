@@ -40,14 +40,20 @@ module.exports = {
             label: 'Making RPC requests'
         },
         {
-            type: 'doc',
-            id: 'android-native/building_transactions',
-            label: 'Building transactions'
-        },
-        {
-            type: 'doc',
-            id: 'android-native/building-anchor-program-transactions',
-            label: 'Building Anchor program transactions'
+            type: 'category',
+            label: "Building transactions",
+            items: [
+                {
+                    type: 'doc',
+                    id: 'android-native/building_transactions',
+                    label: 'Building a Memo program transaction'
+                },
+                {
+                    type: 'doc',
+                    id: 'android-native/building-anchor-program-transactions',
+                    label: 'Building Anchor program transactions'
+                },
+            ]
         },
         {
             type: 'doc',
