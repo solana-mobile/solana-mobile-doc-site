@@ -46,6 +46,11 @@ module.exports = {
         },
         {
             type: 'doc',
+            id: 'android-native/building-anchor-program-transactions',
+            label: 'Building Anchor program transactions'
+        },
+        {
+            type: 'doc',
             id: 'android-native/using_mobile_wallet_adapter',
             label: 'Using Mobile Wallet Adapter'
         },

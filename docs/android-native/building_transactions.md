@@ -75,6 +75,29 @@ val memoTxMessage = Message.Builder()
 val unsignedTx = Transaction(memoTxMessage)
 ```
 
+### Example: System Program Transfer Transaction
+
+In the previous example, we build a simple transaction that invokes the Memo program, where the _data_ of the instruction is a just a UTF encoded string.
+
+Now, let's go through the steps to build a transaction that invokes the System Program's `transfer` instruction which requires a `lamport` parameter.
+
+### Create a transfer instruction
+
+First, let's understand what the format of the SystemProgram `transfer` instruction looks like, by reading its [reference](https://docs.rs/solana-program/1.18.15/solana_program/system_instruction/enum.SystemInstruction.html#variant.Transfer).
+
+We can see that it expects:
+
+- Two accounts declared:
+  1. The funding (or sender) account as a signer
+  2. The recipient account
+- a `lamport: u64` parameter
+
+First, let's define the accounts array:
+
+```kotlin
+
+```
+
 ## Next steps
 
 Read the following _Using Mobile Wallet Adapter_ guide to learn how to sign these transactions and submit them to the Solana network.
