@@ -42,11 +42,12 @@ module.exports = {
         {
             type: 'category',
             label: "Building transactions",
+            collapsed: false,
             items: [
                 {
                     type: 'doc',
                     id: 'android-native/building_transactions',
-                    label: 'Building a Memo program transaction'
+                    label: 'Basics: Build a transaction'
                 },
                 {
                     type: 'doc',
@@ -56,9 +57,21 @@ module.exports = {
             ]
         },
         {
-            type: 'doc',
-            id: 'android-native/using_mobile_wallet_adapter',
-            label: 'Using Mobile Wallet Adapter'
+            type: 'category',
+            label: "Using Mobile Wallet Adapter",
+            collapsed: false,
+            items: [
+                {
+                    type: 'doc',
+                    id: 'android-native/using_mobile_wallet_adapter',
+                    label: 'Basics: Usage guide'
+                },
+                {
+                    type: 'doc',
+                    id: 'android-native/sending-sol',
+                    label: 'Example: Sign and send a SOL transfer'
+                },
+            ]
         },
 
         /* Reference Section */
