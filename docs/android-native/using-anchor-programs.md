@@ -135,8 +135,7 @@ import com.solana.networking.KtorNetworkDriver
 
 // Fetch latest blockhash from RPC
 val rpcClient = SolanaRpcClient("https://api.devnet.solana.com", KtorNetworkDriver())
-val blockhash = rpcClient.getLatestBlockhash()
-
+val blockhashResponse = rpcClient.getLatestBlockhash()
 
 // Build transaction message
 val incrementAmount = 5
@@ -145,7 +144,7 @@ val incrementCounterMessage =
         .addInstruction(
             incrementInstruction
         )
-        .setRecentBlockhash(blockhash)
+        .setRecentBlockhash(blockhashResponse.result!!.blockhash)
         .build()
 
 // Construct the Transaction object from the message
@@ -169,9 +168,11 @@ If you have direct access to a keypair, you can serialize the Transaction messag
 ```kotlin
 import com.solana.transaction.*
 import com.solana.rpc.SolanaRpcClient
+import com.solana.networking.KtorNetworkDriver
 
 // Fetch latest blockhash from RPC
-val blockhash = rpcClient.getLatestBlockhash()
+val rpcClient = SolanaRpcClient("https://api.devnet.solana.com", KtorNetworkDriver())
+val blockhashResponse = rpcClient.getLatestBlockhash()
 
 // Build transaction message
 val incrementAmount = 5
@@ -180,7 +181,7 @@ val incrementCounterMessage =
         .addInstruction(
             incrementInstruction
         )
-        .setRecentBlockhash(blockhash)
+        .setRecentBlockhash(blockhashResponse.result!!.blockhash)
         .build()
 
 // sign the transaction with some keypair signer
@@ -202,5 +203,10 @@ import com.solana.networking.KtorNetworkDriver
 val rpcClient = SolanaRpcClient("https://api.devnet.solana.com", KtorNetworkDriver())
 
 val response = rpcClient.sendTransaction(signedTransaction)
-val txSignature = response.result
+
+if (response.result) {
+    println("Transaction signature: ${response.result}")
+} else if (response.error) {
+    println("Failed to send transaction: ${response.error.message}")
+}
 ```
