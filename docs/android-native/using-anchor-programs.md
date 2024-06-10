@@ -1,4 +1,4 @@
-# Building Anchor Program instructions
+# Working with Anchor Programs in Kotlin
 
 [Anchor](https://www.anchor-lang.com/) is a popular Solana development framework for writing on-chain programs. Programs and instructions created with Anchor, have a different data format than other programs like SPL and SystemProgram.
 
@@ -9,7 +9,9 @@ This guide will teach you how to build instructions and transactions that invoke
 Add the following dependencies to your project:
 
 - [`web3-solana`](https://github.com/solana-mobile/web3-core) library provides the abstraction classes like `Transaction` and `AccountMeta` to simplify building Solana transactions.
+- [`rpc-core`](https://github.com/solana-mobile/rpc-core) library provides a `SolanaRpcClient` class with convenient RPC methods.
 - [`kborsh`](https://github.com/Funkatronics/kBorsh/tree/main) library for Borsh serialization of instruction data.
+- [`solanapublickeys`](https://github.com/metaplex-foundation/solana-kmp/tree/4303eaf0605d45371cb475066215a12f2069d4f9) Public key module of the SolanaKMP library that provides an Anchor instruction serializer.
 
 <Tabs>
 <TabItem value="build.gradle.kts" label="build.gradle.kts">
@@ -17,7 +19,8 @@ Add the following dependencies to your project:
 ```groovy
 dependencies {
     implementation("com.solanamobile:web3-solana:0.2.2")
-    implementation 'io.github.funkatronics:kborsh:0.1.0'
+    implementation("com.solanamobile:rpc-core:0.2.6")
+    implementation('io.github.funkatronics:kborsh:0.1.0')
     implementation("foundation.metaplex:solanapublickeys:0.2.10")
 }
 ```
@@ -127,9 +130,12 @@ Then build a transaction message and construct the `Transaction` packed with the
 
 ```kotlin
 import com.solana.transaction.*
+import com.solana.rpc.SolanaRpcClient
+import com.solana.networking.KtorNetworkDriver
 
 // Fetch latest blockhash from RPC
-val blockhash = fetchLatestBlockhash(rpcUri)
+val rpcClient = SolanaRpcClient("https://api.devnet.solana.com", KtorNetworkDriver())
+val blockhash = rpcClient.getLatestBlockhash()
 
 
 // Build transaction message
@@ -146,8 +152,55 @@ val incrementCounterMessage =
 val unsignedIncrementTx = Transaction(incrementCounterMessage)
 ```
 
-### 5. Sign and send the transaction
+### 5. Sign the transaction
 
-At this point, you have successfully created an _unsigned_ Solana transaction that, when submitted to the network, invokes the _increment_ instruction of the Anchor program.
+At this point, you have successfully created an _unsigned_ Solana transaction for incrementing the counter account. Before submitting to the network, the transaction must be signed by the fee payer.
 
-Read the [_Using Mobile Wallet Adapter_ guide](/android-native/using_mobile_wallet_adapter#signing-and-sending-transactions) to learn how to enable users to sign these transactions and submit them to the Solana network.
+#### Signing with Mobile Wallet Adapter
+
+If you want users to sign the transaction using their mobile wallet app (e.g Phantom, Solflare) you can use Mobile Wallet Adapter to request signing.
+
+Read the [_Using Mobile Wallet Adapter_ guide](/android-native/using_mobile_wallet_adapter#signing-and-sending-transactions) to learn how to prompt users to sign these transactions and submit them to the Solana network.
+
+#### Signing with a keypair
+
+If you have direct access to a keypair, you can serialize the Transaction message, sign the bytes, and construct the signed transaction.
+
+```kotlin
+import com.solana.transaction.*
+import com.solana.rpc.SolanaRpcClient
+
+// Fetch latest blockhash from RPC
+val blockhash = rpcClient.getLatestBlockhash()
+
+// Build transaction message
+val incrementAmount = 5
+val incrementCounterMessage =
+    Message.Builder()
+        .addInstruction(
+            incrementInstruction
+        )
+        .setRecentBlockhash(blockhash)
+        .build()
+
+// sign the transaction with some keypair signer
+val signature = ed25519Signer.signBytes(incrementCounterMessage.serialize())
+
+// send the transaction to the cluster
+val signedTransaction = Transaction(listOf(signature), incrementCounterMessage)
+
+```
+
+### 6. Sending the transaction
+
+After the transaction is signed, it can be submitted to an RPC using the `SolanaRpcClient` class.
+
+```kotlin
+import com.solana.rpc.SolanaRpcClient
+import com.solana.networking.KtorNetworkDriver
+
+val rpcClient = SolanaRpcClient("https://api.devnet.solana.com", KtorNetworkDriver())
+
+val response = rpcClient.sendTransaction(signedTransaction)
+val txSignature = response.result
+```

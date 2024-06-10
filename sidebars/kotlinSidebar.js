@@ -35,26 +35,26 @@ module.exports = {
             className: 'sidebar-section-header',
         },
         {
-            type: 'doc',
-            id: 'android-native/making_rpc_requests',
-            label: 'Making RPC requests'
-        },
-        {
             type: 'category',
-            label: "Building transactions",
+            label: "Core Concepts",
             collapsed: false,
             items: [
                 {
                     type: 'doc',
-                    id: 'android-native/building_transactions',
-                    label: 'Basics: Build a transaction'
+                    id: 'android-native/making_rpc_requests',
+                    label: 'Making RPC requests'
                 },
                 {
                     type: 'doc',
-                    id: 'android-native/building-anchor-program-transactions',
-                    label: 'Building Anchor program transactions'
+                    id: 'android-native/building_transactions',
+                    label: 'Build a Solana transaction'
                 },
             ]
+        },
+        {
+            type: 'doc',
+            id: 'android-native/using-anchor-programs',
+            label: 'Working with Anchor programs'
         },
         {
             type: 'category',

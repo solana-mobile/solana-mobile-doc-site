@@ -1,7 +1,7 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Building transactions
+# Building Solana transactions
 
 A client interacts with the Solana network by submitting a _transaction_ to the cluster. Transactions
 allow a client to invoke instructions of on-chain [_Programs_](https://docs.solana.com/developing/intro/programs).
