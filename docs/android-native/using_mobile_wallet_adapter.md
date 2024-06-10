@@ -323,8 +323,6 @@ payload serialized as a `ByteArray`, in corresponding order to the input.
 :::caution
 The `signTransactions` method is deprecated according to the Mobile Wallet Adapter 2.0 [specification](https://solana-mobile.github.io/mobile-wallet-adapter/spec/spec.html). Wallet apps
 may still support this method for backwards compatibility, but it is recommended for dApps to use `signAndSendTransactions` instead.
-
-The reason for deprecation is to prevent [_durable transaction nonce_](https://docs.solana.com/implemented-proposals/durable-tx-nonces) based replay attacks and vulnerabilities.
 :::
 
 To request a wallet to sign a Solana transaction, use the `signTransactions` method. For an example

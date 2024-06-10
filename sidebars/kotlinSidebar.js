@@ -35,19 +35,43 @@ module.exports = {
             className: 'sidebar-section-header',
         },
         {
-            type: 'doc',
-            id: 'android-native/making_rpc_requests',
-            label: 'Making RPC requests'
+            type: 'category',
+            label: "Core Concepts",
+            collapsed: false,
+            items: [
+                {
+                    type: 'doc',
+                    id: 'android-native/making_rpc_requests',
+                    label: 'Making RPC requests'
+                },
+                {
+                    type: 'doc',
+                    id: 'android-native/building_transactions',
+                    label: 'Build a Solana transaction'
+                },
+            ]
         },
         {
             type: 'doc',
-            id: 'android-native/building_transactions',
-            label: 'Building transactions'
+            id: 'android-native/using-anchor-programs',
+            label: 'Working with Anchor programs'
         },
         {
-            type: 'doc',
-            id: 'android-native/using_mobile_wallet_adapter',
-            label: 'Using Mobile Wallet Adapter'
+            type: 'category',
+            label: "Using Mobile Wallet Adapter",
+            collapsed: false,
+            items: [
+                {
+                    type: 'doc',
+                    id: 'android-native/using_mobile_wallet_adapter',
+                    label: 'Basics: Usage guide'
+                },
+                {
+                    type: 'doc',
+                    id: 'android-native/sending-sol',
+                    label: 'Example: Sign and send a SOL transfer'
+                },
+            ]
         },
 
         /* Reference Section */
