@@ -13,14 +13,14 @@ Add the library to your project:
 <TabItem value="yarn" label="yarn">
 
 ```shell
-yarn add @solana/spl-token.js
+yarn add @solana/spl-token
 ```
 
 </TabItem>
 <TabItem value="npm" label="npm">
 
 ```shell
-npm install @solana/spl-token.js
+npm install @solana/spl-token
 ```
 
 </TabItem>

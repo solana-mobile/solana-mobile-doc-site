@@ -133,16 +133,6 @@ module.exports = {
                     id: 'react-native/polyfill-guides/anchor',
                     label: 'Anchor'
                 },
-                {
-                    type: 'doc',
-                    id: 'react-native/polyfill-guides/polyfills',
-                    label: 'Metaplex'
-                },
-                {
-                    type: 'doc',
-                    id: 'react-native/polyfill-guides/polyfills',
-                    label: 'Metaplex: Umi'
-                },
             ]
         },
 
