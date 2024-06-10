@@ -42,7 +42,7 @@ Read these guides for a collection of code snippets and examples for basic use c
 
 <CardLayout autoFitEnabled={true}>
     <Card
-        to="/android-native/making_rpc_requests"
+        to="/android-native/rpc-requests"
         header={{
             label: "JSON RPC Requests",
             translateId: "rpc-requests",
