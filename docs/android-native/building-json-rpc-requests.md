@@ -6,7 +6,7 @@ import TabItem from '@theme/TabItem';
 This deep dive explains how to use underlying primitives in the `rpc-core` library to construct RPC requests for any methods that aren't provided by `SolanaRpcClient`.
 
 :::tip
-If you only need to use the common RPC methods already supported by `SolanaRpcClient`, read the [_Sending RPC requests_](/android-native/sending_rpc_requests) guide.
+If you only need to use the common RPC methods already supported by `SolanaRpcClient`, read the [_RPC Client usage guide_](/android-native/rpc-requests).
 :::
 
 ## Add dependencies
