@@ -62,13 +62,22 @@ pass the transaction message into the `Transaction` constructor.
 See the previous _Making RPC Requests_ guide for an example of how to fetch a blockhash.
 
 ```kotlin
-// Fetch latest blockhash from RPC
-val blockhash = fetchLatestBlockhash(rpcUri)
+import com.solana.rpc.SolanaRpcClient
+import com.solana.networking.KtorNetworkDriver
+
+// Fetch blockhash from RPC
+val rpcClient = SolanaRpcClient("https://api.devnet.solana.com", KtorNetworkDriver())
+val blockhasResponse = rpcClient.getLatestBlockhash()
+
+if (response.error) {
+    println("Failed to fetch latest blockhash: ${response.error.message}")
+    return;
+}
 
 // Build transaction message
 val memoTxMessage = Message.Builder()
     .addInstruction(memoInstruction)
-    .setRecentBlockhash(blockhash)
+    .setRecentBlockhash(blockhasResponse.result!!.blockhash)
     .build()
 
 // Construct the Transaction object from the message

@@ -70,7 +70,7 @@ To learn how to better use the core Solana Kotlin SDKs, check out these develope
 
 <CardLayout autoFitEnabled={true}>
     <Card
-        to="/android-native/making_rpc_requests"
+        to="/android-native/rpc-requests"
         header={{
             label: "JSON RPC Requests",
             translateId: "rpc-requests",

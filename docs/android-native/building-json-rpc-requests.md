@@ -1,20 +1,24 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Making RPC requests
+# Deep dive: Building JSON RPC request methods
 
-To interface with the Solana network, a client needs to construct and send [_JSON RPC requests_](https://docs.solana.com/api/http) to an [_RPC endpoint_](https://docs.solana.com/cluster/rpc-endpoints).
+This deep dive explains how to use underlying primitives in the `rpc-core` library to construct RPC requests for any methods that aren't provided by `SolanaRpcClient`.
+
+:::tip
+If you only need to use the common RPC methods already supported by `SolanaRpcClient`, read the [_RPC Client usage guide_](/android-native/rpc-requests).
+:::
 
 ## Add dependencies
 
-The [`rpc-core`](https://github.com/solana-mobile/rpc-core) library provides convenient classes and abstractions to build and submit requests according to the JSON-RPC 2.0 specification.
+The [`rpc-core`](https://github.com/solana-mobile/rpc-core) library provides core classes and abstractions to build and submit requests according to the JSON-RPC 2.0 specification.
 
 <Tabs>
 <TabItem value="build.gradle.kts" label="build.gradle.kts">
 
 ```groovy
 dependencies {
-    implementation("com.solanamobile:rpc-core:0.2.4")
+    implementation("com.solanamobile:rpc-core:0.2.6")
 }
 ```
 
@@ -151,5 +155,4 @@ fun getLatestBlockhash(): Blockhash {
 
 ## Next steps
 
-- Read the following _Building transactions_ guide to learn how to create transactions that interact with on-chain Solana Programs.
 - Browse the [full list](https://docs.solana.com/api/http) of Solana RPC HTTP Methods
