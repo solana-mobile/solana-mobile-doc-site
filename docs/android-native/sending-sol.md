@@ -19,12 +19,11 @@ import com.solana.publickey.SolanaPublicKey
 import com.solana.transaction.*
 
 fun buildTransferTransaction(
+    blockhash: String,
     fromPublicKey: SolanaPublicKey,
     toPublicKey: SolanaPublicKey,
     lamports: Long
 ): Transaction {
-    // Fetch latest blockhash from RPC
-    val blockhash = fetchLatestBlockhash()
     val transferTxMessage = Message.Builder()
         .addInstruction(
             SystemProgram.transfer(
@@ -44,7 +43,7 @@ fun buildTransferTransaction(
 
 ## Fetching the latest blockhash
 
-In this method, we call a `fetchLatestBlockhash` method that is not mentioned here. See this [RPC requests guide](/android-native/making_rpc_requests#defining-the-json-rpc-response) on how to write this method and fetch a blockhash.
+In this method, we use a `blockhash` parameter. See this [RPC requests guide](/android-native/rpc-requests#example-fetching-latest-blockhash) for an exampkle.
 
 :::tip
 
@@ -77,6 +76,8 @@ to connect to their mobile wallet app, and learn what their wallet address is.
 import com.funkatronics.encoders.Base58
 import com.solana.publickey.SolanaPublicKey
 import com.solana.mobilewalletadapter.clientlib.*
+import com.solana.rpc.SolanaRpcClient
+import com.solana.networking.KtorNetworkDriver
 
  // `this` is the current Android activity
 val sender = ActivityResultSender(this)
@@ -89,8 +90,17 @@ val result = walletAdapter.transact(sender) { authResult ->
     // Retrieve the user wallet address from the MWA authResult
     val userWallet = SolanaPublicKey(authResult.accounts.first().publicKey)
 
+    // Fetch latest blockhash
+    val rpcClient = SolanaRpcClient("https://api.devnet.solana.com", KtorNetworkDriver())
+    val blockhashResponse = rpcClient.getLatestBlockhash()
+
     // Use the wallet address to build the transfer transaction
-    val transferTx = buildTransferTransaction(userWallet, SolanaPublicKey("<address_of_recipient>"), lamportAmount);
+    val transferTx = buildTransferTransaction(
+        blockhashResponse.result!!.blockhash,
+        userWallet,
+        SolanaPublicKey("<address_of_recipient>"),
+        lamportAmount
+    );
 
     // ...
 }
@@ -115,7 +125,18 @@ val walletAdapter = MobileWalletAdapter(/* ... */)
 val result = walletAdapter.transact(sender) { authResult ->
     // Build a transaction using web3-solana classes
     val account = SolanaPublicKey(authResult.accounts.first().publicKey)
-    val transferTx = buildMemoTransaction(account, "Hello Solana!");
+
+    // Fetch latest blockhash
+    val rpcClient = SolanaRpcClient("https://api.devnet.solana.com", KtorNetworkDriver())
+    val blockhashResponse = rpcClient.getLatestBlockhash()
+
+    // Use the wallet address to build the transfer transaction
+    val transferTx = buildTransferTransaction(
+        blockhashResponse.result!!.blockhash,
+        userWallet,
+        SolanaPublicKey("<address_of_recipient>"),
+        lamportAmount
+    );
 
     // Issue a 'signTransactions' request
     signAndSendTransactions(arrayOf(transferTx.serialize()));
