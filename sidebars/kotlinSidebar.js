@@ -41,8 +41,8 @@ module.exports = {
             items: [
                 {
                     type: 'doc',
-                    id: 'android-native/making_rpc_requests',
-                    label: 'Making RPC requests'
+                    id: 'android-native/rpc-requests',
+                    label: 'RPC Client: Usage guide'
                 },
                 {
                     type: 'doc',
