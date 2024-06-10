@@ -82,7 +82,7 @@ val response = rpc.sendTransaction(transaction)
 if (response.result) {
     println("Transaction signature: ${response.result}")
 } else if (response.error) {
-    println("Failed to fetch latest blockhash: ${response.error.message}")
+    println("Failed to send transaction: ${response.error.message}")
 }
 
 ```
