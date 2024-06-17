@@ -186,10 +186,10 @@ val incrementCounterMessage =
         .setRecentBlockhash(blockhashResponse.result!!.blockhash)
         .build()
 
-// sign the transaction with some keypair signer
+// Sign the transaction with some keypair signer
 val signature = ed25519Signer.signBytes(incrementCounterMessage.serialize())
 
-// send the transaction to the cluster
+// Signed transaction ready to be submitted to the network
 val signedTransaction = Transaction(listOf(signature), incrementCounterMessage)
 
 ```

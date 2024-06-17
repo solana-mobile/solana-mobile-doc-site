@@ -81,7 +81,8 @@ if (response.error) {
 
 // Build transaction message
 val memoTxMessage = Message.Builder()
-    .addInstruction(memoInstruction)
+    // highlight-next-line
+    .addInstruction(memoInstruction) // Pass in instruction from previous step
     .setRecentBlockhash(blockhasResponse.result!!.blockhash)
     .build()
 
