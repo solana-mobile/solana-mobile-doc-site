@@ -43,7 +43,7 @@ fun buildTransferTransaction(
 
 ## Fetching the latest blockhash
 
-In this method, we use a `blockhash` parameter. See this [RPC requests guide](/android-native/rpc-requests#example-fetching-latest-blockhash) for an exampkle.
+In this method, we use a `blockhash` parameter. See this [RPC requests guide](/android-native/rpc-requests#example-fetching-latest-blockhash) for an example.
 
 :::tip
 
@@ -88,7 +88,7 @@ val walletAdapter = MobileWalletAdapter(/* ... */)
 val lamportAmount = 1000000
 val result = walletAdapter.transact(sender) { authResult ->
     // Retrieve the user wallet address from the MWA authResult
-    val userWallet = SolanaPublicKey(authResult.accounts.first().publicKey)
+    val userAccountAddress = SolanaPublicKey(authResult.accounts.first().publicKey)
 
     // Fetch latest blockhash
     val rpcClient = SolanaRpcClient("https://api.devnet.solana.com", KtorNetworkDriver())
@@ -97,7 +97,7 @@ val result = walletAdapter.transact(sender) { authResult ->
     // Use the wallet address to build the transfer transaction
     val transferTx = buildTransferTransaction(
         blockhashResponse.result!!.blockhash,
-        userWallet,
+        userAccountAddress,
         SolanaPublicKey("<address_of_recipient>"),
         lamportAmount
     );
@@ -124,7 +124,7 @@ val walletAdapter = MobileWalletAdapter(/* ... */)
 
 val result = walletAdapter.transact(sender) { authResult ->
     // Build a transaction using web3-solana classes
-    val account = SolanaPublicKey(authResult.accounts.first().publicKey)
+    val userAccountAddress = SolanaPublicKey(authResult.accounts.first().publicKey)
 
     // Fetch latest blockhash
     val rpcClient = SolanaRpcClient("https://api.devnet.solana.com", KtorNetworkDriver())
@@ -133,7 +133,7 @@ val result = walletAdapter.transact(sender) { authResult ->
     // Use the wallet address to build the transfer transaction
     val transferTx = buildTransferTransaction(
         blockhashResponse.result!!.blockhash,
-        userWallet,
+        userAccountAddress,
         SolanaPublicKey("<address_of_recipient>"),
         lamportAmount
     );

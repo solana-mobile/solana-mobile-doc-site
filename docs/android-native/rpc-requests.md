@@ -77,6 +77,9 @@ import com.solana.networking.KtorNetworkDriver
 val rpcClient = SolanaRpcClient("https://api.devnet.solana.com", KtorNetworkDriver())
 
 val transaction = Transaction(/* ... */)
+
+/* ...sign the transaction... */
+
 val response = rpc.sendTransaction(transaction)
 
 if (response.result) {
