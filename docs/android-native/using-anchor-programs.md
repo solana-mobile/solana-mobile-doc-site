@@ -11,7 +11,6 @@ Add the following dependencies to your project:
 - [`web3-solana`](https://github.com/solana-mobile/web3-core) library provides the abstraction classes like `Transaction` and `AccountMeta` to simplify building Solana transactions.
 - [`rpc-core`](https://github.com/solana-mobile/rpc-core) library provides a `SolanaRpcClient` class with convenient RPC methods.
 - [`kborsh`](https://github.com/Funkatronics/kBorsh/tree/main) library for Borsh serialization of instruction data.
-- [`solanapublickeys`](https://github.com/metaplex-foundation/solana-kmp/tree/4303eaf0605d45371cb475066215a12f2069d4f9) Public key module of the SolanaKMP library that provides an Anchor instruction serializer.
 
 <Tabs>
 <TabItem value="build.gradle.kts" label="build.gradle.kts">
@@ -21,7 +20,6 @@ dependencies {
     implementation("com.solanamobile:web3-solana:0.2.2")
     implementation("com.solanamobile:rpc-core:0.2.6")
     implementation('io.github.funkatronics:kborsh:0.1.0')
-    implementation("foundation.metaplex:solanapublickeys:0.2.10")
 }
 ```
 
@@ -55,29 +53,25 @@ Now, let's create each of these required inputs.
 
 ### 1. Find the Counter account PDA
 
-To derive the Counter PDA, we'll use the SolanaKMP `:solanapublickeys:` module which provides a `findProgramAddress` method.
+To derive the Counter PDA, we'll use the `Program` interface in the `web3-solana` module which provides a `findProgramAddress` method.
 
 Call `findProgramAddress` and pass `"counter"` as a seed and the Counter program ID:
 
 ```kotlin
 import com.solana.publickey.SolanaPublicKey
-import foundation.metaplex.solanapublickeys.PublicKey as KmpPublicKey
+import com.solana.publickey.ProgramDerivedAddress
 
-val counterProgramId = KmpPublicKey("ADraQ2ENAbVoVZhvH5SPxWPsF2hH5YmFcgx61TafHuwu")
-val counterPDA = KmpPublicKey.findProgramAddress(listOf("counter".encodeToByteArray()), counterProgramId)
+val programId = SolanaPublicKey.from("ADraQ2ENAbVoVZhvH5SPxWPsF2hH5YmFcgx61TafHuwu")
 
-val counterAccountPublicKey = SolanaPublicKey(counterPDA.address.toByteArray())
+// Counter account has a single seed 'counter'
+val seeds = listOf("counter".encodeToByteArray())
+
+// Calculate the PDA
+val result = ProgramDerivedAddress.find(seeds, programId)
+
+// Unwrap the result
+val counterAccountPDA = result.getOrNull()
 ```
-
-:::info
-
-In the snippet above, we are using both the `PublicKey` class (aliased `KmpPublicKey`) from the SolanaKMP `solanapublickeys` module and the `SolanaPublicKey` class from the `web3-solana` module.
-
-The SolanaKMP `PublicKey` is needed for its PDA derivation functionality.
-
-This confusion is temporary and, in a future release, the `findProgramAddress` functionality will be provided all within `web3-solana`.
-
-:::
 
 ### 2. Serialize the instruction data
 
@@ -119,7 +113,7 @@ import com.solana.transaction.*
 
 val incrementInstruction = TransactionInstruction(
     SolanaPublicKey.from("ADraQ2ENAbVoVZhvH5SPxWPsF2hH5YmFcgx61TafHuwu"),
-    listOf(AccountMeta(counterAccountPublicKey, false, true)),
+    listOf(AccountMeta(counterAccountPDA!!, false, true)),
     encodedInstructionData
 )
 ```
