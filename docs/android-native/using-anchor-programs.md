@@ -53,9 +53,9 @@ Now, let's create each of these required inputs.
 
 ### 1. Find the Counter account PDA
 
-To derive the Counter PDA, we'll use the `Program` interface in the `web3-solana` module which provides a `findProgramAddress` method.
+To derive the Counter PDA, we'll use the `ProgramDerivedAddres` interface in the `web3-solana` module which provides a `find` method.
 
-Call `findProgramAddress` and pass `"counter"` as a seed and the Counter program ID:
+Call `ProgramDerivedAddres.find` and pass `"counter"` as a seed and the Counter program ID:
 
 ```kotlin
 import com.solana.publickey.SolanaPublicKey
