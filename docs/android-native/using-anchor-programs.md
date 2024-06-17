@@ -1,5 +1,9 @@
 # Working with Anchor Programs in Kotlin
 
+import versions from '@site/sms-version-constants';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 [Anchor](https://www.anchor-lang.com/) is a popular Solana development framework for writing on-chain programs. Programs and instructions created with Anchor, have a different data format than other programs like SPL and SystemProgram.
 
 This guide will teach you how to build instructions and transactions that invoke Anchor programs in Kotlin.
@@ -15,13 +19,17 @@ Add the following dependencies to your project:
 <Tabs>
 <TabItem value="build.gradle.kts" label="build.gradle.kts">
 
-```groovy
-dependencies {
-    implementation("com.solanamobile:web3-solana:0.2.2")
-    implementation("com.solanamobile:rpc-core:0.2.6")
-    implementation('io.github.funkatronics:kborsh:0.1.0')
+<pre><code language="groovy">
+
+{
+`dependencies {
+    implementation("com.solanamobile:web3-solana:${versions.KOTLIN_WEB3_SOLANA_VERSION}")
+    implementation("com.solanamobile:rpc-core:${versions.KOTLIN_RPC_CORE_VERSION}")
+    implementation('io.github.funkatronics:kborsh:${versions.KOTLIN_KBORSH_VERSION}')
+}`
 }
-```
+
+</code></pre>
 
 </TabItem>
 </Tabs>

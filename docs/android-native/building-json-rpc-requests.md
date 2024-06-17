@@ -1,5 +1,6 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import versions from '@site/sms-version-constants';
 
 # Deep dive: Building JSON RPC request methods
 
@@ -16,11 +17,15 @@ The [`rpc-core`](https://github.com/solana-mobile/rpc-core) library provides cor
 <Tabs>
 <TabItem value="build.gradle.kts" label="build.gradle.kts">
 
-```groovy
-dependencies {
-    implementation("com.solanamobile:rpc-core:0.2.6")
+<pre><code language="groovy">
+
+{
+`dependencies {
+    implementation("com.solanamobile:rpc-core:${versions.KOTLIN_RPC_CORE_VERSION}")
+}`
 }
-```
+
+</code></pre>
 
 </TabItem>
 </Tabs>
