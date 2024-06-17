@@ -4,7 +4,7 @@
 
 ### Node.js
 
-Please run all CLI tooling with Node version 18 or greater.
+Please run all CLI tooling with Node version 18 to 21. Latest known compatibility is Node `v21.7.3`.
 
 ```shell
 corepack enable
@@ -31,7 +31,7 @@ echo "ANDROID_TOOLS_DIR=\"<path_to_android_sdk_version_build_tools_dir>\"" > .en
 
 Some utilities in the Android tools directory require you to configure and make a `JAVA_HOME` environment variable available to your terminal app. This variable points to the root directory of your installed Java Development Kit, or JDK. If you have Android studio installed, there is already a JDK included (in recent versions of Android Studio this is called the "JBR").
 
-To find the location of the JDK/JBR installed with Android Studio, follow [these instructions in the Android Studio documentation.](https://developer.android.com/build/jdks#set-jdk-in-studio). While discussing the mthod for *_setting_* the JDK location, it also provides the correct method for obtaining the current installation directory.
+To find the location of the JDK/JBR installed with Android Studio, follow [these instructions in the Android Studio documentation.](https://developer.android.com/build/jdks#set-jdk-in-studio). While discussing the mthod for _*setting*_ the JDK location, it also provides the correct method for obtaining the current installation directory.
 
 If you do not have Android Studio installed, you can download a copy of the the OpenJDK [here](https://openjdk.org/projects/jdk/17/). We recommend OpenJDK 17.
 
@@ -40,6 +40,13 @@ Once you have downloaded and installed the JDK, you will need to set the `JAVA_H
 ## Getting Started
 
 In your application folder (e.g., `android-app`):
+
+:::caution
+
+If you're seeing an error, ensure that your `node -v` is returning a version `>= 18` and `<= 21`.
+Latest tested compatibile version is Node `v21.7.3`.
+
+:::
 
 ```shell
 mkdir publishing
