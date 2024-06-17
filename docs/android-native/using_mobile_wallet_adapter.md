@@ -1,5 +1,6 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import versions from '@site/sms-version-constants';
 
 # Using Mobile Wallet Adapter
 
@@ -16,11 +17,15 @@ It provides a convenient API to connect, issue signing requests to a locally ins
 <Tabs>
 <TabItem value="build.gradle.kts" label="build.gradle.kts">
 
-```groovy
-dependencies {
-    implementation("com.solanamobile:mobile-wallet-adapter-clientlib-ktx:2.0.0")
+<pre><code language="groovy">
+
+{
+`dependencies {
+    implementation("com.solanamobile:mobile-wallet-adapter-clientlib-ktx:${versions.KOTLIN_MWA_CLIENTLIB_KTX_VERSION}")
+}`
 }
-```
+
+</code></pre>
 
 </TabItem>
 </Tabs>

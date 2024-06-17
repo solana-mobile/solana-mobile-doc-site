@@ -1,6 +1,7 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import CTAButton from "../../src/components/CTAButton";
+import versions from '@site/sms-version-constants';
 
 # Kotlin Project Setup
 
@@ -38,14 +39,18 @@ are the recommended core Kotlin libraries for Solana transaction building, RPC r
 <Tabs>
 <TabItem value="build.gradle.kts" label="build.gradle.kts">
 
-```groovy
-dependencies {
-    implementation("com.solanamobile:mobile-wallet-adapter-clientlib-ktx:2.0.0")
-    implementation("com.solanamobile:web3-solana:0.2.2")
-    implementation("com.solanamobile:rpc-core:0.2.4")
-    implementation("io.github.funkatronics:multimult:0.2.0")
+<pre><code language="groovy">
+
+{
+`dependencies {
+    implementation("com.solanamobile:mobile-wallet-adapter-clientlib-ktx:${versions.KOTLIN_MWA_CLIENTLIB_KTX_VERSION}")
+    implementation("com.solanamobile:web3-solana:${versions.KOTLIN_WEB3_SOLANA_VERSION}")
+    implementation("com.solanamobile:rpc-core:${versions.KOTLIN_RPC_CORE_VERSION}")
+    implementation("io.github.funkatronics:multimult:${versions.KOTLIN_MULTIMULT_VERSION}")
+}`
 }
-```
+
+</code></pre>
 
 </TabItem>
 </Tabs>
@@ -55,8 +60,8 @@ dependencies {
 
 - `com.solanamobile:mobile-wallet-adapter-clientlib-ktx`: Mobile Wallet Adapter client library for interacting with MWA-compatible wallets.
 - `com.solanamobile:web3-solana`: Solana Kotlin library providing core Solana primitives like transaction building and public key class.
-- `com.solanamobile:rpc-core:0.2.4`: A Kotlin library providing a generic interface and abstractions for building Solana RPC requests.
-- `io.github.funkatronics:multimult:0.2.0`: Lightweight utility library for Base58 conversions.
+- `com.solanamobile:rpc-core`: A Kotlin library providing a generic interface and abstractions for building Solana RPC requests.
+- `io.github.funkatronics:multimult`: Lightweight utility library for Base58 conversions.
 
 </details>
 

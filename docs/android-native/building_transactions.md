@@ -1,5 +1,6 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import versions from '@site/sms-version-constants';
 
 # Building Solana transactions
 
@@ -15,11 +16,15 @@ The [`web3-solana`](https://github.com/solana-mobile/web3-core) library provides
 <Tabs>
 <TabItem value="build.gradle.kts" label="build.gradle.kts">
 
-```groovy
-dependencies {
-    implementation("com.solanamobile:web3-solana:0.2.2")
+<pre><code language="groovy">
+
+{
+`dependencies {
+    implementation("com.solanamobile:web3-solana:${versions.KOTLIN_WEB3_SOLANA_VERSION}")
+}`
 }
-```
+
+</code></pre>
 
 </TabItem>
 </Tabs>
