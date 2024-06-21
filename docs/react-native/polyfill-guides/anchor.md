@@ -9,21 +9,18 @@ This guide will teach you how to set up the Anchor Javascript SDK with the neces
 
 Add the Anchor library to your project:
 
-:::caution
-React Native apps should use **Anchor v0.28.0**. Later versions have an unsolved polyfill issue on React Native.
-:::
 <Tabs>
 <TabItem value="yarn" label="yarn">
 
 ```shell
-yarn add @coral-xyz/anchor@0.28.0
+yarn add @coral-xyz/anchor
 ```
 
 </TabItem>
 <TabItem value="npm" label="npm">
 
 ```shell
-npm install @coral-xyz/anchor@0.28.0
+npm install @coral-xyz/anchor
 ```
 
 </TabItem>
@@ -32,6 +29,43 @@ npm install @coral-xyz/anchor@0.28.0
 ## Polyfills
 
 The following polyfills are needed:
+
+### Install buffer
+
+:::
+
+<Tabs>
+<TabItem value="yarn" label="yarn">
+
+```shell
+yarn add buffer
+```
+
+</TabItem>
+<TabItem value="npm" label="npm">
+
+```shell
+npm install buffer
+```
+
+Then, import the library in your app's entrypoint file (e.g `index.js`), before the Anchor library is imported.
+
+```typescript
+import { Buffer } from "buffer";
+global.Buffer = Buffer;
+
+Buffer.prototype.subarray = function subarray(
+  begin: number | undefined,
+  end: number | undefined
+) {
+  const result = Uint8Array.prototype.subarray.apply(this, [begin, end]);
+  Object.setPrototypeOf(result, Buffer.prototype); // Explicitly add the `Buffer` prototype (adds `readUIntLE`!)
+  return result;
+};
+```
+
+</TabItem>
+</Tabs>
 
 ### Install getRandomValues
 
