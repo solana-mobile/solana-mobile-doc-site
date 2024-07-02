@@ -37,6 +37,12 @@ If you do not have Android Studio installed, you can download a copy of the the 
 
 Once you have downloaded and installed the JDK, you will need to set the `JAVA_HOME` environment variable per the appropriate method for your operating system. [This page](https://www3.ntu.edu.sg/home/ehchua/programming/howto/Environment_Variables.html) has a good overview for all major operating systems.
 
+### ffmpeg
+
+If you plan on uploading video preview assets, make sure you have the [ffmpeg](https://www.ffmpeg.org/download.html) utility library installed.
+
+Follow this [guide](https://support.audacityteam.org/basics/installing-ffmpeg) to install `ffmpeg` for your operating system.
+
 ## Getting Started
 
 In your application folder (e.g., `android-app`):

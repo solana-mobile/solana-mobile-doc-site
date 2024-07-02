@@ -23,8 +23,14 @@ Your submission must meet the following requirements to pass app review:
   - All images provided must have consistent orientation (landscape or portrait).
   - All images provided must have equal aspect ratio.
 - Videos Requirements
+
   - All videos provided must be at least 720px in width and height.
   - All videos provided must be `.mp4` video file format.
+
+    :::info
+    If you have `.mp4` video assets in your publishing, make sure you have `ffmpeg` utility library [installed](/dapp-publishing/setup#ffmpeg).
+    :::
+
 - A release build of your Android APK signed with a unique signing key.
 
 :::warning Important
