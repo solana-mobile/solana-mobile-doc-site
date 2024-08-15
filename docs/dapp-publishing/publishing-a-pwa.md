@@ -115,6 +115,8 @@ bubblewrap fingerprint add <SHA256_fingerprint>
 bubblewrap fingerprint generateAssetLinks
 ```
 
+It should generate a file named `assetlinks.json` configured with the SHA256 fingerprint.
+
 4. Publish the generated `assetlinks.json` file at:
    `https://your-domain.com/.well-known/assetlinks.json`
 
@@ -132,8 +134,8 @@ Ensure the app is working as expected before submitting to the dApp Store.
 
 :::tip
 
-If you are seeing the browser navigation bar at the top of the app, your Digital Asset Links might not be correctly
-published.
+If you are seeing the browser navigation bar at the top of the app, your app's Digital Asset Links might not be configured
+correctly.
 
 Double check that you followed Step 4 and have correctly published your app's SHA256 fingerprint.
 

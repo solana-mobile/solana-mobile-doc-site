@@ -52,7 +52,7 @@ Learn how to develop Solana Mobile dApps in your preferred programming language.
 
 <CardLayout autoFitEnabled={true}>
     <Card
-        to="/react-native/setup#solana-mobile-dapp-scaffold"
+        to="/dapp-publishing/publishing-a-pwa"
         header={{
             label: "Progressive Web Apps (PWAs)",
             translateId: "Progressive Web Apps (PWAs)",
