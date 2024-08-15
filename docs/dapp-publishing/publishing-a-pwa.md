@@ -36,11 +36,9 @@ By the end, you will have a functional, signed release APK that can be published
 
 If missing an existing web manifest, you can follow this [resource](https://learn.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/how-to/web-app-manifests) to create one for your website.
 
-### Using Bubblewrap CLI
+### 1. Installing Bubblewrap CLI
 
 [Bubblewrap CLI](https://github.com/GoogleChromeLabs/bubblewrap/tree/main/packages/cli) is a tool that simplifies the process of converting your PWA into an Android app using TWA.
-
-#### 1. Installing Bubblewrap CLI
 
 Requires Node 14.15.0 and above
 
@@ -48,43 +46,77 @@ Requires Node 14.15.0 and above
 npm i -g @bubblewrap/cli
 ```
 
-#### 2. Initializing Your Project
+### 2. Initializing Your Project
 
 In a new directory, run the `init` command and supply the URL to your web manifest.
-Bubblewrap will use the existing manifest to help fill in metadata for the TWA's manifest.
+Bubblewrap will download the existing manifest and use it to help fill in metadata for the TWA's manifest.
+
+- See the Bubblewrap official [documentation](https://github.com/GoogleChromeLabs/bubblewrap/tree/main/packages/cli#init).
 
 ```bash
 bubblewrap init --manifest https://your-pwa-url.com/manifest.json
 ```
 
-This command will guide you through the process of creating the TWA manifest and setting up the project.
+This command will guide you through the process of creating the TWA manifest for the project.
 
-- If it asks to install additional tooling (e.g Android SDK, JDK, or build tools), you should allow it to install.
+- If it asks to install additional tooling (e.g Android SDK, JDK, or build tools), it is necessary and you should allow it to install.
 
-#### 3. Building the Android APK
+#### Manifest Configuration
 
-Now in the same directory run:
+It will also prompt a series of questions regarding configurations for:
+
+- **Domain and URL path**
+  - Ensure this points directly to where your PWA is hosted.
+- **Display mode and Status Bar settings**
+  - See the [Android documentation](https://material.io/design/platform-guidance/android-bars.html) to see how Status Bar and Navigation Bars appear and decide what configuration is appropriate for your app.
+- **Splash Screen and Icons**
+  - Create a cohesive splash screen by providing a splash screen color and an icon that displays over it.
+- **Keystore location and Password**
+  - See _Caution_ below.
+
+:::caution
+
+The `init` command will ask you to generate an **Android Keystore and password**.
+
+The [Android Keystore](https://developer.android.com/privacy-and-security/keystore) is a security tool that:
+
+- Contains a private key used to digitally sign your app. This signature is used to verify the app's authenticity and integrity.
+- The same key must be used to sign all future updates of your app. This ensures that only you can make updates to your app.
+
+Keep the Keystore file and password secure – losing them can prevent future app updates. Consider following
+Google's [official guide for best practices around Keystore management](https://developer.android.com/studio/publish/app-signing#secure_key).
+
+:::
+
+After completion, Bubblewrap will create in your directory:
+
+- A `twa-manifest.json` configured with the options from above.
+- TWA Android project files generated from `twa-manifest.json`.
+
+:::note
+
+The Android project is entirely generated from the `twa-manifest.json`, so you only need to include
+`twa-manifest.json` in source control. The Android project files are unncessary to track as they are generated.
+
+Any changes to the Android project will be deleted or overwritten by the `update` command (explained in the _Updating your TWA_ section).
+
+:::
+
+### 3. Building the Android APK
+
+The next step is to build initialized Android project and output a _signed release APK_. This APK is what you will submit for publishing on the dApp Store.
+
+In the same directory, run:
 
 ```bash
 bubblewrap build
 ```
 
-This command builds the initialized TWA project and outputs a _signed release APK_. This APK
-is what you will be submitting for publishing on the dApp Store.
+This command will
 
 - If it asks to install additional tooling (e.g Android SDK, JDK, or build tools), you should allow it to install.
 
-:::caution
-
-The `build` command will ask you to generate an Android Keystore and password.
-
-- The [Android Keystore](https://developer.android.com/privacy-and-security/keystore) is a security tool that verifies you as the developer and ensures secure app updates.
-
-Keep the Keystore file and password secure – losing them can prevent future app updates.
-
-:::
-
-#### 4. Publish Digital Asset Links
+### 4. Publish Digital Asset Links
 
 The last step is to declare your app's [Digital Asset Links (DAL)](https://developers.google.com/digital-asset-links/v1/getting-started). DALs establish a secure connection between your website and the Android app.
 
@@ -141,9 +173,22 @@ Double check that you followed Step 4 and have correctly published your app's SH
 
 :::
 
+## Updating your TWA
+
+If you want to release a new version of the app with changes to the TWA manifest (e.g Updating the icon), you can
+make edits to `twa-manifest.json` and run the command:
+
+```bash
+bubblewrap update --manifest=./path/to/twa-manifest.json
+```
+
+This command regenerates the entire Android project from the `twa-manifest.json` and bumps the app version. The manifest is preserved, while any manual changes to the previous Android project are deleted or overwritten.
+
+After this you can run `bubblewrap build` again to generate the signed release APK.
+
 ## Publishing to dApp Store
 
-Once you have your signed APK, you can proceed with publishing as if you were publishing a normal
+Once you have a signed APK, you can proceed with publishing as if you were publishing a normal
 Android app.
 
-Follow the step by step [dApp publishing guide](/dapp-publishing/overview) to submit your signed release APK.
+**Follow the step by step [dApp publishing guide](/dapp-publishing/overview) to submit your signed release APK.**
