@@ -3,9 +3,9 @@ import CardLayout from "../../src/layouts/CardLayout"
 
 # React Native
 
-[**React Native**](https://reactnative.dev/docs/getting-started) is a popular development framework for creating mobile apps using React and Javascript.
+[**React Native**](https://reactnative.dev/docs/getting-started) is a widely-used framework for building mobile applications with React and JavaScript.
 
-This section of the site provides a developer guide for building React Native Android apps for Solana.
+This section provides a comprehensive guide for developers creating React Native Android apps on the Solana platform.
 
 ## Quickstart
 
@@ -17,7 +17,7 @@ This section of the site provides a developer guide for building React Native An
             translateId: "setup",
         }}
         body={{
-            label: "Setup your React Native project with the mobile SDKs for Solana development.",
+            label: "Get your React Native project up and running with Solana's mobile SDKs.",
             translateId: "setup-body",
         }}
         iconPath="img/react-native-32.svg"
@@ -29,7 +29,7 @@ This section of the site provides a developer guide for building React Native An
             translateId: "compose-scaffold-body",
         }}
         body={{
-            label: "Build off the React Native Scaffold app to quickly start developing.",
+            label: "Start developing quickly by using the React Native Scaffold app.",
             translateId: "compose-scaffold",
         }}
         iconPath="img/rocket-icon2.png"
@@ -44,7 +44,7 @@ This section of the site provides a developer guide for building React Native An
             translateId: "setup",
         }}
         body={{
-            label: "For a simplified React Native development process, build a Solana dApp with the Expo platform.",
+            label: "Simplify your development process by building a Solana dApp with the Expo platform.",
             translateId: "setup-body",
         }}
         iconPath="img/expo-sdk-icon.svg"
@@ -56,7 +56,7 @@ This section of the site provides a developer guide for building React Native An
             translateId: "compose-scaffold-body",
         }}
         body={{
-            label: "Quickly start an Expo project by initializing with the Solana Expo dApp Template.",
+            label: "Quickly start an Expo project using the Solana Expo dApp Template.",
             translateId: "compose-scaffold",
         }}
         iconPath="img/expo-snack-icon.svg"
@@ -65,7 +65,7 @@ This section of the site provides a developer guide for building React Native An
 
 ## Core React Native SDKs
 
-Read these guides for a collection of code snippets and examples for common use cases in Solana React Native dApps.
+Explore these guides for code snippets and examples tailored to common use cases in Solana React Native dApps.
 
 <CardLayout autoFitEnabled={true}>
     <Card
@@ -75,7 +75,7 @@ Read these guides for a collection of code snippets and examples for common use 
             translateId: "rpc-requests",
         }}
         body={{
-            label: "Use web3.js `Connection` class to create and send Solana RPC Requests.",
+            label: "Learn how to use the web3.js `Connection` class to create and send Solana RPC requests.",
             translateId: "rpc-requests-body",
         }}
         emoji={"🌐"}
@@ -83,11 +83,11 @@ Read these guides for a collection of code snippets and examples for common use 
     <Card
         to="/react-native/building_transactions"
         header={{
-            label: "Transaction building",
+            label: "Transaction Building",
             translateId: "transaction-building",
         }}
         body={{
-            label: "Use the web3.js library to construct Solana transactions and Program instructions.",
+            label: "Construct Solana transactions and program instructions using the web3.js library.",
             translateId: "transaction-building-body",
         }}
         emoji={"🔧"}
@@ -99,28 +99,27 @@ Read these guides for a collection of code snippets and examples for common use 
             translateId: "mobile-wallet-adapter",
         }}
         body={{
-            label: "Learn how to connect to mobile wallets and request signing services.",
+            label: "Connect to mobile wallets and request signing services with the Mobile Wallet Adapter.",
             translateId: "mobile-wallet-adapter-body",
         }}
         emoji={"📱"}
     />
 </CardLayout>
 
-## Why React Native?
+## Why Choose React Native?
 
-[**React Native**](https://reactnative.dev/docs/getting-started) is a popular development framework for creating mobile apps using React and Javascript. This section goes over the benefits of React Native and why you might choose it to build your mobile app.
+[**React Native**](https://reactnative.dev/docs/getting-started) is an ideal framework for building mobile apps with React and JavaScript. This section highlights the advantages of using React Native for your mobile app development.
 
 ### Code Reusability
 
-Solana developers can continue using popular, well-supported Solana web libraries like `@solana/web3.js` and leverage their existing code in a React Native project. Developers familiar with Solana Web development will find this their quickest option to start building.
+Solana developers can leverage existing web libraries like `@solana/web3.js` and reuse code in React Native projects. If you're familiar with Solana Web development, React Native offers the fastest path to building your mobile app.
 
 ### Familiarity
 
-Developers familiar with React development will be able to leverage their existing knowledge and translate it to building mobile apps. Just like React development on web, React Native supports live and hot reloading, which significantly speeds up the development process.
+React developers can easily apply their existing skills to mobile app development. React Native supports live and hot reloading, which speeds up the development process just like it does in web development.
 
-## Expo?
+## What About Expo?
 
-[**Expo**](https://docs.expo.dev/) is a popular platform that simplifies the development and deployment process for React Native projects, with the tradeoff of stricter customization of native code.
-To use Expo with the MWA libraries, you'll need to follow an alternate Expo development flow, called a [custom Expo Development build](https://docs.expo.dev/develop/development-builds/create-a-build/).
+[**Expo**](https://docs.expo.dev/) is a popular platform that streamlines the development and deployment of React Native projects, though it offers less flexibility in customizing native code. To use Expo with Mobile Wallet Adapter (MWA) libraries, you'll need to follow a [custom Expo Development build](https://docs.expo.dev/develop/development-builds/create-a-build/).
 
-Follow this [guide](/react-native/expo) to set up your Expo project.
+Refer to this [guide](/react-native/expo) to set up your Expo project.
