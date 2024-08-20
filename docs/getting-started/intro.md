@@ -52,16 +52,16 @@ Learn how to develop Solana Mobile dApps in your preferred programming language.
 
 <CardLayout autoFitEnabled={true}>
     <Card
-        to="/react-native/setup#solana-mobile-dapp-scaffold"
+        to="/dapp-publishing/publishing-a-pwa"
         header={{
-            label: "React Native Template dApp",
-            translateId: "developer-programs",
+            label: "Progressive Web Apps (PWAs)",
+            translateId: "Progressive Web Apps (PWAs)",
         }}
         body={{
-            label: "Jump into building with our template React Native dApp.",
-            translateId: "learn-programs",
+            label: "Learn how to convert a PWA to an Android app and publish on the dApp Store.",
+            translateId: "Progressive Web Apps (PWAs)",
         }}
-        iconPath="img/rocket-icon2.png"
+        iconPath="img/pwa-icon.png"
     />
     <Card
         to="/sample-apps/sample_app_overview"

@@ -9,6 +9,11 @@ module.exports = {
             label: 'dApp Store Intro'
         },
         {
+            type: 'doc',
+            id: 'dapp-publishing/publishing-a-pwa',
+            label: 'Publish a PWA'
+        },
+        {
             type: 'category',
             label: 'Publish your dApp',
             collapsible: true,
