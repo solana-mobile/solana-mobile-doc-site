@@ -48,6 +48,10 @@ App JSON valid!
 Release JSON valid!
 ```
 
+:::info
+If you have `.mp4` video assets in your publishing, make sure you have `ffmpeg` utility library [installed](/dapp-publishing/setup#ffmpeg).
+:::
+
 ## Mint your NFTs
 
 :::tip
