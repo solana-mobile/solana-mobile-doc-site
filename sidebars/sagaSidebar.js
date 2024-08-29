@@ -35,6 +35,11 @@ module.exports = {
                     id: 'saga/release-notes/mr3',
                     label: 'MR3'
                 },
+                {
+                    type: 'doc',
+                    id: 'saga/release-notes/mr4',
+                    label: 'MR4'
+                },
             ]
         },
     ]
