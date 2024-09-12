@@ -83,12 +83,7 @@ const sidebars = {
           type: 'doc',
           id: 'getting-started/chapter2-preorder-tokens',
           label: 'Chapter 2 Preorder Tokens'
-        },
-        {
-          type: 'doc',
-          id: 'getting-started/chapter2-element-nfts',
-          label: 'Chapter 2 Element NFTs'
-        },
+        }
       ]
     },
     {
