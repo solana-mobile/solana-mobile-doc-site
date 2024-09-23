@@ -38,6 +38,11 @@ const sidebars = {
           id: 'getting-started/introduction-to-solana',
           label: 'Introduction to Solana'
         },
+        { // dApp publishing entrypoint
+          type: 'doc',
+          label: 'Solana Mobile dApp Store',
+          id: 'dapp-publishing/intro',
+        },
         {
           type: 'doc',
           id: 'getting-started/web3-and-mobile',
@@ -60,11 +65,6 @@ const sidebars = {
           type: 'link',
           href: '/getting-started/overview#seed-vault',
           label: 'Seed Vault'
-        },
-        {
-          type: 'link',
-          href: '/getting-started/overview#solana-dapp-store',
-          label: 'Solana dApp Store'
         },
       ]
     },
@@ -164,11 +164,6 @@ const sidebars = {
       type: 'doc',
       id: 'sample-apps/sample_app_overview',
       label: 'Sample App Collection',
-    },
-    { // dApp publishing entrypoint
-      type: 'doc',
-      label: 'dApp Store Publishing',
-      id: 'dapp-publishing/intro',
     },
     { // Reference entrypoint
       type: 'doc',

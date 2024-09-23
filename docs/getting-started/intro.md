@@ -79,9 +79,21 @@ Learn how to develop Solana Mobile dApps in your preferred programming language.
 
 ## Learn about Solana Mobile
 
-Explore the full Solana Mobile SDK or learn about the Solana blockchain itself.
+Learn about the Solana dApp Store or explore the libraries within the Solana Mobile SDK.
 
 <CardLayout autoFitEnabled={true}>
+    <Card
+        to="/dapp-publishing/intro"
+        header={{
+            label: "dApp Store",
+            translateId: "dapp-store-card-header",
+        }}
+        body={{
+            label: "Learn about the dApp Store and how to publish your app.",
+            translateId: "dapp-store-card-body",
+        }}
+        emoji="📱"
+    />
     <Card
         to="/getting-started/overview"
         header={{
@@ -93,17 +105,5 @@ Explore the full Solana Mobile SDK or learn about the Solana blockchain itself.
             translateId: "learn-programs",
         }}
         iconPath="img/solana-mobile-stack-logo.png"
-    />
-    <Card
-        to="https://docs.solana.com/introduction"
-        header={{
-            label: "Solana Core Documentation",
-            translateId: "development-setup",
-        }}
-        body={{
-            label: "Learn about the history and core concepts of the Solana Blockchain.",
-            translateId: "development-setup-body",
-        }}
-        iconPath="img/solanaLogoMark.svg"
     />
 </CardLayout>
