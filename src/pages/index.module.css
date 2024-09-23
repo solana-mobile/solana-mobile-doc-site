@@ -26,8 +26,14 @@
 
 .logoContainer {
   position: relative;
-  width: 200px;
-  height: 200px;
+  max-width: 100%;
+  height: auto;
+}
+
+.logoContainer img {
+  width: 100%;
+  height: auto;
+  max-width: 1000px; /* or whatever the original width is */
 }
 
 .backgroundImage {
