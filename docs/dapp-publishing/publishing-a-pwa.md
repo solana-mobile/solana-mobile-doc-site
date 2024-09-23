@@ -4,12 +4,6 @@
 
 [Progressive Web Apps (PWAs)](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps) are web applications that use modern web capabilities to deliver an app-like experience to users.
 
-They offer several advantages:
-
-- Work across all devices and platforms
-- Provide offline functionality
-- Stays up to date with
-
 PWAs can be published on the dApp Store, as an Android app wrapped within a **Trusted Web Activity (TWA)**.
 
 ## Trusted Web Activities (TWAs)

@@ -1,7 +1,69 @@
-
 # Welcome publishers!
 
+import Card from "../../src/components/Card"
+import CardLayout from "../../src/layouts/CardLayout"
+
 We’re glad you’re ready to learn about publishing your Web3 apps on the Solana dApp Store, the fee-free app store for the [Saga](https://solanamobile.com/saga) device.
+
+# Quickstart
+
+Learn how to publish your app to the Solana dApp Store from these links.
+
+<CardLayout autoFitEnabled={true}>
+    <Card
+        to="/dapp-publishing/overview"
+        header={{
+            label: "Publish a dApp",
+            translateId: "publish-card-header",
+        }}
+        body={{
+            label: "Follow the step-by-step guide to publish your app to the Solana dApp Store.",
+            translateId: "publish-card-body",
+        }}
+        emoji="🚀"
+    />
+    <Card
+        to="/dapp-publishing/publishing-a-pwa"
+        header={{
+            label: "Progressive Web Apps (PWAs)",
+            translateId: "pwa-card-header",
+        }}
+        body={{
+            label: "Learn how to convert a PWA to an Android app and publish on the dApp Store.",
+            translateId: "pwa-card-body)",
+        }}
+        iconPath="img/pwa-icon.png"
+    />
+</CardLayout>
+
+<CardLayout autoFitEnabled={true}>
+    <Card
+        to="/dapp-publishing/qanda"
+        header={{
+            label: "Frequently Asked Questions",
+            translateId: "qanda-card-header",
+        }}
+        body={{
+            label: "See the list of frequently asked questions about the Solana dApp Store and its publishing process.",
+            translateId: "qanda-card-body",
+        }}
+        emoji="❓"
+    />
+    <Card
+        to="/dapp-publishing/policy"
+        header={{
+            label: "Publisher Policy",
+            translateId: "policy-card-header",
+        }}
+        body={{
+            label: "Learn about the dApp Store mission statement and publisher policy.",
+            translateId: "policy-card-body",
+        }}
+        emoji="📜"
+    />
+</CardLayout>
+
+<br/>
 
 # Why publish on the Solana dApp Store?
 
