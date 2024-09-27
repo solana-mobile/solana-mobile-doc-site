@@ -61,14 +61,27 @@ Metadata Pointer
     Metadata Address: 2DMMamkkxQ6zDMBtkFp8KH7FoWzBMBA1CGTYwom4QH6Z
 ```
 
-## Querying for Chapter 2 Preorder Token holders
+## Querying for Chapter 2 Preorder Token holders with Airship
+
+You can use the [Airship](https://airship.helius.dev/) tool provided by [Helius](https://www.helius.dev/) to query and fetch the list of Chapter 2 Preorder Token users.
+
+1. Select "Create new airdrop" to enter the tool.
+2. Enable the tool by providing a private key and a Solana RPC URL.
+
+- If you're only interested in fetching a list of holders, the private key provided can just be a newly generated dummy key.
+- It is recommended to use a custom RPC provider for best performance.
+
+3. Select "Import Chapter 2 Preorder Token Holders" then press the "Import" button.
+4. The list of wallet addresses of Chapter 2 Preorder Token Holders will be generated in the list below the button.
+
+## Querying for Chapter 2 Preorder Token holders manually
 
 :::tip
 This script can return duplicates of the same owner's wallet address.
 This is because it is possible for a single wallet address to own more than one Preorder Token, if they preordered multiple Chapter 2 products.
 :::
 
-You can follow these steps to query the Chapter 2 Preorder Token list and save it into a JSON file:
+You can follow these steps to manually query the Chapter 2 Preorder Token list and save it into a JSON file:
 
 ### 1. Access your RPC provider.
 
