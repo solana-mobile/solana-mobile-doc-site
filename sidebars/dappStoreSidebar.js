@@ -4,25 +4,72 @@
 module.exports = {
     dappPublishingSidebar: [
         {
+            type: 'html',
+            value: 'Getting Started',
+            className: 'sidebar-section-header',
+        },
+        {
             type: 'doc',
             id: 'dapp-publishing/intro',
-            label: 'dApp Store Intro'
+            label: 'Overview'
+        },
+        {
+            type: 'doc',
+            id: 'dapp-publishing/qanda',
+            label: 'Publishing FAQ'
+        },
+
+        /* Prepare for Publishing section */
+        {
+            type: 'html',
+            value: '<div class="sidebar-divider" />',
+        },
+        {
+            type: 'html',
+            value: 'Prepare for publishing',
+            className: 'sidebar-section-header',
+        },
+        {
+            type: 'link',
+            href: 'dapp-publishing/publishing-a-pwa',
+            label: 'Pre-submission Checklist'
+        },
+        {
+            type: 'link',
+            href: 'dapp-publishing/publishing-a-pwa',
+            label: 'Prepare your assets'
+        },
+        {
+            type: 'link',
+            href: 'dapp-publishing/publishing-a-pwa',
+            label: 'Test your app'
         },
         {
             type: 'doc',
             id: 'dapp-publishing/publishing-a-pwa',
-            label: 'Publish a PWA'
+            label: 'Convert a PWA to an APK'
+        },
+
+        /* Publish your app tutorial */
+        {
+            type: 'html',
+            value: '<div class="sidebar-divider" />',
+        },
+        {
+            type: 'html',
+            value: 'dApp Submission',
+            className: 'sidebar-section-header',
         },
         {
             type: 'category',
             label: 'Publish your dApp',
-            collapsible: true,
+            collapsible: false,
             collapsed: false,
             items: [
                 {
                     type: 'doc',
                     id: 'dapp-publishing/overview',
-                    label: 'Overview'
+                    label: 'Publishing Overview'
                 },
                 {
                     type: 'doc',
@@ -44,30 +91,36 @@ module.exports = {
                     id: 'dapp-publishing/submit',
                     label: '4. Submit your dApp release'
                 },
-                {
-                    type: 'category',
-                    label: 'After publishing',
-                    collapsible: true,
-                    collapsed: false,
-                    items: [
-                        {
-                            type: 'doc',
-                            id: 'dapp-publishing/link-to-dapp-listing-page',
-                            label: 'Link to your dApp listing page'
-                        },
-                        {
-                            type: 'doc',
-                            id: 'dapp-publishing/publishing-updates',
-                            label: 'Publish a dApp update'
-                        }
-                    ]
-                },
             ]  
         },
         {
-            type: 'doc',
-            id: 'dapp-publishing/qanda',
-            label: 'Q & A'
+            type: 'category',
+            label: 'After publishing',
+            collapsible: false,
+            collapsed: false,
+            items: [
+                {
+                    type: 'doc',
+                    id: 'dapp-publishing/publishing-updates',
+                    label: 'Update a Published dApp'
+                },
+                {
+                    type: 'doc',
+                    id: 'dapp-publishing/link-to-dapp-listing-page',
+                    label: 'Link to your dApp listing page'
+                },
+            ]
+        },
+
+        /* Addtional resources section */
+        {
+            type: 'html',
+            value: '<div class="sidebar-divider" />',
+        },
+        {
+            type: 'html',
+            value: 'Additional resources',
+            className: 'sidebar-section-header',
         },
         {
             type: 'category',
