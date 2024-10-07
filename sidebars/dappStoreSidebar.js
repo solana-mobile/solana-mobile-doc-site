@@ -30,18 +30,18 @@ module.exports = {
             className: 'sidebar-section-header',
         },
         {
-            type: 'link',
-            href: 'dapp-publishing/publishing-a-pwa',
+            type: 'doc',
+            id: 'dapp-publishing/checklist',
             label: 'Pre-submission Checklist'
         },
         {
-            type: 'link',
-            href: 'dapp-publishing/publishing-a-pwa',
-            label: 'Prepare your assets'
+            type: 'doc',
+            id: 'dapp-publishing/listing-page-guidelines',
+            label: 'Prepare your dApp listing content'
         },
         {
-            type: 'link',
-            href: 'dapp-publishing/publishing-a-pwa',
+            type: 'doc',
+            id: 'dapp-publishing/test-your-app',
             label: 'Test your app'
         },
         {
