@@ -1,4 +1,4 @@
-# dApp Store Presubmission Checklist
+# dApp Store Pre-submission Checklist
 
 Before you begin the publishing process, make sure that your app meets all of the requirements and guidelines listed on this checklist.
 
@@ -10,9 +10,9 @@ Before you begin the publishing process, make sure that your app meets all of th
 
 ### Technical Requirements
 
-- Release APK file prepared and signed.
+- Release APK file prepared and signed. PWAs can follow [this guide](/dapp-publishing/publishing-a-pwa) to convert to an APK.
 - App Permissions properly declared in manifest.
-- Prepare a developer Solana wallet for use with our Publishing CLI.
+- A developer Solana wallet for use with our Publishing CLI.
 
 ### Content and Assets
 

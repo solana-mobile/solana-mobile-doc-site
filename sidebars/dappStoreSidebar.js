@@ -15,8 +15,8 @@ module.exports = {
         },
         {
             type: 'doc',
-            id: 'dapp-publishing/qanda',
-            label: 'Publishing FAQ'
+            id: 'dapp-publishing/faq',
+            label: 'Frequently Asked Questions'
         },
 
         /* Prepare for Publishing section */
@@ -38,11 +38,6 @@ module.exports = {
             type: 'doc',
             id: 'dapp-publishing/listing-page-guidelines',
             label: 'Prepare your dApp listing content'
-        },
-        {
-            type: 'doc',
-            id: 'dapp-publishing/test-your-app',
-            label: 'Test your app'
         },
         {
             type: 'doc',
