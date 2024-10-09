@@ -1,0 +1,107 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  margin-bottom: 3rem;
+  min-height: 300px;
+}
+
+.withDivider {
+  padding-bottom: 3rem;
+}
+
+.lightMode.withDivider {
+  border-bottom: 1px solid #ccc;
+}
+
+.darkMode.withDivider {
+  border-bottom: 1px solid #444;
+}
+
+.leftHalf, .rightHalf {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.leftHalf {
+  justify-content: flex-end;
+  padding-right: 2rem;
+}
+
+.rightHalf {
+  justify-content: flex-start;
+}
+
+.textContent {
+  max-width: 80%;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.description {
+  font-size: 1rem;
+  text-align: left;
+}
+
+.imageContainer {
+  max-width: 80%;
+  display: flex;
+  align-items: center;
+  border: 8px solid #000000; /* Thick black border */
+  border-radius: 36px; /* Rounded corners */
+  overflow: hidden; /* Ensure the image doesn't overflow the rounded corners */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow */
+}
+
+.image {
+  width: 250px;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  .leftHalf, .rightHalf {
+    width: 100%;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .leftHalf {
+    order: 1;
+    margin-bottom: 1.5rem;
+  }
+
+  .rightHalf {
+    order: 2;
+  }
+
+  .textContent, .imageContainer {
+    max-width: 100%;
+    padding: 0 1rem;
+  }
+
+  .title {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .withDivider {
+    padding-bottom: 1.5rem;
+  }
+
+  .imageContainer {
+    border-width: 8px; /* Slightly thinner border on mobile */
+    border-radius: 24px; /* Smaller radius on mobile */
+  }
+}
