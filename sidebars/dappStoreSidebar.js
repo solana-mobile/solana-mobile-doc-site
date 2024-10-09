@@ -11,7 +11,7 @@ module.exports = {
         {
             type: 'doc',
             id: 'dapp-publishing/intro',
-            label: 'Overview'
+            label: 'dApp Store Overview'
         },
         {
             type: 'doc',

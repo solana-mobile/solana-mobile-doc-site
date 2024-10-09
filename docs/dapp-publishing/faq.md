@@ -8,7 +8,7 @@ import { FAQ, FAQSection } from '@site/src/components/FAQ';
 
     Developers **already** have all the tools necessary to start building apps for the dApp Store today!
 
-    For more information, view our developer documentation.
+    For more information, view our [developer documentation](/getting-started/development-setup).
 
   </FAQSection>
 
@@ -19,14 +19,14 @@ import { FAQ, FAQSection } from '@site/src/components/FAQ';
     2. Mint a set of NFTs describing your App and Publisher details
     3. Submit a signed release APK of your app
 
-    For a full explanation, diagrams, and a step by step guide of the complete publishing flow, view the Publishing Overview page.
+    For a full explanation, diagrams, and a step by step guide of the complete publishing flow, view the [Publishing Overview](/dapp-publishing/overview) page.
 
   </FAQSection>
 
   <FAQSection title="Can I publish a PWA onto the dApp Store?">
     Yes! With a few additional steps, you can convert a PWA into an Android app and generate an APK for app submission.
 
-    For a tutorial and more information, view our PWA documentation.
+    For a tutorial and more information, view our [PWA documentation](/dapp-publishing/publishing-a-pwa).
 
   </FAQSection>
 
