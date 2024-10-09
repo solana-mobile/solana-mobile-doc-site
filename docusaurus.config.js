@@ -117,15 +117,10 @@ const config = {
             label: 'dApp Store',
           },
           {
-            to: 'https://solanamobile.com/',
-            label: 'Seeker',
-            position: 'left'
-          },
-          {
             type: 'doc',
-            docId: 'saga/overview',
+            docId: 'marketing/overview',
             position: 'left',
-            label: 'Saga',
+            label: 'Marketing & Partnerships',
           },
           {to: 'blog', label: 'Blog', position: 'right'},
           {

@@ -170,6 +170,16 @@ const sidebars = {
       label: 'API Reference',
       id: 'reference/overview',
     },
+    { // Reference entrypoint
+      type: 'link',
+      label: 'Seeker',
+      href: 'https://solanamobile.com',
+    },
+    {
+      type: 'doc',
+      id: 'saga/overview',
+      label: 'Saga',
+    },
   ],
   // other sidebars
   ...require("./sidebars/kotlinSidebar.js"),
@@ -177,6 +187,7 @@ const sidebars = {
   ...require("./sidebars/dappStoreSidebar.js"),
   ...require("./sidebars/referenceSidebar.js"),
   ...require("./sidebars/sagaSidebar.js"),
+  ...require("./sidebars/marketingSidebar.js"),
 };
 
 module.exports = sidebars;
