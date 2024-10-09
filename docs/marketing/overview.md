@@ -12,7 +12,7 @@ with these quick links:
 
 <CardLayout autoFitEnabled={true}>
     <Card
-        to="/marketing/overview"
+        to="/marketing/faq"
         header={{
             label: "Marketing & Partnerships FAQ",
             translateId: "faq-card-header",
