@@ -11,7 +11,7 @@ module.exports = {
         {
             type: 'doc',
             id: 'marketing/overview',
-            label: 'Marketing Overview'
+            label: 'Overview'
         },
         {
             type: 'doc',
@@ -19,14 +19,9 @@ module.exports = {
             label: 'Frequently Asked Questions'
         },
         {
-            type: 'link',
-            href: 'marketing/overview',
-            label: 'Brand & Marketing Guidelines'
-        },
-        {
-            type: 'link',
-            href: 'marketing/overview',
-            label: 'Post Launch Marketing'
+            type: 'doc',
+            id: 'marketing/marketing-guidelines',
+            label: 'Marketing Guidelines'
         },
 
         /* Token Section */
@@ -49,5 +44,27 @@ module.exports = {
             id: 'marketing/saga-genesis-token',
             label: 'Saga Genesis Token'
         },
+
+        /* Resources Section */
+        {
+            type: 'html',
+            value: '<div class="sidebar-divider" />',
+        },
+        {
+            type: 'html',
+            value: 'Resources',
+            className: 'sidebar-section-header',
+        },
+        {
+            type: 'doc',
+            id: 'marketing/support',
+            label: 'Support'
+        },
+        {
+            type: 'link',
+            href: 'https://solanamobile.com/press',
+            label: 'Press Kit'
+        },
+
     ]
   };
