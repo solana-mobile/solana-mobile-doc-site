@@ -5,7 +5,7 @@ module.exports = {
     marketingSidebar: [
         {
             type: 'html',
-            value: 'Getting Started',
+            value: 'Marketing & Partnerships',
             className: 'sidebar-section-header',
         },
         {
@@ -14,8 +14,8 @@ module.exports = {
             label: 'Marketing Overview'
         },
         {
-            type: 'link',
-            href: 'marketing/overview',
+            type: 'doc',
+            id: 'marketing/faq',
             label: 'Frequently Asked Questions'
         },
         {
@@ -29,5 +29,25 @@ module.exports = {
             label: 'Post Launch Marketing'
         },
 
+        /* Token Section */
+        {
+            type: 'html',
+            value: '<div class="sidebar-divider" />',
+        },
+        {
+            type: 'html',
+            value: 'Solana Mobile Tokens',
+            className: 'sidebar-section-header',
+        },
+        {
+            type: 'doc',
+            id: 'marketing/chapter2-preorder-tokens',
+            label: 'Chapter 2 Preorder Token'
+        },
+        {
+            type: 'doc',
+            id: 'marketing/saga-genesis-token',
+            label: 'Saga Genesis Token'
+        },
     ]
   };
