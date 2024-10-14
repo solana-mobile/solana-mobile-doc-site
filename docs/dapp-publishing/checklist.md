@@ -1,36 +1,52 @@
-# dApp Store Pre-submission Checklist
+# Publishing Journey Checklist
 
 import Diagram from '@site/src/components/Diagram';
 
-Before you begin the publishing process, make sure that your app meets all of the requirements and guidelines listed on this checklist.
+This checklist aims to provide you a high level overview of the dApp publishing process. You can get
+an idea of the resources you'll need to prepare before submitting your app.
 
-## Publishing Flow
+## Publishing Journey
 
-The publishing process can be simplified into these steps:
+At a high level, the publishing process can be simplified into these steps:
 
 <Diagram src="/diagrams/publishingflow.svg" alt="Publishing Flow Diagram" width={900} height={500} />
 
-### App Functionality & Testing
+### Build an Android APK
 
-- Test your app for crashes and bugs. You do not need a Seeker or Saga to test your app, just test against a comparable Android device or emulator.
-- If using Mobile Wallet Adapter, ensure users are able to connect and sign successfully using any given MWA-compatible wallet (e.g Phantom, Solflare)
+The dApp Publishing tool requires you to submit an Android APK of your app.
+
+- If you already have an Android app (e.g Published to google play), you can generate a release build APK.
+- If you have a web app, follow [this guide](/dapp-publishing/publishing-a-pwa) to convert it to an Android app and generate an APK for submission.
+
+:::important
+
+Ensure you are submitting a release build of your app that is [signed](https://developer.android.com/studio/publish/app-signing#opt-out). Debug builds will not be accepted.
+
+:::
+
+### Test on an Android device
+
+To ensure a great user experience, we recommend developers to thoroughly test their app to catch any bugs/crashes/issues.
+
+You do not need a Seeker or Saga to test your app, you can just test against a comparable Android device or emulator.
+
+- If using Mobile Wallet Adapter, test your app's connect and signing flows with popular MWA wallets like Phantom and Solflare.
 - If your app content is gated (e.g beta access, NFT-gated), prepare a test account with full access for App Review.
 
-### Technical Requirements
+### Prepare your App Listing Page
 
-- Release APK file prepared and signed. PWAs can follow [this guide](/dapp-publishing/publishing-a-pwa) to convert to an APK.
-- App Permissions properly declared in manifest.
-- A developer Solana wallet for use with our Publishing CLI.
+Your app's listing page is what gives users the first impression of your app. You'll want to prepare ahead of time, assets like
+your app icon, screenshots/videos, and text content.
 
-### Content and Assets
+See the [Listing Page guidelines](/dapp-publishing/listing-page-guidelines) to visualize your app's listing page and learn best practices.
 
-- Prepare a minimum of 4 image or video files to be included in your dApp Store listing page.
-- See the dApp Listing Guidelines for best practices and a visualization of your dApp's listing page.
+### Proceed to Publishing!
 
-### Legal and Compliance
+Once you are ready for publishing, you can follow the step-by-step App Submission guide to submit your app. The publishing process
+is completely self service, so it can be started whenever you are ready!
 
-- Read the Developer Agreement and Policy to ensure your app meets requirements.
+After finished, your app will be in queue for App Review and, using your provided contact details, we will reach out to if any questions are needed.
 
-### Get in contact
+### App Promotion
 
-- Join Solana Mobile Developer Discord, grab the _developer_ role, and leave a message in the `#dapp-store` channel.
+For questions regarding promoting your app after launching, see our [Marketing & Partnership documentation](/marketing/overview).

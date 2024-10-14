@@ -32,7 +32,7 @@ module.exports = {
         {
             type: 'doc',
             id: 'dapp-publishing/checklist',
-            label: 'Pre-submission Checklist'
+            label: 'Publishing Checklist'
         },
         {
             type: 'doc',
