@@ -52,19 +52,19 @@ module.exports = {
         },
         {
             type: 'html',
-            value: 'dApp Submission',
+            value: 'Publishing',
             className: 'sidebar-section-header',
         },
         {
             type: 'category',
-            label: 'Publish your dApp',
+            label: 'App Submission Guide',
             collapsible: false,
             collapsed: false,
             items: [
                 {
                     type: 'doc',
                     id: 'dapp-publishing/overview',
-                    label: 'Publishing Overview'
+                    label: 'Submission Overview'
                 },
                 {
                     type: 'doc',

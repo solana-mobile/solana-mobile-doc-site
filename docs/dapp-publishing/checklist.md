@@ -40,7 +40,7 @@ your app icon, screenshots/videos, and text content.
 
 See the [Listing Page guidelines](/dapp-publishing/listing-page-guidelines) to visualize your app's listing page and learn best practices.
 
-### Proceed to Publishing!
+### Proceed to App Submission!
 
 Once you are ready for publishing, you can follow the step-by-step App Submission guide to submit your app. The publishing process
 is completely self service, so it can be started whenever you are ready!
