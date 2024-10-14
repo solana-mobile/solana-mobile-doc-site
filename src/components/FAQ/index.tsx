@@ -3,8 +3,8 @@ import clsx from "clsx";
 import { useColorMode } from "@docusaurus/theme-common";
 import styles from "./styles.module.css";
 
-const FAQSection = ({ title, children, isLast }) => {
-  const [isOpen, setIsOpen] = useState(false);
+const FAQSection = ({ title, children, isLast, expanded = false }) => {
+  const [isOpen, setIsOpen] = useState(expanded);
   const { colorMode } = useColorMode();
 
   return (

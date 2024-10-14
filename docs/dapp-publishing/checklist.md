@@ -1,6 +1,14 @@
 # dApp Store Pre-submission Checklist
 
+import Diagram from '@site/src/components/Diagram';
+
 Before you begin the publishing process, make sure that your app meets all of the requirements and guidelines listed on this checklist.
+
+## Publishing Flow
+
+The publishing process can be simplified into these steps:
+
+<Diagram src="/diagrams/publishingflow.svg" alt="Publishing Flow Diagram" width={900} height={500} />
 
 ### App Functionality & Testing
 
