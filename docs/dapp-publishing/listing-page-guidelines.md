@@ -2,7 +2,7 @@
 hide_table_of_contents: true
 ---
 
-# dApp Listing Guidelines
+# dApp Listing Page Guidelines
 
 import ListingPageSection from '@site/src/components/ListingPageSection';
 

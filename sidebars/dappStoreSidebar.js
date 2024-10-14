@@ -37,7 +37,7 @@ module.exports = {
         {
             type: 'doc',
             id: 'dapp-publishing/listing-page-guidelines',
-            label: 'Prepare your dApp listing content'
+            label: 'Prepare your dApp isting page'
         },
         {
             type: 'doc',
