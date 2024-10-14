@@ -92,3 +92,44 @@ Wherever you are in your publishing journey, you can find resources here to get 
 
   </FAQSection>
 </FAQ>
+
+## More resources
+
+<CardLayout autoFitEnabled={true}>
+    <Card
+        to="/dapp-publishing/checklist"
+        header={{
+            label: "Publishing Checklist",
+            translateId: "publishing-cheklist-card-header",
+        }}
+        body={{
+            label: "An overview of the publishing process and what to expect before you begin.",
+            translateId: "publishing-cheklist-card-body",
+        }}
+        emoji="✅"
+    />
+    <Card
+        to="/dapp-publishing/listing-page-guidelines"
+        header={{
+            label: "dApp Listing Page",
+            translateId: "listing-page-card-header",
+        }}
+        body={{
+            label: "Visualize how your app listing will be presented within the dApp Store.",
+            translateId: "listing-page-card-body",
+        }}
+        emoji="📱"
+    />
+    <Card
+        to="/dapp-publishing/policy"
+        header={{
+            label: "Publisher Policy",
+            translateId: "policy-card-header",
+        }}
+        body={{
+            label: "See the dApp Store mission statement and publisher policy.",
+            translateId: "policy-card-body",
+        }}
+        emoji="📜"
+    />
+</CardLayout>
