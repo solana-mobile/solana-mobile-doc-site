@@ -15,35 +15,44 @@ module.exports = {
         },
         {
             type: 'doc',
+            id: 'marketing/promoting-your-app',
+            label: 'Promoting Your App'
+        },
+        {
+            type: 'doc',
+            id: 'marketing/targeting-seeker-users',
+            label: 'Targeting Seeker & Saga users'
+        },
+        {
+            type: 'doc',
+            id: 'marketing/partnership-inquiries',
+            label: 'Partnership Inquiries'
+        },
+        {
+            type: 'doc',
             id: 'marketing/faq',
             label: 'Frequently Asked Questions'
         },
-        {
-            type: 'doc',
-            id: 'marketing/marketing-guidelines',
-            label: 'Marketing Guidelines'
-        },
-
         /* Token Section */
-        {
-            type: 'html',
-            value: '<div class="sidebar-divider" />',
-        },
-        {
-            type: 'html',
-            value: 'Solana Mobile Tokens',
-            className: 'sidebar-section-header',
-        },
-        {
-            type: 'doc',
-            id: 'marketing/chapter2-preorder-tokens',
-            label: 'Chapter 2 Preorder Token'
-        },
-        {
-            type: 'doc',
-            id: 'marketing/saga-genesis-token',
-            label: 'Saga Genesis Token'
-        },
+        // {
+        //     type: 'html',
+        //     value: '<div class="sidebar-divider" />',
+        // },
+        // {
+        //     type: 'html',
+        //     value: 'Solana Mobile Tokens',
+        //     className: 'sidebar-section-header',
+        // },
+        // {
+        //     type: 'doc',
+        //     id: 'marketing/chapter2-preorder-tokens',
+        //     label: 'Chapter 2 Preorder Token'
+        // },
+        // {
+        //     type: 'doc',
+        //     id: 'marketing/saga-genesis-token',
+        //     label: 'Saga Genesis Token'
+        // },
 
         /* Resources Section */
         {
@@ -54,6 +63,11 @@ module.exports = {
             type: 'html',
             value: 'Resources',
             className: 'sidebar-section-header',
+        },
+        {
+            type: 'doc',
+            id: 'marketing/marketing-guidelines',
+            label: 'Marketing Guidelines & Restrictions'
         },
         {
             type: 'doc',

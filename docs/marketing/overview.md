@@ -7,60 +7,60 @@ This section of the site serves as a resource hub for all things related to mark
 
 # Quickstart
 
-Teams or individual developers that are interested in publishing can find answers to their questions
-with these quick links:
+Whether you're just beginning your publishing journey or about to publish an app, read through the resources
+here to ensure a successful launch.
 
 <CardLayout autoFitEnabled={true}>
     <Card
-        to="/marketing/faq"
+        to="/marketing/promoting-your-app"
         header={{
-            label: "Marketing & Partnerships FAQ",
-            translateId: "faq-card-header",
+            label: "Promoting Your App",
+            translateId: "promoting-your-app-card-header",
         }}
         body={{
-            label: "See the list of common questions we receive from developers and teams.",
-            translateId: "faq-card-body",
+            label: "Explore the best practices for promoting your app on the dApp Store.",
+            translateId: "promoting-your-app-card-body",
         }}
-        emoji="❓"
+        emoji="📣"
     />
     <Card
-        to="/marketing/marketing-guidelines"
+        to="/marketing/targeting-seeker-users"
         header={{
-            label: "Marketing Guidelines",
-            translateId: "marketing-guidelines-card-header",
+            label: "Targeting Seeker & Saga users",
+            translateId: "targeting-seeker-users-card-header",
         }}
         body={{
-            label: "Read the guidelines, restrictions, and best practices around marketing for the dApp Store.",
-            translateId: "marketing-guidelines-card-body)",
+            label: "Run a campaign for Seeker and Saga users using the soulbound Preorder and Genesis NFTs.",
+            translateId: "targeting-seeker-users-card-body",
         }}
-        emoji="📜"
+        iconPath="img/chapter2-logo.svg"
     />
 </CardLayout>
 
 <CardLayout autoFitEnabled={true}>
     <Card
-        to="/marketing/chapter2-preorder-token"
+        to="/marketing/partnership-inquiries"
         header={{
-            label: "Chapter 2 Preorder Token",
+            label: "Partnership Inquiries",
             translateId: "preorder-tokens-card-header",
         }}
         body={{
-            label: "Learn about the Chapter 2 Preorder Token NFT and how to query for its holders.",
+            label: "Learn about Solana Mobile's partnership policies and practices",
             translateId: "preorder-tokens-card-body",
         }}
-        iconPath="img/chapter2-logo.svg"
+        emoji="💼"
     />
     <Card
-        to="/dapp-publishing/intro"
+        to="/dapp-publishing/faq"
         header={{
-            label: "dApp Store Documentation",
+            label: "FAQ",
             translateId: "dapp-store-card-header",
         }}
         body={{
-            label: "Learn about the dApp Store and how to publish your app.",
+            label: "See our a quick overview of common questions around marketing and partnerships.",
             translateId: "dapp-store-card-body",
         }}
-        iconPath="img/dappstore-logo.png"
+        emoji="❓"
     />
 </CardLayout>
 
