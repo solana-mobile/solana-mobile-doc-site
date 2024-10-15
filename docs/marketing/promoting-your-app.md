@@ -9,11 +9,11 @@ provided with engagement on social media.
 
 Best practices for co-marketing:
 
-- Understand Solana Mobile's [restrictions and guidelines](/marketing/marketing-guidelines) around marketing content.
+- Understand Solana Mobile's restrictions and guidelines around marketing content.
 - Share your copy before posting for review.
 - To coordinate with marketing efforts, you can request a specific time for your app to go live.
 
-[Editor note: Do we need a CTA here?]
+For more information, view the [Marketing Guidelines and Restrictions](/marketing/marketing-guidelines) documentation.
 
 ## Marketing campaign for Seeker and Saga users
 
@@ -24,7 +24,7 @@ In the past, dApps have run campaigns targeting Seeker and Saga users with:
 - Early access to apps and features
 - Airdrops and NFT-gated content
 
-For more information, view the [Targeting Seeker and Saga Users](/dapp-publishing/targeting-seeker-users/) documentation.
+For more information, view the [Targeting Seeker and Saga Users](/marketing/targeting-seeker-users/) documentation.
 
 ## App Listing Page
 

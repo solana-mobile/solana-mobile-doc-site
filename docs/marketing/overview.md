@@ -51,7 +51,7 @@ here to ensure a successful launch.
         emoji="❓"
     />
     <Card
-        to="/dapp-publishing/marketing-guidelines"
+        to="/marketing/marketing-guidelines"
         header={{
             label: "Co-marketing Guidelines",
             translateId: "dapp-store-card-header",
