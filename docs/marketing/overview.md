@@ -39,28 +39,28 @@ here to ensure a successful launch.
 
 <CardLayout autoFitEnabled={true}>
     <Card
-        to="/marketing/partnership-inquiries"
+        to="/marketing/faq"
         header={{
             label: "Partnership Inquiries",
             translateId: "preorder-tokens-card-header",
         }}
         body={{
-            label: "Learn about Solana Mobile's partnership policies and practices",
+            label: "Common questions and requests about collaboration with Solana Mobile.",
             translateId: "preorder-tokens-card-body",
         }}
-        emoji="💼"
+        emoji="❓"
     />
     <Card
-        to="/dapp-publishing/faq"
+        to="/dapp-publishing/marketing-guidelines"
         header={{
-            label: "FAQ",
+            label: "Co-marketing Guidelines",
             translateId: "dapp-store-card-header",
         }}
         body={{
-            label: "See our a quick overview of common questions around marketing and partnerships.",
+            label: "Understand the guidelines on receiving co-marketing support from Solana Mobile.",
             translateId: "dapp-store-card-body",
         }}
-        emoji="❓"
+        emoji="📜"
     />
 </CardLayout>
 

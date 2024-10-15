@@ -1,3 +1,0 @@
-# Partnership Inquiries
-
-# No

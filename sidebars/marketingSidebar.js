@@ -19,14 +19,26 @@ module.exports = {
             label: 'Promoting Your App'
         },
         {
-            type: 'doc',
-            id: 'marketing/targeting-seeker-users',
-            label: 'Targeting Seeker & Saga users'
+            type: 'category',
+            label: 'Targeting Seeker & Saga users',
+            collapsed: false,
+            items: [
+                {
+                    type: 'doc',
+                    id: 'marketing/targeting-seeker-users',
+                    label: 'Seeker'
+                },
+                {
+                    type: 'doc',
+                    id: 'marketing/targeting-saga-users',
+                    label: 'Saga'
+                },
+            ]
         },
         {
             type: 'doc',
-            id: 'marketing/partnership-inquiries',
-            label: 'Partnership Inquiries'
+            id: 'marketing/marketing-guidelines',
+            label: 'Marketing Guidelines & Restrictions'
         },
         {
             type: 'doc',
@@ -63,11 +75,6 @@ module.exports = {
             type: 'html',
             value: 'Resources',
             className: 'sidebar-section-header',
-        },
-        {
-            type: 'doc',
-            id: 'marketing/marketing-guidelines',
-            label: 'Marketing Guidelines & Restrictions'
         },
         {
             type: 'doc',

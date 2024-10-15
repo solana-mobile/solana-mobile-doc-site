@@ -7,7 +7,7 @@ authors:
     title: Developer Relations @ Solana Mobile
     url: https://twitter.com/MikeSulistio
     image_url: /blog_profile_pics/mikesulistio.png
-tags: [saga, chapter-2, leaderboard, tanzanite, diamond, emerald, NFT]
+tags: [saga, chapter-2, NFT]
 hide_table_of_contents: false
 ---
 
