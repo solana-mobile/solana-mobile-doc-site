@@ -42,25 +42,25 @@ here to ensure a successful launch.
         to="/marketing/faq"
         header={{
             label: "Partnership Inquiries",
-            translateId: "preorder-tokens-card-header",
+            translateId: "partnership-inquiries-card-header",
         }}
         body={{
             label: "Common questions and requests about collaboration with Solana Mobile.",
-            translateId: "preorder-tokens-card-body",
+            translateId: "partnership-inquiries-card-body",
         }}
         emoji="❓"
     />
     <Card
-        to="/marketing/marketing-guidelines"
+        to="/dapp-publishing/intro"
         header={{
-            label: "Co-marketing Guidelines",
+            label: "Solana dApp Store",
             translateId: "dapp-store-card-header",
         }}
         body={{
-            label: "Understand the guidelines on receiving co-marketing support from Solana Mobile.",
+            label: "Learn about the Solana dApp Store and how to publish mobile and web apps.",
             translateId: "dapp-store-card-body",
         }}
-        emoji="📜"
+        iconPath="img/dappstore-logo.png"
     />
 </CardLayout>
 

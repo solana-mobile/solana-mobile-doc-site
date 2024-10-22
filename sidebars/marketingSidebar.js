@@ -37,11 +37,6 @@ module.exports = {
         },
         {
             type: 'doc',
-            id: 'marketing/marketing-guidelines',
-            label: 'Marketing Guidelines & Restrictions'
-        },
-        {
-            type: 'doc',
             id: 'marketing/faq',
             label: 'Frequently Asked Questions'
         },
