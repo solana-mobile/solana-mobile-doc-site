@@ -19,6 +19,11 @@ module.exports = {
             label: 'Promoting Your App'
         },
         {
+            type: 'doc',
+            id: 'marketing/comarketing-guidelines',
+            label: 'Co-marketing With Solana Mobile'
+        },
+        {
             type: 'category',
             label: 'Targeting Seeker & Saga users',
             collapsed: false,
