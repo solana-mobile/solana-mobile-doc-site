@@ -4,67 +4,50 @@ import TabItem from '@theme/TabItem';
 
 # Targeting Seeker Users
 
-<BlogImageRow>
-  <img src="/blog_imgs/chapter2-preorder-token.jpeg" alt="Preorder Token" width="300" />
-</BlogImageRow>
-
 ## Introduction
 
-This article provides information about the Solana Mobile Chapter 2 Preorder Tokens NFTs. The non-transferrable Chapter 2 Preorder Tokens allow for the identification of wallets that have participated in supporting Chapter 2.
+This article provides information about the Solana Mobile Chapter 2 Preorder Tokens NFTs. The non-transferrable Chapter 2 Preorder Tokens allow for the identification of wallets that have participated in preordering Seeker, known as Chapter 2 when preorders first launched.
+
+Everyone who preorders the Seeker receives this Chapter 2 Preorder Token NFT, which is a way for ecosystem teams to target those who preordered the Seeker through rewards programs, incentives, and other benefits.
 
 Solana Mobile does not currently have a rewards program in connection with the Chapter 2 Preorder Token. Ecosystem teams are entirely free to decide if (and if so, how) they wish to interact with the holders of these non-transferable tokens.
 
 ## Chapter 2 Preorder Token holders
 
-The Chapter 2 Preorder Token NFT is a non-transferable NFT distributed to the wallets of anyone who has preordered Chapter 2.
+The Chapter 2 Preorder Token NFT is a non-transferable NFT distributed to the wallets of anyone who has preordered Seeker.
 
-As of the time this article was written, there are 110,000+ holders of the Preorder Token. The preorder phase is still active and any new Tokens will be issued in waves.
+As of the time this article was written, there are 140,000+ holders of the Preorder Token. The preorder phase is still active and any new Tokens will be issued in waves.
 
-## NFT Details
-
-The Chapter 2 Preorder Tokens are non-transferable NFTs enabled by the _[NonTransferable](https://solana.com/developers/guides/token-extensions/non-transferable)_ extension.
-
-### Mint Address
-
-The Chapter 2 Preorder Token mint address is:
-
-- `2DMMamkkxQ6zDMBtkFp8KH7FoWzBMBA1CGTYwom4QH6Z`
-
-This mint address is shared by all token accounts of the Chapter 2 Preorder Token.
-
-### Metadata
-
-Each Chapter 2 Preorder Token NFT utilizes the [Metadata and Metadata Pointer](https://solana.com/developers/guides/token-extensions/metadata-pointer) extension to define
-its NFT metadata.
-
-```
-Metadata
-    Uri: https://arweave.net/WHyy5Fo8vUC7FqFfzqkuYAmDi-BfOMBjZSXIwwO7P6g
-    Mint: 2DMMamkkxQ6zDMBtkFp8KH7FoWzBMBA1CGTYwom4QH6Z
-    Name: Chapter 2 Preorder Token
-    Symbol: CHAPTER2
-    Update Authority: GRR6BquJZYWgUqWpNJekBZHDHgxVQ56iZ2P2nWjDFRSn
-    Additional Metadata
-Metadata Pointer
-    Authority: GRR6BquJZYWgUqWpNJekBZHDHgxVQ56iZ2P2nWjDFRSn
-    Metadata Address: 2DMMamkkxQ6zDMBtkFp8KH7FoWzBMBA1CGTYwom4QH6Z
-```
-
-## Querying for Chapter 2 Preorder Token Holders
+## Targeting Chapter 2 Preorder Token Holders
 
 <Tabs>
-<TabItem value="Querying with Airship" label="Querying with Airship">
+<TabItem value="Targeting Seeker with Airship" label="Targeting Seeker with Airship">
 
-You can use the [Airship](https://airship.helius.dev/) tool provided by [Helius](https://www.helius.dev/) to query and fetch the list of Chapter 2 Preorder Token users.
+### Airship
+
+[Airship](https://airship.helius.dev/) is a tool developed by [Helius](https://www.helius.dev/) that enables cost-effective and simplified SPL token airdrops. For more information on how it works, check out the official [Airship docs](https://github.com/helius-labs/airship).
+
+You can use the tool to:
+
+- Generate a list of Chapter 2 Preorder Token holders.
+- Distribute a specified amount of compressed SPL tokens to a list of wallets.
+- Claim any distributed compressed tokens that belong to your wallet.
+
+#### Usage
 
 1. Select "Create new airdrop" to enter the tool.
-2. Enable the tool by providing a private key and a Solana RPC URL.
-
-- If you're only interested in fetching a list of holders, the private key provided can just be a newly generated dummy key.
-- It is recommended to use a custom RPC provider for best performance.
-
+2. Provide an RPC URL and the private key of the wallet containing the tokens for distribution.
 3. Select "Import Chapter 2 Preorder Token Holders" then press the "Import" button.
-4. The list of wallet addresses of Chapter 2 Preorder Token Holders will be generated in the list below the button.
+4. The list of wallet addresses of Chapter 2 Preorder Token Holders will be generated.
+5. Select the SPL token you want to distribute and specify either a fixed amount of tokens or a percent of available tokens.
+6. Review the airdrop details and press "Send" to initiate the airdrop.
+
+#### Claiming compressed tokens
+
+After an airdrop is intiated, recipients will need to decompress their distributed tokens using the [Airship decompress tool](https://airship.helius.dev/decompress).
+
+- Recipients can connect their wallets and view a list of the available compressed tokens they can claim.
+- After signing a transaction to claim, the tokens will appear as normal in the users wallet.
 
 </TabItem>
 <TabItem value="Querying manually" label="Querying manually">
@@ -138,3 +121,33 @@ In order to query a subset of the Preorder Token Holders, you may write a script
 
 </TabItem>
 </Tabs>
+
+## NFT Details
+
+The Chapter 2 Preorder Tokens are non-transferable NFTs enabled by the _[NonTransferable](https://solana.com/developers/guides/token-extensions/non-transferable)_ extension.
+
+### Mint Address
+
+The Chapter 2 Preorder Token mint address is:
+
+- `2DMMamkkxQ6zDMBtkFp8KH7FoWzBMBA1CGTYwom4QH6Z`
+
+This mint address is shared by all token accounts of the Chapter 2 Preorder Token.
+
+### Metadata
+
+Each Chapter 2 Preorder Token NFT utilizes the [Metadata and Metadata Pointer](https://solana.com/developers/guides/token-extensions/metadata-pointer) extension to define
+its NFT metadata.
+
+```
+Metadata
+    Uri: https://arweave.net/WHyy5Fo8vUC7FqFfzqkuYAmDi-BfOMBjZSXIwwO7P6g
+    Mint: 2DMMamkkxQ6zDMBtkFp8KH7FoWzBMBA1CGTYwom4QH6Z
+    Name: Chapter 2 Preorder Token
+    Symbol: CHAPTER2
+    Update Authority: GRR6BquJZYWgUqWpNJekBZHDHgxVQ56iZ2P2nWjDFRSn
+    Additional Metadata
+Metadata Pointer
+    Authority: GRR6BquJZYWgUqWpNJekBZHDHgxVQ56iZ2P2nWjDFRSn
+    Metadata Address: 2DMMamkkxQ6zDMBtkFp8KH7FoWzBMBA1CGTYwom4QH6Z
+```

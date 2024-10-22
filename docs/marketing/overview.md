@@ -12,14 +12,14 @@ here to ensure a successful launch.
 
 <CardLayout autoFitEnabled={true}>
     <Card
-        to="/marketing/promoting-your-app"
+        to="/marketing/comarketing-guidelines"
         header={{
-            label: "Promoting Your App",
-            translateId: "promoting-your-app-card-header",
+            label: "Co-marketing with Solana Mobile",
+            translateId: "comarketing-guidelines-card-header",
         }}
         body={{
-            label: "Explore the best practices for promoting your app on the dApp Store.",
-            translateId: "promoting-your-app-card-body",
+            label: "Learn how you can co-market with Solana Mobile and reach the Solana Mobile community.",
+            translateId: "comarketing-guidelines-card-body",
         }}
         emoji="📣"
     />

@@ -15,11 +15,6 @@ module.exports = {
         },
         {
             type: 'doc',
-            id: 'marketing/promoting-your-app',
-            label: 'Promoting Your App'
-        },
-        {
-            type: 'doc',
             id: 'marketing/comarketing-guidelines',
             label: 'Co-marketing With Solana Mobile'
         },

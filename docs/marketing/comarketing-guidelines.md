@@ -16,7 +16,7 @@ If you are interested in reaching the Solana Mobile commmunity with similar cont
 
 ## Best Practices for Co-marketing
 
-These are the best practices to plan out your co-marketing campaign.
+These are the best practices to plan out a co-marketing campaign for the Solana Mobile community.
 
 ### 1. Understand Solana Mobile's restrictions and guidelines
 
