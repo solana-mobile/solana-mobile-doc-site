@@ -25,7 +25,7 @@ function HomeCallToAction() {
     <>
       <ActionButton
         type="primary"
-        href={useBaseUrl("dapp-publishing/overview")}
+        href={useBaseUrl("dapp-publishing/intro")}
         target="_self"
       >
         Publish a dApp
