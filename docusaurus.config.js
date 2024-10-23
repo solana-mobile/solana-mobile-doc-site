@@ -81,7 +81,7 @@ const config = {
             type: 'doc',
             docId: 'getting-started/intro',
             position: 'left',
-            label: 'Overview',
+            label: 'Developers',
           },
           {
             type: 'dropdown',

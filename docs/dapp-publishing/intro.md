@@ -1,4 +1,4 @@
-# The dApp Store
+# Solana dApp Store
 
 import Card from "../../src/components/Card"
 import CardLayout from "../../src/layouts/CardLayout"
