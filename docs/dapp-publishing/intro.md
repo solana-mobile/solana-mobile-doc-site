@@ -72,25 +72,6 @@ Wherever you are in your publishing journey, you can find resources here to get 
     </CardLayout>
 
   </FAQSection>
-  <FAQSection title="I've published my app! How can I promote it?">
-    You can find resources related to App Promotion by viewing our Marketing & Partnerships documentation
-
-    <CardLayout autoFitEnabled={true}>
-        <Card
-            to="/marketing/overview"
-            header={{
-                label: "Marketing & Promotion Resources",
-                translateId: "marketing-card-header",
-            }}
-            body={{
-                label: "See the Marketing & Partnership documentation for resources around launching on the dApp Store.",
-                translateId: "marketing-card-body",
-            }}
-            emoji="📣"
-        />
-    </CardLayout>
-
-  </FAQSection>
 </FAQ>
 
 ## More resources
