@@ -15,7 +15,7 @@ At a high level, the publishing process can be simplified into these steps:
 
 The dApp Publishing tool requires you to submit an Android APK of your app.
 
-- If you already have an Android app (e.g Published to google play), you can generate a release build APK.
+- If you already have an Android app (e.g Published to Google Play Store), you can generate a release build APK.
 - If you have a web app, follow [this guide](/dapp-publishing/publishing-a-pwa) to convert it to an Android app and generate an APK for submission.
 
 :::important
