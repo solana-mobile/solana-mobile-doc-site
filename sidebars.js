@@ -76,14 +76,14 @@ const sidebars = {
       items: [
         {
           type: 'doc',
-          id: 'getting-started/saga-genesis-token',
-          label: 'Saga Genesis Token'
+          id: 'getting-started/chapter2-preorder-tokens',
+          label: 'Chapter 2 Preorder Token'
         },
         {
           type: 'doc',
-          id: 'getting-started/chapter2-preorder-tokens',
-          label: 'Chapter 2 Preorder Tokens'
-        }
+          id: 'getting-started/saga-genesis-token',
+          label: 'Saga Genesis Token'
+        },
       ]
     },
     {
@@ -169,6 +169,16 @@ const sidebars = {
       type: 'doc',
       label: 'API Reference',
       id: 'reference/overview',
+    },
+    { // Reference entrypoint
+      type: 'link',
+      label: 'Seeker',
+      href: 'https://solanamobile.com',
+    },
+    {
+      type: 'doc',
+      id: 'saga/overview',
+      label: 'Saga',
     },
   ],
   // other sidebars

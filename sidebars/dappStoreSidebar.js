@@ -4,25 +4,67 @@
 module.exports = {
     dappPublishingSidebar: [
         {
+            type: 'html',
+            value: 'Getting Started',
+            className: 'sidebar-section-header',
+        },
+        {
             type: 'doc',
             id: 'dapp-publishing/intro',
-            label: 'dApp Store Intro'
+            label: 'dApp Store Overview'
+        },
+        {
+            type: 'doc',
+            id: 'dapp-publishing/faq',
+            label: 'Frequently Asked Questions'
+        },
+
+        /* Prepare for Publishing section */
+        {
+            type: 'html',
+            value: '<div class="sidebar-divider" />',
+        },
+        {
+            type: 'html',
+            value: 'Prepare for publishing',
+            className: 'sidebar-section-header',
+        },
+        {
+            type: 'doc',
+            id: 'dapp-publishing/checklist',
+            label: 'Publishing Checklist'
+        },
+        {
+            type: 'doc',
+            id: 'dapp-publishing/listing-page-guidelines',
+            label: 'Prepare your dApp Listing page'
         },
         {
             type: 'doc',
             id: 'dapp-publishing/publishing-a-pwa',
-            label: 'Publish a PWA'
+            label: 'Convert a PWA to an APK'
+        },
+
+        /* Publish your app tutorial */
+        {
+            type: 'html',
+            value: '<div class="sidebar-divider" />',
+        },
+        {
+            type: 'html',
+            value: 'Publishing',
+            className: 'sidebar-section-header',
         },
         {
             type: 'category',
-            label: 'Publish your dApp',
-            collapsible: true,
+            label: 'App Submission Guide',
+            collapsible: false,
             collapsed: false,
             items: [
                 {
                     type: 'doc',
                     id: 'dapp-publishing/overview',
-                    label: 'Overview'
+                    label: 'Submission Overview'
                 },
                 {
                     type: 'doc',
@@ -44,30 +86,36 @@ module.exports = {
                     id: 'dapp-publishing/submit',
                     label: '4. Submit your dApp release'
                 },
-                {
-                    type: 'category',
-                    label: 'After publishing',
-                    collapsible: true,
-                    collapsed: false,
-                    items: [
-                        {
-                            type: 'doc',
-                            id: 'dapp-publishing/link-to-dapp-listing-page',
-                            label: 'Link to your dApp listing page'
-                        },
-                        {
-                            type: 'doc',
-                            id: 'dapp-publishing/publishing-updates',
-                            label: 'Publish a dApp update'
-                        }
-                    ]
-                },
             ]  
         },
         {
-            type: 'doc',
-            id: 'dapp-publishing/qanda',
-            label: 'Q & A'
+            type: 'category',
+            label: 'After publishing',
+            collapsible: false,
+            collapsed: false,
+            items: [
+                {
+                    type: 'doc',
+                    id: 'dapp-publishing/publishing-updates',
+                    label: 'Update a Published dApp'
+                },
+                {
+                    type: 'doc',
+                    id: 'dapp-publishing/link-to-dapp-listing-page',
+                    label: 'Link to your dApp listing page'
+                },
+            ]
+        },
+
+        /* Addtional resources section */
+        {
+            type: 'html',
+            value: '<div class="sidebar-divider" />',
+        },
+        {
+            type: 'html',
+            value: 'Additional resources',
+            className: 'sidebar-section-header',
         },
         {
             type: 'category',

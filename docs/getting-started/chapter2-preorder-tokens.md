@@ -7,7 +7,7 @@ authors:
     title: Developer Relations @ Solana Mobile
     url: https://twitter.com/MikeSulistio
     image_url: /blog_profile_pics/mikesulistio.png
-tags: [saga, chapter-2, leaderboard, tanzanite, diamond, emerald, NFT]
+tags: [saga, chapter-2, NFT]
 hide_table_of_contents: false
 ---
 
@@ -29,7 +29,7 @@ Solana Mobile does not currently have a rewards program in connection with the C
 
 The Chapter 2 Preorder Token NFT is a non-transferable NFT distributed to the wallets of anyone who has preordered Chapter 2.
 
-As of the time this article was written, there are 110,000+ holders of the Preorder Token. The preorder phase is still active and any new Tokens will be issued in waves.
+As of the time this article was written, there are 140,000+ holders of the Preorder Token. The preorder phase is still active and any new Tokens will be issued in waves.
 
 ## NFT Details
 
@@ -61,14 +61,14 @@ Metadata Pointer
     Metadata Address: 2DMMamkkxQ6zDMBtkFp8KH7FoWzBMBA1CGTYwom4QH6Z
 ```
 
-## Querying for Chapter 2 Preorder Token holders
+## Querying for Chapter 2 Preorder Token holders manually
 
 :::tip
 This script can return duplicates of the same owner's wallet address.
 This is because it is possible for a single wallet address to own more than one Preorder Token, if they preordered multiple Chapter 2 products.
 :::
 
-You can follow these steps to query the Chapter 2 Preorder Token list and save it into a JSON file:
+You can follow these steps to manually query the Chapter 2 Preorder Token list and save it into a JSON file:
 
 ### 1. Access your RPC provider.
 

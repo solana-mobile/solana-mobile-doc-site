@@ -81,7 +81,7 @@ const config = {
             type: 'doc',
             docId: 'getting-started/intro',
             position: 'left',
-            label: 'Overview',
+            label: 'Developers',
           },
           {
             type: 'dropdown',
@@ -115,17 +115,6 @@ const config = {
             docId: 'dapp-publishing/intro',
             position: 'left',
             label: 'dApp Store',
-          },
-          {
-            to: 'https://solanamobile.com/',
-            label: 'Seeker',
-            position: 'left'
-          },
-          {
-            type: 'doc',
-            docId: 'saga/overview',
-            position: 'left',
-            label: 'Saga',
           },
           {to: 'blog', label: 'Blog', position: 'right'},
           {
