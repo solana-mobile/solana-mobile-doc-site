@@ -17,7 +17,7 @@ The app icon is often a user's first point of contact with your app on the dApp 
 
 **Requirements**
 
-- Icon must be 512px by 512px dimensions
+- Icon must be 512px by 512px dimensions.
 
 For information about creating an icon, see the [Google Play Icon Design specifications](https://developer.android.com/distribute/google-play/resources/icon-design-specifications).
 
@@ -35,7 +35,17 @@ Your app's name plays a critical role in how users discover it on the App Store.
 title="Description"
 imageSrc="/listing_page_imgs/subtitle.png">
 
-Provide an engaging description that highlights the features and functionality of your app. The ideal description is a concise, informative paragraph followed by a short list of main features. Let potential users know what makes your app unique and why they'll love it. Communicate in the tone of your brand, and use terminology your target audience will appreciate and understand. The first sentence of your description is the most important — this is what users can read without having to tap to read more. Every word counts, so focus on your app's unique features.
+**Short Description**
+
+Your app’s subtitle, or short description, should concisely communicate the purpose of your app. Use this space to showcase your app's "elevator pitch" and capture a user's attention.
+
+##### **Requirements**
+
+- Short description cannot exceed 30 characters.
+
+**Long Description**
+
+Your app's long description should be a well-written, concise overview of your app' features and functionality. Use this space to give more context to users about what your app is and how they will use it. Users should be able to read it and quickly understand your app's core purpose.
 
 </ListingPageSection>
 
@@ -46,12 +56,21 @@ isLast={true}>
 
 ### Videos
 
-An app preview demonstrates the features, functionality, and UI of your app in a short video that users watch directly on the App Store. Previews can be up to 30 seconds long and use footage captured on the device to show the experience of using your app. You can feature up to three app previews on your App Store and Mac App Store product pages, and localize them for all available App Store languages.
+An app preview video should effectively showcase your app's main features, UI flow, and core user experience.
+
+##### **Requirements**
+
+- All videos must be at least 720px in width and height. 1080p (1920px by 1080px) is strongly recommended.
+- All videos must be `.mp4` video file format.
 
 ### Screenshots
 
-Use images captured from your app's UI to visually communicate your app's user experience. You can feature up to 10 screenshots on your App Store and Mac App Store product pages. Depending on the orientation of your screenshots, the first one to three images will appear in search results when no app preview is available, so make sure these highlight the essence of your app. Focus each subsequent screenshot on a main benefit or feature so that you fully convey your app's value. If your app supports Dark Mode, consider including at least one screenshot that showcases what the experience looks like for users.
+An app preview screenshot should highlight a core feature or screen of your app. The preview gallery should tell a compelling visual story of your app's core user experience.
 
-For screenshot specifications, see App Store Connect Help.
+##### **Requirements**
+
+- All images must be at least 1080px in width and height.
+- All images must have consistent orientation (landscape or portrait).
+- All images must have equal aspect ratio.
 
 </ListingPageSection>
