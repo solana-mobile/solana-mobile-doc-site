@@ -27,7 +27,7 @@ For information about creating an icon, see the [Google Play Icon Design specifi
 title="App Name"
 imageSrc="/listing_page_imgs/appname.png">
 
-Your app's name plays a critical role in how users discover it on the App Store. Choose a simple, memorable name that is easy to spell and hints at what your app does. Be distinctive. Avoid names that use generic terms or are too similar to existing app names. An app name can be up to 30 characters long.
+Your app name should be unique, memorable, and suggest your app's core functionality. Set yourself apart by choosing a name that isn't generic or too similar to existing apps.
 
 </ListingPageSection>
 
