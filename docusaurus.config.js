@@ -116,12 +116,6 @@ const config = {
             position: 'left',
             label: 'dApp Store',
           },
-          {
-            type: 'doc',
-            docId: 'marketing/overview',
-            position: 'left',
-            label: 'Marketing & Partnerships',
-          },
           {to: 'blog', label: 'Blog', position: 'right'},
           {
             href: 'https://github.com/solana-mobile',

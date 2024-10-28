@@ -187,7 +187,6 @@ const sidebars = {
   ...require("./sidebars/dappStoreSidebar.js"),
   ...require("./sidebars/referenceSidebar.js"),
   ...require("./sidebars/sagaSidebar.js"),
-  ...require("./sidebars/marketingSidebar.js"),
 };
 
 module.exports = sidebars;

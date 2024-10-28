@@ -46,7 +46,3 @@ Once you are ready for publishing, you can follow the step-by-step App Submissio
 is completely self service, so it can be started whenever you are ready!
 
 After finished, your app will be in queue for App Review and, using your provided contact details, we will reach out to if any questions are needed.
-
-### App Promotion
-
-For questions regarding promoting your app after launching, see our [Marketing & Partnership documentation](/marketing/overview).
