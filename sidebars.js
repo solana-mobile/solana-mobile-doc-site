@@ -69,6 +69,24 @@ const sidebars = {
       ]
     },
     {
+      type: 'category',
+      label: 'Solana Mobile Tokens',
+      collapsible: true,
+      collapsed: true,
+      items: [
+        {
+          type: 'doc',
+          id: 'getting-started/chapter2-preorder-tokens',
+          label: 'Chapter 2 Preorder Token'
+        },
+        {
+          type: 'doc',
+          id: 'getting-started/saga-genesis-token',
+          label: 'Saga Genesis Token'
+        },
+      ]
+    },
+    {
       type: 'doc',
       id: 'getting-started/mobile-dapp-architecture',
       label: 'Mobile dApp Architecture'
