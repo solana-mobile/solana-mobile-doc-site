@@ -5,6 +5,7 @@ import Layout from "@theme/Layout";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import styles from "./index.module.css";
 import { useColorMode } from "@docusaurus/theme-common";
+import SolanaMobileHero from "@site/src/components/SolanaMobileHero";
 
 export function Section({ children, className, background = "light" }) {
   const sectionClasses = clsx(styles.Section, className, background);
@@ -56,19 +57,27 @@ function SolanaMobileStackLogo() {
   );
 }
 
-function HeaderHero() {
-  return (
-    <Section background="dark" className={styles.HeaderHero}>
-      <SolanaMobileStackLogo />
-      <>
-        <p className={styles.tagline}>Build for the Web3 mobile era.</p>
-        <div className={styles.buttons}>
-          <HomeCallToAction />
-        </div>
-      </>
-    </Section>
-  );
-}
+// function HeaderHero({ backgroundImage, children }) {
+//   return (
+//     <Section background="dark" className={styles.headerHero}>
+//       <div className={styles.backgroundContainer}>
+//         <img
+//           src={backgroundImage}
+//           alt="Background"
+//           className={styles.backgroundImage}
+//         />
+//       </div>
+//       <div className={styles.content}>
+//         <SolanaMobileStackLogo />
+//         <p className={styles.tagline}>Build for the Web3 mobile era.</p>
+//         <div className={styles.buttons}>
+//           <HomeCallToAction />
+//         </div>
+//         {children}
+//       </div>
+//     </Section>
+//   );
+// }
 
 export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
@@ -77,7 +86,13 @@ export default function Home(): JSX.Element {
       title={`${siteConfig.title}`}
       description="A mobile development stack for building Solana Mobile dApps"
     >
-      <HeaderHero />
+      <SolanaMobileHero>
+        <SolanaMobileStackLogo />
+        <p className={styles.tagline}>Build for the Web3 mobile era.</p>
+        <div className={styles.buttons}>
+          <HomeCallToAction />
+        </div>
+      </SolanaMobileHero>
     </Layout>
   );
 }
