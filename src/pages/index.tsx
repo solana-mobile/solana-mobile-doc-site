@@ -6,6 +6,8 @@ import useBaseUrl from "@docusaurus/useBaseUrl";
 import styles from "./index.module.css";
 import { useColorMode } from "@docusaurus/theme-common";
 import SolanaMobileHero from "@site/src/components/SolanaMobileHero";
+import HeroCTACard from "@site/src/components/HeroCTACard";
+import { Code, Megaphone, Store } from "lucide-react";
 
 export function Section({ children, className, background = "light" }) {
   const sectionClasses = clsx(styles.Section, className, background);
@@ -18,27 +20,6 @@ function ActionButton({ href, type = "primary", target, children }) {
     <a className={classes} href={href} target={target}>
       {children}
     </a>
-  );
-}
-
-function HomeCallToAction() {
-  return (
-    <>
-      <ActionButton
-        type="primary"
-        href={useBaseUrl("dapp-publishing/intro")}
-        target="_self"
-      >
-        Publish a dApp
-      </ActionButton>
-      <ActionButton
-        type="secondary"
-        href={useBaseUrl("getting-started/intro")}
-        target="_self"
-      >
-        Learn the stack
-      </ActionButton>
-    </>
   );
 }
 
@@ -57,28 +38,6 @@ function SolanaMobileStackLogo() {
   );
 }
 
-// function HeaderHero({ backgroundImage, children }) {
-//   return (
-//     <Section background="dark" className={styles.headerHero}>
-//       <div className={styles.backgroundContainer}>
-//         <img
-//           src={backgroundImage}
-//           alt="Background"
-//           className={styles.backgroundImage}
-//         />
-//       </div>
-//       <div className={styles.content}>
-//         <SolanaMobileStackLogo />
-//         <p className={styles.tagline}>Build for the Web3 mobile era.</p>
-//         <div className={styles.buttons}>
-//           <HomeCallToAction />
-//         </div>
-//         {children}
-//       </div>
-//     </Section>
-//   );
-// }
-
 export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
   return (
@@ -89,8 +48,25 @@ export default function Home(): JSX.Element {
       <SolanaMobileHero>
         <SolanaMobileStackLogo />
         <p className={styles.tagline}>Build for the Web3 mobile era.</p>
-        <div className={styles.buttons}>
-          <HomeCallToAction />
+        <div className={styles.cardContainer}>
+          <HeroCTACard
+            icon={Code}
+            title="Developers"
+            description="Build mobile dApps with our SDK and developer tools"
+            to="/getting-started/intro"
+          />
+          <HeroCTACard
+            icon={Store}
+            title="dApp Store"
+            description="Publish your dApp on the Solana dApp Store"
+            to="/dapp-publishing/intro"
+          />
+          <HeroCTACard
+            icon={Megaphone}
+            title="Marketing & Partnerships"
+            description="Learn how to reach the Solana Mobile community"
+            to="/marketing/overview"
+          />
         </div>
       </SolanaMobileHero>
     </Layout>

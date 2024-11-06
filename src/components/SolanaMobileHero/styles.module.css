@@ -2,7 +2,6 @@
   position: relative;
   overflow: hidden;
   min-height: 100vh;
-  background-color: black;
   display: flex;  /* Add this */
   align-items: center;  /* Add this */
   justify-content: center;  /* Add this */
@@ -15,8 +14,6 @@
   right: 0;
   bottom: 0;
   background-size: 100% 100%;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .heroContent {
@@ -34,6 +31,7 @@
 @media (max-width: 768px) {
   .heroContainer {
     min-height: 100vh;
+    padding-top: 32px;
   }
 
   .heroBackground {
