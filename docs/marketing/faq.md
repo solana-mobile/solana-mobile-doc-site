@@ -23,7 +23,7 @@ import { FAQ, FAQSection } from '@site/src/components/FAQ';
   <FAQSection title="How can I target Seeker users?">
     Users that preordered Chapter 2 received a *Chapter 2 Preorder Token NFT*. This NFT is a way for ecosystem teams to target those who preordered the Seeker through rewards programs, incentives, and other benefits.
 
-    For more information, view the [Targeting Seeker Users](/marketing/targeting-seeker-users) documentation.
+    For more information, view the [Targeting Seeker Users](/marketing/engaging-seeker-users) documentation.
 
   </FAQSection>
 
@@ -63,7 +63,7 @@ View the [Co-marketing Guidelines](marketing/comarketing-guidelines) to understa
 
     You can generate a list of wallet addresses by querying on-chain for holders of the Chapter 2 Preorder Token NFT.
 
-    For more information about targeting Seeker users, view the [Targeting Seeker User](marketing/targeting-seeker-users) documentation.
+    For more information about targeting Seeker users, view the [Targeting Seeker User](marketing/engaging-seeker-users) documentation.
 
   </FAQSection>
 

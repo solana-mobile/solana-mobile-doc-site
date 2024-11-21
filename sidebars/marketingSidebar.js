@@ -20,17 +20,17 @@ module.exports = {
         },
         {
             type: 'category',
-            label: 'Targeting Seeker & Saga users',
+            label: 'Engaging with Seeker & Saga users',
             collapsed: false,
             items: [
                 {
                     type: 'doc',
-                    id: 'marketing/targeting-seeker-users',
+                    id: 'marketing/engaging-seeker-users',
                     label: 'Seeker'
                 },
                 {
                     type: 'doc',
-                    id: 'marketing/targeting-saga-users',
+                    id: 'marketing/engaging-saga-users',
                     label: 'Saga'
                 },
             ]

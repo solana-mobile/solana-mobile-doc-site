@@ -2,13 +2,9 @@ import BlogImageRow from "../../src/components/BlogImageRow/"
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Targeting Seeker Users
-
-## Introduction
+# Introduction
 
 This article provides information about the Solana Mobile Chapter 2 Preorder Tokens NFTs. The non-transferrable Chapter 2 Preorder Tokens allow for the identification of wallets that have participated in preordering Seeker, known as Chapter 2 when preorders first launched.
-
-Everyone who preorders the Seeker receives this Chapter 2 Preorder Token NFT, which is a way for ecosystem teams to target those who preordered the Seeker through rewards programs, incentives, and other benefits.
 
 Solana Mobile does not currently have a rewards program in connection with the Chapter 2 Preorder Token. Ecosystem teams are entirely free to decide if (and if so, how) they wish to interact with the holders of these non-transferable tokens.
 
@@ -18,36 +14,14 @@ The Chapter 2 Preorder Token NFT is a non-transferable NFT distributed to the wa
 
 As of the time this article was written, there are 140,000+ holders of the Preorder Token. The preorder phase is still active and any new Tokens will be issued in waves.
 
-## Targeting Chapter 2 Preorder Token Holders
+## Engaging with Chapter 2 Preorder Token Holders
 
 <Tabs>
 <TabItem value="Targeting Seeker with Airship" label="Targeting Seeker with Airship">
 
 ### Airship
 
-[Airship](https://airship.helius.dev/) is a tool developed by [Helius](https://www.helius.dev/) that enables cost-effective and simplified SPL token airdrops. For more information on how it works, check out the official [Airship docs](https://github.com/helius-labs/airship).
-
-You can use the tool to:
-
-- Generate a list of Chapter 2 Preorder Token holders.
-- Distribute a specified amount of compressed SPL tokens to a list of wallets.
-- Claim any distributed compressed tokens that belong to your wallet.
-
-#### Usage
-
-1. Select "Create new airdrop" to enter the tool.
-2. Provide an RPC URL and the private key of the wallet containing the tokens for distribution.
-3. Select "Import Chapter 2 Preorder Token Holders" then press the "Import" button.
-4. The list of wallet addresses of Chapter 2 Preorder Token Holders will be generated.
-5. Select the SPL token you want to distribute and specify either a fixed amount of tokens or a percent of available tokens.
-6. Review the airdrop details and press "Send" to initiate the airdrop.
-
-#### Claiming compressed tokens
-
-After an airdrop is intiated, recipients will need to decompress their distributed tokens using the [Airship decompress tool](https://airship.helius.dev/decompress).
-
-- Recipients can connect their wallets and view a list of the available compressed tokens they can claim.
-- After signing a transaction to claim, the tokens will appear as normal in the users wallet.
+[Airship](https://airship.helius.dev/) is a tool developed by [Helius](https://www.helius.dev/) that enables cost-effective and simplified airdrops. For more information on how it works, check out the official [Airship docs](https://github.com/helius-labs/airship).
 
 </TabItem>
 <TabItem value="Querying manually" label="Querying manually">

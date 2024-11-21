@@ -24,14 +24,14 @@ here to ensure a successful launch.
         emoji="📣"
     />
     <Card
-        to="/marketing/targeting-seeker-users"
+        to="/marketing/engaging-seeker-users"
         header={{
-            label: "Targeting Seeker & Saga users",
-            translateId: "targeting-seeker-users-card-header",
+            label: "Engaging Seeker & Saga users",
+            translateId: "engaging-seeker-users-card-header",
         }}
         body={{
             label: "Run a campaign for Seeker and Saga users using the soulbound Preorder and Genesis NFTs.",
-            translateId: "targeting-seeker-users-card-body",
+            translateId: "engaging-seeker-users-card-body",
         }}
         iconPath="img/chapter2-logo.svg"
     />
