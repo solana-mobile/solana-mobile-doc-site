@@ -9,20 +9,6 @@ import SolanaMobileHero from "@site/src/components/SolanaMobileHero";
 import HeroCTACard from "@site/src/components/HeroCTACard";
 import { Code, Megaphone, Store } from "lucide-react";
 
-export function Section({ children, className, background = "light" }) {
-  const sectionClasses = clsx(styles.Section, className, background);
-  return <div className={sectionClasses}>{children}</div>;
-}
-
-function ActionButton({ href, type = "primary", target, children }) {
-  const classes = clsx(styles.ActionButton, styles[type]);
-  return (
-    <a className={classes} href={href} target={target}>
-      {children}
-    </a>
-  );
-}
-
 function SolanaMobileStackLogo() {
   const { colorMode } = useColorMode();
 
@@ -47,7 +33,7 @@ export default function Home(): JSX.Element {
     >
       <SolanaMobileHero>
         <SolanaMobileStackLogo />
-        <p className={styles.tagline}>Build for the Web3 mobile era.</p>
+        <p className={styles.tagline}>Documentation Hub</p>
         <div className={styles.cardContainer}>
           <HeroCTACard
             icon={Code}

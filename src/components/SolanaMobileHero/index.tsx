@@ -5,7 +5,7 @@ import { useColorMode } from "@docusaurus/theme-common";
 function SolanaMobileHero({ children }) {
   const { colorMode } = useColorMode();
 
-  const heroBackgroundSrc = "img/SeekerBannerTransparent.png";
+  const heroBackgroundSrc = "img/SeekerGradient.png";
 
   return (
     <div className={styles.heroContainer}>
