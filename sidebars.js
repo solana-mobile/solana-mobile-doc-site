@@ -181,6 +181,7 @@ const sidebars = {
       label: 'Saga',
     },
   ],
+
   // other sidebars
   ...require("./sidebars/kotlinSidebar.js"),
   ...require("./sidebars/reactNativeSidebar.js"),
@@ -188,6 +189,7 @@ const sidebars = {
   ...require("./sidebars/referenceSidebar.js"),
   ...require("./sidebars/sagaSidebar.js"),
   ...require("./sidebars/marketingSidebar.js"),
+  ...require("./sidebars/developersSidebar.js"),
 };
 
 module.exports = sidebars;
