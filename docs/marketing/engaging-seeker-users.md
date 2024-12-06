@@ -17,7 +17,7 @@ As of the time this article was written, there are 140,000+ holders of the Preor
 ## Engaging with Chapter 2 Preorder Token Holders
 
 <Tabs>
-<TabItem value="Targeting Seeker with Airship" label="Targeting Seeker with Airship">
+<TabItem value="Using Airship" label="Targeting Seeker with Airship">
 
 ### Airship
 
@@ -26,10 +26,7 @@ As of the time this article was written, there are 140,000+ holders of the Preor
 </TabItem>
 <TabItem value="Querying manually" label="Querying manually">
 
-:::tip
-This script can return duplicates of the same owner's wallet address.
-This is because it is possible for a single wallet address to own more than one Preorder Token, if they preordered multiple Chapter 2 products.
-:::
+### Manual List Generation
 
 You can follow these steps to manually query the Chapter 2 Preorder Token list and save it into a JSON file:
 

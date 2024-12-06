@@ -33,16 +33,16 @@ import { FAQ, FAQSection } from '@site/src/components/FAQ';
   <FAQSection title="Can I get a developer kit for testing?">
     We are not running a developer device program for the Seeker. It is sufficient to test your app against standard Android devices or emulators, and we also provide an example wallet app that developers can test their app against.
 
-    For best practices about testing your app, view our testing documentation.
+    For best practices about testing your app, view our [development setup](getting-started/development-setup) documentation.
 
   </FAQSection>
 
   <FAQSection title="What does it mean for the dApp Store to be 'fee-free'?">
-    Solana Mobile, Inc. does not collect any fees on in-app purchases, app purchases, or subscriptions, nor are any fees collected on its behalf by apps in the catalog.
+    Solana Mobile, Inc. does not currently collect any fees on in-app purchases, app purchases, or subscriptions, nor are any fees collected on its behalf by apps in the catalog.
   </FAQSection>
 
-  <FAQSection title="Can I see user statistics for apps in the dApp Store?">
-    The dApp Store does not collect any user statistics (e.g., user downloads, activity, etc.) for apps in the dApp Store. Developers are free to implement their own metric collection and logging within their apps.
+  <FAQSection title="How can I see user statistics for my app in the dApp Store?">
+    Developers are free to implement their own metric collection and logging within their apps. For example, [Google Analytics for Firebase](https://firebase.google.com/docs/analytics/get-started?platform=android) is a popular measurement solution that provides mobile SDKs.
   </FAQSection>
 
   <FAQSection title="I've published my app, now what?">

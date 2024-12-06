@@ -13,11 +13,13 @@ Wherever you are in your publishing journey, you can find resources here to get 
 <FAQ>
   <FAQSection title="What apps can be published to the dApp Store?" expanded={true}>
 
-    Both Android apps and web apps! At its core, publishing to the dApp Store requires **submitting an Android APK**.
+    Both Android apps and web apps!
 
     If you:
     - Have an existing Android app, you're ready to start publishing now!
     - Have a web app, you can convert a PWA into an Android app and generate an APK for app submission!
+
+    Before publishing, ensure your dApp complies with the Solana dApp Store [publisher policy](dapp-publishing/policy).
 
     <CardLayout autoFitEnabled={true}>
 
@@ -29,7 +31,7 @@ Wherever you are in your publishing journey, you can find resources here to get 
             }}
             body={{
                 label: "Follow the step-by-step guide to publish your app to the Solana dApp Store.",
-                translateId: "publish-card-body)",
+                translateId: "publish-card-body",
             }}
             iconPath="img/rocket-icon2.png"
         />
@@ -60,11 +62,11 @@ Wherever you are in your publishing journey, you can find resources here to get 
         <Card
             to="/getting-started/development-setup"
             header={{
-                label: "Developing for the dApp Store",
+                label: "Development Setup",
                 translateId: "develop-card-header",
             }}
             body={{
-                label: "A technical resource on developing and testing an Android app to launch on the dApp Store",
+                label: "A guide to setup an Android device or emulator and start building for the dApp Store.",
                 translateId: "develop-card-body",
             }}
         iconPath="img/solana-mobile-stack-logo.png"

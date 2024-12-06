@@ -13,13 +13,11 @@ These guidelines will help you create a compelling and informative listing that 
 title="App Icon"
 imageSrc="/listing_page_imgs/appicon.png">
 
-The app icon is often a user's first point of contact with your app on the dApp Store, so it is crucial that is thoughtfully crafted to convey your dApp's brand and value.
+The app icon is often a user's first point of contact with your app on the dApp Store, so it is crucial that it is thoughtfully crafted to convey your dApp's brand and value.
 
 **Requirements**
 
 - Icon must be 512px by 512px dimensions.
-
-For information about creating an icon, see the [Google Play Icon Design specifications](https://developer.android.com/distribute/google-play/resources/icon-design-specifications).
 
 </ListingPageSection>
 
