@@ -4,7 +4,7 @@ import Card from "../../src/components/Card"
 import CardLayout from "../../src/layouts/CardLayout"
 import { FAQ, FAQSection } from '@site/src/components/FAQ';
 
-The Solana dApp Store is the fee-free Web3 app store for the Solana Mobile phones, Saga and the upcoming [Seeker](https://solanamobile.com/).
+The Solana dApp Store is the crypto-friendly app store for the Solana Mobile phones, Saga and the upcoming [Seeker](https://solanamobile.com/).
 
 ## Getting Started
 
@@ -19,7 +19,7 @@ Wherever you are in your publishing journey, you can find resources here to get 
     - Have an existing Android app, you're ready to start publishing now!
     - Have a web app, you can convert a PWA into an Android app and generate an APK for app submission!
 
-    Before publishing, ensure your dApp complies with the Solana dApp Store [publisher policy](dapp-publishing/policy).
+    Before publishing, ensure your dApp complies with the Solana dApp Store [publisher policy](/dapp-publishing/policy).
 
     <CardLayout autoFitEnabled={true}>
 

@@ -39,7 +39,7 @@ export default function Home(): JSX.Element {
             icon={Code}
             title="Developers"
             description="Build mobile dApps with our SDK and developer tools"
-            to="/developers/overview"
+            to="/getting-started/intro"
           />
           <HeroCTACard
             icon={Store}

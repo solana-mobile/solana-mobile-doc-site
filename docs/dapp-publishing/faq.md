@@ -31,14 +31,16 @@ import { FAQ, FAQSection } from '@site/src/components/FAQ';
   </FAQSection>
 
   <FAQSection title="Can I get a developer kit for testing?">
-    We are not running a developer device program for the Seeker. It is sufficient to test your app against standard Android devices or emulators, and we also provide an example wallet app that developers can test their app against.
+    We are not running a developer device program for the Seeker, because you do not need a Seeker or Saga to develop Android apps for the dApp Store.
 
-    For best practices about testing your app, view our [development setup](getting-started/development-setup) documentation.
+    Developers **already** have all the tools necessary to start building apps for the dApp Store today!
+
+    For more information, view our [developer documentation](/getting-started/development-setup).
 
   </FAQSection>
 
   <FAQSection title="What does it mean for the dApp Store to be 'fee-free'?">
-    Solana Mobile, Inc. does not currently collect any fees on in-app purchases, app purchases, or subscriptions, nor are any fees collected on its behalf by apps in the catalog.
+    Solana Mobile Inc. does not currently collect any fees on in-app purchases, app purchases, or subscriptions, nor are any fees collected on its behalf by apps in the catalog.
   </FAQSection>
 
   <FAQSection title="How can I see user statistics for my app in the dApp Store?">
