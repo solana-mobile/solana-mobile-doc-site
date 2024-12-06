@@ -164,6 +164,19 @@ const config = {
               },
             ],
           },
+          {
+            title: 'Legal',
+            items: [
+              {
+                label: 'Terms of Service',
+                href: 'https://legal.solanamobile.com/tos-homepage-web',
+              },
+              {
+                label: 'Privacy Policy',
+                href: 'https://legal.solanamobile.com/privacy-policy-homepage-web',
+              },
+            ],
+          },
         ],
         copyright: `Copyright © ${new Date().getFullYear()} Solana Mobile, Inc.`,
       },
