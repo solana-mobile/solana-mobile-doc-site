@@ -24,35 +24,18 @@ const sidebars = {
       className: 'sidebar-section-header',
     },
     {
-      type: 'category',
-      label: 'Introduction',
-      link: {
-        type: 'doc',
-        id: 'getting-started/intro',
-      },
-      collapsible: true,
-      collapsed: false,
-      items: [
-        {
-          type: 'doc',
-          id: 'getting-started/introduction-to-solana',
-          label: 'Introduction to Solana'
-        },
-        { // dApp publishing entrypoint
-          type: 'doc',
-          label: 'Solana Mobile dApp Store',
-          id: 'dapp-publishing/intro',
-        },
-        {
-          type: 'doc',
-          id: 'getting-started/web3-and-mobile',
-          label: 'Web3 and Mobile'
-        },
-      ]
+      type: 'doc',
+      id: 'getting-started/intro',
+      label: 'Introduction'
+    },
+    {
+      type: 'doc',
+      id: 'getting-started/development-setup',
+      label: 'Development Setup'
     },
     {
       type: 'category',
-      label: 'The Solana Mobile Stack',
+      label: 'Solana Mobile Stack',
       collapsible: true,
       collapsed: true,
       items: [
@@ -66,37 +49,13 @@ const sidebars = {
           href: '/getting-started/overview#seed-vault',
           label: 'Seed Vault'
         },
-      ]
-    },
-    {
-      type: 'category',
-      label: 'Solana Mobile Tokens',
-      collapsible: true,
-      collapsed: true,
-      items: [
         {
           type: 'doc',
-          id: 'getting-started/chapter2-preorder-tokens',
-          label: 'Chapter 2 Preorder Token'
-        },
-        {
-          type: 'doc',
-          id: 'getting-started/saga-genesis-token',
-          label: 'Saga Genesis Token'
+          id: 'getting-started/mobile-dapp-architecture',
+          label: 'Mobile dApp Architecture'
         },
       ]
     },
-    {
-      type: 'doc',
-      id: 'getting-started/mobile-dapp-architecture',
-      label: 'Mobile dApp Architecture'
-    },
-    {
-      type: 'doc',
-      id: 'getting-started/development-setup',
-      label: 'Development Setup'
-    },
-
 
     /* SDK Section **/
     {
@@ -189,7 +148,6 @@ const sidebars = {
   ...require("./sidebars/referenceSidebar.js"),
   ...require("./sidebars/sagaSidebar.js"),
   ...require("./sidebars/marketingSidebar.js"),
-  ...require("./sidebars/developersSidebar.js"),
 };
 
 module.exports = sidebars;
