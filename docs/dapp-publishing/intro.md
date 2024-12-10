@@ -60,7 +60,7 @@ Wherever you are in your publishing journey, you can find resources here to get 
 
     <CardLayout autoFitEnabled={true}>
         <Card
-            to="/getting-started/development-setup"
+            to="/developers/development-setup"
             header={{
                 label: "Development Setup",
                 translateId: "develop-card-header",

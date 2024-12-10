@@ -8,20 +8,20 @@ import TabItem from '@theme/TabItem';
 In this tutorial, you'll learn how to build a React Native dApp that sends a message to the Solana network.
 
 ## What you will learn
-- How to use [**Mobile Wallet Adapter**](/getting-started/overview#mobile-wallet-adapter) to connect to an installed wallet app.
+- How to use [**Mobile Wallet Adapter**](/developers/overview#mobile-wallet-adapter) to connect to an installed wallet app.
 - How to connect to devnet, check your wallet balance, and request an airdrop of SOL.
 - How to use the memo program to write your message to the network
 - View your message on the [Solana Explorer](https://explorer.solana.com/)!
 
 ## Prerequisites
-Read the [prerequisite setup](../getting-started/development-setup) guide before starting the tutorial. 
+Read the [prerequisite setup](../developers/development-setup) guide before starting the tutorial. 
 You'll need:
 - a running Android emulator or device to build and launch your app.
 - an MWA-compatible wallet installed on the same device.
 - an IDE/Editor of your choice.
 
 
-This tutorial will be using the [fakewallet](../getting-started/development-setup#3-install-a-wallet-app) app to test your app's integration with Mobile Wallet Adapter.
+This tutorial will be using the [fakewallet](../developers/development-setup#3-install-a-wallet-app) app to test your app's integration with Mobile Wallet Adapter.
 
 
 ## Clone the React Native dApp Scaffold

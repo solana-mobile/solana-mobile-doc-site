@@ -29,7 +29,7 @@ It includes:
 
 ## Prerequisites
 
-Follow the [prerequisite setup](../getting-started/development-setup#prerequisite-setup) guide to set up Android Studio, your [Android Device/Emulator](../getting-started/development-setup#2-setup-deviceemulator) and install a MWA-compatible wallet, like [fakewallet](../getting-started/development-setup#3-install-a-wallet-app).
+Follow the [prerequisite setup](../developers/development-setup#prerequisite-setup) guide to set up Android Studio, your [Android Device/Emulator](../developers/development-setup#2-setup-deviceemulator) and install a MWA-compatible wallet, like [fakewallet](../developers/development-setup#3-install-a-wallet-app).
 
 ## Install the Jetpack Compose Scaffold
 
@@ -48,7 +48,7 @@ In Android Studio, open the project with `File > Open > SolanaKotlinComposeScaff
 **Build and run**
 
 Ensure you have connected an Android emulator or device and it is detected by Android Studio. If not, follow
-this [guide](../getting-started/development-setup#2-setup-deviceemulator) to setup your emulator/device.
+this [guide](../developers/development-setup#2-setup-deviceemulator) to setup your emulator/device.
 
 In the top bar of Android Studio, select `"app"` as the configuration and your emulator/device, then click run.
 

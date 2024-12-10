@@ -12,7 +12,7 @@ The scaffold is a ready-to-go React Native dApp that offers:
 
 ## Prerequisites
 
-- React Native and Android Envrionment [setup](https://docs.solanamobile.com/getting-started/development-setup)
+- React Native and Android Envrionment [setup](https://docs.solanamobile.com/developers/development-setup)
   - An Android device/emulator.
   - Install an MWA compliant wallet app on your device/emulator.
 

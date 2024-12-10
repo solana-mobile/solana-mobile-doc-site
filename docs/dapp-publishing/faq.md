@@ -8,7 +8,7 @@ import { FAQ, FAQSection } from '@site/src/components/FAQ';
 
     Developers **already** have all the tools necessary to start building apps for the dApp Store today!
 
-    For more information, view our [developer documentation](/getting-started/development-setup).
+    For more information, view our [developer documentation](/developers/development-setup).
 
   </FAQSection>
 
@@ -35,7 +35,7 @@ import { FAQ, FAQSection } from '@site/src/components/FAQ';
 
     Developers **already** have all the tools necessary to start building apps for the dApp Store today!
 
-    For more information, view our [developer documentation](/getting-started/development-setup).
+    For more information, view our [developer documentation](/developers/development-setup).
 
   </FAQSection>
 
