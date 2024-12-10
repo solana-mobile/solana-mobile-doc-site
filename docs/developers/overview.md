@@ -1,10 +1,12 @@
 ---
 hide_table_of_contents: true
-title: Development Overview
 ---
 
 import Card from "../../src/components/Card"
 import CardLayout from "../../src/layouts/CardLayout"
+
+# Development Overview
+
 
 Welcome to the **Solana Mobile Documentation** site!
 
