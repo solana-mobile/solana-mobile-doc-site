@@ -17,7 +17,7 @@ As of the time this article was written, there are 140,000+ holders of the Preor
 ## Engaging with Chapter 2 Preorder Token Holders
 
 <Tabs>
-<TabItem value="Using Airship" label="Targeting Seeker with Airship">
+<TabItem value="Using Airship" label="Using Airship">
 
 ### Airship
 
