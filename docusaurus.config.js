@@ -79,7 +79,7 @@ const config = {
         items: [
           {
             type: 'doc',
-            docId: 'getting-started/intro',
+            docId: 'developers/overview',
             position: 'left',
             label: 'Developers',
           },

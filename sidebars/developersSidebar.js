@@ -48,7 +48,12 @@ module.exports = {
                 {
                     type: 'doc',
                     id: 'developers/mobile-wallet-adapter-web',
-                    label: 'Usage on the web'
+                    label: 'Usage in a web browser'
+                },
+                {
+                    type: 'doc',
+                    id: 'developers/mobile-wallet-adapter-deep-dive',
+                    label: 'Deep dive'
                 },
             ]
         },
@@ -70,11 +75,6 @@ module.exports = {
         },
         {
             type: 'doc',
-            id: 'developers/mobile-scaffold-apps',
-            label: 'Scaffold Apps'
-        },
-        {
-            type: 'doc',
             id: 'sample-apps/sample_app_overview',
             label: 'Sample Applications'
         },
@@ -87,6 +87,16 @@ module.exports = {
             type: 'doc',
             id: 'developers/community',
             label: 'Community'
+        },
+        {
+            type: 'link',
+            href: 'https://solanamobile.com/',
+            label: 'Seeker'
+        },
+        {
+            type: 'doc',
+            id: 'saga/overview',
+            label: 'Saga'
         },
       ],
   };

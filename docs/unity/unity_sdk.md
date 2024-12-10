@@ -1,5 +1,5 @@
 ---
-displayed_sidebar: documentationSidebar
+displayed_sidebar: developersSidebar
 ---
 
 # Unity SDK

@@ -1,6 +1,6 @@
 ---
 title: Flutter
-displayed_sidebar: documentationSidebar
+displayed_sidebar: developersSidebar
 ---
 
 # Flutter

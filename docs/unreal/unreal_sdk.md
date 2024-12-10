@@ -1,5 +1,5 @@
 ---
-displayed_sidebar: documentationSidebar
+displayed_sidebar: developersSidebar
 ---
 
 # Unreal Engine SDK

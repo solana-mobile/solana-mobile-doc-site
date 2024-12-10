@@ -1,64 +1,97 @@
-# Mobile dApp Architecture Overview
+# Mobile Wallet Adapter on Web Browsers
 
-This reference aims to give a conceptual overview of the architecture of a mobile dApp using the Solana Mobile Stack.
+The Solana Mobile Stack was designed to be compatible on the mobile web. This document will
+explain how to ensure a mobile web app can be integrated with Solana Mobile libraries.
 
-## High Level
+## Android Web
 
-The following diagram shows a bird's eye view of a mobile dApp's interactions with mobile wallets and the Solana network.
+Mobile Wallet Adapter library is built to also support functionality on the Android Chrome browser.
 
-  <img src="/diagrams/dapp_architecture_full.svg" alt="Full Architecture Diagram" className="diagram-image"/>
+In particular, [`@solana-mobile/wallet-adapter-mobile` ](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/js/packages/wallet-adapter-mobile) is a plugin developed for use with `@solana/wallet-adapter` to enable MWA for web apps on Android.
 
-## Mobile Wallet Adapter Protocol
+### Usage
 
-The **Mobile Wallet Adapter (MWA) ** protocol is what defines the communication exchange between a dApp and a mobile wallet.
-In the protocol, the dApp sends requests (i.e: authorization or signing), while the wallet is responsible for displaying
-these requests to the user and responding back to the dApp if approved.
+Users of these libraries do not need to take any extra steps:
 
-For an extensive, deep dive into the specifics of the protocol and MWA methods, refer to the [MWA spec](https://solana-mobile.github.io/mobile-wallet-adapter/spec/spec.html).
+- `@solana/wallet-adapter-react@">=0.15.21"`
 
-### Session Establishment
+Those libraries automatically bundle the Mobile Wallet Adapter plugin, and enable it when running in a compatible mobile environment.
 
-To begin the protocol, a dApp initiates first contact with a mobile wallet and establishes an **MWA session**.
-With the current SDKs, the MWA session is initiated through Android intents, with the dApp broadcasting an intent
-with the `solana-wallet://` scheme.
+### Customization
 
-  <img src="/diagrams/session_establishment.svg" alt="Session Establishment Diagram" className="diagram-image"/>
-  <br /><br />
+Developers might wish to customize the behavior of this plugin for their app. Specifying the app's name and icon, deciding which address to select in the event the wallet authorizes the app to use more than one, specifying which network cluster to communicate with, and more are made possible by creating an instance of the mobile wallet adapter like this.
 
-A wallet then receives the intent and starts a websocket connection, thus establishing a channel for commmunication.
+:::tip
+It is highly recommended to provide a custom `appIdentity` with your app name and an identifable icon to help
+users understand what app they are interacting with.
 
-### Example: Authorize and Sign Transaction
+If left to default, the user will see an _"Unknown app_" label displayed and a missing icon.
+:::
 
-Once a session is established, the dApp can now begin sending MWA Requests to receive signed transactions from the wallet.
-This example case outlines an MWA session where the dApp:
+```ts
+new SolanaMobileWalletAdapter({
+  addressSelector: createDefaultAddressSelector(),
+  appIdentity: {
+    name: "My app",
+    uri: "https://myapp.io",
+    icon: "relative/path/to/icon.png", // resolves to https://myapp.io/relative/path/to/icon.png
+  },
+  authorizationResultCache: createDefaultAuthorizationResultCache(),
+  cluster: WalletAdapterNetwork.Devnet,
+  onWalletNotFound: createDefaultWalletNotFoundHandler(),
+});
+```
 
-1. Establishes a session with a wallet.
-2. Requests authorization, elevating the session to an "authorized state" and receiving a list of authorized accounts and an authToken.
-3. Requests transaction signing, receiving a transaction signed by the authorized accounts.
+Developers who use `@solana/wallet-adapter-react@">=0.15.21"` can supply this custom instance to `WalletProvider` which will use it to override the default one.
 
-<img src="/diagrams/authorize_and_sign.svg" alt="Authorize and Sign Diagram" className="diagram-image"/>
+```ts
+const wallets = useMemo(
+  () => [
+    new SolanaMobileWalletAdapter({
+      addressSelector: createDefaultAddressSelector(),
+      appIdentity: {
+        name: "My app",
+        uri: "https://myapp.io",
+        icon: "relative/path/to/icon.png",
+      },
+      authorizationResultCache: createDefaultAuthorizationResultCache(),
+      cluster: WalletAdapterNetwork.Devnet,
+      onWalletNotFound: createDefaultWalletNotFoundHandler(),
+    }),
+  ],
+  []
+);
 
-In future sessions, the dApp can initiate with the valid authToken to immediately elevate to an "authorizd state", skipping the "connect" step.
+return (
+  <ConnectionProvider endpoint={clusterApiUrl(WalletAdapterNetwork.Devnet)}>
+    <WalletProvider wallets={wallets}>
+      <MyApp />
+    </WalletProvider>
+  </ConnectionProvider>
+);
+```
 
-While the protocol technically supports multiple accounts, most wallet apps only implement a single account authorization per session.
+### Browser Compatibility
 
-For a more detailed diagram that shows the full communication exchange, refer to this [section in the spec](https://solana-mobile.github.io/mobile-wallet-adapter/spec/spec.html#authorize-and-sign-transaction).
+Currently, the Mobile Wallet Adapter plugin is tested for compatibility with the Android Chrome browser. Other Android browsers, like the Brave browser on Android, might run into issues when trying to use Mobile Wallet Adapter.
 
-## Submitting to the Solana network
+This inconsistency can be due to differences in browser configurations for required permissions like local web socket connections.
 
-Just like web dApps, the process for a mobile dApp submitting transactions to the blockchain network is the same. The dApp specifies
-a cluster and an RPC endpoint then sends the transaction payload, following the [JSON RPC API](https://docs.solana.com/api).
+## iOS Web
 
-For certain usecases, the dApp may choose to communicate with the RPC through the [Websocket API](https://docs.solana.com/api/websocket)
+Mobile Wallet Adapter is not supported on iOS Safari. This is the same with iOS native apps, and is a limitation of the operating system explained more in-depth in this [blog article](/blog/ios-wallet-signing#mobile-wallet-adapter).
 
-  <img src="/diagrams/submit_rpc.svg" alt="Submit to RPC Diagram" className="diagram-image"/>
+### Workarounds
 
-### Sign and Send Transaction
+Besides Mobile Wallet Adapter, there are alternative ways to enable wallet signing for your website directly within an iOS browser.
 
-For submitting transactions, it is encouraged for the dApp to send a `sign_and_send_transaction` MWA request to the wallet. This request
-type sends a unsigned transaction to the wallet. If authorized, the wallet will then sign the transaction and send it to the network with its
-own implementation. Depending on the wallet app, this can include applying its own priority fee.
+#### Wallet In App Browser
 
-Relying on the wallet reduces the risk of replay attacks with [durable nonce based transactions](https://docs.solana.com/implemented-proposals/durable-tx-nonces), which can be abused with `sign_transactions`.
+Websites that use `@solana/wallet-adapter` can receive wallet signing if the user is viewing their site within a wallet app's in-app-browser.
 
-  <img src="/diagrams/sign_and_send.svg" alt="Sign and Send Diagram" className="diagram-image"/>
+#### Safari Web Extension Wallet
+
+If the user's wallet app supports a Safari Web Extension for signing, they can receive signing directly within the iOS Safari browser. See
+this [proof-of-concept repo](https://github.com/solana-mobile/SolanaSafariWalletExtension) for a demo of what this experience looks like.
+
+_Glow Wallet_ and _Nightly Wallet_ have iOS apps that support this Safari Web Extension signing experience.
