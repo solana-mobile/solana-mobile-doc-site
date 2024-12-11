@@ -18,7 +18,7 @@ Connect to wallet apps and sign transactions and messages with the Mobile Wallet
 
 - [**`mobile-wallet-adapter-clientlib-ktx`**](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/android/clientlib-ktx)
 
-    - A Kotlin library that provides a [Mobile Wallet Adapter](../../getting-started/overview#mobile-wallet-adapter) client implemented in Kotlin.
+    - A Kotlin library that provides a Mobile Wallet Adapter client implemented in Kotlin.
 
 Add the library as a dependency in your project's `build.gradle` file:
 <Tabs>

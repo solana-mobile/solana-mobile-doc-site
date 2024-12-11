@@ -1,0 +1,39 @@
+.heroContainer {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;  /* Add this */
+  align-items: center;  /* Add this */
+  justify-content: center;  /* Add this */
+}
+
+.heroBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: 100% 100%;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+/* Add responsive styles */
+@media (max-width: 768px) {
+  .heroContainer {
+    min-height: 100vh;
+  }
+
+  .heroContent {
+    padding: 2rem;
+  }
+
+}

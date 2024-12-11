@@ -15,7 +15,7 @@ This template is a ready-to-go Expo dApp that offers:
 ## Prerequisites
 
 - An [Expo](https://expo.dev/) account.
-- React Native and Android Envrionment [setup](https://docs.solanamobile.com/getting-started/development-setup)
+- React Native and Android Envrionment [setup](https://docs.solanamobile.com/developers/development-setup)
   - An Android device/emulator.
   - Install an MWA compliant wallet app on your device/emulator.
 

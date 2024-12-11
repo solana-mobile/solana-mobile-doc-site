@@ -9,7 +9,7 @@ import versions from '@site/sms-version-constants';
 
 - Download [Android Studio](https://developer.android.com/studio) for development and device management.
 
-- Follow the [prerequisite setup](../getting-started/development-setup#prerequisite-setup) guide to set up your [Android Device/Emulator](../getting-started/development-setup#2-setup-deviceemulator) and install a MWA-compatible wallet, like [fakewallet](../getting-started/development-setup#3-install-a-wallet-app).
+- Follow the [prerequisite setup](../developers/development-setup#prerequisite-setup) guide to set up your [Android Device/Emulator](../developers/development-setup#2-setup-deviceemulator) and install a MWA-compatible wallet, like [fakewallet](../developers/development-setup#3-install-a-wallet-app).
 
 ## Solana Mobile Kotlin Compose Scaffold
 

@@ -3,19 +3,6 @@
  * and scoped locally.
  */
 
-.heroBanner {
-  padding: 4rem 0;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-
-@media screen and (max-width: 996px) {
-  .heroBanner {
-    padding: 2rem;
-  }
-}
-
 .buttons {
   display: flex;
   align-items: center;
@@ -36,162 +23,37 @@
   max-width: 1000px; /* or whatever the original width is */
 }
 
-.backgroundImage {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1;
-}
-
-/* Header Hero */
-.HeaderHero {
+/* Hero CTA Card Container */
+.cardContainer {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 95vh;
-}
-
-.HeaderHero .title {
-  font-size: 64px;
-  color: var(--brand);
-  line-height: 1;
-  margin-top: 0;
-  margin-bottom: 20px;
-  font-weight: 500;
-}
-
-.HeaderHero .tagline {
-  font-size: 36px;
-  line-height: 1.3;
-  color: white;
-  font-weight: 500;
-  text-align: center;
-}
-
-[data-theme='light'] .HeaderHero .tagline {
-  font-size: 36px;
-  line-height: 1.3;
-  color: black;
-  font-weight: 500;
-  text-align: center;
-}
-
-.HeaderHero .buttons {
-  margin-top: 40px;
-}
-
-.HeaderHero .image {
-  display: flex;
-  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
   justify-content: center;
 }
 
-@media only screen and (min-width: 481px) and (max-width: 960px) {
-  .HeaderHero .title {
-    display: flex;
-    justify-content: center;
-  }
-  .HeaderHero .column.last {
-    text-align: center;
-  }
-}
-
-@media only screen and (max-width: 760px) {
-  .HeaderHero .title {
-    font-size: 42px;
-  }
-
-  .HeaderHero .tagline {
-    font-size: 30px;
-  }
-
-  .HeaderHero .socialLinks {
-    margin-top: -2rem;
-  }
-}
-
-@media only screen and (max-width: 481px) {
-  .HeaderHero .title {
-    font-size: 30px;
-  }
-
-  .HeaderHero .tagline {
-    font-size: 22px;
-  }
-
-  .HeaderHero .socialLinks {
-    margin-top: -2rem;
-  }
-}
-
-/* Section */
-.Section {
-  width: 100%;
-  padding-top: 50px;
-  padding-bottom: 50px;
-  overflow-x: hidden;
-}
-
-.Section + .Section {
-  border-top: 1px solid var(--ifm-table-border-color);
-}
-
-.Section.tint {
-  background-color: var(--ifm-menu-color-background-active);
-}
-
-.Section.dark {
-  background-color: var(--dark);
-}
-
-/* ActionButton */
-
-.ActionButton {
-  padding: 0.50rem 1.25rem;
+.tagline {
+  font-size: 2.5rem;
   text-align: center;
-  font-weight: 600;
-  font-size: 1rem;
-  text-decoration: none !important;
-  border-bottom: none;
-  transition: all 0.4s ease-out;
-  border-radius: 25px;
+  margin: 0 0 3rem 0;  /* Top Right Bottom Left */
+  line-height: 1.2;
+  letter-spacing: -0.02em;  /* Slight negative tracking */
+  max-width: 800px;  /* Prevent line from getting too long */
 }
 
-.ActionButton.primary {
-  margin-right: 5px;
-  color: black;
-  background-color: #14F195;
+.no-padding {
+  padding: 0 !important;
 }
 
-[data-theme='dark'] .ActionButton.primary:hover {
-  color: black;
-  background-color: white;
-}
+@media (max-width: 768px) {
+  .cardContainer {
+    flex-direction: column;
+    align-items: center;
+  }
 
-.ActionButton.secondary {
-  margin-left: 5px;
-  color: #14F195;
-  border: 1px solid #14F195;
-}
-
-[data-theme='dark'] .ActionButton.secondary:hover {
-  margin-left: 5px;
-  color: white;
-  border: 1px solid white;
-}
-
-[data-theme='light'] .ActionButton.primary {
-  margin-right: 5px;
-  color: black;
-  background-color: #14F195;
-}
-
-[data-theme='light'] .ActionButton.secondary {
-  margin-left: 5px;
-  color: #00cd78;
-  border: 1px solid #00cd78;
+  .tagline {
+    font-size: 1.5rem;
+    margin: 1.5rem 0 2rem 0;
+    padding: 0 1rem;
+  }
 }

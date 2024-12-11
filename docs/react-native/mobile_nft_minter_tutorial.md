@@ -24,7 +24,7 @@ View or download the complete open-source program on Github, or follow this tuto
 - Create and mint a Metaplex NFT on-chain.
 
 ## Prerequisites
-- Complete [prerequisite setup](../getting-started/development-setup) for a ready dev environment.
+- Complete [prerequisite setup](../developers/development-setup) for a ready dev environment.
 - An Android device/emulator to build and launch a React Native app
 - An MWA-compatible wallet installed on the same device/emulator.
 - Basic understanding of MWA.

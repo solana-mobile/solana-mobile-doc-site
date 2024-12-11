@@ -17,7 +17,7 @@ By the end of this tutorial, you'll have an understanding of how to use the Sola
 - How to use the memo program to write your message to the network and see your message on the blockchain!
 
 ## Prerequisites
-Read the [**prerequisite setup**](../getting-started/development-setup) guide before starting the tutorial. This tutorial will be using the [fakewallet](../getting-started/development-setup#3-install-a-wallet-app) app to test your app's integration with Mobile Wallet Adapter.
+Read the [**prerequisite setup**](../developers/development-setup) guide before starting the tutorial. This tutorial will be using the [fakewallet](../developers/development-setup#3-install-a-wallet-app) app to test your app's integration with Mobile Wallet Adapter.
 
 ### Clone the tutorial repo
 

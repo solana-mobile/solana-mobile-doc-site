@@ -79,7 +79,7 @@ const config = {
         items: [
           {
             type: 'doc',
-            docId: 'getting-started/intro',
+            docId: 'developers/overview',
             position: 'left',
             label: 'Developers',
           },
@@ -115,6 +115,12 @@ const config = {
             docId: 'dapp-publishing/intro',
             position: 'left',
             label: 'dApp Store',
+          },
+          {
+            type: 'doc',
+            docId: 'marketing/overview',
+            position: 'left',
+            label: 'Marketing & Partnerships',
           },
           {to: 'blog', label: 'Blog', position: 'right'},
           {
@@ -155,6 +161,19 @@ const config = {
               {
                 label: 'GitHub',
                 href: 'https://github.com/solana-mobile',
+              },
+            ],
+          },
+          {
+            title: 'Legal',
+            items: [
+              {
+                label: 'Terms of Service',
+                href: 'https://legal.solanamobile.com/tos-homepage-web',
+              },
+              {
+                label: 'Privacy Policy',
+                href: 'https://legal.solanamobile.com/privacy-policy-homepage-web',
               },
             ],
           },
