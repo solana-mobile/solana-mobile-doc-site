@@ -2,8 +2,10 @@
 
 import Card from "../../src/components/Card"
 import CardLayout from "../../src/layouts/CardLayout"
+import { FAQ, FAQSection } from '@site/src/components/FAQ';
 
-We’re glad you’re ready to learn about publishing your Web3 apps on the Solana dApp Store, the fee-free app store for the [Saga](https://solanamobile.com/saga) device.
+
+The Solana dApp Store is the crypto-friendly app store for the Solana Mobile phones, Saga and the upcoming [Seeker](https://solanamobile.com).
 
 # Quickstart
 
