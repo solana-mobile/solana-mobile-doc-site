@@ -1,12 +1,11 @@
-# Solana dApp Store
+# Welcome publishers!
 
 import Card from "../../src/components/Card"
 import CardLayout from "../../src/layouts/CardLayout"
-import { FAQ, FAQSection } from '@site/src/components/FAQ';
 
-The Solana dApp Store is the crypto-friendly app store for the Solana Mobile phones, Saga and the upcoming [Seeker](https://solanamobile.com/).
+We’re glad you’re ready to learn about publishing your Web3 apps on the Solana dApp Store, the fee-free app store for the [Saga](https://solanamobile.com/saga) device.
 
-## Getting Started
+# Quickstart
 
 Wherever you are in your publishing journey, you can find resources here to get started.
 
@@ -99,28 +98,43 @@ Wherever you are in your publishing journey, you can find resources here to get 
 
 <CardLayout autoFitEnabled={true}>
     <Card
-        to="/dapp-publishing/checklist"
+        to="/dapp-publishing/overview"
         header={{
-            label: "Publishing Checklist",
-            translateId: "publishing-cheklist-card-header",
+            label: "Publish a dApp",
+            translateId: "publish-card-header",
         }}
         body={{
-            label: "An overview of the publishing process and what to expect before you begin.",
-            translateId: "publishing-cheklist-card-body",
+            label: "Follow the step-by-step guide to publish your app to the Solana dApp Store.",
+            translateId: "publish-card-body",
         }}
-        emoji="✅"
+        emoji="🚀"
     />
     <Card
-        to="/dapp-publishing/listing-page-guidelines"
+        to="/dapp-publishing/publishing-a-pwa"
         header={{
-            label: "dApp Listing Page",
-            translateId: "listing-page-card-header",
+            label: "Progressive Web Apps (PWAs)",
+            translateId: "pwa-card-header",
         }}
         body={{
-            label: "Visualize how your app listing will be presented within the dApp Store.",
-            translateId: "listing-page-card-body",
+            label: "Learn how to convert a PWA to an Android app and publish on the dApp Store.",
+            translateId: "pwa-card-body)",
         }}
-        emoji="📱"
+        iconPath="img/pwa-icon.png"
+    />
+</CardLayout>
+
+<CardLayout autoFitEnabled={true}>
+    <Card
+        to="/dapp-publishing/qanda"
+        header={{
+            label: "Frequently Asked Questions",
+            translateId: "qanda-card-header",
+        }}
+        body={{
+            label: "See the list of frequently asked questions about the Solana dApp Store and its publishing process.",
+            translateId: "qanda-card-body",
+        }}
+        emoji="❓"
     />
     <Card
         to="/dapp-publishing/policy"
@@ -129,9 +143,11 @@ Wherever you are in your publishing journey, you can find resources here to get 
             translateId: "policy-card-header",
         }}
         body={{
-            label: "See the dApp Store mission statement and publisher policy.",
+            label: "Learn about the dApp Store mission statement and publisher policy.",
             translateId: "policy-card-body",
         }}
         emoji="📜"
     />
 </CardLayout>
+
+<br/>

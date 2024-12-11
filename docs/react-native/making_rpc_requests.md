@@ -13,7 +13,7 @@ The [@solana/web3.js](https://github.com/solana-labs/solana-web3.js) library pro
 <TabItem value="yarn" label="yarn">
 
 ```bash
-yarn install @solana/web3.js \
+yarn install @solana/web3.js@1 \
              react-native-get-random-values \
              buffer
 ```
@@ -22,7 +22,7 @@ yarn install @solana/web3.js \
 <TabItem value="npm" label="npm">
 
 ```bash
-npm install @solana/web3.js \
+npm install @solana/web3.js@1 \
              react-native-get-random-values \
              buffer
 ```

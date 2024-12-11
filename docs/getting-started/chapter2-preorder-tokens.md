@@ -29,7 +29,7 @@ Solana Mobile does not currently have a rewards program in connection with the C
 
 The Chapter 2 Preorder Token NFT is a non-transferable NFT distributed to the wallets of anyone who has preordered Chapter 2.
 
-As of the time this article was written, there are 110,000+ holders of the Preorder Token. The preorder phase is still active and any new Tokens will be issued in waves.
+As of the time this article was written, there are 140,000+ holders of the Preorder Token. The preorder phase is still active and any new Tokens will be issued in waves.
 
 ## NFT Details
 
@@ -60,19 +60,6 @@ Metadata Pointer
     Authority: GRR6BquJZYWgUqWpNJekBZHDHgxVQ56iZ2P2nWjDFRSn
     Metadata Address: 2DMMamkkxQ6zDMBtkFp8KH7FoWzBMBA1CGTYwom4QH6Z
 ```
-
-## Querying for Chapter 2 Preorder Token holders with Airship
-
-You can use the [Airship](https://airship.helius.dev/) tool provided by [Helius](https://www.helius.dev/) to query and fetch the list of Chapter 2 Preorder Token users.
-
-1. Select "Create new airdrop" to enter the tool.
-2. Enable the tool by providing a private key and a Solana RPC URL.
-
-- If you're only interested in fetching a list of holders, the private key provided can just be a newly generated dummy key.
-- It is recommended to use a custom RPC provider for best performance.
-
-3. Select "Import Chapter 2 Preorder Token Holders" then press the "Import" button.
-4. The list of wallet addresses of Chapter 2 Preorder Token Holders will be generated in the list below the button.
 
 ## Querying for Chapter 2 Preorder Token holders manually
 
