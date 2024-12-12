@@ -149,6 +149,7 @@ const sidebars = {
   ...require("./sidebars/sagaSidebar.js"),
   ...require("./sidebars/marketingSidebar.js"),
   ...require("./sidebars/developersSidebar.js"),
+  ...require("./sidebars/walletsSidebar.js"),
 };
 
 module.exports = sidebars;
