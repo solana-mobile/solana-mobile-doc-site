@@ -1,4 +1,4 @@
-# Welcome publishers!
+# Solana dApp Store
 
 import Card from "../../src/components/Card"
 import CardLayout from "../../src/layouts/CardLayout"
