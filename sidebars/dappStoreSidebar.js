@@ -44,6 +44,11 @@ module.exports = {
             id: 'dapp-publishing/publishing-a-pwa',
             label: 'Convert a PWA to an APK'
         },
+        {
+            type: 'doc',
+            id: 'dapp-publishing/publishing-expo',
+            label: 'Prepare Expo app for dApp Store'
+        },
 
         /* Publish your app tutorial */
         {
