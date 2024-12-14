@@ -9,7 +9,7 @@ This library provides an implementation for the [*Wallet* endpoint](https://sola
 
 ### Features
 
-- Registers your wallet app with Android to handle dApp connection requests.
+- Configures your wallet app to handle dApp connection requests.
 - Enables session establishment from both mobile dApps and web dApps on the mobile browser.
 - Provides a framework for handling wallet operations like transaction signing and account access.
 
@@ -57,6 +57,7 @@ Mobile Wallet Adapter 2.0 is an updated [specification](https://solana-mobile.gi
 The spec, along with the SDK, aims to be backwards compatible with Mobile Wallet Adapter 1.0 (legacy).
 
 ### New Features
+
 - A dedicated Sign-in-with-Solana (SIWS) API for both native dApps and mobile web dApps.
 - An extensible Feature Extensions API that enables customized wallet requests and features.
 - Support for multi-account authorization, chain agnostic identifiers, and QOL changes.
