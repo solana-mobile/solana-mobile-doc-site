@@ -27,34 +27,14 @@ module.exports = {
         },
         {
             type: 'doc',
-            id: 'wallets/mobile-wallet-adapter/installation',
-            label: 'Installation'
+            id: 'wallets/mobile-wallet-adapter/overview',
+            label: 'Overview'
         },
         {
             type: 'doc',
-            id: 'wallets/mobile-wallet-adapter/usage',
-            label: 'Usage'
+            id: 'wallets/mobile-wallet-adapter/integration',
+            label: 'Integration'
         },
-        {
-            type: 'category',
-            label: 'Guides',
-            collapsible: true,
-            collapsed: false,
-            items: [
-                {
-                    type: 'doc',
-                    id: 'wallets/guides/upgrade-mobile-wallet-adapter',
-                    label: 'Upgrading to Mobile Wallet Adapter 2.0'
-                },
-                {
-                    type: 'doc',
-                    id: 'wallets/guides/bottom-sheets',
-                    label: 'Use bottom sheets to handle MWA requests'
-                },
-            ]
-        },
-        
-
         
         /* Seed Vault Section */
         {
@@ -68,15 +48,41 @@ module.exports = {
         },
         {
             type: 'doc',
-            id: 'wallets/seed-vault/installation',
-            label: 'Installation'
+            id: 'wallets/seed-vault/overview',
+            label: 'Overview'
         },
         {
             type: 'doc',
-            id: 'wallets/seed-vault/usage',
-            label: 'Usage'
+            id: 'wallets/seed-vault/integration',
+            label: 'Integration'
         },
-        
+
+                
+        /* Guides Section */
+        {
+            type: 'html',
+            value: '<div class="sidebar-divider" />',
+        },
+        {
+            type: 'html',
+            value: 'Guides',
+            className: 'sidebar-section-header',
+        },
+        {
+            type: 'doc',
+            id: 'wallets/guides/ux-best-practices',
+            label: 'Wallet UX Best Practices'
+        },
+        {
+            type: 'doc',
+            id: 'wallets/guides/upgrade-mobile-wallet-adapter',
+            label: 'Upgrade to Mobile Wallet Adapter 2.0'
+        },
+        {
+            type: 'doc',
+            id: 'wallets/guides/bottom-sheets',
+            label: 'Use bottom sheets to handle MWA requests'
+        },
         
         /* Resources Section */
         {
@@ -87,11 +93,6 @@ module.exports = {
             type: 'html',
             value: 'Resources',
             className: 'sidebar-section-header',
-        },
-        {
-            type: 'doc',
-            id: 'wallets/guides/ux-best-practices',
-            label: 'Wallet UX Best Practices'
         },
         {
             type: 'category',
