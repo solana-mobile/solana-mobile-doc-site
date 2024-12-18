@@ -109,28 +109,46 @@ the paginated response is a list of Saga Genesis Token Assets and metadata.
 <TabItem value="Javascript" label="Javascript">
 
 ```javascript
-const url = "https://your.rpc.com/?api-key=<api-key>";
+const fs = require('fs');
+const DAS_API_URL = "https://your.rpc.com/?api-key=<api-key>";
+const OUTPUT_FILE = `out.json`;
 
 const getAssetsByGroup = async () => {
-  const response = await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      jsonrpc: "2.0",
-      id: "my-id",
-      method: "getAssetsByGroup",
-      params: {
-        groupKey: "collection",
-        groupValue: "46pcSL5gmjBrPqGKFaLbbCmR6iVuLJbnQy13hAe7s6CC", // Genesis Token Collection NFT Address
-        page: 1, // Starts at 1
-        limit: 1000,
+  let output = []
+  let page = 0;
+
+  while (true) {
+    page++;
+    const response = await fetch(DAS_API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-    }),
-  });
-  const { result } = await response.json();
-  console.log("Page 1 of Saga Genesis Token Assets: ", result.items);
+      body: JSON.stringify({
+        jsonrpc: "2.0",
+        id: "my-id",
+        method: "getAssetsByGroup",
+        params: {
+          groupKey: "collection",
+          groupValue: "46pcSL5gmjBrPqGKFaLbbCmR6iVuLJbnQy13hAe7s6CC", // Genesis Token Collection NFT Address
+          page: page, // Starts at 1
+          limit: 1000,
+        },
+      }),
+    });
+    const { result } = await response.json();
+    console.log(`Page ${page} of Saga Genesis Token Assets`);
+    if (result.total === 0) {
+      console.log("Done!");
+      break;
+    }
+    for (const item of result.items) {
+      output.push({owner: item.ownership.owner})
+    }
+  }
+
+  console.log(`Writing to ${OUTPUT_FILE}`);
+  fs.writeFileSync(OUTPUT_FILE, JSON.stringify(output, null, 2));
 };
 getAssetsByGroup();
 ```
