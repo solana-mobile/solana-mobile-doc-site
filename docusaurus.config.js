@@ -178,7 +178,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} Solana Mobile, Inc.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Solana Mobile Inc.`,
       },
       prism: {
         additionalLanguages: ['kotlin', 'json', 'swift', 'java'],
