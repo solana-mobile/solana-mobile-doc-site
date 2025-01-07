@@ -4,7 +4,7 @@
 <details>
 <summary>What does it mean for the Solana dApp Store to be “fee-free”?</summary>
 
-Solana Mobile, Inc. does not collect any fees on in-app purchases, app purchases, or subscriptions, nor are any fees collected on its behalf by apps in the catalog. Users may incur fees from usage of apps contained within the catalog, such as network transaction fees.
+Solana Mobile Inc. does not collect any fees on in-app purchases, app purchases, or subscriptions, nor are any fees collected on its behalf by apps in the catalog. Users may incur fees from usage of apps contained within the catalog, such as network transaction fees.
 
 </details>
 
