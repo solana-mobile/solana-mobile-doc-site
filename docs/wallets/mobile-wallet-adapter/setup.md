@@ -33,9 +33,17 @@ npm install @solana-mobile/mobile-wallet-adapter-walletlib
 
 ## 2. Activity Entrypoint
 
-To begin the protocol, dApps will send an *association* [intent](https://developer.android.com/guide/components/intents-filters) to a wallet, indicating they want to establish an MWA session.
+To initiate the protocol, dApps will send an *association* [intent](https://developer.android.com/guide/components/intents-filters) to a wallet, indicating they want to establish an MWA session.
 
 The wallet must define an entrypoint [`Activity`](https://developer.android.com/guide/components/activities/intro-activities) that handles incoming intents sent by dApps. The default intent URI scheme used by dApps is `solana-wallet://`.
+
+:::tip
+
+This intent filter only enables *local* associations (e.g when dapp and wallet are on the same device).
+
+View the MWA Remote guide to support remote associations. (TODO)
+
+:::
 
 ### Define an intent filter
 
@@ -122,22 +130,17 @@ your wallet authorization, signing, and error handling logic through these callb
 <Tabs groupId="development-framework">
   <TabItem value="native-android" label="Kotlin">
 ```kotlin
+import com.solana.mobilewalletadapter.walletlib.scenario.*
+
 private inner class MobileWalletAdapterScenarioCallbacks : LocalScenario.Callbacks {
+
+    // Scenario lifecycle events
     override fun onScenarioReady() : Unit
-    
     override fun onScenarioServingClients() : Unit
-    
-    override fun onScenarioServingComplete() {
-        // Handle scenario completion and cleanup
-    }
-    
+    override fun onScenarioServingComplete() : Unit
     override fun onScenarioComplete() = Unit
-    
     override fun onScenarioError() = Unit
-    
-    override fun onScenarioTeardownComplete() {
-        // Handle scenario teardown completion
-    }
+    override fun onScenarioTeardownComplete() = Unit
 
     override fun onAuthorizeRequest(request: AuthorizeRequest) {
         // Handle authorization requests (including SIWS)
@@ -195,6 +198,10 @@ async function handleRequest(request) {
 After receiving an incoming intent, extract and parse the association URI with the `AssociationUri` class. 
 
 ```kotlin
+import android.content.Intent
+import com.solana.mobilewalletadapter.walletlib.association.AssociationUri
+import com.solana.mobilewalletadapter.walletlib.association.LocalAssociationUri
+
 val associationUri = intent.data?.let { uri -> AssociationUri.parse(uri) }
 
 if (associationUri is LocalAssociationUri) {
@@ -209,6 +216,8 @@ if (associationUri is LocalAssociationUri) {
 Define a `MobileWalletAdapterConfig` object that informs the dApp what features/options your wallet supports.
 
 ```kotlin
+import com.solana.mobilewalletadapter.walletlib.protocol.MobileWalletAdapterConfig
+
 val config = MobileWalletAdapterConfig(
     10, // maxTransactionsPerSigningRequest
     10, // maxMessagesPerSigningRequest
@@ -226,6 +235,9 @@ val config = MobileWalletAdapterConfig(
 With the association URI, the wallet can establish a session with the dApp by invoking `createScenario` and `start`.
 
 ```kotlin
+import com.solana.mobilewalletadapter.walletlib.scenario.*
+import com.solana.mobilewalletadapter.walletlib.authorization.AuthIssuerConfig
+
 val scenario = associationUri.createScenario(
     getApplication<MyWalletApplication>().applicationContext,
     config,
