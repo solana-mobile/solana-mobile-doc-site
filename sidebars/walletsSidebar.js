@@ -32,8 +32,8 @@ module.exports = {
         },
         {
             type: 'doc',
-            id: 'wallets/mobile-wallet-adapter/integration',
-            label: 'Integration'
+            id: 'wallets/mobile-wallet-adapter/setup',
+            label: 'Setup'
         },
         
         /* Seed Vault Section */
