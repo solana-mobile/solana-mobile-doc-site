@@ -31,21 +31,25 @@ npm install @solana-mobile/mobile-wallet-adapter-walletlib
   </TabItem>
 </Tabs>
 
-## 2. Activity Entrypoint
+## 2. Association
 
-To initiate the protocol, dApps will send an *association* [intent](https://developer.android.com/guide/components/intents-filters) to a wallet, indicating they want to establish an MWA session.
+To initiate the protocol, dApps must provide an *association* URI to the wallet, indicating they want to establish
+an MWA session.
 
-The wallet must define an entrypoint [`Activity`](https://developer.android.com/guide/components/activities/intro-activities) that handles incoming intents sent by dApps. The default intent URI scheme used by dApps is `solana-wallet://`.
+There are two types of sessions supported by the current SDKs:
 
-:::tip
+- Local Sessions - e.g Android dApp to Android wallet app
+- Remote Sessions - e.g Desktop Web dApp to Android wallet app
 
-This intent filter only enables *local* associations (e.g when dapp and wallet are on the same device).
 
-View the MWA Remote guide to support remote associations. (TODO)
+### Local association
 
-:::
+For local sessions, dApps will initiate the protocol by sending an [intent](https://developer.android.com/guide/components/intents-filters) containing the association URI to the wallet.
+
 
 ### Define an intent filter
+
+The wallet must define an entrypoint [`Activity`](https://developer.android.com/guide/components/activities/intro-activities) that handles these incoming association intents sent by dApps. The default intent URI scheme used by dApps is `solana-wallet://`.
 
 To ensure your wallet is discoverable during Android intent [disambiguation](https://developer.android.com/training/basics/intents/sending#disambiguation-dialog), you need to add an [intent filter](https://developer.android.com/guide/components/intents-filters#Receiving) for the
 `solana-wallet:` URI scheme.
@@ -121,6 +125,13 @@ Solana Mobile provides a custom Expo config plugin to do this. View the [MWA Bot
 ```
   </TabItem>
 </Tabs>
+
+
+### Remote association
+
+Remote association is initiated when the web dApp displays a QR code encoded as remote association URI, which is scanned and parsed by the wallet app.
+
+View the MWA Remote guide to learn about how to enable remote connections and signing services.
 
 ## 3. Implement request handling
 
