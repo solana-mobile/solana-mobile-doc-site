@@ -33,7 +33,7 @@ npm install @solana-mobile/mobile-wallet-adapter-walletlib
 
 ## 2. Association
 
-To initiate the protocol, dApps must provide an *association* URI to the wallet, indicating they want to establish
+To initiate the protocol, dApps must provide an [*association* URI](https://solana-mobile.github.io/mobile-wallet-adapter/spec/spec.html#association) to the wallet, indicating they want to establish
 an MWA session.
 
 There are two types of sessions supported by the current SDKs:
@@ -41,10 +41,20 @@ There are two types of sessions supported by the current SDKs:
 - Local Sessions - e.g Android dApp to Android wallet app
 - Remote Sessions - e.g Desktop Web dApp to Android wallet app
 
+In both cases, the wallet will receive an association URI and use it to establish a connection with the dApp.
 
-### Local association
+### Association Intent
 
-For local sessions, dApps will initiate the protocol by sending an [intent](https://developer.android.com/guide/components/intents-filters) containing the association URI to the wallet.
+The dApp will initiate the protocol by sending an [intent](https://developer.android.com/guide/components/intents-filters) containing the association URI to the wallet.
+
+- In local association, the dApp will directly send the URI within an intent to the wallet app.
+- In remote association, the dApp will display a QR code that encodes the association URI. The QR code is then scanned by the device camera and the URI broadcasted as an intent (e.g or an in-app camera directly scans the QR code).
+
+An example local association URI:
+
+```
+solana-wallet:/v1/associate/local?association=<association_token>&port=<port_number>&v=<version>
+```
 
 
 ### Define an intent filter
@@ -126,13 +136,6 @@ Solana Mobile provides a custom Expo config plugin to do this. View the [MWA Bot
   </TabItem>
 </Tabs>
 
-
-### Remote association
-
-Remote association is initiated when the web dApp displays a QR code encoded as remote association URI, which is scanned and parsed by the wallet app.
-
-View the MWA Remote guide to learn about how to enable remote connections and signing services.
-
 ## 3. Implement request handling
 
 The library defines an interface for handling MWA requests and events through callback handlers. Implement
@@ -140,6 +143,7 @@ your wallet authorization, signing, and error handling logic through these callb
 
 <Tabs groupId="development-framework">
   <TabItem value="native-android" label="Kotlin">
+
 ```kotlin
 import com.solana.mobilewalletadapter.walletlib.scenario.*
 
@@ -188,24 +192,102 @@ private inner class MobileWalletAdapterScenarioCallbacks : LocalScenario.Callbac
     }
 }
 ```
-  </TabItem>
-    <TabItem value="react-native" label="Typescript">
-```javascript
-async function handleRequest(request) {
-  // Implementation
-}
+
+</TabItem>
+  <TabItem value="react-native" label="Typescript">
+
+#### 1. Initialize MWA Event listener
+
+Initialize a listener that listens for MWA requests and events and passes them to the provided callback handlers.
+
+```typescript
+import {
+  initializeMWAEventListener,
+  MWARequest,
+  MWASessionEvent,
+} from '@solana-mobile/mobile-wallet-adapter-walletlib';
+
+const listener: EmitterSubscription = initializeMWAEventListener(
+  (request: MWARequest) => { 
+      switch (request.__type) {
+        case MWARequestType.SignAndSendTransactionsRequest:
+        case MWARequestType.SignTransactionsRequest:
+        case MWARequestType.SignMessagesRequest:
+        case MWARequestType.AuthorizeDappRequest:
+          /* ... */
+      }
+  },
+  (sessionEvent: MWASessionEvent) => { 
+      switch (event.__type) {
+        case MWASessionEventType.SessionStartEvent:
+        case MWASessionEventType.SessionReadyEvent:
+        case MWASessionEventType.SessionTerminatedEvent:
+        case MWASessionEventType.SessionServingClientsEvent:
+        case MWASessionEventType.SessionServingCompleteEvent:
+        case MWASessionEventType.SessionCompleteEvent:
+        case MWASessionEventType.SessionErrorEvent:
+        case MWASessionEventType.SessionTeardownCompleteEvent:
+        case MWASessionEventType.LowPowerNoConnectionEvent:
+          /* ... */
+      }
+   },
+);
+
+/* ... */
+
+// Clean up the listener when it is out of scope
+listener.remove()
 ```
+
+Ensure the listener is cleaned up with `listener.remove()` when it goes out of scope (e.g `listener.remove()` on component lifecycle unmount).
+
+#### 2. Resolving a request
+
+A `MWARequest` is handled by calling `resolve(request, response)`, with each type of request having a corresponding response type.
+
+An example of handling an `AuthorizationRequest`:
+
+```typescript
+import {
+  resolve,
+  AuthorizeDappResponse
+} from '@solana-mobile/mobile-wallet-adapter-walletlib';
+
+const response = {
+  publicKey: Keypair.generate().publicKey.toBytes(),
+  label: 'Wallet Name',
+} as AuthorizeDappResponse;
+
+resolve(authorizationRequest, response)
+```
+
+#### 3. Rejecting a response
+
+There is also a set of of *fail* responses that you can return to the dApp. These are for cases where the user declines, or an error occurs during signing, etc.
+
+```typescript
+import {
+  UserDeclinedResponse
+} from '@solana-mobile/mobile-wallet-adapter-walletlib';
+
+const response = {
+  failReason: MWARequestFailReason.UserDeclined,
+} as UserDeclinedResponse;
+
+// Tells the dApp user has declined the authorization request
+resolve(authorizationRequest, response)
+```
+
+To see the complete list of valid request and response types, view the Request and Response types reference.
+
   </TabItem>
 </Tabs>
-
-
 ## 4. Establish a session
-
-<Tabs groupId="development-framework">
-  <TabItem value="native-android" label="Kotlin">
 
 ### 1. Parse the Association URI
 
+<Tabs groupId="development-framework">
+  <TabItem value="native-android" label="Kotlin">
 After receiving an incoming intent, extract and parse the association URI with the `AssociationUri` class. 
 
 ```kotlin
@@ -221,9 +303,45 @@ if (associationUri is LocalAssociationUri) {
   print("Unsupported association URI '${intent.data}'")
 }
 ```
+  </TabItem>
+  <TabItem value="react-native" label="Typescript">
+After receiving an incoming intent, extract and parse the association URI with the `AssociationUri` class. 
+
+```typescript
+const config: MobileWalletAdapterConfig = {
+  supportsSignAndSendTransactions: true,
+  maxTransactionsPerSigningRequest: 10,
+  maxMessagesPerSigningRequest: 10,
+  supportedTransactionVersions: [0, 'legacy'],
+  noConnectionWarningTimeoutMs: 3000,
+  optionalFeatures: ['solana:signInWithSolana']
+};
+
+try {
+  const sessionId = await initializeMobileWalletAdapterSession(
+    'Wallet Name',
+    config,
+  );
+  console.log('sessionId: ' + sessionId);
+} catch (e: any) {
+    if (e instanceof SolanaMWAWalletLibError) {
+      console.error(e.name, e.code, e.message);
+    } else {
+      console.error(e);
+    }   
+}
+```
+  </TabItem>
+</Tabs>
+
+:::tip QR Code Scanning
+For remote sessions, wallets can also implement an in-app QR code scanner to directly parse and extract the remote association URI.
+:::
 
 ### 2. Define a wallet config
 
+<Tabs groupId="development-framework">
+  <TabItem value="native-android" label="Kotlin">
 Define a `MobileWalletAdapterConfig` object that informs the dApp what features/options your wallet supports.
 
 ```kotlin
@@ -240,10 +358,33 @@ val config = MobileWalletAdapterConfig(
     )
 ),
 ```
+  </TabItem>
+  <TabItem value="react-native" label="Typescript">
+Define a `MobileWalletAdapterConfig` object that informs the dApp what features/options your wallet supports.
 
-### 3. Create a Scenario
+```typescript
+import {
+  MobileWalletAdapterConfig,
+} from '@solana-mobile/mobile-wallet-adapter-walletlib';
 
-With the association URI, the wallet can establish a session with the dApp by invoking `createScenario` and `start`.
+const config: MobileWalletAdapterConfig = {
+  supportsSignAndSendTransactions: true,
+  maxTransactionsPerSigningRequest: 10,
+  maxMessagesPerSigningRequest: 10,
+  supportedTransactionVersions: [0, 'legacy'],
+  noConnectionWarningTimeoutMs: 3000,
+  optionalFeatures: ['solana:signInWithSolana']
+};
+```
+  </TabItem>
+</Tabs>
+
+### 3. Initialize a session
+
+With the association URI, the wallet can initialize and establish a session with the dApp.
+
+<Tabs groupId="development-framework">
+  <TabItem value="native-android" label="Kotlin">
 
 ```kotlin
 import com.solana.mobilewalletadapter.walletlib.scenario.*
@@ -256,37 +397,20 @@ val scenario = associationUri.createScenario(
     MobileWalletAdapterScenarioCallbacks()
 ).also { it.start() }
 ```
-
-If successfully established, the dApp will begin sending requests/events to be handled by the provided callbacks.
-
   </TabItem>
-  <TabItem value="Expo" label="Typescript">
+  <TabItem value="react-native" label="Typescript">
 
+```typescript
+import {
+  initializeMobileWalletAdapterSession,
+} from '@solana-mobile/mobile-wallet-adapter-walletlib';
 
+const sessionId = await initializeMobileWalletAdapterSession(
+  'Wallet Name',
+  config,
+);
+```
   </TabItem>
 </Tabs>
 
-
-## Local and Remote sessions
-
-There are two types of sessions supported by the current SDKs:
-
-- Local Sessions - e.g Android dApp to Android wallet app
-- Remote Sessions - e.g Desktop Web dApp to Android wallet app
-
-The main difference when handing local vs. remote sessions is
-
-1. How the dApp attempts to associate with the wallet.
-2. How communication is facilitated between the dApp and wallet.
-
-### Local sessions
-
-**Association** - Local sessions are initiated by the dApp sending an Android association intent to the wallet app on the same device.
-
-**Local Web Socket Server** - The session is facilitated through a direct local web socket connection, hosted by the wallet endpoint.
-
-### Remote Sessions
-
-**Association** - The web dApp displays a QR Code encoded as remote association URI, which is scanned and parsed by the wallet app.
-
-**Reflector Server** - The session connection is facilitated by a [reflector Websocket server](https://solana-mobile.github.io/mobile-wallet-adapter/spec/spec.html#reflector-protocol), which reflects traffic between the dApp and wallet.
+If successfully established, the dApp will begin sending requests/events to be handled by the provided callbacks.
