@@ -3,8 +3,8 @@ import { FAQ, FAQSection } from '@site/src/components/FAQ';
 # Frequently Asked Questions
 
 <FAQ>
-  <FAQSection title="Do I need a Seeker or Saga to build an app for the dApp Store?">
-    You do not need a Seeker or Saga to develop Android apps for the dApp Store.
+  <FAQSection title="Do I need a Solana Mobile device to build an app for the dApp Store?">
+    You do not need a Solana Mobile device to develop Android apps for the dApp Store.
 
     Developers **already** have all the tools necessary to start building apps for the dApp Store today!
 
@@ -31,7 +31,7 @@ import { FAQ, FAQSection } from '@site/src/components/FAQ';
   </FAQSection>
 
   <FAQSection title="Can I get a developer kit for testing?">
-    We are not running a developer device program for the Seeker, because you do not need a Seeker or Saga to develop Android apps for the dApp Store.
+    We are not running a developer device program for the Seeker, because you do not need a Solana Mobile device to develop Android apps for the dApp Store.
 
     Developers **already** have all the tools necessary to start building apps for the dApp Store today!
 
