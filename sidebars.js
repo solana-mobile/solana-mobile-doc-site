@@ -134,11 +134,6 @@ const sidebars = {
       label: 'Seeker',
       href: 'https://solanamobile.com',
     },
-    {
-      type: 'doc',
-      id: 'saga/overview',
-      label: 'Saga',
-    },
   ],
 
   // other sidebars

@@ -94,9 +94,9 @@ module.exports = {
             label: 'Seeker'
         },
         {
-            type: 'doc',
-            id: 'saga/overview',
-            label: 'Saga'
-        },
+            type: 'link',
+            href: 'https://docs.solanamobile.com/saga/release-notes/',
+            label: 'Saga Release Notes',
+          }
       ],
   };
