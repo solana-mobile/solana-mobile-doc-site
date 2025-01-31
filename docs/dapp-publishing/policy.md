@@ -7,7 +7,7 @@
 
 # Mission
 
-The Solana dApp Store aims to be the best place for Web3 users to discover and install apps for Saga. Free of fees for users (other than network transaction fees), it provides a channel for developers to deliver their high-quality apps to users that is friendly to crypto and web3. Developers are free to establish direct relationships with their users, including financial relationships, without interference by the method of app distribution.
+The Solana dApp Store aims to be the best place for Web3 users to discover and install apps. Free of fees for users (other than network transaction fees), it provides a channel for developers to deliver their high-quality apps to users that is friendly to crypto and web3. Developers are free to establish direct relationships with their users, including financial relationships, without interference by the method of app distribution.
 
 It is worth noting that the Solana dApp Store makes a distinction between *app publishing* and *catalog curation*. Apps are published on-chain in a permissionless manner, represented by NFTs. Anyone can publish an app, and possession of the private key for the publishing account provides control over publishing of new versions of the app. The Solana dApp Store catalog is a curated collection of apps published on-chain, is managed by Solana Mobile, and to which the policies outlined in this document apply. **Solana Mobile reserves the right to make the final determination on what dApps are available in the Solana dApp Store.**
 

@@ -66,7 +66,7 @@ The Seed Vault SDK is designed for usage by _wallet_ apps. If you are building a
 
 #### For Wallet Apps
 
-To integrate and provide Seed Vault custody in a wallet app, follow this [integration guide](https://github.com/solana-mobile/seed-vault-sdk/blob/main/docs/integration_guide.md) for a deep dive into the SDK. The repo includes a Seed vault simulator, which can be used to simulate and test for Saga Seed Vault integration on emulators.
+To integrate and provide Seed Vault custody in a wallet app, follow this [integration guide](https://github.com/solana-mobile/seed-vault-sdk/blob/main/docs/integration_guide.md) for a deep dive into the SDK. The repo includes a Seed vault simulator, which can be used to simulate and test for Seed Vault integration on emulators.
 
 ## Solana dApp Store
 

@@ -16,7 +16,7 @@ In addition, there are also resources for developers wanting to publish on the [
 These resources are actively maintained by the [Solana Mobile](https://github.com/solana-mobile) team, but welcomes [contributions from the community](https://github.com/solana-mobile/solana-mobile-doc-site)!
 
 :::note
-You don't need a Saga device or physical device to start developing. The stack is compatible with any Android device. See [**prerequisite setup**](development-setup) to set up your development environment and start building!
+You don't need a Solana Mobile device or physical device to start developing. The stack is compatible with any Android device. See [**prerequisite setup**](development-setup) to set up your development environment and start building!
 :::
 
 ## Quickstart

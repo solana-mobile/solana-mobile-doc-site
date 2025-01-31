@@ -28,7 +28,7 @@ Ensure you are submitting a release build of your app that is [signed](https://d
 
 To ensure a great user experience, we recommend developers to thoroughly test their app to catch any bugs/crashes/issues.
 
-You do not need a Seeker or Saga to test your app, you can just test against a comparable Android device or emulator.
+You do not need a Solana Mobile device to test your app, you can just test against a comparable Android device or emulator.
 
 - If using Mobile Wallet Adapter, test your app's connect and signing flows with popular MWA wallets like Phantom and Solflare.
 - If your app content is gated (e.g beta access, NFT-gated), prepare a test account with full access for App Review.

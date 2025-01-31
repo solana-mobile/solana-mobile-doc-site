@@ -5,7 +5,7 @@ import CardLayout from "../../src/layouts/CardLayout"
 import { FAQ, FAQSection } from '@site/src/components/FAQ';
 
 
-The Solana dApp Store is the crypto-friendly app store for the Solana Mobile phones, Saga and the upcoming [Seeker](https://solanamobile.com).
+The Solana dApp Store is the crypto-friendly app store for Solana Mobile devices.
 
 # Quickstart
 
@@ -53,8 +53,8 @@ Wherever you are in your publishing journey, you can find resources here to get 
     </CardLayout>
 
   </FAQSection>
-  <FAQSection title="Do I need a Seeker or Saga to build an app for the dApp Store?">
-    You do not need a Seeker or Saga to develop Android apps for the dApp Store.
+  <FAQSection title="Do I need a Solana Mobile device to build an app for the dApp Store?">
+    You do not need a Solana Mobile device to develop Android apps for the dApp Store.
 
     Developers **already** have all the tools necessary to start building apps for the dApp Store today!
 
