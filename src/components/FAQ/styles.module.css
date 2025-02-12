@@ -15,13 +15,15 @@
   text-align: left;
   background: none;
   border: none;
-  padding: 1.5rem 1.5rem; /* Increased padding */
+  padding: 1.5rem 1.5rem;
   cursor: pointer;
+  /* Ensures the button doesn't apply iOS default styles */
+  color: inherit;
 }
 
 .titleWrapper {
   flex-grow: 1;
-  padding-right: 1.5rem; /* Increased padding */
+  padding-right: 1.5rem;
 }
 
 .title {
@@ -35,7 +37,7 @@
 }
 
 .answer {
-  padding: 0 1.5rem 1.5rem 1.5rem; /* Increased padding */
+  padding: 0 1.5rem 1.5rem 1.5rem;
   margin-top: 0.5rem;
 }
 
