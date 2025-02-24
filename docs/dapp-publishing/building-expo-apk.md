@@ -1,4 +1,4 @@
-# Publishing an existing Expo (React Native) app to Solana Mobile dApp Store
+# Building a release APK with Expo
 
 If you have a React Native app built with Expo, just a few steps are needed to publish it on the Solana Mobile dApp Store.
 
@@ -9,7 +9,7 @@ This guide assumes minimal experience with typical Android development tools.
 By default, when building with EAS, the platform compiles an Android App Bundle (.aab) file. Solana Mobile dApp Store requires a different binary format, APK, so we'll create a new EAS profile by adding the following lines in `eas.json`:
 
 ```
-"solana": {
+"dapp-store": {
     "channel": "production",
     "android": {
         "buildType": "apk"
@@ -20,10 +20,10 @@ By default, when building with EAS, the platform compiles an Android App Bundle 
 Then build:
 
 ```
-npx eas build -p android --profile solana
+npx eas build -p android --profile dapp-store
 ```
 
-Meanwhile, in your project directory, create a new folder `solana-build` (if you're using Git you may want to add this folder to `.gitignore` to avoid uploading large binary files).
+Meanwhile, in your project directory, create a new folder `dapp-store-build` (if you're using Git you may want to add this folder to `.gitignore` to avoid uploading large binary files).
 
 Once the EAS build has finished, download the APK file, and name it `myapp-0.0.1-unsigned.apk`. Replace `myapp` and `0.0.1` with your app name and release version, but keep file naming consistent between updates.
 
@@ -60,9 +60,9 @@ Alternatively, use a full path on Mac:
 
 ## Step 3. Sign the APK
 
-In your project directory, create a new folder `solana-keys` (if you're using Git you may want to add this folder to `.gitignore` to avoid exposing signing keys).
+In your project directory, create a new folder `dapp-store-signing-keys` (if you're using Git you may want to add this folder to `.gitignore` to avoid exposing signing keys).
 
-Open the folder `solana-keys` and run the following command (edit as needed) to create a keystore used for signing the app.
+Open the folder `dapp-store-signing-keys` and run the following command (edit as needed) to create a keystore used for signing the app.
 
 ```
 keytool -genkey -v -keystore release-key.keystore -alias myapp -keyalg RSA -keysize 2048 -validity 50000
@@ -77,13 +77,13 @@ Open your project directory, and run the following command:
 
 ```
 ~/Library/Android/sdk/build-tools/35.0.0/apksigner sign \
-    --ks ./solana-keys/release-key.keystore \
+    --ks ./dapp-store-signing-keys/release-key.keystore \
     --ks-key-alias myapp \
-    --out ./solana-build/myapp-v0.0.1-signed.apk \
-    ./solana-build/myapp-v0.0.1-unsigned.apk
+    --out ./dapp-store-build/myapp-v0.0.1-signed.apk \
+    ./dapp-store-build/myapp-v0.0.1-unsigned.apk
 ```
 
-The signed binary will be at `solana-build/myapp-v0.0.1-signed.apk`. This is the file you'll need to reference in `config.yaml` at the publishing stage.
+The signed binary will be at `dapp-store-build/myapp-v0.0.1-signed.apk`. This is the file you'll need to reference in `config.yaml` at the publishing stage.
 
 ## Publishing to dApp Store
 

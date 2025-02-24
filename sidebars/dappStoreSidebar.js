@@ -46,8 +46,8 @@ module.exports = {
         },
         {
             type: 'doc',
-            id: 'dapp-publishing/publishing-expo',
-            label: 'Prepare Expo app for dApp Store'
+            id: 'dapp-publishing/building-expo-apk',
+            label: 'Build a release APK with Expo'
         },
 
         /* Publish your app tutorial */
