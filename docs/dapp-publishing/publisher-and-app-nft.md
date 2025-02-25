@@ -1,9 +1,12 @@
 # Mint your Publisher and App NFT
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 If this is your first time publishing an app on the dApp Store, then you will need to mint a **Publisher NFT** and an **App NFT**.
 
 :::tip
-If you are looking to publish an update version of an existing app, then skip to [this step](/dapp-publishing/publishing_releases).
+If you are looking to publish an update version of an existing app, then skip to [this step](/dapp-publishing/publishing-updates).
 :::
 
 A Publisher NFT:
@@ -62,9 +65,41 @@ To customize this value, use param `-p` or `--priority-fee-lamports <priority-fe
 
 ### 1. Create your publisher NFT
 
+Run the following command to mint your NFT:
+
+<Tabs>
+<TabItem value="Arweave" label="Arweave">
+
+By default the CLI uploads the NFT metadata using [Arweave](https://www.arweave.org/).
+
 ```shell
 npx dapp-store create publisher -k <path_to_your_keypair> [-u <mainnet_beta_rpc_url>]
 ```
+
+</TabItem>
+<TabItem value="Amazon S3" label="Amazon S3">
+
+Alternatively, you can instruct the CLI to upload the NFT metadata using [Amazon S3](https://aws.amazon.com/s3/), by passing in
+the `-s` or `--storage-config` flag.
+
+```shell
+npx dapp-store create publisher -k <path_to_your_keypair> -s <s3_params> [-u <mainnet_beta_rpc_url>]
+```
+
+The `<s3_params>` is are an array of parameters in the expected format:
+
+```
+s3Params="[\"s3\", \"$releaseAwsAccessKey\", \"$releaseAwsSecretKey\", \"$releaseAwsS3Bucket\", \"$releaseAwsS3Region\"]"
+```
+
+An example of S3 parameters:
+
+```shell
+-s "[\"s3\", \"TestAccessKey\", \"TestSecret\", \"TestBucket\", \"us-east-1\"]"
+```
+
+</TabItem>
+</Tabs>
 
 :::info
 This is a **one-time** operation. Once you have created your publisher, the mint address is recorded in your configuration file.
@@ -74,9 +109,39 @@ If you have already published an app, you should not mint a new Publisher NFT an
 
 ### 2. Create your app NFT
 
+<Tabs>
+<TabItem value="Arweave" label="Arweave">
+
+By default the CLI uploads the NFT metadata using [Arweave](https://www.arweave.org/).
+
 ```shell
 npx dapp-store create app -k <path_to_your_keypair> [-u <mainnet_beta_rpc_url>]
 ```
+
+</TabItem>
+<TabItem value="Amazon S3" label="Amazon S3">
+
+Alternatively, you can instruct the CLI to upload the NFT metadata using [Amazon S3](https://aws.amazon.com/s3/), by passing in
+the `-s` or `--storage-config` flag.
+
+```shell
+npx dapp-store create app -k <path_to_your_keypair> -s <s3_params> [-u <mainnet_beta_rpc_url>]
+```
+
+The `<s3_params>` is are an array of parameters in the expected format:
+
+```
+s3Params="[\"s3\", \"$releaseAwsAccessKey\", \"$releaseAwsSecretKey\", \"$releaseAwsS3Bucket\", \"$releaseAwsS3Region\"]"
+```
+
+An example of S3 parameters:
+
+```shell
+-s "[\"s3\", \"TestAccessKey\", \"TestSecret\", \"TestBucket\", \"us-east-1\"]"
+```
+
+</TabItem>
+</Tabs>
 
 :::info
 This is a **one-time** operation per app. Once you have created your dApp, the mint address is recorded in your configuration file.
