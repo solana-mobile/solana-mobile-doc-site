@@ -144,6 +144,7 @@ const sidebars = {
   ...require("./sidebars/sagaSidebar.js"),
   ...require("./sidebars/marketingSidebar.js"),
   ...require("./sidebars/developersSidebar.js"),
+  ...require("./sidebars/mobileWalletAdapterSidebar.js"),
 };
 
 module.exports = sidebars;

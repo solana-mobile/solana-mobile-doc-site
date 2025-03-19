@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./styles.module.css";
-import { Code, Store, Megaphone } from "lucide-react"; // Using lucide icons
 import Link from "@docusaurus/Link";
 
 function HeroCTACard({ title, description, icon: Icon, to }) {
