@@ -4,6 +4,11 @@
 module.exports = {
     developersSidebar: [
         {
+            type: 'html',
+            value: 'Mobile Wallet Adapter',
+            className: 'sidebar-section-header',
+        },
+        {
             type: 'doc',
             id: 'mobile-wallet-adapter/overview',
             label: 'Overview'
@@ -16,13 +21,13 @@ module.exports = {
             items: [
             {
                 type: 'doc',
-                id: 'mobile-wallet-adapter/local-connection',
-                label: 'Local (Mobile to Mobile)'
+                id: 'mobile-wallet-adapter/mobile-apps',
+                label: 'Mobile Apps'
             },
             {
                 type: 'doc',
-                id: 'mobile-wallet-adapter/remote-connection',
-                label: 'Remote (Desktop to Mobile)'
+                id: 'mobile-wallet-adapter/web-apps',
+                label: 'Web Apps'
             },]
         },
         {

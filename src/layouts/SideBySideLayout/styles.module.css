@@ -1,11 +1,36 @@
-.sideBySideLayout {
+.container {
   display: flex;
-  flex-direction: row;
-  margin-top: 2rem;
+  width: 100%;
+  margin: 2rem 0;
+  align-items: flex-start; /* Always align to top */
 }
 
-@media screen and (max-width: 1200) {
-  .sideBySideLayout {
+.leftContent {
+  flex: 1;
+  min-width: 0; /* Prevent flex child from overflowing */
+}
+
+.rightContent {
+  flex: 1;
+  min-width: 0; /* Prevent flex child from overflowing */
+  display: flex;
+  justify-content: center;
+}
+
+/* Media query for mobile view */
+@media (max-width: 768px) {
+  .container {
     flex-direction: column;
+    gap: 2rem !important; /* Override the inline style gap for mobile */
+  }
+  
+  /* Mobile reverse option */
+  .reverseMobile {
+    flex-direction: column-reverse;
+  }
+  
+  .leftContent,
+  .rightContent {
+    width: 100%;
   }
 }

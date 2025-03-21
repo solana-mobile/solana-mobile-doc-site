@@ -40,6 +40,12 @@ import { SDKSelectionContainer, SDKSelectionButton } from '@site/src/components/
 <div>
   <SDKSelectionContainer title="Mobile" icon={<Smartphone size={16} />}>
     <SDKSelectionButton 
+      title="Overview" 
+      icon={<Code size={20} />}
+      emphasized={true}
+      link="/docs/sdks/react-native" 
+    />
+    <SDKSelectionButton 
       title="React Native" 
       icon={<Code size={20} />}
       link="/docs/sdks/react-native" 
