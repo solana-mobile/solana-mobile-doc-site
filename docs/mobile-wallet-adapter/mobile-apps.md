@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 import VideoCarousel from '@site/src/components/VideoCarousel';
 import SideBySideLayout from '@site/src/layouts/SideBySideLayout';
 import { SDKSelectionContainer, SDKSelectionButton } from '@site/src/components/SDKSelectionContainer';
-import { Smartphone, Code, FileCode, Palette } from 'lucide-react';
+import { Smartphone, Code, FileCode, Palette, Globe } from 'lucide-react';
 
 <SideBySideLayout
   rightContent={
@@ -55,6 +55,11 @@ Solana Mobile maintains an open-source **Android** SDK for Mobile Wallet Adapter
       title="Flutter" 
       icon={<Palette size={20} />}
       link="/docs/sdks/flutter" 
+    />
+    <SDKSelectionButton 
+      title="Mobile Web" 
+      icon={<Globe size={20} />}
+      link="/docs/sdks/mobile-wallet-standard" 
     />
   </SDKSelectionContainer>
 

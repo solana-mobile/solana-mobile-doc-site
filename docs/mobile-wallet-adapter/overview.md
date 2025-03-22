@@ -3,7 +3,7 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import { FeatureCards, FeatureCard } from '@site/src/components/FeatureCard';
-import { Plug, Code, Users, Smartphone, Globe, FileCode, Palette, Layout } from 'lucide-react';
+import { Plug, Code, Users, Smartphone, Globe, FileCode, Palette, Layout, QrCode, List } from 'lucide-react';
 import { SDKSelectionContainer, SDKSelectionButton } from '@site/src/components/SDKSelectionContainer';
 
 
@@ -41,7 +41,7 @@ import { SDKSelectionContainer, SDKSelectionButton } from '@site/src/components/
   <SDKSelectionContainer title="Mobile" icon={<Smartphone size={16} />}>
     <SDKSelectionButton 
       title="Overview" 
-      icon={<Code size={20} />}
+      icon={<List size={20} />}
       emphasized={true}
       link="/docs/sdks/react-native" 
     />
@@ -64,8 +64,18 @@ import { SDKSelectionContainer, SDKSelectionButton } from '@site/src/components/
 
   <SDKSelectionContainer title="Web" icon={<Globe size={16} />}>
     <SDKSelectionButton 
-      title="Mobile Wallet Standard" 
-      icon={<Layout size={20} />}
+      title="Overview" 
+      icon={<List size={20} />}
+      link="/docs/sdks/mobile-wallet-standard" 
+    />
+    <SDKSelectionButton 
+      title="QR Code (Desktop)" 
+      icon={<QrCode size={20} />}
+      link="/docs/sdks/mobile-wallet-standard" 
+    />
+    <SDKSelectionButton 
+      title="Mobile Web" 
+      icon={<Globe size={20} />}
       link="/docs/sdks/mobile-wallet-standard" 
     />
   </SDKSelectionContainer>

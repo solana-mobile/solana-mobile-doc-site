@@ -2,7 +2,7 @@
 
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 module.exports = {
-    developersSidebar: [
+    mobileWalletAdapterSidebar: [
         {
             type: 'html',
             value: 'Mobile Wallet Adapter',
