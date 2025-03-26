@@ -3,7 +3,7 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import { FeatureCards, FeatureCard } from '@site/src/components/FeatureCard';
-import { Plug, Code, Users, Smartphone, Globe, FileCode, Palette, Layout, QrCode, List } from 'lucide-react';
+import { Plug, Code, Users, Smartphone, Globe, ArrowDownToLine, QrCode, List } from 'lucide-react';
 import { SDKSelectionContainer, SDKSelectionButton } from '@site/src/components/SDKSelectionContainer';
 
 
@@ -43,22 +43,43 @@ import { SDKSelectionContainer, SDKSelectionButton } from '@site/src/components/
       title="Overview" 
       icon={<List size={20} />}
       emphasized={true}
-      link="/docs/sdks/react-native" 
+      link="/mobile-wallet-adapter/mobile-apps" 
     />
     <SDKSelectionButton 
       title="React Native" 
-      icon={<Code size={20} />}
-      link="/docs/sdks/react-native" 
+      icon={
+        <img
+          src={"/img/react-native-96.svg"}
+          alt=""
+          width={20}
+          height={20}
+        />
+      }
+      link="/react-native/using_mobile_wallet_adapter" 
     />
     <SDKSelectionButton 
       title="Kotlin" 
-      icon={<FileCode size={20} />}
-      link="/docs/sdks/kotlin" 
+      icon={
+        <img
+          src={"/img/kotlin-icon-32.svg"}
+          alt=""
+          width={20}
+          height={20}
+        />
+      }
+      link="/android-native/using_mobile_wallet_adapter" 
     />
     <SDKSelectionButton 
       title="Flutter" 
-      icon={<Palette size={20} />}
-      link="/docs/sdks/flutter" 
+      icon={
+        <img
+          src={"/img/flutter-icon.svg"}
+          alt=""
+          width={20}
+          height={20}
+        />
+      }
+      link="/flutter/overview" 
     />
   </SDKSelectionContainer>
 
@@ -66,17 +87,17 @@ import { SDKSelectionContainer, SDKSelectionButton } from '@site/src/components/
     <SDKSelectionButton 
       title="Overview" 
       icon={<List size={20} />}
-      link="/docs/sdks/mobile-wallet-standard" 
+      link="/mobile-wallet-adapter/web-apps" 
     />
     <SDKSelectionButton 
-      title="QR Code (Desktop)" 
+      title="Installation" 
+      icon={<ArrowDownToLine size={20} />}
+      link="/mobile-wallet-adapter/web-installation" 
+    />
+    <SDKSelectionButton 
+      title="Demo" 
       icon={<QrCode size={20} />}
-      link="/docs/sdks/mobile-wallet-standard" 
-    />
-    <SDKSelectionButton 
-      title="Mobile Web" 
-      icon={<Globe size={20} />}
-      link="/docs/sdks/mobile-wallet-standard" 
+      link="https://anza-xyz.github.io/wallet-adapter/example/" 
     />
   </SDKSelectionContainer>
 </div>

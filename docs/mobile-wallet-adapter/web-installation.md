@@ -3,7 +3,7 @@ import { HiddenUrl } from '@site/src/components/HiddenUrlContainer';
 # Installing Mobile Wallet Standard 
 
 
-Use the **Mobile Wallet Standard** library to register Mobile Wallet Adapter as a wallet option into your web app.
+Use the **Mobile Wallet Standard** library to register Mobile Wallet Adapter as a wallet option into your web application.
 
 The wallet automatically adapts to the user's device:
 
@@ -14,7 +14,7 @@ The wallet automatically adapts to the user's device:
 
 ### 1. Install the package
 
-You can add Mobile Wallet Adapter to your web app by installing:
+You can add Mobile Wallet Adapter to your web application by installing:
 
 ```shell    
 npm install @solana-mobile/wallet-standard-mobile
@@ -38,7 +38,7 @@ register({
     uri: "https://myapp.io",
     icon: "relative/path/to/icon.png", // resolves to https://myapp.io/relative/path/to/icon.png
   },    
-  reflectorUrl: "<REPLACE_WITH_ENDPOINT>", // See below for public endpoint
+  reflectorUrl: "<REPLACE_WITH_ENDPOINT>", // Include to enable remote connection option.
   addressSelector: createDefaultAddressSelector(),
   authorizationResultCache: createDefaultAuthorizationResultCache(),
   cluster: WalletAdapterNetwork.Devnet,
@@ -46,13 +46,21 @@ register({
 })
 ```
 
+Once registered, Mobile Wallet Adapter is added as a wallet option on mobile environments. For desktop environments, the remote connection option needs to be explicitly enabled.
+
+
 ## Enable remote connection
 
 To enable the remote connection for desktop viewers, you need to configure the `reflectorUrl` parameter in the register function. If not provided, the wallet will only register on mobile environments.
 
+
+:::info
 The `reflectorUrl` should point to a [*reflector WebSocket server*](https://solana-mobile.github.io/mobile-wallet-adapter/spec/spec.html#reflector-protocol) endpoint that reflects all communication between the web app and the wallet app. 
 
 For more information, view the Reflector protocol documentation.
+:::
+
+
 
 ### 1. Get the endpoint URL
 
@@ -78,3 +86,5 @@ register({
   // ...remaining options
 })
 ```
+
+After configured, MWA Remote connection will now appear as a wallet option on desktop environments.
