@@ -13,41 +13,60 @@ module.exports = {
             id: 'mobile-wallet-adapter/overview',
             label: 'Overview'
         },
+
+        /* Client SDKs Section **/
         {
-            type: 'category',
-            label: 'Usage',
-            collapsible: true,
-            collapsed: false,
-            items: [
-            {
-                type: 'doc',
-                id: 'mobile-wallet-adapter/mobile-apps',
-                label: 'Mobile Apps'
-            },
-            {
-                type: 'doc',
-                id: 'mobile-wallet-adapter/web-apps',
-                label: 'Web Apps'
-            },]
+            type: 'html',
+            value: '<div class="sidebar-divider" />',
+        },
+        {
+            type: 'html',
+            value: 'Client SDKs',
+            className: 'sidebar-section-header',
+        },
+        {
+            type: 'doc',
+            id: 'mobile-wallet-adapter/mobile-apps',
+            label: 'Mobile SDK'
         },
         {
             type: 'category',
-            label: 'Deep dive',
+            label: 'Web SDK',
             collapsible: true,
             collapsed: false,
             items: [
                 {
                     type: 'doc',
-                    id: 'mobile-wallet-adapter/diagrams',
-                    label: 'Diagrams'
+                    id: 'mobile-wallet-adapter/web-apps',
+                    label: 'Overview'
                 },
                 {
-                    type: 'link',
-                    href: 'https://solana-mobile.github.io/mobile-wallet-adapter/spec/spec.html',
-                    label: 'Spec'
+                    type: 'doc',
+                    id: 'mobile-wallet-adapter/web-installation',
+                    label: 'Installation'
                 },
             ]
         },
 
+        /* Deep Dive Section **/
+        {
+            type: 'html',
+            value: '<div class="sidebar-divider" />',
+        },
+        {
+            type: 'html',
+            value: 'Deep Dive',
+            className: 'sidebar-section-header',
+        },
+        {
+            type: 'doc',
+            id: 'mobile-wallet-adapter/diagrams',
+            label: 'Diagrams'
+        },
+        {
+            type: 'link',
+            href: 'https://solana-mobile.github.io/mobile-wallet-adapter/spec/spec.html',
+            label: 'Spec'
+        },
       ],
   };
