@@ -1,0 +1,291 @@
+/* Expandable Container */
+.expandableContainer {
+    border: 1px solid var(--ifm-color-emphasis-300);
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 16px 0;
+    background-color: var(--ifm-background-surface-color);
+  }
+  
+  .header {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    user-select: none;
+    color: var(--ifm-font-color-base);
+  }
+  
+  .header span {
+    font-weight: 600;
+  }
+  
+  .header:hover {
+    background-color: var(--ifm-hover-overlay);
+  }
+  
+  .chevron {
+    font-size: 12px;
+    margin-right: 10px;
+    color: var(--ifm-color-emphasis-600);
+    transition: transform 0.2s ease;
+    display: inline-block;
+  }
+  
+  .chevronExpanded {
+    transform: rotate(90deg);
+  }
+  
+  .expandedContent {
+    border-top: 1px solid var(--ifm-color-emphasis-200);
+    animation: slideDown 0.3s ease-out;
+  }
+  
+  @keyframes slideDown {
+    from {
+      max-height: 0;
+      opacity: 0;
+    }
+    to {
+      max-height: 100px;
+      opacity: 1;
+    }
+  }
+  
+  .urlContainer {
+    display: block;
+    padding: 16px 20px;
+    background-color: var(--ifm-color-emphasis-100);
+    position: relative;
+  }
+  
+  .urlText {
+    font-size: 14px;
+    word-break: break-all;
+    color: var(--ifm-color-emphasis-900);
+    display: block;
+    margin-right: 50px; /* Space for the button */
+  }
+  
+  /* Copy directly from Docusaurus styles */
+  .buttonGroup {
+    display: flex;
+    column-gap: 0.2rem;
+    position: absolute;
+    right: 12px;
+    top: 12px;
+  }
+  
+  /* Hide copy button on mobile */
+  @media (max-width: 768px) {
+    .buttonGroup {
+      display: none;
+    }
+    
+    .urlText {
+      margin-right: 0; /* Remove right margin when button is hidden */
+    }
+  }
+  
+  .codeButton {
+    display: flex;
+    align-items: center;
+    background: var(--ifm-background-color);
+    color: var(--ifm-color-emphasis-800);
+    border: 1px solid var(--ifm-color-emphasis-300);
+    border-radius: var(--ifm-global-radius);
+    padding: 0.4rem;
+    line-height: 0;
+  }
+  
+  .urlText {
+    font-size: 14px;
+    word-break: break-all;
+    max-width: calc(100% - 70px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--ifm-color-emphasis-900);
+  }
+  
+  .copyButton {
+    background: none;
+    border: none;
+    color: var(--ifm-color-emphasis-700);
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.2s;
+  }
+  
+  .copyButton:hover {
+    background-color: var(--ifm-color-emphasis-200);
+  }
+  
+  /* Modal styling */
+  .modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+  }
+  
+  .modalContainer {
+    background-color: var(--ifm-background-surface-color);
+    border-radius: 8px;
+    width: 100%;
+    max-width: 500px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    animation: modalFadeIn 0.2s ease-out;
+    border: 1px solid var(--ifm-color-emphasis-300);
+  }
+  
+  @keyframes modalFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  }
+  
+  .modalHeader h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  
+  .closeButton {
+    background: none;
+    border: none;
+    font-size: 24px;
+    line-height: 24px;
+    cursor: pointer;
+    color: var(--ifm-color-emphasis-600);
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+  }
+  
+  .closeButton:hover {
+    color: var(--ifm-color-emphasis-800);
+  }
+  
+  .modalContent {
+    padding: 20px;
+    overflow-y: auto;
+    flex-grow: 1;
+  }
+  
+  .termsText {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ifm-font-color-base);
+    white-space: pre-line;
+    background-color: var(--ifm-background-surface-color);
+  }
+  
+  .modalFooter {
+    padding: 16px 20px;
+    border-top: 1px solid var(--ifm-color-emphasis-200);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .checkboxContainer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .checkboxContainer input {
+    margin-right: 8px;
+  }
+  
+  .validationError {
+    color: #dc3545;
+    font-size: 12px;
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  
+  .modalActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+  }
+  
+  .cancelButton {
+    background-color: var(--ifm-color-emphasis-200);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--ifm-font-color-base);
+  }
+  
+  .cancelButton:hover {
+    background-color: var(--ifm-color-emphasis-300);
+  }
+  
+  .acceptButton {
+    background-color: var(--ifm-color-primary);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .acceptButton:hover {
+    background-color: var(--ifm-color-primary-dark);
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 576px) {
+    .modalContainer {
+      width: 100%;
+    }
+    
+    .modalActions {
+      flex-direction: column-reverse;
+    }
+    
+    .modalActions button {
+      width: 100%;
+      margin-bottom: 8px;
+    }
+    
+    .copyButton {
+      padding: 4px 8px;
+      font-size: 12px;
+    }
+  }

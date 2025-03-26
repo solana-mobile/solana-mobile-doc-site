@@ -1,4 +1,7 @@
+import { HiddenUrl } from '@site/src/components/HiddenUrlContainer';
+
 # Installing Mobile Wallet Standard 
+
 
 Use the **Mobile Wallet Standard** library to register Mobile Wallet Adapter as a wallet option into your web app.
 
@@ -35,7 +38,7 @@ register({
     uri: "https://myapp.io",
     icon: "relative/path/to/icon.png", // resolves to https://myapp.io/relative/path/to/icon.png
   },    
-  reflectorUrl: "<REPLACE_WITH_ENDPOINT>", // Optional parameter. See below for public endpoint.
+  reflectorUrl: "<REPLACE_WITH_ENDPOINT>", // See below for public endpoint
   addressSelector: createDefaultAddressSelector(),
   authorizationResultCache: createDefaultAuthorizationResultCache(),
   cluster: WalletAdapterNetwork.Devnet,
@@ -45,7 +48,7 @@ register({
 
 ## Enable remote connection
 
-To enable the remote connection for desktop viewers, you need to configure a `reflectorUrl` parameter in the register function.
+To enable the remote connection for desktop viewers, you need to configure the `reflectorUrl` parameter in the register function. If not provided, the wallet will only register on mobile environments.
 
 The `reflectorUrl` should point to a [*reflector WebSocket server*](https://solana-mobile.github.io/mobile-wallet-adapter/spec/spec.html#reflector-protocol) endpoint that reflects all communication between the web app and the wallet app. 
 
@@ -55,17 +58,16 @@ For more information, view the Reflector protocol documentation.
 
 Solana Mobile maintains a public endpoint for a reflector server:
 
-> [View terms and accept conditions to reveal endpoint]
+<HiddenUrl
+  url="https://reflector.example.solana.com/v1/endpoint"
+/>
 
-:::info
 If needed, dApps can implement and host their own reflector server.
-
-For more information, view the Reflector protocol documentation.
-:::
+For more information, view the Hosting a Reflector server documentation.
 
 ### 2. Configure your application
 
-Once you've accepted the terms, add the URL in your register function with the revealed URL.
+Once you've accepted the terms, add the URL in your register function with the URL.
 
 Example with a configured endpoint:
 
