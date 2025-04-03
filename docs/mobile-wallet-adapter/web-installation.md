@@ -5,11 +5,6 @@ import { HiddenUrl } from '@site/src/components/HiddenUrlContainer';
 
 Use the **Mobile Wallet Standard** library to register Mobile Wallet Adapter as a wallet option into your web application.
 
-The wallet automatically adapts to the user's device:
-
-- Desktop - Remote connection via QR Code.
-- Mobile - Local connection via Android Intents (same as native Android apps).
-
 ## Installation
 
 ### 1. Install the package
@@ -22,40 +17,42 @@ npm install @solana-mobile/wallet-standard-mobile
 
 ### 2. Register the wallet
 
-In the root of your web application, invoke the `register` function.
+In the root of your web application, invoke the `registerMwa` function.
 
 ```typescript
 import { 
-    register, 
+    registerMwa, 
     createDefaultAddressSelector, 
     createDefaultAuthorizationResultCache, 
     createDefaultWalletNotFoundHandler 
 } from '@solana-mobile/wallet-standard-mobile'
 
-register({
+registerMwa({
   appIdentity: {
-    name: "My app",
-    uri: "https://myapp.io",
-    icon: "relative/path/to/icon.png", // resolves to https://myapp.io/relative/path/to/icon.png
+    name: 'My app',
+    uri: 'https://myapp.io',
+    icon: 'relative/path/to/icon.png', // resolves to https://myapp.io/relative/path/to/icon.png
   },    
-  reflectorUrl: "<REPLACE_WITH_ENDPOINT>", // Include to enable remote connection option.
+  cluster: WalletAdapterNetwork.Devnet,
   addressSelector: createDefaultAddressSelector(),
   authorizationResultCache: createDefaultAuthorizationResultCache(),
-  cluster: WalletAdapterNetwork.Devnet,
   onWalletNotFound: createDefaultWalletNotFoundHandler(),
+  remoteHostAuthority: '<REPLACE_WITH_URL_>', // Include to enable remote connection option.
 })
 ```
 
-Once registered, Mobile Wallet Adapter is added as a wallet option on mobile environments. For desktop environments, the remote connection option needs to be explicitly enabled.
+Once registered, the wallet behavior automatically adapts to the user's device:
+
+- **Desktop**: If `remoteHostAuthority` is provided, remote connection via QR Code.
+- **Mobile**: Local connection via Android Intents (same as native Android apps).
 
 
 ## Enable remote connection
 
-To enable the remote connection for desktop viewers, you need to configure the `reflectorUrl` parameter in the register function. If not provided, the wallet will only register on mobile environments.
-
+To enable the remote connection for desktop viewers, you need to configure the `remoteHostAuthority` parameter in the register function. If not provided, the wallet will only register on mobile environments.
 
 :::info
-The `reflectorUrl` should point to a [*reflector WebSocket server*](https://solana-mobile.github.io/mobile-wallet-adapter/spec/spec.html#reflector-protocol) endpoint that reflects all communication between the web app and the wallet app. 
+The `remoteHostAuthority` is a URL that points to a [*reflector WebSocket server*](https://solana-mobile.github.io/mobile-wallet-adapter/spec/spec.html#reflector-protocol) endpoint that reflects all communication between the web app and the wallet app. 
 
 For more information, view the Reflector protocol documentation.
 :::
@@ -80,9 +77,9 @@ Once you've accepted the terms, add the URL in your register function with the U
 Example with a configured endpoint:
 
 ```typescript
-register({
+registerMwa({
   // ...other configuration options
-  reflectorUrl: "<REPLACE_WITH_ENDPOINT>",
+  remoteHostAuthority: "<REPLACE_WITH_ENDPOINT>",
   // ...remaining options
 })
 ```

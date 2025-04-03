@@ -78,16 +78,32 @@ const config = {
         },
         items: [
           {
-            type: 'doc',
-            docId: 'developers/overview',
-            position: 'left',
-            label: 'Developers',
-          },
-          {
             type: 'dropdown',
             position: 'left',
-            label: 'SDKs',
+            label: 'Developers',
             items: [
+              {
+                type: 'html',
+                value: 'Solana Mobile Stack',
+                className: 'sidebar-section-header',
+              },
+              {
+                to: 'developers/overview',
+                label: 'Overview'
+              },
+              {
+                to: 'mobile-wallet-adapter/overview',
+                label: 'Mobile Wallet Adapter'
+              },
+              {
+                to: 'seed-vault/overview',
+                label: 'Seed Vault'
+              },
+              {
+                type: 'html',
+                value: 'Guides & Reference',
+                className: 'sidebar-section-header',
+              },
               {
                 to: 'react-native/overview',
                 label: 'React Native'
