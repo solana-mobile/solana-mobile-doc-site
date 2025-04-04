@@ -66,6 +66,11 @@ Solana Mobile maintains an open-source **Android** SDK for Mobile Wallet Adapter
       link="/android-native/using_mobile_wallet_adapter" 
     />
     <SDKSelectionButton 
+      title="Mobile Web" 
+      icon={<Globe size={20} />}
+      link="/mobile-wallet-adapter/web-installation" 
+    />
+    <SDKSelectionButton 
       title="Flutter" 
       icon={
         <img
@@ -78,9 +83,28 @@ Solana Mobile maintains an open-source **Android** SDK for Mobile Wallet Adapter
       link="/flutter/overview" 
     />
     <SDKSelectionButton 
-      title="Mobile Web" 
-      icon={<Globe size={20} />}
-      link="/mobile-wallet-adapter/web-installation" 
+      title="Unity" 
+      icon={
+        <img
+          src={"/img/unity-logo.png"}
+          alt=""
+          width={20}
+          height={20}
+        />
+      }
+      link="/unity/unity_sdk" 
+    />
+    <SDKSelectionButton 
+      title="Unreal" 
+      icon={
+        <img
+          src={"/img/unreal-logo.png"}
+          alt=""
+          width={20}
+          height={20}
+        />
+      }
+      link="/unreal/unreal_sdk" 
     />
   </SDKSelectionContainer>
 

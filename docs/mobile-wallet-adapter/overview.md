@@ -97,7 +97,7 @@ import { SDKSelectionContainer, SDKSelectionButton } from '@site/src/components/
     <SDKSelectionButton 
       title="Demo" 
       icon={<QrCode size={20} />}
-      link="https://anza-xyz.github.io/wallet-adapter/example/" 
+      link="https://solana-mobile.github.io/mobile-wallet-adapter/example-web-app/" 
     />
   </SDKSelectionContainer>
 </div>

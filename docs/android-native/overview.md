@@ -1,3 +1,7 @@
+---
+displayed_sidebar: kotlinSidebar
+---
+
 import Card from "../../src/components/Card"
 import CardLayout from "../../src/layouts/CardLayout"
 

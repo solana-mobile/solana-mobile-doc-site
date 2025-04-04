@@ -1,12 +1,12 @@
 .cardContainer {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 18px;
-  background-color: var(--card-background);
-  border: 1px solid var(--card-border-color);
+  border-radius: 8px;
+  background-color: var(--card-background, #ffffff);
+  border: 1px solid var(--card-border-color, #e0e0e0);
   transition: background-color 0.2s, box-shadow 0.2s, border-color 0.2s;
   height: auto;
   overflow: hidden;
-  padding: 18px 18px 0px 18px;
+  padding: 12px 12px 12px 12px;
 }
 
 @media screen and (max-width: 768px) {
@@ -18,23 +18,36 @@
 [data-theme="dark"] .cardContainer {
   --card-background: #2c2c2c;
   --card-border-color: #3b3b3b;
+  --icon-background: #3a3a3a;
 }
 
 [data-theme="light"] .cardContainer {
-  
+  --card-background: #ffffff;
+  --card-border-color: #e0e0e0;
+  --icon-background: #f0f0f0;
 }
 
 .cardLink {
   display: block;
-  padding: 16px;
+  padding: 12px;
   text-decoration: none;
 }
 
-.cardHeader {
+.cardContent {
   display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.iconWrapper {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 2px;
+}
+
+.cardHeader {
   color: white;
   transition: color 0.2s;
-  align-items: center; /* Keeps this for horizontal alignment */
 }
 
 [data-theme="light"] .cardHeader {
@@ -45,6 +58,8 @@
 .cardBody {
   color: #ffffffb3;
   transition: color 0.2s;
+  margin-top: 2px;
+  padding-bottom: 4px;
 }
 
 [data-theme="light"] .cardBody {
@@ -55,28 +70,36 @@
 .cardIcon {
   width: 32px;
   height: 32px;
-  margin-right: 8px;
-  background-color: transparent;
-  display: flex; /* Add this */
-  align-items: center; /* Add this */
-  justify-content: center; /* Add this */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--icon-background);
+  border-radius: 8px;
+  padding: 6px;
 }
 
 .emojiIcon {
-  margin-right: 8px;
-  font-size: 24px;
-  display: flex; /* Add this */
-  align-items: center; /* Add this */
-  justify-content: center; /* Add this */
-  height: 32px; /* Match the height of cardIcon */
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  width: 32px;
+  background-color: var(--icon-background);
+  border-radius: 8px;
+  padding: 6px;
 }
 
 .cardHeader h3 {
   margin: 0;
-  display: flex; /* Add this */
-  align-items: center; /* Add this */
-  height: 32px; /* Match height to the icon */
-  line-height: 1; /* Adjust line height */
+  font-size: 16px;
+  line-height: 1.3;
+}
+
+.cardBody p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
 }
 
 /* Hover */ 

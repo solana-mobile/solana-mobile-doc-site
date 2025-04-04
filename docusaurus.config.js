@@ -96,7 +96,7 @@ const config = {
                 label: 'Mobile Wallet Adapter'
               },
               {
-                to: 'seed-vault/overview',
+                to: 'developers/seed-vault',
                 label: 'Seed Vault'
               },
               {

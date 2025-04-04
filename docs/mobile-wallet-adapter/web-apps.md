@@ -25,25 +25,34 @@ The library handles both connection types automatically and presents the correct
     <SDKSelectionButton 
       title="Installation" 
       icon={<ArrowDownToLine size={20} />}
-      link="/docs/sdks/mobile-wallet-standard" 
+      link="/mobile-wallet-adapter/web-installation" 
     />
     <SDKSelectionButton 
       title="Demo" 
       icon={<QrCode size={20} />}
-      link="/docs/sdks/mobile-wallet-standard" 
+      link="https://solana-mobile.github.io/mobile-wallet-adapter/example-web-app/" 
     />
     <SDKSelectionButton 
       title="Github" 
       icon={<Github size={20} />}
-      link="/docs/sdks/mobile-wallet-standard" 
+      link="https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/js/packages/wallet-standard-mobile" 
     />
   </SDKSelectionContainer>
 
-## Wallet Compatibility
+## Wallet Compatibility 
 
-| Wallet | QR Code (Remote) | Mobile Web (Local) |
+| Wallet (Android only) | QR Code (Remote) | Mobile Web (Local) |
 | ------ | ---------------- | ------------------ |
 | Seed Vault Wallet | ✅ | ✅ |
-| Solflare | ✅ | ✅ |
+| Solflare | ✅  | ✅ |
 | Phantom | ❌ | ✅ |
+
+## Browser Compatibility
+
+| Platform                                  | QR Code (Remote) | Mobile Web (Local) | Notes                                                          |
+| ----------------------------------------- | ---------------- | ------------------ | -------------------------------------------------------------- |
+| Desktop - All Browsers                    | ✅               | N/A                | QR Code display works on all desktop browsers.                 |
+| Android - Chrome                          | N/A              | ✅                 | Primary Android browser; also works with Chrome PWAs.          |
+| Android - Other Browsers                  | N/A              | ❌                 | Firefox, Opera, Brave, etc. do not support MWA.                |
+| iOS - All Browsers                        | N/A              | ❌                 | MWA is not available on any iOS browser.                       |
 
