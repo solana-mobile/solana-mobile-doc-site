@@ -20,12 +20,8 @@ import {Code, ArrowDownToLine, Globe } from 'lucide-react';
           label: "Phantom"
         },
         {
-          src: "/videos/phantom_mwa.mp4",
+          src: "/videos/solflare_mwa.mp4",
           label: "Solflare"
-        },
-        {
-          src: "/videos/phantom_mwa.mp4",
-          label: "Seed Vault Wallet"
         },
       ]}
       autoPlay={true}
