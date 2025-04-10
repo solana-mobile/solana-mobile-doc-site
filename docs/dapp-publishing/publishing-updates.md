@@ -34,5 +34,5 @@ Run the same CLI command as the "Create the release NFT" step from the [Mint a r
 Submit the update to the Solana dApp Publisher Portal, where the new release will enter a review queue for inclusion in the dApp store catalog:
 
 ```
-npx dapp-store publish update -k <path_to_your_keypair> --requestor-is-authorized --complies-with-solana-dapp-store-policies
+npx dapp-store publish update -k <path_to_your_keypair> -u <mainnet_beta_rpc_url> --requestor-is-authorized --complies-with-solana-dapp-store-policies
 ```
