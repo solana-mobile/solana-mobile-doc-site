@@ -97,8 +97,8 @@ You can also install and test with these popular MWA-compatible wallet apps:
 You have a development environment and testing device, and are now ready to start developing. 
 
 Check out these links to quickly get an app running:
-- Quickstart (TODO)
-- Sample Apps
+- [Quickstart](/react-native/quickstart)
+- [Sample Apps](/sample-apps/sample_app_overview)
 
 
 
