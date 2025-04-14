@@ -1,106 +1,156 @@
 import Card from "../../src/components/Card"
 import CardLayout from "../../src/layouts/CardLayout"
+import Card2 from "../../src/components/Card2"
+import { Terminal, Rocket, Code, BookOpen, Home} from "lucide-react";
 
-# Development Overview
 
-Welcome to the **Solana Mobile Developer Documentation**!
+# Developer Documentation
 
-This section serves as a comprehensive knowledge center for developers that want to build with the **Solana Mobile Stack (SMS)**.
+## Getting Started
 
-Here, you can find an excellent collection of guides, tutorials, and references aimed at assisting developers as they build Web3 mobile dApps.
-In addition, there are also resources for developers wanting to publish on the [Solana dApp Store](/dapp-publishing/intro).
-
-These resources are actively maintained by the [Solana Mobile](https://github.com/solana-mobile) team.
-
-:::note
-You don't need a Solana Mobile device or physical device to start developing. The stack is compatible with any Android device. See [**prerequisite setup**](development-setup) to set up your development environment and start building!
-:::
-
-## Quickstart
-
-Learn how to develop Solana Mobile dApps in your preferred programming language.
+Start developing apps for the Solana dApp Store on **any** Android device or emulator.
 
 <CardLayout autoFitEnabled={true}>
-    <Card
+    <Card2
+        to="/react-native/quickstart"
+        header={{
+            label: "Quickstart",
+            translateId: "quickstart-header",
+        }}
+        body={{
+            label: "Launch a mobile app using the Solana Mobile Expo Template.",
+            translateId: "quickstart-body",
+        }}
+        iconComponent={<Rocket size={24} />}
+    />
+    <Card2
+        to="/developers/development-setup"
+        header={{
+            label: "Development Setup",
+            translateId: "development-setup-header",
+        }}
+        body={{
+            label: "Set up your environment for Solana mobile development.",
+            translateId: "development-setup-body",
+        }}
+        iconComponent={<Terminal size={24} />}
+    />
+</CardLayout>
+
+## Development Guides
+
+Official guides and resources for building Solana mobile apps with our fully supported frameworks.
+
+<CardLayout autoFitEnabled={true}>
+    <Card2
         to="/react-native/overview"
         header={{
             label: "React Native",
-            translateId: "developer-programs",
+            translateId: "react-native",
         }}
         body={{
-            label: "Learn about the React Native SDKs and how to quickly start building on Solana Mobile.",
-            translateId: "learn-programs",
+            label: "Build mobile apps with JavaScript and reuse familiar Solana web libraries.",
+            translateId: "react-native-body",
         }}
         iconPath="img/react-native-96.svg"
     />
-    <Card
+    <Card2
         to="/android-native/overview"
         header={{
             label: "Kotlin",
-            translateId: "development-setup",
+            translateId: "android-native",
         }}
         body={{
-            label: "Learn how to build a native Android app using the core Solana Kotlin SDKs.",
-            translateId: "development-setup-body",
+            label: "Create high-performance native apps with full Android capabilities.",
+            translateId: "android-native-body",
         }}
         iconPath="img/kotlin-icon-32.svg"
     />
 </CardLayout>
 
+### Community Supported Frameworks
+
+Third-party development guides and resources for additional frameworks created by the ecosystem members.
+
 <CardLayout autoFitEnabled={true}>
-    <Card
-        to="/dapp-publishing/publishing-a-pwa"
+    <Card2
+        to="/flutter/overview"
         header={{
-            label: "Progressive Web Apps (PWAs)",
-            translateId: "Progressive Web Apps (PWAs)",
+            label: "Flutter",
+            translateId: "flutter-headr",
         }}
         body={{
-            label: "Learn how to convert a PWA to an Android app and publish on the dApp Store.",
-            translateId: "Progressive Web Apps (PWAs)",
+            label: "Third-party resources and SDKs for Solana Flutter development.",
+            translateId: "learn-programs",
         }}
-        iconPath="img/pwa-icon.png"
+        iconPath="img/flutter-icon.svg"
     />
-    <Card
-        to="/sample-apps/sample_app_overview"
+    <Card2
+        to="/unity/unity_sdk"
         header={{
-            label: "Sample Apps",
-            translateId: "development-setup",
+            label: "Unity",
+            translateId: "unity-header",
         }}
         body={{
-            label: "Reference our collection of sample apps that use the Solana Mobile Stack.",
-            translateId: "development-setup-body",
+            label: "Third-party resources and SDKs for Solana Unity development.",
+            translateId: "unity-setup-body",
         }}
-        iconPath="img/bookshelf-circle-icon.png"
+        iconPath="img/unity-logo.png"
+    />
+    <Card2
+        to="/unreal/unreal_sdk"
+        header={{
+            label: "Unreal Engine",
+            translateId: "unreal-header",
+        }}
+        body={{
+            label: "Third-party resources and SDKs for Solana Unreal development.",
+            translateId: "unreal-header-body",
+        }}
+        iconPath="img/unreal-logo.png"
     />
 </CardLayout>
 
-## Learn about the Solana Mobile Stack
 
-Learn about the Solana dApp Store or explore the libraries within the Solana Mobile SDK.
+## Resources
+
+Additional resources for building mobile apps on the Solana dApp Store.
 
 <CardLayout autoFitEnabled={true}>
-    <Card
-        to="/developers/mobile-wallet-adapter"
+    <Card2
+        to="/sample-apps/sample_app_overview"
         header={{
-            label: "Mobile Wallet Adapter",
-            translateId: "developer-programs",
+            label: "Sample Apps",
+            translateId: "mobile-wallet-adapter-header",
         }}
         body={{
-            label: "Learn about the Mobile Wallet Adapter protocol and how it connects wallets to mobile dApps.",
-            translateId: "learn-programs",
+            label: "Browse reference apps to jumpstart your development.",
+            translateId: "mobile-wallet-adapter-body",
         }}
-        iconPath="img/solana-mobile-stack-logo.png"
+        iconComponent={<Code size={24} />}
     />
-    <Card
-        to="/developers/seed-vault"
+    <Card2
+        to="/dapp-publishing/overview"
         header={{
-            label: "Seed Vault",
+            label: "dApp Store",
             translateId: "dapp-store-card-header",
         }}
         body={{
-            label: "Learn about the Seed Vault and how it provides key custody for Solana Mobile devices.",
+            label: "Publish your app on the Solana dApp Store.",
             translateId: "dapp-store-card-body",
         }}
-        emoji="📱"
+        iconComponent={<Home size={24} />}
+    />
+    <Card2
+        to="/reference/overview"
+        header={{
+            label: "API Reference",
+            translateId: "api-reference-header",
+        }}
+        body={{
+            label: "Explore comprehensive SDK and API documentation.",
+            translateId: "api-reference-body",
+        }}
+        iconComponent={<BookOpen size={24} />}
     />
 </CardLayout>

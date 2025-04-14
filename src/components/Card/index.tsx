@@ -16,14 +16,24 @@ interface CardProps {
   to: string;
   iconPath?: string;
   emoji?: string;
+  iconComponent?: React.ReactNode; // New prop for passing a React component directly
 }
 
-const Card: React.FC<CardProps> = ({ header, body, to, iconPath, emoji }) => {
+const Card: React.FC<CardProps> = ({ 
+  header, 
+  body, 
+  to, 
+  iconPath, 
+  emoji, 
+  iconComponent 
+}) => {
   return (
     <div className={styles.cardContainer}>
       <Link className={styles.cardLink} to={to}>
         <div className={styles.cardHeader}>
-          {emoji ? (
+          {iconComponent ? (
+            <div className={styles.cardIcon}>{iconComponent}</div>
+          ) : emoji ? (
             <div className={styles.emojiIcon}>{emoji}</div>
           ) : (
             iconPath && (

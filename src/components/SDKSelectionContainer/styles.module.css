@@ -1,0 +1,91 @@
+/* Container styles */
+.sdkContainer {
+  margin-bottom: 2rem;
+}
+
+.sdkContainerHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.sdkContainerIcon {
+  display: flex;
+  align-items: center;
+  margin-right: 0.5rem;
+}
+
+.sdkContainerTitle {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+/* Button grid layout */
+.sdkButtonsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+/* Button styles */
+.sdkButton {
+  display: block;
+  text-decoration: none;
+  color: var(--ifm-font-color-base);
+  background-color: var(--ifm-card-background-color);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 8px;
+  padding: 1rem;
+  transition: all 0.2s ease;
+  height: 100%;
+}
+
+.sdkButton:hover {
+  text-decoration: none;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-color: var(--ifm-color-primary-light);
+  color: var(--ifm-font-color-base);
+}
+
+/* Emphasized button styles */
+.emphasizedButton {
+  background-color: var(--ifm-color-emphasis-100);
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  position: relative;
+  z-index: 1;
+}
+
+.emphasizedButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  border-color: var(--ifm-color-primary);
+}
+
+.sdkButtonContent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: left;
+}
+
+.sdkButtonIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.75rem;
+}
+
+.sdkButtonTitle {
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .sdkButtonsGrid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+}

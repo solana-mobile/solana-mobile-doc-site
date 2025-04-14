@@ -18,11 +18,6 @@ module.exports = {
             id: 'developers/development-setup',
             label: 'Development Setup'
         },
-        {
-            type: 'doc',
-            id: 'developers/mobile-development-frameworks',
-            label: 'Mobile Development Frameworks'
-        },
 
         /* Solana Mobile Stack Section **/
         {
@@ -35,32 +30,59 @@ module.exports = {
             className: 'sidebar-section-header',
         },
         {
-            type: 'category',
-            label: 'Mobile Wallet Adapter',
-            collapsible: true,
-            collapsed: false,
-            items: [
-                {
-                    type: 'doc',
-                    id: 'developers/mobile-wallet-adapter',
-                    label: 'What is Mobile Wallet Adapter?'
-                },
-                {
-                    type: 'doc',
-                    id: 'developers/mobile-wallet-adapter-web',
-                    label: 'Usage in a web browser'
-                },
-                {
-                    type: 'doc',
-                    id: 'developers/mobile-wallet-adapter-deep-dive',
-                    label: 'Deep dive'
-                },
-            ]
+            type: 'doc',
+            id: 'mobile-wallet-adapter/overview',
+            label: 'Mobile Wallet Adapter'
         },
         {
             type: 'doc',
             id: 'developers/seed-vault',
             label: 'Seed Vault'
+        },
+
+        /* SDKs Section **/
+        {
+            type: 'html',
+            value: '<div class="sidebar-divider" />',
+        },
+        {
+            type: 'html',
+            value: 'Development Guides',
+            className: 'sidebar-section-header',
+        },
+        {
+            type: 'doc',
+            id: 'react-native/overview',
+            label: 'React Native'
+        },
+        {
+            type: 'doc',
+            id: 'android-native/overview',
+            label: 'Kotlin'
+        },
+
+        {
+            type: 'category',
+            label: 'Community SDKs',
+            collapsible: true,
+            collapsed: true,
+            items: [
+                {
+                    type: 'doc',
+                    id: 'flutter/overview',
+                    label: 'Flutter'
+                },
+                {
+                    type: 'doc',
+                    id: 'unity/unity_sdk',
+                    label: 'Unity'
+                },
+                {
+                    type: 'doc',
+                    id: 'unreal/unreal_sdk',
+                    label: 'Unreal'
+                },
+            ]
         },
 
         /* Resources Section **/
@@ -88,15 +110,5 @@ module.exports = {
             id: 'developers/community',
             label: 'Community'
         },
-        {
-            type: 'link',
-            href: 'https://solanamobile.com/',
-            label: 'Seeker'
-        },
-        {
-            type: 'link',
-            href: 'https://docs.solanamobile.com/saga/release-notes/',
-            label: 'Saga Release Notes',
-          }
       ],
   };

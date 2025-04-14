@@ -4,7 +4,6 @@ title: Hello World React Native Tutorial
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import SideBySideLayout from "../../src/layouts/SideBySideLayout"
 
 In this tutorial, we'll walk you through the process of setting up an Android React Native project and use the [Mobile Wallet Adapter Javascript library](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/js/packages) to build a simple user interface that allows you to connect to a mobile wallet, request an airdrop, and send a message to the Solana network. 
 

@@ -78,16 +78,32 @@ const config = {
         },
         items: [
           {
-            type: 'doc',
-            docId: 'developers/overview',
-            position: 'left',
-            label: 'Developers',
-          },
-          {
             type: 'dropdown',
             position: 'left',
-            label: 'SDKs',
+            label: 'Developers',
             items: [
+              {
+                type: 'html',
+                value: 'Solana Mobile Stack',
+                className: 'sidebar-section-header',
+              },
+              {
+                to: 'developers/overview',
+                label: 'Overview'
+              },
+              {
+                to: 'mobile-wallet-adapter/overview',
+                label: 'Mobile Wallet Adapter'
+              },
+              {
+                to: 'developers/seed-vault',
+                label: 'Seed Vault'
+              },
+              {
+                type: 'html',
+                value: 'Guides & Reference',
+                className: 'sidebar-section-header',
+              },
               {
                 to: 'react-native/overview',
                 label: 'React Native'
@@ -181,7 +197,7 @@ const config = {
         copyright: `Copyright © ${new Date().getFullYear()} Solana Mobile Inc.`,
       },
       prism: {
-        additionalLanguages: ['kotlin', 'json', 'swift', 'java'],
+        additionalLanguages: ['kotlin', 'json', 'swift', 'java', 'bash'],
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
       },
