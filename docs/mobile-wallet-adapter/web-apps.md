@@ -8,12 +8,36 @@ import { SDKSelectionContainer, SDKSelectionButton } from '@site/src/components/
 import { Smartphone, Code, Github, BookOpen, QrCode, ArrowDownToLine } from 'lucide-react';
 
 
+<div className="image-container">
+  <img 
+    src="/img/RemoteModal.png" 
+    alt="Descriptive alt text for accessibility" 
+    width="100%" 
+    loading="lazy"
+  />
+</div>
+
+<style jsx>{`
+  .image-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  .image-container img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+`}</style>
+
 ## Overview
 
 Mobile Wallet Adapter works on both Desktop Web and Mobile Web applications through two different connection methods:
 
-- **Desktop Web Apps** connect remotely to wallet apps via QR code scanning
-- **Mobile Web Apps**, including PWAs, connect locally to wallet apps on the same device
+- **Desktop Web Apps** connect remotely to wallet apps via QR code scanning.
+- **Mobile Web Apps**, including PWAs, connect locally to wallet apps on the same device.
 
 ## SDK
 
@@ -44,7 +68,7 @@ The library handles both connection types automatically and presents the correct
 | Wallet (Android only) | QR Code (Remote) | Mobile Web (Local) |
 | ------ | ---------------- | ------------------ |
 | Seed Vault Wallet | ✅ | ✅ |
-| Solflare | ✅  | ✅ |
+| Solflare | ✅ (Planned) | ✅ |
 | Phantom | ❌ | ✅ |
 
 ## Browser Compatibility

@@ -1,5 +1,3 @@
-import { HiddenUrl } from '@site/src/components/HiddenUrlContainer';
-
 # Installing Mobile Wallet Standard 
 
 
@@ -61,14 +59,10 @@ For more information, view the Reflector protocol documentation.
 
 ### 1. Get the endpoint URL
 
-Solana Mobile maintains a public endpoint for a reflector server:
+Solana Mobile maintains a public endpoint for a reflector server (endpoint details to be announced).
 
-<HiddenUrl
-  url="https://reflector.example.solana.com/v1/endpoint"
-/>
-
-If needed, dApps can implement and host their own reflector server.
-For more information, view the Hosting a Reflector server documentation.
+If needed, dApps can implement and self-host their own reflector server. More information on this to come.
+<!-- For more information, view the Hosting a Reflector server documentation. TODO -->
 
 ### 2. Configure your application
 
