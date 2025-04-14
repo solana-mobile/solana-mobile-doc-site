@@ -130,7 +130,7 @@ Additional resources for building mobile apps on the Solana dApp Store.
         iconComponent={<Code size={24} />}
     />
     <Card2
-        to="/dapp-publishers/overview"
+        to="/dapp-publishing/overview"
         header={{
             label: "dApp Store",
             translateId: "dapp-store-card-header",
