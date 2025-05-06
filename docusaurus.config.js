@@ -63,7 +63,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       // Replace with your project's social card
-      image: 'img/solana-mobile-stack-social-card.png',
+      image: 'img/solana-mobile-social-card.png',
       colorMode: {
         defaultMode: 'dark',
         disableSwitch: false,
