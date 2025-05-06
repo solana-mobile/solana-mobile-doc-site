@@ -125,7 +125,7 @@ These are reference apps that also serve as development tools to test MWA integr
         title="fake dapp" 
         sampleAppLink="https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/android/fakedapp"
         description="A Kotlin app with UI to simulate MWA methods." 
-        imageUrl="img/solana-mobile-stack-social-card.png" 
+        imageUrl="img/solana-mobile-social-card.png" 
         tags={[
                 "Kotlin", 
             ]}
@@ -134,7 +134,7 @@ These are reference apps that also serve as development tools to test MWA integr
         title="fake wallet" 
         sampleAppLink="https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/android/fakewallet"
         description="An unsafe, reference Kotlin wallet supporting MWA."
-        imageUrl="img/solana-mobile-stack-social-card.png" 
+        imageUrl="img/solana-mobile-social-card.png" 
         tags={[
                 "Kotlin", 
                 "walletlib",
@@ -144,7 +144,7 @@ These are reference apps that also serve as development tools to test MWA integr
         title="Example RN wallet"
         sampleAppLink="https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/examples/example-react-native-wallet"
         description="An unsafe RN wallet with MWA bottom sheet signing." 
-        imageUrl="img/solana-mobile-stack-social-card.png" 
+        imageUrl="img/solana-mobile-social-card.png" 
         tags={[
                 "React Native", 
                 "walletlib",
