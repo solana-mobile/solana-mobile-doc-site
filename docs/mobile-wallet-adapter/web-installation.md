@@ -19,23 +19,24 @@ In the root of your web application, invoke the `registerMwa` function.
 
 ```typescript
 import { 
+    createDefaultAuthorizationCache, 
+    createDefaultChainSelector, 
+    createDefaultWalletNotFoundHandler,
     registerMwa, 
-    createDefaultAddressSelector, 
-    createDefaultAuthorizationResultCache, 
-    createDefaultWalletNotFoundHandler 
-} from '@solana-mobile/wallet-standard-mobile'
+} from '@solana-mobile/wallet-standard-mobile';
+
 
 registerMwa({
-  appIdentity: {
-    name: 'My app',
-    uri: 'https://myapp.io',
-    icon: 'relative/path/to/icon.png', // resolves to https://myapp.io/relative/path/to/icon.png
-  },    
-  cluster: WalletAdapterNetwork.Devnet,
-  addressSelector: createDefaultAddressSelector(),
-  authorizationResultCache: createDefaultAuthorizationResultCache(),
-  onWalletNotFound: createDefaultWalletNotFoundHandler(),
-  remoteHostAuthority: '<REPLACE_WITH_URL_>', // Include to enable remote connection option.
+    appIdentity: {
+      name: 'My app',
+      uri: 'https://myapp.io',
+      icon: 'relative/path/to/icon.png', // resolves to https://myapp.io/relative/path/to/icon.png
+    },    
+    authorizationCache: createDefaultAuthorizationCache(),
+    chains: ['solana:devnet', 'solana:mainnet-beta'],
+    chainSelector: createDefaultChainSelector(),
+    onWalletNotFound: createDefaultWalletNotFoundHandler(),
+    remoteHostAuthority: '<REPLACE_WITH_URL_>', // Include to enable remote connection option.
 })
 ```
 
