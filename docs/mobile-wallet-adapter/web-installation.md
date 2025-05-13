@@ -33,7 +33,7 @@ registerMwa({
       icon: 'relative/path/to/icon.png', // resolves to https://myapp.io/relative/path/to/icon.png
     },    
     authorizationCache: createDefaultAuthorizationCache(),
-    chains: ['solana:devnet', 'solana:mainnet-beta'],
+    chains: ['solana:devnet', 'solana:mainnet'],
     chainSelector: createDefaultChainSelector(),
     onWalletNotFound: createDefaultWalletNotFoundHandler(),
     remoteHostAuthority: '<REPLACE_WITH_URL_>', // Include to enable remote connection option.
