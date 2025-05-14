@@ -98,7 +98,33 @@ Any changes to the Android project will be deleted or overwritten by the `update
 
 ### 3. Building the Android APK
 
+#### Add supported langauges
+
+Before running the build command, you need to specify the languages your app supports. 
+
+:::warning
+Do not skip this step!
+
+By default, Bubblewrap CLI incorrectly declares that your app supports all locales. This inaccuracy will be displayed on your dApp Store listing page.
+:::
+
+In the generated Android project, edit the `build.gradle` and add:
+
+```kt build.gradle
+android {
+    defaultConfig {
+        ...
+        resConfigs "en", "es" // Add any locales your app supports
+    }
+}
+```
+
+See the [Android documentation](https://developer.android.com/guide/topics/resources/multilingual-support#specify-the-languages-your-app-supports) for more details.
+
+#### Build the APK
+
 The next step is to build initialized Android project and output a _signed release APK_. This APK is what you will submit for publishing on the dApp Store.
+
 
 In the same directory, run:
 
