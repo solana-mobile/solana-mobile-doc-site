@@ -1,0 +1,97 @@
+.heroBanner {
+  background-color: #6e56cf; /* Solana-ish purple, replace with your brand color */
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heroContent {
+  text-align: center;
+  color: white;
+  z-index: 1;
+  padding: 2rem;
+}
+
+.heroTitle {
+  font-size: 3rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.container {
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.intro {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.introText {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.sections {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.section {
+  /* Default section styling */
+}
+
+.centerSection {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.tagline {
+  font-size: 1.25rem;
+}
+
+.signupSection {
+  background-color: #f5f5f5;
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.formContainer {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.formGroup {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.emailInput {
+  padding: 0.75rem;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  flex: 1;
+}
+
+.submitButton {
+  background-color: #6e56cf;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.75rem 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.submitButton:hover {
+  background-color: #5d48b6;
+}
