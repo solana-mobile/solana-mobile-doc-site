@@ -138,6 +138,8 @@ const config = {
             position: 'left',
             label: 'Marketing & Partnerships',
           },
+          {to: 'hackathon', label: 'Hackathon', position: 'left'},
+          {to: 'grants', label: 'Grants', position: 'left'},
           {to: 'blog', label: 'Blog', position: 'right'},
           {
             href: 'https://github.com/solana-mobile',

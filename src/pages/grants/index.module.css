@@ -1,0 +1,151 @@
+/* Grants page specific styles */
+.logoContainer {
+  width: 90%;
+  max-width: 600px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.logoContainer img {
+  width: 100%;
+  height: auto;
+}
+
+.subtitle {
+  color: white;
+  font-size: 1.4rem;
+  margin-top: 1rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.heroBanner {
+  padding: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.heroImage {
+  background: linear-gradient(180deg, #020609, #040d14, #07151e, #091d29, #0b2633, #0e2e3e, #123c4d, #194e60, #216173, #297485, #338796, #3d9aa6);
+  width: 100%;
+  height: 480px;
+  position: relative;
+}
+
+.heroContent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  width: 90%;
+  max-width: 800px;
+  padding: 3rem 0;
+}
+
+.heroTitle {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin: 0 0 1.5rem 0;
+  letter-spacing: 0.03em;
+}
+
+.heroSubtitle {
+  font-size: 1.6rem;
+  margin-bottom: 2.5rem;
+}
+
+.container {
+  padding: 4rem 2rem 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+  width: 90%;
+}
+
+.intro {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.introText {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.sections {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.section h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-align: left;
+  margin-bottom: 1.5rem;
+}
+
+.section ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.section li {
+  margin-bottom: 1.5rem;
+  padding-left: 0;
+}
+
+.section li strong {
+  font-size: 1.3rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.section li p {
+  margin-top: 0.5rem;
+}
+
+.centerSection {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.tagline {
+  font-size: 1.25rem;
+}
+
+/* Media queries for responsive design */
+@media screen and (max-width: 996px) {
+  .heroImage {
+    height: 450px;
+  }
+  
+  .heroTitle {
+    font-size: 2.5rem;
+  }
+  
+  .heroSubtitle {
+    font-size: 1.3rem;
+  }
+  
+  .heroContent {
+    padding: 2.5rem 0;
+  }
+  
+  .container {
+    padding: 3rem 0.5rem 1rem;
+  }
+  
+  .section h2 {
+    font-size: 1.8rem;
+  }
+  
+  .section li strong {
+    font-size: 1.2rem;
+  }
+}
