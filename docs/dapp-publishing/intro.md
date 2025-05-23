@@ -20,7 +20,7 @@ Wherever you are in your publishing journey, you can find resources here to get 
     - Have an existing Android app, you're ready to start publishing now!
     - Have a web app, you can convert a PWA into an Android app and generate an APK for app submission!
 
-    Before publishing, ensure your dApp complies with the Solana dApp Store [publisher policy](/dapp-publishing/policy).
+    Before publishing, ensure your dApp complies with the Solana dApp Store [publisher policy](/dapp-publishing/publisher-policy).
 
     <CardLayout autoFitEnabled={true}>
 
@@ -139,7 +139,7 @@ Wherever you are in your publishing journey, you can find resources here to get 
         emoji="❓"
     />
     <Card
-        to="/dapp-publishing/policy"
+        to="/dapp-publishing/publisher-policy"
         header={{
             label: "Publisher Policy",
             translateId: "policy-card-header",
