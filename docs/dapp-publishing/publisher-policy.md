@@ -1,9 +1,9 @@
 # Solana Mobile Publisher Policy
 
-This Solana Mobile Publisher Policy (“Publisher Policy”) is part of and subject to the Solana Mobile dApp Store Developer Agreement (“Developer Agreement”). Capitalized words used but not defined herein have the meaning given in the Developer Agreement. By submitting any Developer Asset to Solana Mobile, you acknowledge and agree that such Developer Asset complies with the terms of this Publisher Policy. If you encounter any Developer Asset or other Content in the dApp Store or otherwise via our products and services that does not comply with the terms of this Publisher Policy, you may notify us at [concerns@dappstore.solanamobile.com](mailto:concerns@dappstore.solanamobile.com). We reserve the right, but assume no obligation, to investigate and take any action we deem appropriate. 
+This Solana Mobile Publisher Policy (“<u>Publisher Policy</u>”) is part of and subject to the Solana Mobile dApp Store Developer Agreement (“<u>Developer Agreement</u>”). Capitalized words used but not defined herein have the meaning given in the Developer Agreement. By submitting any Developer Asset to Solana Mobile, you acknowledge and agree that such Developer Asset complies with the terms of this Publisher Policy. If you encounter any Developer Asset or other Content in the dApp Store or otherwise via our products and services that does not comply with the terms of this Publisher Policy, you may notify us at [concerns@dappstore.solanamobile.com](mailto:concerns@dappstore.solanamobile.com). We reserve the right, but assume no obligation, to investigate and take any action we deem appropriate. 
 
-## Restricted Content  
-Solana Mobile does not allow any Developer Assets, User Content, or text, images, audio content, code, or other content of any sort (“Content”) that Solana Mobile determines in its sole discretion may violate applicable law, rule, or regulation (“Applicable Law”), or the Solana dApp Store mission (“Restricted Content”). Restricted Content includes, without limitation, the following:  
+## <u>Restricted Content</u>  
+Solana Mobile does not allow any Developer Assets, User Content, or text, images, audio content, code, or other content of any sort (“<u>Content</u>”) that Solana Mobile determines in its sole discretion may violate applicable law, rule, or regulation (“<u>Applicable Law</u>”), or the Solana dApp Store mission (“<u>Restricted Content</u>”). Restricted Content includes, without limitation, the following:  
  
 
 * **Illegality:** Content that violates or promotes the violation of Applicable Law, including the following:  
@@ -22,8 +22,8 @@ Solana Mobile does not allow any Developer Assets, User Content, or text, images
   * Content that misleads users as to the true intent, nature, or purpose of any dApp; and   
   * Content designed to create, or to enable users to create, ‘deepfakes’ or other false or misleading Content.
 
-## Guidelines for User Data  
-dApps that collect, access, use, store, or disclose User Content or other information from or about a user, including without limitation device information (“User Data”), must be transparent about the collection and use of such User Data. Without limitation, all dApps on the dApp Store must: 
+## <u>Guidelines for User Data</u>  
+dApps that collect, access, use, store, or disclose User Content or other information from or about a user, including without limitation device information (“<u>User Data</u>”), must be transparent about the collection and use of such User Data. Without limitation, all dApps on the dApp Store must: 
 
 * Disclose the dApp’s or its Developer’s practices with respect to the collection, use, and disclosure of User Data in a privacy policy or other statement that complies with Applicable Law;  
 * Obligate all third-party services used by or integrated with the dApp that may have access to the applicable User Data to comply with this Publisher Policy;   
@@ -31,13 +31,13 @@ dApps that collect, access, use, store, or disclose User Content or other inform
 * Provide a means or method for users to delete their account, and delete the User Data associated with such account (except to the extent you have lawful reasons, such as regulatory requirements or fraud prevention, to retain such data); and  
 * Not use fraudulent, deceptive, or coercive measures to obtain user consent to the collection, sharing, or any specific use of User Data, and respect users’ decisions if they decline to consent. 
 
-dApps that collect, access, share, or encourage the collection, access, or sharing of Regulated Data from or between or among end users must comply with all Applicable Laws with respect to such Regulated Data. “Regulated Data” means any (a) Social Security numbers or other government-issued identification numbers; (b) protected health information subject to the Health Insurance Portability and Accountability Act (HIPAA) or other information regarding an individual’s medical history, mental or physical condition, or medical treatment or diagnosis by a health care professional; (c) health insurance information; (d) biometric information or biometric identifiers; (e) credentials to any financial accounts or credit, debit or payment card data subject to the Payment Card Industry Data Security Standard (PCI DSS); (f) tax return data; (g) precise geolocation data; (h) data revealing racial or ethnic origin, religious beliefs, sex life or sexual orientation, union membership, citizenship, or immigration status; (i) genetic data; (j) personal data collected from an individual under the age of 18; (k) personal data subject to any Applicable Law related to data protection, including U.S. state consumer privacy laws such as the California Consumer Privacy Act; (l) data relating to criminal convictions or offenses; or (m) online account credentials. Without limiting the foregoing: 
+dApps that collect, access, share, or encourage the collection, access, or sharing of Regulated Data from or between or among end users must comply with all Applicable Laws with respect to such Regulated Data. “<u>Regulated Data</u>” means any (a) Social Security numbers or other government-issued identification numbers; (b) protected health information subject to the Health Insurance Portability and Accountability Act (HIPAA) or other information regarding an individual’s medical history, mental or physical condition, or medical treatment or diagnosis by a health care professional; (c) health insurance information; (d) biometric information or biometric identifiers; (e) credentials to any financial accounts or credit, debit or payment card data subject to the Payment Card Industry Data Security Standard (PCI DSS); (f) tax return data; (g) precise geolocation data; (h) data revealing racial or ethnic origin, religious beliefs, sex life or sexual orientation, union membership, citizenship, or immigration status; (i) genetic data; (j) personal data collected from an individual under the age of 18; (k) personal data subject to any Applicable Law related to data protection, including U.S. state consumer privacy laws such as the California Consumer Privacy Act; (l) data relating to criminal convictions or offenses; or (m) online account credentials. Without limiting the foregoing: 
 
 * dApps that collect Regulated Data should collect only the minimum amount of such Regulated Data required to perform such dApp’s function;  
 * dApps should not offer Regulated Data for sale or otherwise make it available to any third party except with the applicable users’ express consent and in compliance with Applicable Law; and  
 * dApps that collect, store, and transfer Regulated Data should use encryption and other industry best practices to protect such Regulated Data in transit and at rest.
 
-## Restricted Activities and Transactions  
+## <u>Restricted Activities and Transactions</u>  
 Solana Mobile does not knowingly allow any dApps that are designed to process transactions, provide services, or facilitate other activities that violate Applicable Law. Without limiting the foregoing: 
 
 * dApps may not facilitate the sale or purchase of prescription drugs without a prescription;  
@@ -60,8 +60,8 @@ Developer Assets may not include, and Solana Mobile will not knowingly permit th
 * dApps or other Content containing a webview that loads untrusted web Content or unverified URLs obtained from untrusted sources; and  
 * dApps that force user interaction with disruptive ads or notifications.
 
-## Guidelines for User-Generated Content  
-dApps that solicit, permit, host, display, enable, or otherwise make available (“Make Available”) user-generated Content (“UGC”) are solely responsible for ensuring that such UGC complies with the restrictions applicable to Content as set forth in this Publisher Policy. In particular, and without limitation, any dApp that Makes Available any UGC must:
+## <u>Guidelines for User-Generated Content</u>  
+dApps that solicit, permit, host, display, enable, or otherwise make available (“<u>Make Available</u>”) user-generated Content (“<u>UGC</u>”) are solely responsible for ensuring that such UGC complies with the restrictions applicable to Content as set forth in this Publisher Policy. In particular, and without limitation, any dApp that Makes Available any UGC must:
 
 * Cause its user terms to include the same restrictions as this Publisher Policy, and require end users to agree to such user terms;  
 * Enable users to report or flag offensive or inappropriate content from within the dApp;  

@@ -129,7 +129,7 @@ module.exports = {
             items: [
                 {
                     type: 'doc',
-                    id: 'dapp-publishing/policy',
+                    id: 'dapp-publishing/publisher-policy',
                     label: 'Publisher Policy'
                 },
                 {
@@ -141,6 +141,11 @@ module.exports = {
                     type: 'doc',
                     id: 'dapp-publishing/tou',
                     label: 'Solana dApp Store TOU'
+                },
+                {
+                    type: 'doc',
+                    id: 'dapp-publishing/privacy-policy',
+                    label: 'Solana Mobile Device and dApp Store Privacy Policy'
                 }
             ]
         },
