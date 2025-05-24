@@ -56,11 +56,11 @@ The [Mobile Wallet Adapter](/mobile-wallet-adapter/overview) (MWA) library allow
 
 Install an MWA-compatible wallet app to test your app's Mobile Wallet Adapter integration.
 
-### Fake Wallet
+### Mock MWA Wallet
 
-Solana Mobile provides a 'fake' development wallet for you to test your app with and get a feel of what Seed Vault Wallet interactions on the Seeker will look like.
+Solana Mobile provides a mock development wallet for you to test your app with and get a feel of what Seed Vault Wallet interactions on the Seeker will look like.
 
-The fake wallet features:
+The mock wallet features:
 - Mobile Wallet Adapter support
 - Simulate connection or signing errors
 - QR Code Scanning for MWA Remote Connections
@@ -68,19 +68,19 @@ The fake wallet features:
 It is intended for development purposes only, so it does not store a persistent keypair and the wallet is reset each time the app is exited.
 
 <details>
-<summary>Installation steps</summary>
+<summary>Installation:</summary>
 
-1. Clone the Mobile Wallet Adapter repo, containing the `fakewallet` app from the [github repository](https://github.com/solana-mobile/mobile-wallet-adapter)
+1. Clone the Mock MWA Wallet repo from the [github repository](https://github.com/solana-mobile/mock-mwa-wallet)
 
 ```
-git clone https://github.com/solana-mobile/mobile-wallet-adapter.git
+git clone https://github.com/solana-mobile/mock-mwa-wallet.git
 ```
 
-2. In Android Studio, `Open project > Navigate to the cloned directory > Select mobile-wallet-adapter/android/build.gradle`
+2. In Android Studio, `Open project > Navigate to the directory > Select mock-mwa-wallet/android/build.gradle`
 
 3. After Android Studio finishes loading the project, select `fakewallet` in the build/run configuration dropdown in the top right
 
-![fakewallet build](/img/fakewallet-install.png)
+![Mock MWA Wallet build](/img/mock-mwa-wallet-install.png)
 
 4. After it builds successfully, you should see the app on your connected Android device or emulator.
 
