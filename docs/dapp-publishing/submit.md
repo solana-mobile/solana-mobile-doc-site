@@ -37,6 +37,13 @@ npx dapp-store publish submit -k <path_to_your_keypair> -u <mainnet_beta_rpc_url
 
 The two flags for this command (`--requestor-is-authorized` and `--complies-with-solana-dapp-store-policies`) are attestations from the requestor that this dApp is compliant with Solana dApp Store policies, and that they are authorized to submit this request to the Solana dApp Publisher Portal.
 
-## Wait for a decision on your app
+## Get in contact for App Review
 
-After submitting, we’ll review your app based on our policies. Please make sure to provide a valid email address, so that we can reach out to you with any questions about your submission.
+Congrats! You've successfully submitted your app. Now, we'll review your app based on our policies.
+
+ 1. Join the Solana Mobile Discord.
+ 2. In the `#developer` channel, get the developer role.
+ 3. Leave a message in the `#dapp-store` channel that you've completed app review.
+ 4. We'll be in contact through the channel shortly after.
+
+
