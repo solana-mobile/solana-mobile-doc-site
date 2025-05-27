@@ -2,7 +2,7 @@
 
 Effective as of May 21, 2025
 
-Please click **here** to view the previous version of our Privacy Policy.
+Please click [**here**](https://legal.solanamobile.com/privacy-policy-v1-web) to view the previous version of our Privacy Policy.
 
 **California Notice at Collection/State Law Privacy Rights**: See the [State privacy rights notice](#state-privacy-rights-notice) section below for important information about your rights under applicable state privacy laws.
 
