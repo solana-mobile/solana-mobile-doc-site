@@ -80,7 +80,7 @@ const config = {
           {
             type: 'dropdown',
             position: 'left',
-            label: 'Developers',
+            label: 'Documentation',
             items: [
               {
                 type: 'html',
@@ -131,12 +131,6 @@ const config = {
             docId: 'dapp-publishing/intro',
             position: 'left',
             label: 'dApp Store',
-          },
-          {
-            type: 'doc',
-            docId: 'marketing/overview',
-            position: 'left',
-            label: 'Marketing & Partnerships',
           },
           {to: 'hackathon', label: 'Hackathon', position: 'left'},
           {to: 'grants', label: 'Grants', position: 'left'},
