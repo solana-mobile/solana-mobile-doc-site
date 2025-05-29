@@ -37,7 +37,7 @@ export default function Home(): JSX.Element {
         <div className={styles.cardContainer}>
           <HeroCTACard
             icon={Code}
-            title="Developers"
+            title="Documentation"
             description="Build mobile dApps with our SDK and developer tools"
             to="/developers/overview"
           />
