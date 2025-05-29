@@ -32,10 +32,9 @@
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  color: white;
   width: 90%;
   max-width: 800px;
-  padding: 3rem 0;
+  padding: 2rem 0;
 }
 
 .heroTitle {
