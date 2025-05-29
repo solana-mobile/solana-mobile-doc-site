@@ -33,7 +33,7 @@ export default function Home(): JSX.Element {
     >
       <SolanaMobileHero>
         <SolanaMobileStackLogo />
-        <p className={styles.tagline}>Documentation Hub</p>
+        <p className={styles.tagline}>Developer Portal</p>
         <div className={styles.cardContainer}>
           <HeroCTACard
             icon={Code}

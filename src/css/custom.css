@@ -4,6 +4,16 @@
  * work well for content-centric websites.
  */
 
+ html[data-theme='light'] {
+  --ifm-background-color: #ffffff;
+  --ifm-font-color-base: #000000;
+}
+
+html[data-theme='dark'] {
+  --ifm-background-color: #000000;
+  --ifm-font-color-base: #ffffff;
+}
+
 /* Purple theme */
 :root {
   --ifm-color-primary: #5c5de5;
