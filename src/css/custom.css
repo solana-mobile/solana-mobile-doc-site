@@ -16,14 +16,25 @@ html[data-theme='dark'] {
 
 /* Footer Styling */
 [data-theme='light'] .footer {
-  --ifm-footer-background-color: rgb(149, 210, 230);
-  --ifm-footer-color: black;
+  background: radial-gradient(89.5% 96.835% at 26.88% 140.12%, 
+  rgba(0, 0, 0, 0.20) 0%, 
+  rgba(21, 107, 97, 0.20) 27.5%, 
+  rgba(82, 147, 139, 0.20) 36%, 
+  rgba(193, 229, 214, 0.20) 68%, 
+  rgba(252, 253, 247, 0.20) 100%), 
+  #99B3BE;  
   --ifm-footer-link-color: black;
   --ifm-footer-title-color: black;
 }
 
 [data-theme='dark'] .footer {
-  --ifm-footer-background-color: rgb(149, 210, 230);
+  background: radial-gradient(89.5% 96.835% at 26.88% 140.12%, 
+  rgba(0, 0, 0, 0.20) 0%, 
+  rgba(21, 107, 97, 0.20) 27.5%, 
+  rgba(82, 147, 139, 0.20) 36%, 
+  rgba(193, 229, 214, 0.20) 68%, 
+  rgba(252, 253, 247, 0.20) 100%), 
+  #99B3BE;  
   --ifm-footer-color: black;
   --ifm-footer-link-color: black;
   --ifm-footer-title-color: black;

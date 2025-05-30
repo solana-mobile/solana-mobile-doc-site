@@ -70,11 +70,11 @@ const config = {
         respectPrefersColorScheme: false,
       },
       navbar: {
+        style: 'dark',
         title: '',
         logo: {
           alt: 'Solana Mobile Logo',
-          src: 'img/Solana_Mobile_With_Logo_Black.png',
-          srcDark: 'img/Solana_Mobile_With_Logo_White.png'
+          src: 'img/Solana_Mobile_With_Logo_White.png'
         },
         items: [
           {
