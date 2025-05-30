@@ -14,6 +14,22 @@ html[data-theme='dark'] {
   --ifm-font-color-base: #ffffff;
 }
 
+/* Footer Styling */
+[data-theme='light'] .footer {
+  --ifm-footer-background-color: rgb(149, 210, 230);
+  --ifm-footer-color: black;
+  --ifm-footer-link-color: black;
+  --ifm-footer-title-color: black;
+}
+
+[data-theme='dark'] .footer {
+  --ifm-footer-background-color: rgb(149, 210, 230);
+  --ifm-footer-color: black;
+  --ifm-footer-link-color: black;
+  --ifm-footer-title-color: black;
+}
+
+
 /* Purple theme */
 :root {
   --ifm-color-primary: #5c5de5;
@@ -25,7 +41,6 @@ html[data-theme='dark'] {
   --ifm-color-primary-lightest: #8d8fef;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
-
   --sidebar-header-color: black;
 }
 
