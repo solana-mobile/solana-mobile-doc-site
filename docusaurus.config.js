@@ -92,6 +92,10 @@ const config = {
                 label: 'Overview'
               },
               {
+                to: 'dapp-publishing/overview',
+                label: 'dApp Store'
+              },
+              {
                 to: 'mobile-wallet-adapter/overview',
                 label: 'Mobile Wallet Adapter'
               },
@@ -125,12 +129,6 @@ const config = {
                 label: 'Unreal Engine'
               },
             ],
-          },
-          {
-            type: 'doc',
-            docId: 'dapp-publishing/intro',
-            position: 'left',
-            label: 'dApp Store',
           },
           {to: 'hackathon', label: 'Hackathon', position: 'left'},
           {to: 'grants', label: 'Grants', position: 'left'},

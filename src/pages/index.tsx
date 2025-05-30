@@ -1,13 +1,11 @@
 import React from "react";
-import clsx from "clsx";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
-import useBaseUrl from "@docusaurus/useBaseUrl";
 import styles from "./index.module.css";
 import { useColorMode } from "@docusaurus/theme-common";
 import SolanaMobileHero from "@site/src/components/SolanaMobileHero";
 import HeroCTACard from "@site/src/components/HeroCTACard";
-import { Code, Megaphone, Store } from "lucide-react";
+import { Code, Store, Award, Rocket } from "lucide-react";
 
 function SolanaMobileStackLogo() {
   const { colorMode } = useColorMode();
@@ -48,10 +46,16 @@ export default function Home(): JSX.Element {
             to="/dapp-publishing/intro"
           />
           <HeroCTACard
-            icon={Megaphone}
-            title="Marketing & Partnerships"
-            description="Learn how to reach the Solana Mobile community"
-            to="/marketing/overview"
+            icon={Rocket}
+            title="Hackathon"
+            description="Compete in the very first Solana Mobile Hackathon"
+            to="/hackathon"
+          />
+          <HeroCTACard
+            icon={Award}
+            title="Grants"
+            description="Help push the Solana Mobile Developer ecosystem forward"
+            to="/grants"
           />
         </div>
       </SolanaMobileHero>
