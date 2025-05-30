@@ -31,6 +31,11 @@ module.exports = {
         },
         {
             type: 'doc',
+            id: 'dapp-publishing/overview',
+            label: 'dApp Store'
+        },
+        {
+            type: 'doc',
             id: 'mobile-wallet-adapter/overview',
             label: 'Mobile Wallet Adapter'
         },
