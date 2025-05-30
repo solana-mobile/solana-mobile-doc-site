@@ -22,8 +22,7 @@ html[data-theme='dark'] {
   rgba(82, 147, 139, 0.20) 36%, 
   rgba(193, 229, 214, 0.20) 68%, 
   rgba(252, 253, 247, 0.20) 100%), 
-  #99B3BE;  
-  --ifm-footer-link-color: black;
+  #99B3BE;  --ifm-footer-link-color: black;
   --ifm-footer-title-color: black;
 }
 
