@@ -1,3 +1,7 @@
+---
+displayed_sidebar: dappPublishingSidebar
+---
+
 # Solana dApp Store
 
 import Card from "../../src/components/Card"
