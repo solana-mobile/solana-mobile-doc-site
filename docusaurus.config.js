@@ -92,7 +92,7 @@ const config = {
                 label: 'Overview'
               },
               {
-                to: 'dapp-publishing/overview',
+                to: 'dapp-publishing/intro',
                 label: 'dApp Store'
               },
               {
