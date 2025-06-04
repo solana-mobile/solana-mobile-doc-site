@@ -72,7 +72,7 @@ export default function HackathonPage() {
             <li>Cash prizes</li>
             <li>Seeker devices</li>
             <li>Special track prizes</li>
-            <li>Special or preferential dApp store placement</li>
+            <li>Highlighted or featured dApp store placement</li>
           </ul>
           <p>
             All of the above is subject to change until official details have gone live.
