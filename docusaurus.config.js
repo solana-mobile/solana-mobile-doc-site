@@ -52,7 +52,7 @@ const config = {
         },
         gtag: {
           // this GA code is safe to be published
-          trackingID: "G-PBF6HZVSRX",
+          trackingID: ["G-PBF6HZVSRX", "G-EYSNGZ63MD"],
           anonymizeIP: true,
         },
       }),
