@@ -45,6 +45,11 @@ module.exports = {
                     id: 'mobile-wallet-adapter/web-installation',
                     label: 'Installation'
                 },
+                {
+                    type: 'doc',
+                    id: 'mobile-wallet-adapter/migrating-to-wallet-standard',
+                    label: 'Migrating to Wallet Standard'
+                },
             ]
         },
 
