@@ -21,7 +21,7 @@ browsing on Android Chrome, unless explicitly added.
 
 The `@solana-mobile/wallet-standard-mobile` library includes a remote connection option that allows users to connect their mobile wallet app to a desktop web page.
 
-View the [MWA Remote documentation](http://localhost:3000/mobile-wallet-adapter/web-installation#enable-remote-connection) for more information.
+View the [MWA Remote documentation](/mobile-wallet-adapter/web-installation#enable-remote-connection) for more information.
 
 ### Bug fixes and stability
 
