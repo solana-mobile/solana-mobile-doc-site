@@ -14,7 +14,7 @@ There are several reasons to upgrade to using MWA via Wallet Standard.
 
 The `@solana/wallet-adapter-react` library will [not include MWA as a default option](https://github.com/anza-xyz/wallet-adapter/pull/1097) starting from versions `>= 1.0.0`. 
 
-This means any web app using `@solana/wallet-adapter-react` will no longer display *"Mobile Wallet Adapter"* as an option for users
+This means any web app using `@solana/wallet-adapter-react` will no longer display `Mobile Wallet Adapter` as an option for users
 browsing on Android Chrome, unless explicitly added.
 
 ### Enable remote connection
@@ -31,16 +31,20 @@ The legacy `@solana-mobile/wallet-adapter-mobile` library will be deprecated and
 
 ## How to upgrade
 
-### Install Mobile Wallet Standard
+### 1. Install Mobile Wallet Standard
 
 Installing the standard wallet takes two steps:
 
 1. Add the library `@solana-mobile/wallet-standard-mobile`.
 2. Call the `register` function.
 
+
+Now, `Mobile Wallet Adapter` will appear as a wallet option.
+
 **View the [installation guide](/mobile-wallet-adapter/web-installation).**
 
-### Upgrade to the latest wallet-adapter
+### 2. Update to wallet-adapter >= 0.15.36
 
-If your web app is using `@solana/wallet-adapter-react`, update to the latest version. The latest version fixes common MWA Web issues
-like the [*No connect after selecting MWA*](https://github.com/solana-mobile/mobile-wallet-adapter/issues/1086) bug.
+If your web app is using `@solana/wallet-adapter-react` update to a version `>= 0.15.36`. 
+Updating fixes common MWA Web issues like:
+- the [*No connect after selecting MWA*](https://github.com/solana-mobile/mobile-wallet-adapter/issues/1086) bug.
