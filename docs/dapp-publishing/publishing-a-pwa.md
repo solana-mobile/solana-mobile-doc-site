@@ -179,7 +179,7 @@ Congrats! You have successfully converted your PWA into a working Android app.
 If you have an emulator or testing device ready, you can install the APK with:
 
 ```bash
-bubblewrwap install app-release-signed.apk
+bubblewrap install app-release-signed.apk
 ```
 
 Ensure the app is working as expected before submitting to the dApp Store.
