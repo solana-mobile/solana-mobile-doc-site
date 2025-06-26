@@ -35,7 +35,7 @@ export default function HackathonPage() {
         <section className={styles.section}>
           <h2>What is it?</h2>
           <p>
-            In June, Solana Mobile will be launching its very first hackathon — the <b>Solana Mobile Hackathon</b> — 
+            In July, Solana Mobile will be launching its very first hackathon — the <b>Solana Mobile Hackathon</b> — 
             focused on creating brand new mobile Solana dApps OR converting existing Solana dApps to mobile 
             for submission to the Solana dApp Store.
           </p>
