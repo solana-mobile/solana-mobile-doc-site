@@ -49,7 +49,7 @@ export default function Home(): JSX.Element {
             icon={Rocket}
             title="Hackathon"
             description="Compete in the very first Solana Mobile Hackathon"
-            to="/hackathon"
+            to="https://solanamobile.radiant.nexus/"
           />
           <HeroCTACard
             icon={Award}
