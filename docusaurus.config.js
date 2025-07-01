@@ -130,7 +130,7 @@ const config = {
               },
             ],
           },
-          {to: 'hackathon', label: 'Hackathon', position: 'left'},
+          {to: 'https://solanamobile.radiant.nexus/', label: 'Hackathon', position: 'left'},
           {to: 'grants', label: 'Grants', position: 'left'},
           {to: 'blog', label: 'Blog', position: 'right'},
           {
