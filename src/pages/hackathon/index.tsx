@@ -19,6 +19,8 @@ export default function HackathonPage() {
       <Head>
         <meta property="og:title" content="Solana Mobile Hackathon" />
         <meta property="og:description" content="Join the Solana Mobile Hackathon and build the future of mobile dApps" />
+        <meta property="og:image" content="https://cdn.prod.website-files.com/685357732354043b88fbf118/68640c055711a79babb5f498_smh-opengraph.png" />
+        <meta name="twitter:image" content="https://cdn.prod.website-files.com/685357732354043b88fbf118/68640c055711a79babb5f498_smh-opengraph.png" />
       </Head>
       
       <div className={styles.heroBanner}>
