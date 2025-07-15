@@ -132,6 +132,7 @@ const config = {
           },
           {to: 'https://solanamobile.radiant.nexus/', label: 'Hackathon', position: 'left'},
           {to: 'grants', label: 'Grants', position: 'left'},
+          {to: 'marketing/overview', label: 'Dev Marketing', position: 'left'},
           {to: 'blog', label: 'Blog', position: 'right'},
           {
             href: 'https://github.com/solana-mobile',
