@@ -15,27 +15,27 @@ module.exports = {
         },
         {
             type: 'category',
-            label: 'Setup',
+            label: 'Getting Started',
             collapsible: true,
             collapsed: false,
             items: [
                 {
                     type: 'doc',
-                    id: 'react-native/setup',
-                    label: 'React Native'
+                    id: 'react-native/quickstart',
+                    label: 'Create a project'
                 },
                 {
                     type: 'doc',
-                    id: 'react-native/expo',
-                    label: 'Expo'
+                    id: 'react-native/setup',
+                    label: 'Environment Setup'
+                },
+                {
+                    type: 'doc',
+                    id: 'react-native/test-with-any-android-device',
+                    label: 'Test with any Android device'
                 },
             ]
           },
-        {
-            type: 'doc',
-            id: 'react-native/quickstart',
-            label: 'Quickstart'
-        },
 
         /* Development Section */
         {
