@@ -1,9 +1,9 @@
-# Marketing & Partnerships
+# Developer Marketing
 
 import Card from "../../src/components/Card"
 import CardLayout from "../../src/layouts/CardLayout"
 
-This section of the site serves as a resource hub for all things related to marketing and partnerships with Solana Mobile.
+This section of the site serves as a resource hub for all things related to marketing your app to the Solana Mobile community.
 
 # Quickstart
 

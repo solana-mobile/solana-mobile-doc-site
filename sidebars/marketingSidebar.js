@@ -5,7 +5,7 @@ module.exports = {
     marketingSidebar: [
         {
             type: 'html',
-            value: 'Marketing & Partnerships',
+            value: 'Developer Marketing',
             className: 'sidebar-section-header',
         },
         {
