@@ -157,27 +157,6 @@ module.exports = {
             label: 'Mobile NFT Photo Minter'
         },
 
-        /* Starter Templates Section */
-        {
-            type: 'html',
-            value: '<div class="sidebar-divider" />',
-        },
-        {
-            type: 'html',
-            value: 'Template Apps',
-            className: 'sidebar-section-header',
-        },
-        {
-            type: 'link',
-            href: 'https://github.com/solana-mobile/solana-mobile-dapp-scaffold',
-            label: 'React Native dApp Scaffold'
-        },
-        {
-            type: 'link',
-            href: 'https://github.com/solana-mobile/solana-mobile-expo-template',
-            label: 'Expo dApp Template'
-        },
-
         /* Reference Section */
         {
             type: 'html',
