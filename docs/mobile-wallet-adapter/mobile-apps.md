@@ -23,6 +23,10 @@ import {Code, ArrowDownToLine, Globe } from 'lucide-react';
           src: "/videos/solflare_mwa.mp4",
           label: "Solflare"
         },
+        {
+          src: "/videos/mock_mwa_wallet.mp4",
+          label: "Mock Wallet"
+        },
       ]}
       autoPlay={true}
       muted={true}

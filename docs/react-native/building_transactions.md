@@ -31,7 +31,7 @@ npm install @solana/web3.js
 
 ### Add polyfills
 
-After installing, ensure you have also added these [polyfills](/react-native/setup#step-3-update-indexjs-with-polyfills) to your React native app.
+After installing, ensure you have also added these [polyfills](/react-native/polyfill-guides/web3-js) to your React native app.
 These are needed by some parts of `@solana/web3.js` because it is originally written as a web/node library and, as a result, certain expected APIs are missing in a React Native environment.
 
 ## Example: SOL Transfer Transaction
