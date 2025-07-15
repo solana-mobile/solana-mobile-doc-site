@@ -2,101 +2,50 @@
 displayed_sidebar: reactNativeSidebar
 ---
 
-import Card from "../../src/components/Card"
+import Card2 from "../../src/components/Card2"
 import CardLayout from "../../src/layouts/CardLayout"
 
 # React Native
 
 [**React Native**](https://reactnative.dev/docs/getting-started) is a popular development framework for creating mobile apps using React and Javascript.
 
-This section of the site provides a developer guide for building React Native Android apps for Solana.
+This section of the site provides a developer guide for building React Native Android apps for Solana Mobile.
 
-## Quickstart
+## Getting Started
 
 <CardLayout autoFitEnabled={true}>
-    <Card
-        to="/react-native/setup"
+    <Card2
+        to="/react-native/quickstart"
         header={{
-            label: "Project Setup",
-            translateId: "setup",
+            label: "Create a project",
+            translateId: "create",
         }}
         body={{
-            label: "Setup your React Native project with the mobile SDKs for Solana development.",
-            translateId: "setup-body",
-        }}
-        iconPath="img/react-native-32.svg"
-    />
-    <Card
-        to="https://github.com/solana-mobile/solana-mobile-dapp-scaffold"
-        header={{
-            label: "React Native Scaffold App",
-            translateId: "compose-scaffold-body",
-        }}
-        body={{
-            label: "Build off the React Native Scaffold app to quickly start developing.",
-            translateId: "compose-scaffold",
+            label: "Create a React Native project for Solana Mobile development.",
+            translateId: "create-body",
         }}
         iconPath="img/rocket-icon2.png"
     />
-</CardLayout>
-
-<CardLayout autoFitEnabled={true}>
-    <Card
-        to="/react-native/expo"
+    <Card2
+        to="/react-native/setup"
         header={{
-            label: "Expo Development",
-            translateId: "setup",
+            label: "Environment Setup",
+            translateId: "env-setup-body",
         }}
         body={{
-            label: "For a simplified React Native development process, build a Solana dApp with the Expo platform.",
-            translateId: "setup-body",
+            label: "Setup your development environment for React Native.",
+            translateId: "env-setup",
         }}
-        iconPath="img/expo-sdk-icon.svg"
-    />
-    <Card
-        to="/react-native/quickstart"
-        header={{
-            label: "Expo dApp Template",
-            translateId: "compose-scaffold-body",
-        }}
-        body={{
-            label: "Quickly start an Expo project by initializing with the Solana Expo dApp Template.",
-            translateId: "compose-scaffold",
-        }}
-        iconPath="img/expo-snack-icon.svg"
+        iconPath="img/react-native-32.svg"
     />
 </CardLayout>
 
-## Core React Native SDKs
+## Cookbook
 
 Read these guides for a collection of code snippets and examples for common use cases in Solana React Native dApps.
 
 <CardLayout autoFitEnabled={true}>
-    <Card
-        to="/react-native/making_rpc_requests"
-        header={{
-            label: "JSON RPC Requests",
-            translateId: "rpc-requests",
-        }}
-        body={{
-            label: "Use web3.js `Connection` class to create and send Solana RPC Requests.",
-            translateId: "rpc-requests-body",
-        }}
-        emoji={"🌐"}
-    />
-    <Card
-        to="/react-native/building_transactions"
-        header={{
-            label: "Transaction building",
-            translateId: "transaction-building",
-        }}
-        body={{
-            label: "Use the web3.js library to construct Solana transactions and Program instructions.",
-            translateId: "transaction-building-body",
-        }}
-        emoji={"🔧"}
-    />
-    <Card
+    <Card2
         to="/react-native/using_mobile_wallet_adapter"
         header={{
             label: "Mobile Wallet Adapter",
@@ -107,6 +56,30 @@ Read these guides for a collection of code snippets and examples for common use 
             translateId: "mobile-wallet-adapter-body",
         }}
         emoji={"📱"}
+    />
+    <Card2
+        to="/react-native/making_rpc_requests"
+        header={{
+            label: "JSON RPC Requests",
+            translateId: "rpc-requests",
+        }}
+        body={{
+            label: "Use the web3.js library class to create and send Solana RPC Requests.",
+            translateId: "rpc-requests-body",
+        }}
+        emoji={"🌐"}
+    />
+    <Card2
+        to="/react-native/building_transactions"
+        header={{
+            label: "Transaction building",
+            translateId: "transaction-building",
+        }}
+        body={{
+            label: "Use the web3.js library to construct Solana transactions.",
+            translateId: "transaction-building-body",
+        }}
+        emoji={"🔧"}
     />
 </CardLayout>
 
@@ -125,6 +98,6 @@ Developers familiar with React development will be able to leverage their existi
 ## Expo?
 
 [**Expo**](https://docs.expo.dev/) is a popular platform that simplifies the development and deployment process for React Native projects, with the tradeoff of stricter customization of native code.
+
 To use Expo with the MWA libraries, you'll need to follow an alternate Expo development flow, called a [custom Expo Development build](https://docs.expo.dev/develop/development-builds/create-a-build/).
 
-Follow this [guide](/react-native/expo) to set up your Expo project.
