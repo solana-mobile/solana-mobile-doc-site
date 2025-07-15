@@ -4,6 +4,7 @@ displayed_sidebar: reactNativeSidebar
 
 import Card2 from "../../src/components/Card2"
 import CardLayout from "../../src/layouts/CardLayout"
+import { Rocket } from "lucide-react";
 
 # React Native
 
@@ -24,7 +25,7 @@ This section of the site provides a developer guide for building React Native An
             label: "Create a React Native project for Solana Mobile development.",
             translateId: "create-body",
         }}
-        iconPath="img/rocket-icon2.png"
+        iconComponent={<Rocket size={24} />}
     />
     <Card2
         to="/react-native/setup"
