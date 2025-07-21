@@ -1,15 +1,10 @@
-# Mint your Publisher and App NFT
+# Mint your App NFT
 
-If this is your first time publishing an app on the dApp Store, then you will need to mint a **Publisher NFT** and an **App NFT**.
+If this is your first time publishing an app on the dApp Store, then you will need to mint a an **App NFT**.
 
 :::tip
 If you are looking to publish an update version of an existing app, then skip to [this step](/dapp-publishing/publishing_releases).
 :::
-
-A Publisher NFT:
-
-- Contains metadata that describes you, the publisher of the dApp.
-- **Created only once** and is re-used for publishing other apps under the same publisher.
 
 An App NFT:
 
@@ -43,7 +38,6 @@ npx dapp-store validate -k <path_to_your_keypair> -b <path_to_your_android_sdk_b
 On success, you should see output similar to:
 
 ```shell
-Publisher JSON valid!
 App JSON valid!
 Release JSON valid!
 ```
@@ -52,27 +46,13 @@ Release JSON valid!
 If you have `.mp4` video assets in your publishing, make sure you have `ffmpeg` utility library [installed](/dapp-publishing/setup#ffmpeg).
 :::
 
-## Mint your NFTs
+## Create your App NFT
 
 :::tip
 When using CLI version >= `0.8.0`, the following commands will submit a Solana transaction that includes a default priority fee of `500000` lamports.
 
 To customize this value, use param `-p` or `--priority-fee-lamports <priority-fee-lamports>`
 :::
-
-### 1. Create your publisher NFT
-
-```shell
-npx dapp-store create publisher -k <path_to_your_keypair> [-u <mainnet_beta_rpc_url>]
-```
-
-:::info
-This is a **one-time** operation. Once you have created your publisher, the mint address is recorded in your configuration file.
-
-If you have already published an app, you should not mint a new Publisher NFT and instead, reuse your existing NFT.
-:::
-
-### 2. Create your app NFT
 
 ```shell
 npx dapp-store create app -k <path_to_your_keypair> [-u <mainnet_beta_rpc_url>]
