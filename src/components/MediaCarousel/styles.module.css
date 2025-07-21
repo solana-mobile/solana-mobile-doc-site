@@ -1,0 +1,224 @@
+/* MediaCarousel - Updated from VideoCarousel to support images and videos */
+.videoCarousel {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  overflow: visible; /* Allow container to show phone frame */
+  background-color: transparent;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+/* Media container styles - base container */
+.videoContainer {
+  max-width: 100%;
+  margin: 0 auto;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Phone container for videos */
+.phoneContainer {
+  width: 320px;
+  aspect-ratio: 9/19.5; /* Phone aspect ratio */
+  border: 8px solid #252525; /* Phone frame */
+}
+
+/* Image container for images */
+.imageContainer {
+  width: 600px; /* Wider for landscape images */
+  max-width: 90vw; /* Responsive */
+  aspect-ratio: 16/9; /* Common image aspect ratio */
+  border: 2px solid #ddd; /* Subtle border instead of thick phone frame */
+}
+
+.videoItem {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.3s ease;
+}
+
+/* Video styles */
+.video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Fill the phone frame properly */
+  background-color: #000;
+}
+
+/* Image styles */
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Show full image without cropping */
+  background-color: #f8f9fa;
+}
+
+/* Alternative image styles for different use cases */
+.image.cover {
+  object-fit: cover; /* Fill container, may crop image */
+}
+
+.image.fill {
+  object-fit: fill; /* Stretch to fill, may distort */
+}
+
+.visible {
+  opacity: 1;
+  z-index: 1;
+}
+
+.hidden {
+  opacity: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Tab styles - dynamic width based on container */
+.videoTabs {
+  display: flex;
+  width: 100%; /* Match container width */
+  max-width: 600px; /* Max width for images */
+  margin: 0 auto 12px;
+  border-radius: 8px;
+  background-color: #f5f5f5;
+  padding: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.videoTab {
+  flex: 1;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #555;
+  position: relative;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.videoTab:hover {
+  color: var(--ifm-color-primary);
+  background-color: rgba(92, 93, 229, 0.05);
+}
+
+.videoTab.active {
+  color: var(--ifm-color-primary);
+  font-weight: 600;
+}
+
+.videoTab.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--ifm-color-primary);
+  border-radius: 2px;
+}
+
+/* Phone notch styling - only for phone containers */
+.phoneContainer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 20px;
+  background-color: #252525;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  z-index: 10;
+}
+
+/* Loading state for images */
+.image.loading {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .videoContainer {
+    width: 280px;
+  }
+  
+  .videoTabs {
+    width: 280px;
+  }
+  
+  .videoTab {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+}
+
+/* Dark mode styles */
+[data-theme='dark'] .videoCarousel {
+  background-color: transparent;
+}
+
+[data-theme='dark'] .videoTabs {
+  background-color: #222;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme='dark'] .videoTab {
+  color: #ccc;
+}
+
+[data-theme='dark'] .videoTab:hover {
+  color: var(--ifm-color-primary-light);
+  background-color: rgba(137, 140, 255, 0.1);
+}
+
+[data-theme='dark'] .videoTab.active {
+  color: var(--ifm-color-primary-light);
+}
+
+[data-theme='dark'] .videoTab.active::after {
+  background-color: var(--ifm-color-primary-light);
+}
+
+/* Dark mode border for images */
+[data-theme='dark'] .imageContainer {
+  border-color: #555;
+}
+
+[data-theme='dark'] .phoneContainer {
+  border-color: #3a3a3a;
+}
+
+[data-theme='dark'] .image {
+  background-color: #1a1a1a; /* Dark background for images */
+}
+
+[data-theme='dark'] .image.loading {
+  background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
