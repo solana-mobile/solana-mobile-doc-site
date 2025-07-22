@@ -9,7 +9,7 @@ import { Smartphone, Code, Github, BookOpen, QrCode, ArrowDownToLine } from 'luc
 
 
 <MediaCarousel 
-  videos={[
+  media={[
     {
       src: "/videos/svw_mwa.mp4",
       label: "Mobile Web"

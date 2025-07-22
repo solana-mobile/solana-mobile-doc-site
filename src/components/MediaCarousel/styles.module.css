@@ -16,7 +16,6 @@
   position: relative;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 /* Phone container for videos */
@@ -26,12 +25,12 @@
   border: 8px solid #252525; /* Phone frame */
 }
 
-/* Image container for images */
 .imageContainer {
-  width: 600px; /* Wider for landscape images */
-  max-width: 90vw; /* Responsive */
-  aspect-ratio: 16/9; /* Common image aspect ratio */
-  border: 2px solid #ddd; /* Subtle border instead of thick phone frame */
+  width: 900px; /* Set a reasonable width */
+  max-width: 90vw; /* Responsive constraint */
+  aspect-ratio: 16/9;  /* Remove aspect-ratio to let image determine height */
+  border-radius: 12px; /* Match modal's rounded corners */
+  overflow: hidden; /* Ensure image respects the rounded corners */
 }
 
 .videoItem {
@@ -49,23 +48,6 @@
   height: 100%;
   object-fit: cover; /* Fill the phone frame properly */
   background-color: #000;
-}
-
-/* Image styles */
-.image {
-  width: 100%;
-  height: 100%;
-  object-fit: contain; /* Show full image without cropping */
-  background-color: #f8f9fa;
-}
-
-/* Alternative image styles for different use cases */
-.image.cover {
-  object-fit: cover; /* Fill container, may crop image */
-}
-
-.image.fill {
-  object-fit: fill; /* Stretch to fill, may distort */
 }
 
 .visible {
@@ -88,7 +70,6 @@
   border-radius: 8px;
   background-color: #f5f5f5;
   padding: 4px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .videoTab {

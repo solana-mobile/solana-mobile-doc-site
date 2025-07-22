@@ -6,6 +6,26 @@ On the web, Mobile Wallet Adapter (MWA) is available as a *standard wallet* with
 
 This is the recommended library for MWA on web and this guide explains why and how to migrate your web app.
 
+## How to upgrade
+
+### 1. Install Mobile Wallet Standard
+
+Installing the standard wallet takes two steps:
+
+1. Add the library `@solana-mobile/wallet-standard-mobile`.
+2. Call the `register` function.
+
+
+Now, `Mobile Wallet Adapter` will appear as a wallet option.
+
+**View the [installation guide](/mobile-wallet-adapter/web-installation).**
+
+### 2. Update to wallet-adapter >= 0.15.36
+
+If your web app is using `@solana/wallet-adapter-react` update to a version `>= 0.15.36`. 
+Updating fixes common MWA Web issues like:
+- the [*No connect after selecting MWA*](https://github.com/solana-mobile/mobile-wallet-adapter/issues/1086) bug.
+
 ## Why switch?
 
 There are several reasons to upgrade to using MWA via Wallet Standard.
@@ -28,23 +48,3 @@ View the [MWA Remote documentation](/mobile-wallet-adapter/web-installation#enab
 The `@solana-mobile/wallet-standard-mobile` is the recommended web library for MWA going forward. This means it will receive all the latest feature additions and updates. 
 
 The legacy `@solana-mobile/wallet-adapter-mobile` library will be deprecated and enter maintenance mode, and only receive updates for bug fixes.
-
-## How to upgrade
-
-### 1. Install Mobile Wallet Standard
-
-Installing the standard wallet takes two steps:
-
-1. Add the library `@solana-mobile/wallet-standard-mobile`.
-2. Call the `register` function.
-
-
-Now, `Mobile Wallet Adapter` will appear as a wallet option.
-
-**View the [installation guide](/mobile-wallet-adapter/web-installation).**
-
-### 2. Update to wallet-adapter >= 0.15.36
-
-If your web app is using `@solana/wallet-adapter-react` update to a version `>= 0.15.36`. 
-Updating fixes common MWA Web issues like:
-- the [*No connect after selecting MWA*](https://github.com/solana-mobile/mobile-wallet-adapter/issues/1086) bug.
