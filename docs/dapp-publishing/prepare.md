@@ -53,8 +53,9 @@ It is recommended that you put your dApp publishing files next to your dApp, and
 
 Populate the initial contents of the configuration file created during setup. By default, the file name is `config.yaml`. Replace all fields in `<< >>` with details for your dApp. Remove any fields that don't apply (for e.g., `saga_features`, `google_store_package`, etc).
 
-There are 2 sections to fill out: `app` and `release`:
+There are 3 sections to fill out: `publisher`, `app`, and `release`:
 
+- The `publisher` section describes you, the app developer.
 - The `app` section represents a single logical app produced by a publisher. A single publisher will always have at least one app, but if you publish multiple different apps under a single identity, there will be one for each of your apps.
 - The `release` section is the most important, and describes all the metadata for a single release of an app, including its display name, description, icons, screenshots, etc. The text you enter in the `catalog` subsection, along with the icon and screenshots in the `media` subsections, are what application stores will use to display details about your app to the end user, so be as descriptive as you can.
 
