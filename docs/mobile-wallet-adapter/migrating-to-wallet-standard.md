@@ -12,13 +12,49 @@ This is the recommended library for MWA on web and this guide explains why and h
 
 Installing the standard wallet takes two steps:
 
-1. Add the library `@solana-mobile/wallet-standard-mobile`.
-2. Call the `register` function.
+#### Step 1
 
+Add the library `@solana-mobile/wallet-standard-mobile`.
+
+```bash
+npm install @solana-mobile/wallet-standard-mobile
+```
+
+#### Step 2
+
+Call the `registerMwa` function. 
+
+:::caution
+Ensure `registerMwa` is invoked in a non-SSR context. if you're using a framework with Server Side Rendering (e.g Next.js), 
+:::
+
+```ts
+// 'use client' - If using Next.js, ensure it is registered in a non-SSR context.
+
+import { 
+    createDefaultAuthorizationCache, 
+    createDefaultChainSelector, 
+    createDefaultWalletNotFoundHandler,
+    registerMwa, 
+} from '@solana-mobile/wallet-standard-mobile';
+
+registerMwa({
+    appIdentity: {
+      name: 'My app',
+      uri: 'https://myapp.io',
+      icon: 'relative/path/to/icon.png', // resolves to https://myapp.io/relative/path/to/icon.png
+    },    
+    authorizationCache: createDefaultAuthorizationCache(),
+    chains: ['solana:devnet', 'solana:mainnet'],
+    chainSelector: createDefaultChainSelector(),
+    onWalletNotFound: createDefaultWalletNotFoundHandler(),
+    // remoteHostAuthority: '<REPLACE_WITH_URL_>',  Include to enable remote connection option.
+})
+```
 
 Now, `Mobile Wallet Adapter` will appear as a wallet option.
 
-**View the [installation guide](/mobile-wallet-adapter/web-installation).**
+For more context, view the **full [installation guide](/mobile-wallet-adapter/web-installation).**
 
 ### 2. Update to wallet-adapter >= 0.15.36
 

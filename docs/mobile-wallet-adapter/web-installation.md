@@ -17,14 +17,19 @@ npm install @solana-mobile/wallet-standard-mobile
 
 In the root of your web application, invoke the `registerMwa` function.
 
+:::caution
+Ensure `registerMwa` is invoked in a non-SSR context. if you're using a framework with Server Side Rendering (e.g Next.js), 
+:::
+
 ```typescript
+// 'use client' - If using Next.js, ensure it is registered in a non-SSR context.
+
 import { 
     createDefaultAuthorizationCache, 
     createDefaultChainSelector, 
     createDefaultWalletNotFoundHandler,
     registerMwa, 
 } from '@solana-mobile/wallet-standard-mobile';
-
 
 registerMwa({
     appIdentity: {
