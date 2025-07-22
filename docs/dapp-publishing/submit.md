@@ -1,6 +1,6 @@
 # Submit your dApp release
 
-After minting a Publisher and App NFT, you will need to mint a **Release NFT** in order to submit for app review.
+After minting an App NFT, you will need to mint a **Release NFT** in order to submit for app review.
 
 A Release NFT:
 
@@ -9,7 +9,7 @@ A Release NFT:
 
 ## Mint a release NFT
 
-Using the same wallet that contains your Publisher and App NFTs, run this command.
+Using the same wallet that contains your App NFT, run this command.
 
 ```shell
 npx dapp-store create release -k <path_to_your_keypair> -b <path_to_your_android_sdk_build_tools> [-u <mainnet_beta_rpc_url>]
@@ -29,7 +29,7 @@ Please make sure your network connection is reliable and has a minimum upload sp
 
 ## Submit your app
 
-After minting a complete set of on-chain NFTs (publisher, dApp, and release), you may choose to submit them to the Solana dApp Publisher Portal, as a candidate for inclusion in the Solana dApp Store catalog:
+After minting a complete set of on-chain NFTs (App NFT and Release NFT), you may choose to submit them to the Solana dApp Publisher Portal, as a candidate for inclusion in the Solana dApp Store catalog:
 
 ```shell
 npx dapp-store publish submit -k <path_to_your_keypair> -u <mainnet_beta_rpc_url> --requestor-is-authorized --complies-with-solana-dapp-store-policies

@@ -83,8 +83,8 @@ module.exports = {
                 },
                 {
                     type: 'doc',
-                    id: 'dapp-publishing/publisher-and-app-nft',
-                    label: '3. Publisher and App NFTs'
+                    id: 'dapp-publishing/app-nft',
+                    label: '3. Mint your App NFT'
                 },
                 {
                     type: 'doc',
