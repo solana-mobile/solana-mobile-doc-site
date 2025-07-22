@@ -6,26 +6,26 @@ hide_table_of_contents: true
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import VideoCarousel from '@site/src/components/VideoCarousel';
+import MediaCarousel from '@site/src/components/MediaCarousel';
 import SideBySideLayout from '@site/src/layouts/SideBySideLayout';
 import { SDKSelectionContainer, SDKSelectionButton } from '@site/src/components/SDKSelectionContainer';
 import {Code, ArrowDownToLine, Globe } from 'lucide-react';
 
 <SideBySideLayout
   rightContent={
-    <VideoCarousel 
+    <MediaCarousel 
       videos={[
         {
-          src: "/videos/phantom_mwa.mp4",
-          label: "Phantom"
+          src: "/videos/svw_mwa.mp4",
+          label: "SV Wallet"
         },
         {
           src: "/videos/solflare_mwa.mp4",
           label: "Solflare"
         },
         {
-          src: "/videos/mock_mwa_wallet.mp4",
-          label: "Mock Wallet"
+          src: "/videos/phantom_mwa.mp4",
+          label: "Phantom"
         },
       ]}
       autoPlay={true}

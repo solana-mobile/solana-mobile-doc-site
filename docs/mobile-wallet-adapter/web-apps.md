@@ -2,35 +2,26 @@
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import VideoCarousel from '@site/src/components/VideoCarousel';
+import MediaCarousel from '@site/src/components/MediaCarousel';
 import SideBySideLayout from '@site/src/layouts/SideBySideLayout';
 import { SDKSelectionContainer, SDKSelectionButton } from '@site/src/components/SDKSelectionContainer';
 import { Smartphone, Code, Github, BookOpen, QrCode, ArrowDownToLine } from 'lucide-react';
 
 
-<div className="image-container">
-  <img 
-    src="/img/RemoteModal.png" 
-    alt="Descriptive alt text for accessibility" 
-    width="100%" 
-    loading="lazy"
-  />
-</div>
-
-<style jsx>{`
-  .image-container {
-    max-width: 800px;
-    margin: 2rem auto;
-    border-radius: 4px;
-    overflow: hidden;
-  }
-  
-  .image-container img {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-`}</style>
+<MediaCarousel 
+  media={[
+    {
+      src: "/videos/svw_mwa.mp4",
+      label: "Mobile Web"
+    },
+    {
+      src: "/img/RemoteModal.png",
+      label: "Desktop Web"
+    },
+  ]}
+  autoPlay={true}
+  muted={true}
+/>
 
 ## Overview
 
