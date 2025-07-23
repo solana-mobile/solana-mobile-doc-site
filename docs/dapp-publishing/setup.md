@@ -67,3 +67,9 @@ npx dapp-store --help
 ## CLI Updates
 
 The CLI will automatically check for updated versions on npm and restrict operations on a periodic basis. If your CI/CD deployments fail, be sure to check if there is a required update.
+
+To update the CLI run:
+
+```bash
+pnpm install --save-dev @solana-mobile/dapp-store-cli@latest
+```
