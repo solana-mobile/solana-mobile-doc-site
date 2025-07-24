@@ -17,6 +17,7 @@ Your submission must meet the following requirements to pass app review:
 - Icon(s) must be 512px by 512px dimensions.
   - Follow the [Google Play icon design spec](https://developer.android.com/distribute/google-play/resources/icon-design-specifications) for best practices.
 - Banner Graphic image of size 1200px by 600px is required.
+- (optional) Feature Graphic image of size 1200x1200px is required to be featured in Editor's choice carousel
 - Provide a minimum of 4 screenshot images or videos of your app.
   - We recommend preview images and videos to be 1080p resolution (1920px by 1080px).
 - Image Requirements
@@ -24,7 +25,6 @@ Your submission must meet the following requirements to pass app review:
   - All images provided must have consistent orientation (landscape or portrait).
   - All images provided must have equal aspect ratio.
 - Videos Requirements
-
   - All videos provided must be at least 720px in width and height.
   - All videos provided must be `.mp4` video file format.
 
