@@ -24,11 +24,46 @@ This guide shows you how to:
 
 By the end, you will have a functional, signed release APK that can be published on the dApp Store!
 
-### Prequisites
+### Prerequisite
 
-- A functional, hosted PWA with a [web manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest)
+- A PWA [web manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest) hosted at `https://your-pwa-url.com/manifest.json`
 
-If missing an existing web manifest, you can follow this [resource](https://learn.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/how-to/web-app-manifests) to create one for your website.
+### Template: Web Manifest 
+
+At minimum, a typical manifest file includes:
+
+- The app's name
+- The icons the app should use
+- The URL that should be opened when the app launches
+
+You can use this template to quickly stand up a `manifest.json` on your website.
+
+```json manifest.json
+{
+    "name": "APP_NAME",
+    "short_name": "APP_NAME",
+    "scope": "/",
+    "start_url": "/",
+    "icons": [
+        {
+            "src": "/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff",
+    "display": "standalone"
+}
+```
+
+For more information on web manifests, view this [documentation](https://web.dev/articles/add-manifest).
+
 
 ### 1. Installing Bubblewrap CLI
 
