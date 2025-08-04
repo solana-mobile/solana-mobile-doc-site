@@ -50,6 +50,11 @@ module.exports = {
                     id: 'mobile-wallet-adapter/migrating-to-wallet-standard',
                     label: 'Migrating to Wallet Standard'
                 },
+                {
+                    type: 'doc',
+                    id: 'mobile-wallet-adapter/ux-guidelines',
+                    label: 'UX Guidelines'
+                },
             ]
         },
 
