@@ -1,124 +1,164 @@
-import BlogImageRow from "../../src/components/BlogImageRow/"
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+# Seeker Genesis Token
 
-# Introduction
+## Overview
 
-This article provides information about the Solana Mobile Chapter 2 Preorder Tokens NFTs. The non-transferrable Chapter 2 Preorder Tokens allow for the identification of wallets that have participated in preordering Seeker, known as Chapter 2 when preorders first launched.
-
-Solana Mobile does not currently have a rewards program in connection with the Chapter 2 Preorder Token. Ecosystem teams are entirely free to decide if (and if so, how) they wish to interact with the holders of these non-transferable tokens.
-
-## Chapter 2 Preorder Token holders
-
-The Chapter 2 Preorder Token NFT is a non-transferable NFT distributed to the wallets of anyone who has preordered Seeker.
-
-As of the time this article was written, there are 140,000+ holders of the Preorder Token. The preorder phase is still active and any new Tokens will be issued in waves.
-
-## Engaging with Chapter 2 Preorder Token Holders
-
-<Tabs>
-<TabItem value="Using Airship" label="Using Airship">
-
-### Airship
-
-[Airship](https://airship.helius.dev/) is a tool developed by [Helius](https://www.helius.dev/) that enables cost-effective and simplified airdrops. For more information on how it works, check out the official [Airship docs](https://github.com/helius-labs/airship).
-
-</TabItem>
-<TabItem value="Querying manually" label="Querying manually">
-
-### Manual List Generation
-
-You can follow these steps to manually query the Chapter 2 Preorder Token list and save it into a JSON file:
-
-#### 1. Access your RPC provider.
-
-Any RPC provider with the [DAS (Digital Asset Standard)](https://github.com/metaplex-foundation/digital-asset-standard-api) APIs should work. If you don't have one, the Helius Free plan (helius.dev/pricing) should be sufficient for this query.
-
-#### 2. Add your API Key to the following query:
-
-```js
-import { writeFileSync } from "fs";
-
-const DAS_API_URL = "https://mainnet.helius-rpc.com/?api-key=<API_KEY>";
-const TOKEN_MINT_ADDRESS = "2DMMamkkxQ6zDMBtkFp8KH7FoWzBMBA1CGTYwom4QH6Z";
-const OUTPUT_FILE = `out.json`;
-
-let tokens = [];
-
-let page = 0;
-while (true) {
-  page++;
-  console.log(`Fetching page ${page}`);
-  const response = await fetch(DAS_API_URL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      jsonrpc: "2.0",
-      id: "my-id",
-      method: "getTokenAccounts",
-      params: {
-        mint: `${TOKEN_MINT_ADDRESS}`,
-        page: page, // Starts at 1
-        limit: 1000,
-      },
-    }),
-  });
-  const { result } = await response.json();
-  if (result.total === 0) {
-    console.log("Done!");
-    break;
-  }
-  for (const item of result.token_accounts) {
-    tokens.push({ owner: item.owner, count: item.amount });
-  }
-}
-
-console.log(`Writing to ${OUTPUT_FILE}`);
-writeFileSync(OUTPUT_FILE, JSON.stringify(tokens, null, 2));
-```
-
-#### 3. Perform the Query
-
-Run the script to perform the query and you can find the results in the output file `out.json`.
-
-#### 4. Further querying (optional)
-
-In order to query a subset of the Preorder Token Holders, you may write a script to fetch wallet activity data using blockchain explorers and analytics tools based on the subset criteria. You can use their APIs to retrieve transaction history, token balances, and other relevant information, such as:
-
-- Length of their engagement with the applicable protocol (i.e. The date of the first transaction)
-- Participation in applications within the ecosystem that are adjacent or complementary to your project
-
-</TabItem>
-</Tabs>
+The Seeker Genesis Token is a unique, non-transferable NFT that represents a verified owner of a Seeker device. It can only be minted once per device.
 
 ## NFT Details
 
-The Chapter 2 Preorder Tokens are non-transferable NFTs enabled by the _[NonTransferable](https://solana.com/developers/guides/token-extensions/non-transferable)_ extension.
+The Seeker Genesis Token implements Token Extensions (formerly Token-2022). 
 
-### Mint Address
+### Token Extensions
 
-The Chapter 2 Preorder Token mint address is:
+Seeker Genesis Token implements several extensions, notably:
+- Metadata Pointer
+- NonTransferable
+- Token Group Member and Pointer
 
-- `2DMMamkkxQ6zDMBtkFp8KH7FoWzBMBA1CGTYwom4QH6Z`
+### Key Addresses
+- **Mint Authority**: `GT2zuHVaZQYZSyQMgJPLzvkmyztfyXg2NJunqFp4p3A4`
+- **Metadata Address**: `GT22s89nU4iWFkNXj1Bw6uYhJJWDRPpShHt4Bk8f99Te`
 
-This mint address is shared by all token accounts of the Chapter 2 Preorder Token.
+#### View on an Explorer
+- An individual [Seeker Genesis Token](https://explorer.solana.com/address/5mXbkqKz883aufhAsx3p5Z1NcvD2ppZbdTTznM6oUKLj/token-extensions) and its extensions
+- Seeker Genesis Token [Metadata Account](https://explorer.solana.com/address/5mXbkqKz883aufhAsx3p5Z1NcvD2ppZbdTTznM6oUKLj/token-extensions)
 
-### Metadata
+## Verifying Seeker Genesis Token Ownership
 
-Each Chapter 2 Preorder Token NFT utilizes the [Metadata and Metadata Pointer](https://solana.com/developers/guides/token-extensions/metadata-pointer) extension to define
-its NFT metadata.
+To verify a wallet owns a Seeker Genesis Token ownership, you can use the `searchAssets` API.
 
+Here's an example script using Helius RPC with pagination:
+
+```js
+async function checkSgtOwnership(walletAddress: string): Promise<boolean> {
+  const SGT_METADATA_AUTHORITY = 'GT2zuHVaZQYZSyQMgJPLzvkmyztfyXg2NJunqFp4p3A4';
+  const SGT_METADATA_ADDRESS = 'GT22s89nU4iWFkNXj1Bw6uYhJJWDRPpShHt4Bk8f99Te';
+  
+  let page = 1;
+  
+  while (true) {
+    const response = await fetch(`https://mainnet.helius-rpc.com/?api-key=YOUR_API_KEY`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        jsonrpc: '2.0',
+        id: 'my-id',
+        method: 'searchAssets',
+        params: {
+          ownerAddress: walletAddress,
+          tokenType: 'all',
+          limit: 1000,
+          page: page
+        }
+      })
+    });
+
+    const data = await response.json();
+    const assets = data.result?.items || [];
+    
+    if (assets.length === 0) break;
+    
+    for (const asset of assets) {
+      const metadataPointer = asset.mint_extensions?.metadata_pointer;
+      
+      if (metadataPointer && 
+          metadataPointer.authority === SGT_METADATA_AUTHORITY &&
+          metadataPointer.metadata_address === SGT_METADATA_ADDRESS) {
+        return true; // SGT found
+      }
+    }
+    
+    page++;
+  }
+  
+  return false; // No SGT found
+}
 ```
-Metadata
-    Uri: https://arweave.net/WHyy5Fo8vUC7FqFfzqkuYAmDi-BfOMBjZSXIwwO7P6g
-    Mint: 2DMMamkkxQ6zDMBtkFp8KH7FoWzBMBA1CGTYwom4QH6Z
-    Name: Chapter 2 Preorder Token
-    Symbol: CHAPTER2
-    Update Authority: GRR6BquJZYWgUqWpNJekBZHDHgxVQ56iZ2P2nWjDFRSn
-    Additional Metadata
-Metadata Pointer
-    Authority: GRR6BquJZYWgUqWpNJekBZHDHgxVQ56iZ2P2nWjDFRSn
-    Metadata Address: 2DMMamkkxQ6zDMBtkFp8KH7FoWzBMBA1CGTYwom4QH6Z
+
+## Querying a mint list of holders 
+
+You can query an RPC and fetch a mint list of all Seeker Genesis Token holders.
+
+This script can be prone to rate limit, so consider lowering the batch sizes or upgrading your RPC plan.
+
+```js
+import { Connection, PublicKey } from '@solana/web3.js';
+import fs from 'fs';
+import path from 'path';
+
+async function fetchAllHolders() {
+  const connection = new Connection('replace-with-rpc-url');
+  const GROUP = 'GT22s89nU4iWFkNXj1Bw6uYhJJWDRPpShHt4Bk8f99Te'; 
+  
+  console.log('Fetching SGT holder signatures...');
+  
+  // Fetch all signatures with pagination 
+  let sigs = [];
+  let before = undefined;
+  const limit = 1000; 
+  
+  while (true) {
+    const options = { limit };
+    if (before) options.before = before;
+    
+    const batch = await connection.getSignaturesForAddress(
+      new PublicKey('GT2zuHVaZQYZSyQMgJPLzvkmyztfyXg2NJunqFp4p3A4'), 
+      options
+    );
+    
+    if (batch.length === 0) break; // No more signatures
+    
+    sigs.push(...batch);
+    before = batch[batch.length - 1].signature;
+    
+    console.log(`Fetched ${sigs.length} signatures so far...`);
+  }
+  
+  console.log(`Found ${sigs.length} signatures to process`);
+  
+  const holders = [];
+
+  // Process in larger batches for speed
+  for (let i = 0; i < sigs.length; i += 20) {
+    const batch = sigs.slice(i, i + 20);
+    console.log(`Processing batch ${Math.floor(i / 20) + 1}/${Math.ceil(sigs.length / 20)}`);
+    
+    const txs = await Promise.all(batch.map(s => 
+      connection.getParsedTransaction(s.signature, { maxSupportedTransactionVersion: 0 })
+    ));
+    
+    for (const tx of txs) {
+      if (!tx?.meta?.postTokenBalances) continue;
+      
+      const hasGroup = tx.transaction.message.accountKeys.some(a => a.pubkey.toBase58() === GROUP);
+      if (!hasGroup) continue;
+      
+      for (const b of tx.meta.postTokenBalances) {
+        if (b.mint && b.owner && b.uiTokenAmount.uiAmount === 1) {
+          holders.push({ mint: b.mint, owner: b.owner });
+        }
+      }
+    }
+  }
+
+  // Create output directory if it doesn't exist
+  const outputDir = path.join(process.cwd(), 'output');
+  if (!fs.existsSync(outputDir)) {
+    fs.mkdirSync(outputDir, { recursive: true });
+  }
+
+  // Generate timestamped filename
+  const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+  const filename = `sgt-holders-fast-${timestamp}.json`;
+  const filepath = path.join(outputDir, filename);
+
+  // Write holders to file
+  fs.writeFileSync(filepath, JSON.stringify(holders, null, 2));
+  
+  console.log(`Found ${holders.length} holders`);
+  console.log(`Output written to: ${filepath}`);
+}
+
+// Run the script
+fetchAllHoldersFast().catch(console.error); 
 ```
