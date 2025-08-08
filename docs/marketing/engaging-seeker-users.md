@@ -160,5 +160,5 @@ async function fetchAllHolders() {
 }
 
 // Run the script
-fetchAllHoldersFast().catch(console.error); 
+fetchAllHolders().catch(console.error); 
 ```
