@@ -21,7 +21,7 @@ Seeker Genesis Token implements several extensions, notably:
 
 #### View on an Explorer
 - An individual [Seeker Genesis Token](https://explorer.solana.com/address/5mXbkqKz883aufhAsx3p5Z1NcvD2ppZbdTTznM6oUKLj/token-extensions) and its extensions
-- Seeker Genesis Token [Metadata Account](https://explorer.solana.com/address/5mXbkqKz883aufhAsx3p5Z1NcvD2ppZbdTTznM6oUKLj/token-extensions)
+- Seeker Genesis Token [Metadata Account](https://explorer.solana.com/address/GT22s89nU4iWFkNXj1Bw6uYhJJWDRPpShHt4Bk8f99Te/)
 
 ## Verifying Seeker Genesis Token Ownership
 
