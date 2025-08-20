@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Seeker Genesis Token is a unique, non-transferable NFT that represents a verified owner of a Seeker device. It can only be minted once per device.
+The Seeker Genesis Token is a unique NFT that represents a verified owner of a Seeker device. It can only be minted once per device and is minted into the primary account in a user's Seed Vault Wallet.
 
 ## NFT Details
 
@@ -12,7 +12,6 @@ The Seeker Genesis Token implements Token Extensions (formerly Token-2022).
 
 Seeker Genesis Token implements several extensions, notably:
 - Metadata Pointer
-- NonTransferable
 - Token Group Member and Pointer
 
 ### Key Addresses
@@ -22,6 +21,12 @@ Seeker Genesis Token implements several extensions, notably:
 #### View on an Explorer
 - An individual [Seeker Genesis Token](https://explorer.solana.com/address/5mXbkqKz883aufhAsx3p5Z1NcvD2ppZbdTTznM6oUKLj/token-extensions) and its extensions
 - Seeker Genesis Token [Metadata Account](https://explorer.solana.com/address/GT22s89nU4iWFkNXj1Bw6uYhJJWDRPpShHt4Bk8f99Te/)
+
+### Transferability
+
+The Seeker Genesis Token can be transferred between a user's wallet accounts on a permissioned basis via the Mint Authority. 
+
+A transfer occurs when a user changes their primary account in the Seed Vault Wallet.
 
 ## Verifying Seeker Genesis Token Ownership
 
