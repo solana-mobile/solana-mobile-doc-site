@@ -8,6 +8,27 @@ The Seeker Genesis Token is a unique NFT that represents a verified owner of a S
 
 The Seeker Genesis Token implements Token Extensions (formerly Token-2022). 
 
+### Transferability
+
+The Seeker Genesis Token can only be transferred between a user's wallet accounts on a permissioned basis within the Seed Vault Wallet.
+A transfer occurs when a user changes their primary account in the Seed Vault Wallet.
+
+The **mint address** of the SGT remains the same when it is transferred.
+
+#### Anti-Sybil Example: In-App Rewards Claim
+
+Even with transferability, the Seeker Genesis Token is still useful as an anti-sybil measure. 
+
+As an example, imagine an in-app rewards claim that wants to use the Seeker Genesis Token to limit the claim to once per Seeker device.
+
+To implement this, the app should check for 3 properties:
+
+1. The connected wallet owns a Seeker Genesis Token.
+2. The user proves ownership of the wallet via [signing a message](https://github.com/phantom/sign-in-with-solana?tab=readme-ov-file#dapp-integration).
+3. The Seeker Genesis Token has not been previously used to claim a reward (i.e check that its **mint address** has not been seen before).
+
+Step 3 is crucial to exclude wallets that have previously claimed the reward on another wallet (and then transferred the SGT to a new wallet).
+
 ### Token Extensions
 
 Seeker Genesis Token implements several extensions, notably:
@@ -22,11 +43,7 @@ Seeker Genesis Token implements several extensions, notably:
 - An individual [Seeker Genesis Token](https://explorer.solana.com/address/5mXbkqKz883aufhAsx3p5Z1NcvD2ppZbdTTznM6oUKLj/token-extensions) and its extensions
 - Seeker Genesis Token [Metadata Account](https://explorer.solana.com/address/GT22s89nU4iWFkNXj1Bw6uYhJJWDRPpShHt4Bk8f99Te/)
 
-### Transferability
 
-The Seeker Genesis Token can be transferred between a user's wallet accounts on a permissioned basis via the Mint Authority. 
-
-A transfer occurs when a user changes their primary account in the Seed Vault Wallet.
 
 ## Verifying Seeker Genesis Token Ownership
 
