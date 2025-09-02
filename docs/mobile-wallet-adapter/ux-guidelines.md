@@ -24,16 +24,14 @@ import { useWalletModal } from '@solana/wallet-adapter-react-ui';
 import { SolanaMobileWalletAdapterWalletName } from '@solana-mobile/wallet-standard-mobile'
 
 export default function ConnectButton() {
-    const { connected, wallet, wallets } = useWallet();
+    const { connected, connect, wallet, wallets } = useWallet();
     const { setVisible: showWalletSelectionModal } = useWalletModal();
 
-    // MWA is only available when user is on Android Web environments (e.g Android Chrome).
-    const mobileWalletAdapter = wallets.find((wallet) => wallet.adapter.name === SolanaMobileWalletAdapterWalletName)
-
     const handleConnectClick = () => {
+        // MWA is only available if user is on Android Web environments (e.g Android Chrome).
         if (wallet?.adapter?.name === SolanaMobileWalletAdapterWalletName) {
             // If already selected, immediately connect.
-            await wallet?.adapter.connect();
+            await connect();
         } else if (mobileWalletAdapter) {
             // If MWA is not selected, but available, select it instead of showing modal.
             select(SolanaMobileWalletAdapterWalletName)
@@ -68,13 +66,11 @@ import { useWalletModal } from '@solana/wallet-adapter-react-ui';
 import { SolanaMobileWalletAdapterWalletName } from '@solana-mobile/wallet-standard-mobile'
 
 export default function SignInButton() {
-    const { connected, wallet, wallets, signIn } = useWallet();
+    const { connected, signIn, wallet, wallets } = useWallet();
     const { setVisible: showWalletSelectionModal } = useWalletModal();
 
-    // MWA is only available when user is on Android Web environments (e.g Android Chrome).
-    const mobileWalletAdapter = wallets.find((wallet) => wallet.adapter.name === SolanaMobileWalletAdapterWalletName)
-
     const handleSignInButtonClick = () => {
+        // MWA is only available if user is on Android Web environments (e.g Android Chrome).
         if (wallet?.adapter?.name === SolanaMobileWalletAdapterWalletName) {
             // If MWA is present, immediately sign in.
             const input: SolanaSignInInput = {
