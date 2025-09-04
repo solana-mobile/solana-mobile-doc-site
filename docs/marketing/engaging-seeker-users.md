@@ -107,11 +107,12 @@ Here's an example script using Helius RPC:
 
 ```js
 import { Connection, PublicKey } from '@solana/web3.js';
-import { unpackMint, getMetadataPointerState, TOKEN_2022_PROGRAM_ID } from '@solana/spl-token';
+import { unpackMint, getMetadataPointerState, getTokenGroupMemberState, TOKEN_2022_PROGRAM_ID } from '@solana/spl-token';
 
 async function walletHasToken(walletAddress) {
   const SGT_METADATA_AUTHORITY = 'GT2zuHVaZQYZSyQMgJPLzvkmyztfyXg2NJunqFp4p3A4';
   const SGT_METADATA_ADDRESS = 'GT22s89nU4iWFkNXj1Bw6uYhJJWDRPpShHt4Bk8f99Te';
+  const SGT_GROUP_MINT_ADDRESS = 'GT22s89nU4iWFkNXj1Bw6uYhJJWDRPpShHt4Bk8f99Te';
   const SOLANA_RPC_MAINNET = "https://mainnet.helius-rpc.com/?api-key=YOUR_API_KEY";
 
   try {
@@ -144,12 +145,22 @@ async function walletHasToken(walletAddress) {
         
         // Use the helper function to get the Metadata Pointer extension state
         const metadataPointer = getMetadataPointerState(mint);
-        // Check if the extension exists and if its values match our target SGT
-        if (metadataPointer &&
+
+        // Check to see if it has the correct Metadata
+        const hasCorrectMetadata = metadataPointer &&
             metadataPointer.authority?.toBase58() === SGT_METADATA_AUTHORITY &&
-            metadataPointer.metadataAddress?.toBase58() === SGT_METADATA_ADDRESS) {
-          
-          console.log("MATCH FOUND: Wallet holds a verified SGT.");
+            metadataPointer.metadataAddress?.toBase58() === SGT_METADATA_ADDRESS;
+
+        // Get the actual group member data from the mint's extensions
+        const tokenGroupMemberState = getTokenGroupMemberState(mint);
+
+        // Check if the extension exists and if its `group` address matches our target group.
+        const isCorrectGroupMember = tokenGroupMemberState &&
+            tokenGroupMemberState.group?.toBase58() === SGT_GROUP_MINT_ADDRESS;
+
+        // Check if the extension exists and if its values match our target SGT
+        if (hasCorrectMetadata && isCorrectGroupMember) {
+          console.log("MATCH FOUND: Wallet holds a verified SGT (checked metadata and group).");
           return true; // We found it, exit early
         }
       }
