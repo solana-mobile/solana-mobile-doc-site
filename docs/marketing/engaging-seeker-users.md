@@ -38,126 +38,163 @@ Seeker Genesis Token implements several extensions, notably:
 ### Key Addresses
 - **Mint Authority**: `GT2zuHVaZQYZSyQMgJPLzvkmyztfyXg2NJunqFp4p3A4`
 - **Metadata Address**: `GT22s89nU4iWFkNXj1Bw6uYhJJWDRPpShHt4Bk8f99Te`
+- **Group Address**: `GT22s89nU4iWFkNXj1Bw6uYhJJWDRPpShHt4Bk8f99Te`
 
 #### View on an Explorer
 - An individual [Seeker Genesis Token](https://explorer.solana.com/address/5mXbkqKz883aufhAsx3p5Z1NcvD2ppZbdTTznM6oUKLj/token-extensions) and its extensions
 - Seeker Genesis Token [Metadata Account](https://explorer.solana.com/address/GT22s89nU4iWFkNXj1Bw6uYhJJWDRPpShHt4Bk8f99Te/)
 
 
-
 ## Verifying Seeker Genesis Token Ownership
 
-### Option 1: Use the `searchAssets` API.
+To verify a wallet owns a Seeker Genesis Token, you can use the [`getTokenAccountsByOwnerV2` API call](https://www.helius.dev/docs/api-reference/rpc/http/gettokenaccountsbyownerv2) provided by Helius.
 
-To verify a wallet owns a Seeker Genesis Token ownership, you can use the `searchAssets` API.
-
-Here's an example script using Helius RPC with pagination:
+Here's an example script:
 
 ```js
-async function checkSgtOwnership(walletAddress: string): Promise<boolean> {
-  const SGT_METADATA_AUTHORITY = 'GT2zuHVaZQYZSyQMgJPLzvkmyztfyXg2NJunqFp4p3A4';
+const { Connection, PublicKey } = require('@solana/web3.js');
+const { unpackMint, getMetadataPointerState, getTokenGroupMemberState, TOKEN_2022_PROGRAM_ID } = require('@solana/spl-token');
+
+async function checkWalletForSGT(walletAddress) {
+  const HELIUS_RPC_URL = `https://mainnet.helius-rpc.com/?api-key=${HELIUS_API_KEY}`;
+
+  const SGT_MINT_AUTHORITY = 'GT2zuHVaZQYZSyQMgJPLzvkmyztfyXg2NJunqFp4p3A4';
+
+  // The metadata mint and group mint address are intentionally the same.
   const SGT_METADATA_ADDRESS = 'GT22s89nU4iWFkNXj1Bw6uYhJJWDRPpShHt4Bk8f99Te';
-  
-  let page = 1;
-  
-  while (true) {
-    const response = await fetch(`https://mainnet.helius-rpc.com/?api-key=YOUR_API_KEY`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        jsonrpc: '2.0',
-        id: 'my-id',
-        method: 'searchAssets',
-        params: {
-          ownerAddress: walletAddress,
-          tokenType: 'all',
-          limit: 1000,
-          page: page
-        }
-      })
-    });
-
-    const data = await response.json();
-    const assets = data.result?.items || [];
-    
-    if (assets.length === 0) break;
-    
-    for (const asset of assets) {
-      const metadataPointer = asset.mint_extensions?.metadata_pointer;
-      
-      if (metadataPointer && 
-          metadataPointer.authority === SGT_METADATA_AUTHORITY &&
-          metadataPointer.metadata_address === SGT_METADATA_ADDRESS) {
-        return true; // SGT found
-      }
-    }
-    
-    page++;
-  }
-  
-  return false; // No SGT found
-}
-```
-
-### Option 2: Use the `getTokenAccountsByOwner` API (Better performance and more efficient).
-
-To verify a wallet owns a Seeker Genesis Token ownership, you can use the `getTokenAccountsByOwner` API.
-
-Here's an example script using Helius RPC:
-
-```js
-import { Connection, PublicKey } from '@solana/web3.js';
-import { unpackMint, getMetadataPointerState, TOKEN_2022_PROGRAM_ID } from '@solana/spl-token';
-
-async function walletHasToken(walletAddress) {
-  const SGT_METADATA_AUTHORITY = 'GT2zuHVaZQYZSyQMgJPLzvkmyztfyXg2NJunqFp4p3A4';
-  const SGT_METADATA_ADDRESS = 'GT22s89nU4iWFkNXj1Bw6uYhJJWDRPpShHt4Bk8f99Te';
-  const SOLANA_RPC_MAINNET = "https://mainnet.helius-rpc.com/?api-key=YOUR_API_KEY";
+  const SGT_GROUP_MINT_ADDRESS = 'GT22s89nU4iWFkNXj1Bw6uYhJJWDRPpShHt4Bk8f99Te';
 
   try {
-    const connection = new Connection(SOLANA_RPC_MAINNET);
-    const owner = new PublicKey(walletAddress);
+    const connection = new Connection(HELIUS_RPC_URL);
     
-    // 1. Find all Token-2022 token accounts for the wallet
-    const tokenAccounts = await connection.getTokenAccountsByOwner(owner, {
-      programId: TOKEN_2022_PROGRAM_ID
-    });
-    if (tokenAccounts.value.length === 0) {
+    // Use getTokenAccountsByOwnerV2 with pagination
+    let allTokenAccounts = [];
+    let paginationKey = null;
+    let pageCount = 0;
+
+    console.log(`Starting paginated fetch for wallet: ${walletAddress}`);
+
+    do {
+      pageCount++;
+      console.log(`Fetching page ${pageCount}...`);
+
+      const requestPayload = {
+        jsonrpc: '2.0',
+        id: `page-${pageCount}`,
+        method: 'getTokenAccountsByOwnerV2',
+        params: [
+          walletAddress,
+          { "programId": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb" }, // Token-2022 program
+          {
+            encoding: 'jsonParsed', 
+            limit: 1000, // Maximum accounts per request
+            ...(paginationKey && { paginationKey })
+          }
+        ]
+      };
+
+      const response = await fetch(HELIUS_RPC_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(requestPayload)
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      
+      if (data.error) {
+        throw new Error(`RPC error: ${data.error.message}`);
+      }
+
+      const pageResults = data.result?.value.accounts || [];
+      console.log(`Page ${pageCount}: Found ${pageResults.length} token accounts`);
+      
+      if (pageResults.length > 0) {
+        allTokenAccounts.push(...pageResults);
+      }
+      paginationKey = data.result?.paginationKey;
+      
+      // Log pagination info
+      if (data.result.totalResults) {
+        console.log(`Total results available: ${data.result.totalResults}`);
+      }
+      
+    } while (paginationKey); // Continue until no more pages
+
+    console.log(`\nCompleted pagination: ${pageCount} pages, ${allTokenAccounts.length} total token accounts`);
+
+    if (allTokenAccounts.length === 0) {
       console.log("No Token-2022 accounts found for this wallet.");
       return false;
     }
-    // 2. Extract the mint addresses from each token account
-    const mintPubkeys = tokenAccounts.value.map((accountInfo) => {
-      // The mint public key is the first 32 bytes of the token account data
-      return new PublicKey(accountInfo.account.data.slice(0, 32));
+
+    // Extract mint addresses from token accounts 
+    const mintPubkeys = allTokenAccounts.map((accountInfo) => {
+      return new PublicKey(accountInfo.account.data.parsed.info.mint);
     });
-    // 3. Fetch all mint account data in a single batch call for efficiency
-    const mintAccountInfos = await connection.getMultipleAccountsInfo(mintPubkeys);
-    // 4. Iterate through the mint accounts to find a match
+
+    console.log(`Extracted ${mintPubkeys.length} mint addresses`);
+
+    // Fetch all mint account data in batches of 100 to avoid RPC limits
+    const BATCH_SIZE = 100; 
+    const mintAccountInfos = [];
+
+    for (let i = 0; i < mintPubkeys.length; i += BATCH_SIZE) {
+      const batch = mintPubkeys.slice(i, i + BATCH_SIZE);
+      console.log(`Fetching mint info batch ${Math.floor(i / BATCH_SIZE) + 1}/${Math.ceil(mintPubkeys.length / BATCH_SIZE)}`);
+      
+      const batchResults = await connection.getMultipleAccountsInfo(batch);
+      mintAccountInfos.push(...batchResults);
+    }
+
+    // Check each mint for SGT verification
+    console.log(`Checking ${mintAccountInfos.length} mints for SGT verification...`);
+    
     for (let i = 0; i < mintAccountInfos.length; i++) {
       const mintInfo = mintAccountInfos[i];
       if (mintInfo) {
         const mintPubkey = mintPubkeys[i];
         
-        // Unpack the raw mint account data
-        const mint = unpackMint(mintPubkey, mintInfo, TOKEN_2022_PROGRAM_ID);
-        
-        // Use the helper function to get the Metadata Pointer extension state
-        const metadataPointer = getMetadataPointerState(mint);
-        // Check if the extension exists and if its values match our target SGT
-        if (metadataPointer &&
-            metadataPointer.authority?.toBase58() === SGT_METADATA_AUTHORITY &&
-            metadataPointer.metadataAddress?.toBase58() === SGT_METADATA_ADDRESS) {
-          
-          console.log("MATCH FOUND: Wallet holds a verified SGT.");
-          return true; // We found it, exit early
+        try {
+          // Unpack the raw mint account data
+          const mint = unpackMint(mintPubkey, mintInfo, TOKEN_2022_PROGRAM_ID);
+          const mintAuthority = mint.mintAuthority?.toBase58();
+
+          const hasCorrectMintAuthority = mintAuthority === SGT_MINT_AUTHORITY;
+
+          // Check for correct SGT Metadata
+          const metadataPointer = getMetadataPointerState(mint);
+          const hasCorrectMetadata = metadataPointer &&
+              metadataPointer.authority?.toBase58() === SGT_MINT_AUTHORITY &&
+              metadataPointer.metadataAddress?.toBase58() === SGT_METADATA_ADDRESS;
+
+          // Check for correct SGT Group Member
+          const tokenGroupMemberState = getTokenGroupMemberState(mint);
+          const hasCorrectGroupMember = tokenGroupMemberState &&
+              tokenGroupMemberState.group?.toBase58() === SGT_GROUP_MINT_ADDRESS;
+
+          // If all extensions match and mint authority is correct, then it is an SGT
+          if (hasCorrectMintAuthority && hasCorrectMetadata && hasCorrectGroupMember) {
+            console.log(`\nVERIFIED SGT FOUND: Wallet holds a verified SGT (${mint.address.toBase58()}).`);
+            return true; 
+          }
+        } catch (mintError) {
+          // Skip this mint if we can't unpack it
+          console.log(`Warning: Could not unpack mint ${mintPubkey.toBase58()}: ${mintError.message}`);
+          continue;
         }
       }
     }
-    // No verified SGT found in wallet.
+
+    // No verified SGT found in wallet
+    console.log("\nNo verified SGT found in wallet.");
     return false;
+
   } catch (error) {
-    //Error verifying SGT ownership
+    console.error("Error verifying SGT ownership:", error.message);
     return false;
   }
 }
