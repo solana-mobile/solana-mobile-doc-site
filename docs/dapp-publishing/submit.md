@@ -37,6 +37,8 @@ npx dapp-store publish submit -k <path_to_your_keypair> -u <mainnet_beta_rpc_url
 
 The two flags for this command (`--requestor-is-authorized` and `--complies-with-solana-dapp-store-policies`) are attestations from the requestor that this dApp is compliant with Solana dApp Store policies, and that they are authorized to submit this request to the Solana dApp Publisher Portal.
 
+By submitting this command  you agree to, and represent that you have read, (i) the [Solana Mobile dApp Store Developer Agreement](https://docs.solanamobile.com/dapp-publishing/agreement), including the arbitration clause linked [here](https://docs.solanamobile.com/dapp-publishing/agreement#:~:text=force%20and%20effect.-,16.6.%20Arbitration.,-The%20parties%20agree), meaning that, where enforceable, any dispute related to the dApp Store will be resolved through BINDING ARBITRATION on an individual, non-class basis, and (ii) the [Solana Mobile Publisher Policy](https://docs.solanamobile.com/dapp-publishing/publisher-policy).
+
 ## Get in contact for App Review
 
 Congrats! You've successfully submitted your app. Now, we'll review your app based on our policies.

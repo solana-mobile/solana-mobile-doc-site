@@ -36,3 +36,5 @@ Submit the update to the Solana dApp Publisher Portal, where the new release wil
 ```
 npx dapp-store publish update -k <path_to_your_keypair> -u <mainnet_beta_rpc_url> --requestor-is-authorized --complies-with-solana-dapp-store-policies
 ```
+
+By submitting this command  you agree to, and represent that you have read, (i) the [Solana Mobile dApp Store Developer Agreement](https://docs.solanamobile.com/dapp-publishing/agreement), including the arbitration clause linked [here](https://docs.solanamobile.com/dapp-publishing/agreement#:~:text=force%20and%20effect.-,16.6.%20Arbitration.,-The%20parties%20agree), meaning that, where enforceable, any dispute related to the dApp Store will be resolved through BINDING ARBITRATION on an individual, non-class basis, and (ii) the [Solana Mobile Publisher Policy](https://docs.solanamobile.com/dapp-publishing/publisher-policy).
