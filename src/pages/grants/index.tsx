@@ -38,43 +38,43 @@ export default function GrantsPage() {
                 This program will offer a few variety of grant types, 
                 each with their own specific goals and functions.
               </p>
-              <p>
-                The details of the overall program 
-                are still to be worked out to make sure the incentives are properly aligned between 
-                both the potential grantee and Solana Mobile.
-              </p>
           </section>
           
           <section className={styles.section}>
-            <h2>Grant Types</h2>
-
-            <p>When the program officially goes live, 
-            here is what you can expect.</p>
-            <ul>
-              <li>
-                <strong>Tooling</strong>
-                <p>These grants are intended purely to help improve the mobile tool suite currently used by Solana Developers</p>
-              </li>
-              <li>
-                <strong>Sample Applications</strong>
-                <p>These grants are geared towards building sample Solana Mobile applications to help future Solana Mobile developers learn how to build mobile dApps more quickly, and all the components necessary to make them work</p>
-              </li>
-              <li>
-                <strong>Content and Documentation</strong>
-                <p>Content and documentation for Solana Mobile is improving every day, but that doesn't mean it can't get better. We will be looking to grant funds to developers who enjoy improving developer experience by providing top tier content</p>
-              </li>
-              <li>
-                <strong>Mobile Apps</strong>
-                <p>These grants will have a high bar for review and require that it's more than just a good idea, but it must also have an existing codebase that shows you're highly motivated to build mobile.</p>
-              </li>
-            </ul>
-          </section>
-          
-          <section className={styles.section}>
-            <h2>Timeline</h2>
+            <h2>Colosseum Cypherpunk Hackathon Grants</h2>
             <p>
-              The official builder grants program is set to go fully live in June, 2025. All of the above details 
-              are subject to change prior to the official program going live. Please check back later for more details.
+              We're excited to announce the Solana Mobile Builder Grants Program running alongside the 
+              Colosseum Cypherpunk Hackathon. We're sweetening the prize pool for teams that bring mobile into focus.
+            </p>
+            <p>
+              <strong>Up to 10 teams will receive $10K builder grants for mobile-focused dApps.</strong>
+            </p>
+          </section>
+
+          <section className={styles.section}>
+            <h2>Evaluation Criteria</h2>
+            <p>
+              We'll be evaluating submissions closely. It should be obvious in your submissions that you've 
+              integrated or optimized for mobile — and that you intend to go mobile.
+            </p>
+            <p>
+              <strong>If you're building mobile-first, make sure to check the mobile box on your submission ☑️</strong>
+            </p>
+          </section>
+          
+          <section className={styles.section}>
+            <h2>What Selected Teams Receive</h2>
+            <p>Selected teams will receive:</p>
+            <ul className={styles.benefitsList}>
+              <li>• <strong>$10k builder grant</strong></li>
+              <li>• <strong>Marketing support</strong></li>
+              <li>• <strong>Launch support</strong></li>
+            </ul>
+            <p>
+              We'll work closely with you on your journey to launching on the Solana dApp Store.
+            </p>
+            <p>
+              <em>Note: Grants are awarded after your dApp is submitted.</em>
             </p>
           </section>
         </div>
