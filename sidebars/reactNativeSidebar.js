@@ -97,6 +97,11 @@ module.exports = {
         },
         {
             type: 'doc',
+            id: 'react-native/detecting-seeker-users',
+            label: 'Detecting Seeker Users'
+        },
+        {
+            type: 'doc',
             id: 'react-native/anchor_integration',
             label: 'Anchor Integration Guide'
         },
