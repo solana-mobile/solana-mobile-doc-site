@@ -86,7 +86,7 @@ For use cases where you need a guarantee that you are interacting with a Seeker 
 
 The SGT is a unique NFT that is minted to a user's wallet only *once* per Seeker device. Owning an SGT represents verified ownership of a Seeker device.
 
-Learn more about the [Seeker Genesis Token](/getting-started/seeker-genesis-token).
+Learn more about the [Seeker Genesis Token](/marketing/engaging-seeker-users).
 
 ### Genesis Token Verification Process
 
