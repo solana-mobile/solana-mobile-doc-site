@@ -8,7 +8,7 @@ import CTAButton from "../../src/components/CTAButton";
 
 # Detecting Seeker Users
 
-This guide outlines the two primary methods for identifying Seeker users within your React Native application. Choose the appropriate method based on your security requirements and use case.
+This guide outlines the two primary methods for identifying Seeker users within your React Native application. Choose the appropriate method based on your requirements and use case.
 
 ## Overview
 
