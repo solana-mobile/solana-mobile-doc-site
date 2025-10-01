@@ -7,7 +7,6 @@ displayed_sidebar: dappPublishingSidebar
 import { FrameworkSwitcher } from '@site/src/components/FrameworkSwitcher';
 import NativeAndroidInstructions from './_snippets/buildSignedApkNativeAndroid.mdx';
 import ExpoInstructions from './_snippets/buildSignedApkExpo.mdx';
-import FlutterInstructions from './_snippets/buildSignedApkFlutter.mdx';
 
 ## Overview
 
@@ -39,21 +38,19 @@ keytool -genkey -v -keystore dappstore.keystore \
 
 **Store the keystore file and passwords securely** - losing them means you cannot update your app.
 
-[Learn more about Android app signing](https://developer.android.com/studio/publish/app-signing)
+For reference, view the [Android app signing guide](https://developer.android.com/studio/publish/app-signing).
 
 ### 2. Build Signed APK
 
 <FrameworkSwitcher
   frameworks={[
     { id: 'native', label: 'Native Android', icon: '/img/android_icon.svg' },
-    { id: 'expo', label: 'Expo', icon: '/img/expo-sdk-icon.svg' },
-    { id: 'flutter', label: 'Flutter', icon: '/img/flutter-icon.svg' }
+    { id: 'expo', label: 'Expo', icon: '/img/expo-sdk-icon.svg' }
   ]}
 >
   {{
     native: <NativeAndroidInstructions />,
-    expo: <ExpoInstructions />,
-    flutter: <FlutterInstructions />
+    expo: <ExpoInstructions />
   }}
 </FrameworkSwitcher>
 
@@ -64,7 +61,7 @@ Confirm your APK is properly signed before submission:
 apksigner verify --print-certs app-release.apk
 ```
 
-[Full apksigner documentation](https://developer.android.com/studio/command-line/apksigner#usage-verify)
+For reference, view the [apksigner documentation](https://developer.android.com/studio/command-line/apksigner#usage-verify).
 
 ## Next Steps
 

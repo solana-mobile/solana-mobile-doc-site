@@ -1,30 +1,54 @@
-Add signing configuration to `app/build.gradle`:
+Configure dual-store setup in `app/build.gradle` using product flavors:
 
 ```gradle
 android {
     signingConfigs {
-        dappstore {
-            storeFile file("../dappstore.keystore")
-            storePassword System.getenv("KEYSTORE_PASSWORD")
+        // Existing Google Play signing config
+        googlePlay {
+            storeFile file("keystores/googleplay.keystore")
+            storePassword "your_googleplay_keystore_password"
+            keyAlias "googleplay"
+            keyPassword "your_googleplay_key_password"
+        }
+        
+        // dApp Store signing config
+        dappStore {
+            storeFile file("keystores/dappstore.keystore")
+            storePassword "your_dappstore_keystore_password"
             keyAlias "dappstore"
-            keyPassword System.getenv("KEY_PASSWORD")
+            keyPassword "your_dappstore_key_password"
         }
     }
-    buildTypes {
+
+    flavorDimensions = ['store']
+    
+    productFlavors {
+        googlePlay {
+            dimension 'store'
+        }
+        
+        dappStore {
+            dimension 'store'
+        }
+    }
+
+    buildTypes { 
         release {
-            signingConfig signingConfigs.dappstore
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            // Assign signing configs to each flavor
+            productFlavors.googlePlay.signingConfig signingConfigs.googlePlay
+            productFlavors.dappStore.signingConfig signingConfigs.dappStore
         }
     }
 }
 ```
 
-Build the APK:
+Build the dApp Store APK:
 ```bash
-./gradlew assembleRelease
+./gradlew assembleDappStoreRelease
 ```
 
-Your APK will be at `app/build/outputs/apk/release/app-release.apk`
+- Alternatively, build using Android Studio IDE: **Build** → **Select Build Variant** → **dappStoreRelease** → **Build APK**.
+
+Your dApp Store APK will be at `app/build/outputs/apk/dappStore/release/app-dappStore-release.apk`
 
 For reference, view the [Android signing documentation](https://developer.android.com/studio/publish/app-signing#gradle-sign).

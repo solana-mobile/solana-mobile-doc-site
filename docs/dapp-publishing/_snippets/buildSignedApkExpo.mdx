@@ -26,19 +26,27 @@ Create `credentials.json` with your dApp Store keystore details:
 }
 ```
 
-**EAS Build (Cloud)**
+:::warning Security
+Store `credentials.json` securely and add it to `.gitignore` to prevent accidental commits to source control.
+:::
 
-Build in the cloud using local credentials:
-```bash
-eas build --platform android --profile dapp-store-production
-```
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-**Local Build**
-
-Build entirely on your machine using local credentials:
-```bash
-eas build --platform android --profile dapp-store-production --local
-```
+<Tabs>
+  <TabItem value="cloud" label="EAS Build (Cloud)" default>
+    Build the dApp Store APK in the cloud using local credentials:
+    ```bash
+    eas build --platform android --profile dapp-store-production
+    ```
+  </TabItem>
+  <TabItem value="local" label="Local Build">
+    Build the dApp Store APK entirely on your machine using local credentials:
+    ```bash
+    eas build --platform android --profile dapp-store-production --local
+    ```
+  </TabItem>
+</Tabs>
 
 This approach lets you use EAS-managed credentials for Google Play and local credentials for the dApp Store.
 
