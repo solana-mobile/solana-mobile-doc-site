@@ -1,4 +1,4 @@
-Configure `eas.json` with local credentials for dApp Store builds:
+**1.** Configure `eas.json` with local credentials for dApp Store builds:
 ```json
 {
   "build": {
@@ -12,7 +12,7 @@ Configure `eas.json` with local credentials for dApp Store builds:
 }
 ```
 
-Create `credentials.json` with your dApp Store keystore details:
+**2.** Create `credentials.json` with your dApp Store keystore details:
 ```json
 {
   "android": {
@@ -35,13 +35,13 @@ import TabItem from '@theme/TabItem';
 
 <Tabs>
   <TabItem value="cloud" label="EAS Build (Cloud)" default>
-    Build the dApp Store APK in the cloud using local credentials:
+    **3.** Build the dApp Store APK in the cloud using local credentials:
     ```bash
     eas build --platform android --profile dapp-store-production
     ```
   </TabItem>
   <TabItem value="local" label="Local Build">
-    Build the dApp Store APK entirely on your machine using local credentials:
+    **3.** Build the dApp Store APK entirely on your machine using local credentials:
     ```bash
     eas build --platform android --profile dapp-store-production --local
     ```

@@ -1,4 +1,4 @@
-Configure dual-store setup in `app/build.gradle` using product flavors:
+**1.** Configure dual-store setup in `app/build.gradle` using product flavors:
 
 ```gradle
 android {
@@ -42,12 +42,12 @@ android {
 }
 ```
 
-Build the dApp Store APK:
+**2.** Build the dApp Store APK:
 ```bash
 ./gradlew assembleDappStoreRelease
 ```
 
-- Alternatively, build using Android Studio IDE: **Build** → **Select Build Variant** → **dappStoreRelease** → **Build APK**.
+**3.** Alternatively, build using Android Studio IDE: **Build** → **Select Build Variant** → **dappStoreRelease** → **Build APK**.
 
 Your dApp Store APK will be at `app/build/outputs/apk/dappStore/release/app-dappStore-release.apk`
 
