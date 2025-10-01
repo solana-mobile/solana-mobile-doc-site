@@ -1,0 +1,39 @@
+Configure signing in `android/key.properties`:
+```properties
+storePassword=your-store-password
+keyPassword=your-key-password
+keyAlias=dappstore
+storeFile=../dappstore.keystore
+```
+
+Reference in `android/app/build.gradle`:
+```gradle
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('key.properties')
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
+android {
+    signingConfigs {
+        release {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+            storePassword keystoreProperties['storePassword']
+        }
+    }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+        }
+    }
+}
+```
+
+Build the APK:
+```bash
+flutter build apk --release
+```
+
+For reference, view the [Flutter deployment guide](https://docs.flutter.dev/deployment/android#signing-the-app).

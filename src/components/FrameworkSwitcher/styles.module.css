@@ -1,0 +1,68 @@
+.frameworkSwitcher {
+  margin: 1rem 0;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.frameworkTabs {
+  display: flex;
+  background-color: var(--ifm-color-emphasis-100);
+  border-bottom: 1px solid var(--ifm-color-emphasis-300);
+  overflow-x: auto;
+}
+
+.frameworkTab {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--ifm-color-content-secondary);
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  border-bottom: 2px solid transparent;
+}
+
+.frameworkTab:hover {
+  background-color: var(--ifm-color-emphasis-200);
+  color: var(--ifm-color-content);
+}
+
+.frameworkTab.active {
+  background-color: var(--ifm-background-color);
+  color: var(--ifm-color-primary);
+  border-bottom-color: var(--ifm-color-primary);
+}
+
+.frameworkIcon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.frameworkContent {
+  padding: 1.5rem;
+  background-color: var(--ifm-background-color);
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] .frameworkTab.active {
+  background-color: var(--ifm-background-color);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .frameworkTab {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+  }
+  
+  .frameworkContent {
+    padding: 1rem;
+  }
+}

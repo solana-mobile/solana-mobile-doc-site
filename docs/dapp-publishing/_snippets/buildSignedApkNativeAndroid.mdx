@@ -1,0 +1,30 @@
+Add signing configuration to `app/build.gradle`:
+
+```gradle
+android {
+    signingConfigs {
+        dappstore {
+            storeFile file("../dappstore.keystore")
+            storePassword System.getenv("KEYSTORE_PASSWORD")
+            keyAlias "dappstore"
+            keyPassword System.getenv("KEY_PASSWORD")
+        }
+    }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.dappstore
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+```
+
+Build the APK:
+```bash
+./gradlew assembleRelease
+```
+
+Your APK will be at `app/build/outputs/apk/release/app-release.apk`
+
+For reference, view the [Android signing documentation](https://developer.android.com/studio/publish/app-signing#gradle-sign).
