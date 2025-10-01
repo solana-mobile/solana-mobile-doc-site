@@ -25,7 +25,7 @@ npx eas build -p android --profile dapp-store
 
 Meanwhile, in your project directory, create a new folder `dapp-store-build` (if you're using Git you may want to add this folder to `.gitignore` to avoid uploading large binary files).
 
-Once the EAS build has finished, download the APK file, and name it `myapp-0.0.1-unsigned.apk`. Replace `myapp` and `0.0.1` with your app name and release version, but keep file naming consistent between updates.
+Once the EAS build has finished, download the APK file, and name it `myapp-v0.0.1-unsigned.apk`. Replace `myapp` and `0.0.1` with your app name and release version, but keep file naming consistent between updates.
 
 ## Step 2. Set up Java and Android tooling
 

@@ -1,0 +1,53 @@
+Configure `eas.json` with local credentials for dApp Store builds:
+```json
+{
+  "build": {
+    "dapp-store-production": {
+      "android": {
+        "buildType": "apk",
+        "credentialsSource": "local"
+      }
+    }
+  }
+}
+```
+
+Create `credentials.json` with your dApp Store keystore details:
+```json
+{
+  "android": {
+    "keystore": {
+      "keystorePath": "./dappstore.keystore",
+      "keystorePassword": "your-keystore-password",
+      "keyAlias": "dappstore",
+      "keyPassword": "your-key-password"
+    }
+  }
+}
+```
+
+:::warning Security
+Store `credentials.json` securely and add it to `.gitignore` to prevent accidental commits to source control.
+:::
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs>
+  <TabItem value="cloud" label="EAS Build (Cloud)" default>
+    Build the dApp Store APK in the cloud using local credentials:
+    ```bash
+    eas build --platform android --profile dapp-store-production
+    ```
+  </TabItem>
+  <TabItem value="local" label="Local Build">
+    Build the dApp Store APK entirely on your machine using local credentials:
+    ```bash
+    eas build --platform android --profile dapp-store-production --local
+    ```
+  </TabItem>
+</Tabs>
+
+This approach lets you use EAS-managed credentials for Google Play and local credentials for the dApp Store.
+
+For reference, view the Expo [local credentials documentation](https://docs.expo.dev/app-signing/local-credentials/#credentialsjson).

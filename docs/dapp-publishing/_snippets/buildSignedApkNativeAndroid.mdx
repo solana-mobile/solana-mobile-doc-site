@@ -1,0 +1,54 @@
+Configure dual-store setup in `app/build.gradle` using product flavors:
+
+```gradle
+android {
+    signingConfigs {
+        // Existing Google Play signing config
+        googlePlay {
+            storeFile file("keystores/googleplay.keystore")
+            storePassword "your_googleplay_keystore_password"
+            keyAlias "googleplay"
+            keyPassword "your_googleplay_key_password"
+        }
+        
+        // dApp Store signing config
+        dappStore {
+            storeFile file("keystores/dappstore.keystore")
+            storePassword "your_dappstore_keystore_password"
+            keyAlias "dappstore"
+            keyPassword "your_dappstore_key_password"
+        }
+    }
+
+    flavorDimensions = ['store']
+    
+    productFlavors {
+        googlePlay {
+            dimension 'store'
+        }
+        
+        dappStore {
+            dimension 'store'
+        }
+    }
+
+    buildTypes { 
+        release {
+            // Assign signing configs to each flavor
+            productFlavors.googlePlay.signingConfig signingConfigs.googlePlay
+            productFlavors.dappStore.signingConfig signingConfigs.dappStore
+        }
+    }
+}
+```
+
+Build the dApp Store APK:
+```bash
+./gradlew assembleDappStoreRelease
+```
+
+- Alternatively, build using Android Studio IDE: **Build** → **Select Build Variant** → **dappStoreRelease** → **Build APK**.
+
+Your dApp Store APK will be at `app/build/outputs/apk/dappStore/release/app-dappStore-release.apk`
+
+For reference, view the [Android signing documentation](https://developer.android.com/studio/publish/app-signing#gradle-sign).
