@@ -142,6 +142,7 @@ const sidebars = {
   ...require("./sidebars/dappStoreSidebar.js"),
   ...require("./sidebars/referenceSidebar.js"),
   ...require("./sidebars/sagaSidebar.js"),
+  ...require("./sidebars/seekerSidebar.js"),
   ...require("./sidebars/marketingSidebar.js"),
   ...require("./sidebars/developersSidebar.js"),
   ...require("./sidebars/mobileWalletAdapterSidebar.js"),
