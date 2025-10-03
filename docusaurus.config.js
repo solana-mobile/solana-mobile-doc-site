@@ -134,11 +134,7 @@ const config = {
           {to: 'grants', label: 'Grants', position: 'left'},
           {to: 'marketing/overview', label: 'Dev Marketing', position: 'left'},
           {to: 'blog', label: 'Blog', position: 'right'},
-          {
-            href: 'https://github.com/solana-mobile',
-            label: 'GitHub',
-            position: 'right',
-          },
+          {to: 'seeker/release-notes', label: 'Seeker', position: 'right'},
           {
             href: 'https://discord.gg/solanamobile',
             label: 'Discord',
