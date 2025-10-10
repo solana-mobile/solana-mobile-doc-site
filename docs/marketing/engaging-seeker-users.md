@@ -132,9 +132,20 @@ async function checkWalletForSGT(walletAddress) {
     }
 
     // Extract mint addresses from token accounts 
-    const mintPubkeys = allTokenAccounts.map((accountInfo) => {
-      return new PublicKey(accountInfo.account.data.parsed.info.mint);
-    });
+    const mintPubkeys = allTokenAccounts
+      .map((accountInfo) => {
+        try {
+          if (accountInfo?.account?.data?.parsed?.info?.mint) {
+            return new PublicKey(accountInfo.account.data.parsed.info.mint);
+          } else {
+            console.log('No mint found for account:', accountInfo);
+            return null;
+          }
+        } catch (error) {
+          return null;
+        }
+      })
+      .filter((mintPubkey) => mintPubkey !== null);
 
     console.log(`Extracted ${mintPubkeys.length} mint addresses`);
 
