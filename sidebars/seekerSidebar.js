@@ -15,6 +15,11 @@ module.exports = {
                     id: 'seeker/release-notes/mr4',
                     label: 'MR4'
                 },
+                {
+                    type: 'doc',
+                    id: 'seeker/release-notes/mr5',
+                    label: 'MR5'
+                },
             ]
         },
     ]
