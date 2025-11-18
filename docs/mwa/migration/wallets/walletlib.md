@@ -105,6 +105,8 @@ public class SignInResult {
 
 The `AuthorizationResult` object that is returned to the dapp endpoint is now constructed by passing in a list of `AuthorizedAccount` objects, rather than a single public key and label.
 
+An optional `walletIcon` parameter has also been added to allow the wallets to send back an icon (data URI) for dapps to display on thier UI when the wallet is connected.
+
 Constructor for `AuthorizationResult`:
 
 <Tabs>
