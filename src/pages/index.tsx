@@ -17,7 +17,9 @@ function SolanaMobileStackLogo() {
 
   return (
     <div className={styles.logoContainer}>
-      <img src={logoSrc} alt="Solana Mobile Stack" />
+      <em>
+        <img src={logoSrc} alt="Solana Mobile Stack" />
+      </em>
     </div>
   );
 }

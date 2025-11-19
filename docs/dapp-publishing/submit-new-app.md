@@ -64,7 +64,7 @@ Ensure you approve each signing request and you do not skip any or else certain 
 Congratulations on submitting your first app! 🎉
 
 ## After Submission
-Once submitted, your app is now automatically in the app review queue and will go live immediately under an appropriate category once approved.
+Once submitted, your app automatically enters the app review queue and will go live immediately under an appropriate category once approved.
 
 ### App Review
 - It typically takes 2-5 business days for app review, so please be patient as we go through the review queue. 

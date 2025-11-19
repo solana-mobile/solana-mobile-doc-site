@@ -67,12 +67,12 @@ module.exports = {
         },
         {
             type: 'doc',
-            id: 'dapp-publishing/publisher-portal',
+            id: 'dapp-publishing/submit-new-app',
             label: 'Submit a New App'
         },
         {
             type: 'doc',
-            id: 'dapp-publishing/publishing-updates-portal',
+            id: 'dapp-publishing/submit-an-update',
             label: 'Submit an Update'
         },
         {
