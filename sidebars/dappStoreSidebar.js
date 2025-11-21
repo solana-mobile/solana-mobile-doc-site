@@ -66,10 +66,25 @@ module.exports = {
             className: 'sidebar-section-header',
         },
         {
+            type: 'doc',
+            id: 'dapp-publishing/submit-new-app',
+            label: 'Submit a New App'
+        },
+        {
+            type: 'doc',
+            id: 'dapp-publishing/submit-an-update',
+            label: 'Submit an Update'
+        },
+        {
+            type: 'doc',
+            id: 'dapp-publishing/link-to-dapp-listing-page',
+            label: 'Link to your dApp listing page'
+        },
+        {
             type: 'category',
-            label: 'App Submission Guide',
-            collapsible: false,
-            collapsed: false,
+            label: 'Publishing CLI',
+            collapsible: true,
+            collapsed: true,
             items: [
                 {
                     type: 'doc',
@@ -96,25 +111,12 @@ module.exports = {
                     id: 'dapp-publishing/submit',
                     label: '4. Submit your dApp release'
                 },
-            ]  
-        },
-        {
-            type: 'category',
-            label: 'After publishing',
-            collapsible: false,
-            collapsed: false,
-            items: [
                 {
                     type: 'doc',
                     id: 'dapp-publishing/publishing-updates',
                     label: 'Update a Published dApp'
                 },
-                {
-                    type: 'doc',
-                    id: 'dapp-publishing/link-to-dapp-listing-page',
-                    label: 'Link to your dApp listing page'
-                },
-            ]
+            ]  
         },
 
         /* Addtional resources section */

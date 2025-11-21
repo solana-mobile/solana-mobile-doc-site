@@ -32,6 +32,8 @@ const config = {
     locales: ['en'],
   },
 
+  plugins: ['docusaurus-plugin-image-zoom'],
+
   presets: [
     [
       'classic',
@@ -198,7 +200,19 @@ const config = {
         appId: "QHX7ZKLF5I",
         indexName: "solanamobile",
         contextualSearch: true,
-      },
+      },        
+      zoom: {
+        selector: '.markdown :not(em) > img',
+        background: {
+          light: 'rgb(255, 255, 255)',
+          dark: 'rgb(50, 50, 50)'
+        },
+        config: {
+          margin: 64,
+          background: '#FFF',
+          scrollOffset: 0,
+        }
+      }
     }),
 };
 
