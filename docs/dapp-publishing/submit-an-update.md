@@ -4,7 +4,7 @@ When you're ready to publish an updated release of your dApp, follow these steps
 
 ## 1. Navigate to the Publisher Portal
 
-Log into the [Solana dApp Publisher Portal](https://dapp-portal.solanamobile.com) and find your published app in the sidebar.
+Log into the [Solana dApp Publisher Portal](https://publish.solanamobile.com) and find your published app in the sidebar.
 
 ## 2. Update your app details
 

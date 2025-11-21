@@ -82,7 +82,7 @@ module.exports = {
         },
         {
             type: 'category',
-            label: 'Publishing CLI (deprecated)',
+            label: 'Publishing CLI',
             collapsible: true,
             collapsed: true,
             items: [

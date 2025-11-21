@@ -1,6 +1,6 @@
 # Submit a New App
 
-Use the [Solana dApp Publisher Portal](https://dapp-portal.solanamobile.com) to submit your dApp to the Solana dApp Store.
+Use the [Solana dApp Publisher Portal](https://publish.solanamobile.com) to submit your dApp to the Solana dApp Store.
 
 ## Before you begin
 
@@ -8,7 +8,7 @@ Ensure you have:
 - A release-ready APK file signed with your release key.
 - App metadata prepared (name, description, screenshots, icon).
 - A Solana wallet browser extension (Phantom, Solflare, etc.) with sufficient SOL.
-- Reviewed the [Publishing Checklist](checklist), [Publisher Policy](publisher-policy), and [Developer Agreement](agreement)
+- Reviewed the [Publisher Policy](publisher-policy) and [Developer Agreement](agreement)
 
 
 ## 1. Sign up for a Publisher Account
