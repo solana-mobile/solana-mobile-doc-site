@@ -29,7 +29,7 @@ Wherever you are in your publishing journey, you can find resources here to get 
     <CardLayout autoFitEnabled={true}>
 
         <Card
-            to="/dapp-publishing/overview"
+            to="/dapp-publishing/submit-new-app"
             header={{
                 label: "Publish your dApp",
                 translateId: "publish-card-header",
@@ -104,7 +104,7 @@ Wherever you are in your publishing journey, you can find resources here to get 
 
 <CardLayout autoFitEnabled={true}>
     <Card
-        to="/dapp-publishing/overview"
+        to="/dapp-publishing/submit-new-app"
         header={{
             label: "Publish a dApp",
             translateId: "publish-card-header",
