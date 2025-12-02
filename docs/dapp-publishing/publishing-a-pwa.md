@@ -246,4 +246,4 @@ After this you can run `bubblewrap build` again to generate the signed release A
 Once you have a signed APK, you can proceed with publishing as if you were publishing a normal
 Android app.
 
-**Follow the step by step [dApp publishing guide](/dapp-publishing/overview) to submit your signed release APK.**
+**Follow the step by step [dApp publishing guide](/dapp-publishing/submit-new-app) to submit your signed release APK.**

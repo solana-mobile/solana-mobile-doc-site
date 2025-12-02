@@ -65,14 +65,9 @@ For reference, view the [apksigner documentation](https://developer.android.com/
 
 ## Next Steps
 
-With your signed APK ready, follow the standard dApp Store publishing process:
-
-1. **[Set up publishing tools](/dapp-publishing/setup)** - Install the dApp Store CLI
-2. **[Prepare your submission](/dapp-publishing/prepare)** - Gather assets and configure app details  
-3. **[Complete publishing guide](/dapp-publishing/overview)** - Submit your app
+With your signed APK ready, follow the standard dApp Store publishing process and [Submit your app](/dapp-publishing/submit-new-app)
 
 ## Additional Resources
 
 - [Publisher Policy](/dapp-publishing/publisher-policy) - Review dApp Store requirements
-- [Asset Requirements](/dapp-publishing/prepare#asset-requirements) - Icon, banner, and screenshot specifications
 - [Support](/dapp-publishing/support) - Get help with publishing issues

@@ -87,4 +87,4 @@ The signed binary will be at `dapp-store-build/myapp-v0.0.1-signed.apk`. This is
 
 ## Publishing to dApp Store
 
-Now that you have signed APK, you are ready to follow the [dApp publishing guide](/dapp-publishing/overview) to submit your app to Solana Mobile dApp Store.
+Now that you have signed APK, you are ready to follow the [dApp publishing guide](/dapp-publishing/submit-new-app) to submit your app to Solana Mobile dApp Store.
