@@ -1,6 +1,7 @@
 {
     "ignoreCommand": "bash ignoreBuildScript.sh",
     "redirects": [
-        { "source": "/hackathon", "destination": "https://solanamobile.radiant.nexus/", "permanent": true }
+        { "source": "/hackathon", "destination": "https://solanamobile.radiant.nexus/", "permanent": true },
+        { "source": "/grants", "destination": "http://solanamobile.com/grants", "permanent": true }
     ]
 }
