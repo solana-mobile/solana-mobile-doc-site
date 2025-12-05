@@ -34,11 +34,13 @@ export const FrameworkSwitcher: React.FC<FrameworkSwitcherProps> = ({
             onClick={() => setActiveFramework(framework.id)}
           >
             {framework.icon && (
-              <img 
-                src={framework.icon} 
-                alt={framework.label} 
-                className={styles.frameworkIcon}
-              />
+              <em>
+                <img 
+                  src={framework.icon} 
+                  alt={framework.label} 
+                  className={styles.frameworkIcon}
+                />
+              </em>
             )}
             {framework.label}
           </button>

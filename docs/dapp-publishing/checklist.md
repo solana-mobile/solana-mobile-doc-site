@@ -42,7 +42,7 @@ See the [Listing Page guidelines](/dapp-publishing/listing-page-guidelines) to v
 
 ### Proceed to App Submission!
 
-Once you are ready for publishing, you can follow the step-by-step [App Submission guide](/dapp-publishing/overview) to submit your app. The publishing process
+Once you are ready for publishing, you can follow the step-by-step [App Submission guide](/dapp-publishing/submit-new-app) to submit your app. The publishing process
 is completely self service, so it can be started whenever you are ready!
 
 After finished, your app will be in queue for App Review and, using your provided contact details, we will reach out to you if any questions are needed.

@@ -19,7 +19,7 @@ import { FAQ, FAQSection } from '@site/src/components/FAQ';
     2. Mint a set of NFTs describing your App and Publisher details
     3. Submit a signed release APK of your app
 
-    For a full explanation, diagrams, and a step by step guide of the complete publishing flow, view the [Publishing Overview](/dapp-publishing/overview) page.
+    For a full explanation, diagrams, and a step by step guide of the complete publishing flow, view the [Publishing Overview](/dapp-publishing/submit-new-app) page.
 
   </FAQSection>
 

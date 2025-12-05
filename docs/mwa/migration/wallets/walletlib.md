@@ -103,7 +103,9 @@ public class SignInResult {
 
 #### AuthorizationResult
 
-The `AuthorizationResult` object that is returned to the dapp endpoint is now constructed by passing in an `AuthorizedAccount`, rather than a public key and label.
+The `AuthorizationResult` object that is returned to the dapp endpoint is now constructed by passing in a list of `AuthorizedAccount` objects, rather than a single public key and label.
+
+An optional `walletIcon` parameter has also been added to allow the wallets to send back an icon (data URI) for dapps to display on thier UI when the wallet is connected.
 
 Constructor for `AuthorizationResult`:
 
@@ -112,9 +114,10 @@ Constructor for `AuthorizationResult`:
 
 ```kotlin
 public AuthorizationResult(@NonNull String authToken,
-                            @NonNull AuthorizedAccount account,
-                            @Nullable Uri walletUriBase,
-                            @Nullable SignInResult signInResult);
+                           @NonNull @Size(min = 1) AuthorizedAccount[] accounts,
+                           @Nullable Uri walletUriBase,
+                           @Nullable Uri walletIcon,
+                           @Nullable SignInResult signInResult);
 ```
 
 </TabItem>
@@ -123,9 +126,9 @@ public AuthorizationResult(@NonNull String authToken,
 ```kotlin
 @Deprecated
 public AuthorizationResult(@NonNull String authToken,
-                            @NonNull byte[] publicKey,
-                            @Nullable String accountLabel,
-                            @Nullable Uri walletUriBase);
+                           @NonNull byte[] publicKey,
+                           @Nullable String accountLabel,
+                           @Nullable Uri walletUriBase);
 ```
 
 </TabItem>
@@ -142,12 +145,6 @@ AuthorizedAccount {
 
 </TabItem>
 </Tabs>
-
-:::note
-
-In the near future, `AuthorizationResult` will be updated again to support multiple accounts and store a list of `AuthorizedAccount` objects.
-
-:::
 
 ### Sign And Send Transactions ([2.0 spec](https://solana-mobile.github.io/mobile-wallet-adapter/spec/spec.html#sign_and_send_transactions))
 

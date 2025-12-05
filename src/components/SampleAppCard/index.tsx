@@ -15,7 +15,9 @@ const SampleAppCard: React.FC<SampleAppCardProps> = ({ title, sampleAppLink, des
   return (
       <div className={styles.sampleAppCard}>
           <div className={styles.cardImage}>
-            <img src={useBaseUrl(imageUrl)} alt={title} />
+            <em>
+              <img src={useBaseUrl(imageUrl)} alt={title} />
+            </em>
           </div>
           <div className={styles.cardBody}>
               <h2> <Link to={sampleAppLink}>{title}</Link></h2>

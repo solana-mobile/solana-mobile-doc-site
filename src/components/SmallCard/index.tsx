@@ -17,7 +17,7 @@ const SmallCard: React.FC<SmallCardProps> = ({ header, to, iconPath }) => {
   return (
     <div className={styles.cardContainer}>
       <Link className={styles.cardLink} to={to}>
-          {iconPath && <img src={useBaseUrl(iconPath)} alt="" className={styles.cardIcon} />}
+          {iconPath && <em><img src={useBaseUrl(iconPath)} alt="" className={styles.cardIcon} /></em>}
           <div className={styles.cardHeaderText}>
             <Translate description={header.translateId}>
               {header.label}

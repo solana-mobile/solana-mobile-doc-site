@@ -38,11 +38,13 @@ const Card: React.FC<CardProps> = ({
               <div className={styles.emojiIcon}>{emoji}</div>
             ) : (
               iconPath && (
-                <img
-                  src={useBaseUrl(iconPath)}
-                  alt=""
-                  className={styles.cardIcon}
-                />
+                <em>
+                  <img
+                    src={useBaseUrl(iconPath)}
+                    alt=""
+                    className={styles.cardIcon}
+                  />
+                </em>
               )
             )}
           </div>
