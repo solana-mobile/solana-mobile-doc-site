@@ -62,6 +62,18 @@ A list of open-source sample apps in different languages/frameworks to help you 
                 "Express",
             ]}
     />
+    <SampleAppCard
+        title="skr-address-resolution"
+        sampleAppLink="https://github.com/solana-mobile/react-native-samples/tree/main/skr-address-resolution"
+        description="Demo application showcasing bidirectional domain lookup with AllDomains integration"
+        imageUrl="sample_app_imgs/skr-address-resolution.png"
+        tags={[
+                "React Native",
+                "Expo",
+                "Express",
+                "AllDomains"
+            ]}
+    />
 
 </SampleAppCardLayout>
 </>
