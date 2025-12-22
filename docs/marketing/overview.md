@@ -26,14 +26,14 @@ here to ensure a successful launch.
     <Card
         to="/marketing/engaging-seeker-users"
         header={{
-            label: "Engaging Seeker & Saga users",
+            label: "Engaging Seeker users",
             translateId: "engaging-seeker-users-card-header",
         }}
         body={{
-            label: "Run a campaign for Seeker and Saga users using the soulbound Preorder and Genesis NFTs.",
+            label: "Run a campaign targeting Seekers using the Seeker Genesis Token.",
             translateId: "engaging-seeker-users-card-body",
         }}
-        iconPath="img/chapter2-logo.svg"
+        iconPath="img/seeker-genesis-token.png"
     />
 </CardLayout>
 

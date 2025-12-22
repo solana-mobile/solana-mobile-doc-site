@@ -19,21 +19,9 @@ module.exports = {
             label: 'Co-marketing With Solana Mobile'
         },
         {
-            type: 'category',
-            label: 'Engaging with Seeker & Saga users',
-            collapsed: false,
-            items: [
-                {
-                    type: 'doc',
-                    id: 'marketing/engaging-seeker-users',
-                    label: 'Seeker'
-                },
-                {
-                    type: 'doc',
-                    id: 'marketing/engaging-saga-users',
-                    label: 'Saga'
-                },
-            ]
+            type: 'doc',
+            id: 'marketing/engaging-seeker-users',
+            label: 'Engaging with Seeker users'
         },
         {
             type: 'doc',
