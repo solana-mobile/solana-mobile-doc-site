@@ -22,7 +22,7 @@ import { FAQ, FAQSection } from '@site/src/components/FAQ';
 
   <FAQSection title="How can I engage with Seeker users?">
 
-    Users that preordered Chapter 2 received a Chapter 2 Preorder Token NFT.  Ecosystem teams are entirely free to decide if (and if so, how) they wish to interact with the holders of these non-transferable tokens.
+    Ecosystem teams are entirely free to decide if (and if so, how) they wish to interact with Seeker users.
 
     For more information, view the [Engaging with Seeker Users](/marketing/engaging-seeker-users) documentation.
 
@@ -47,12 +47,10 @@ import { FAQ, FAQSection } from '@site/src/components/FAQ';
 
   </FAQSection>
 
-  <FAQSection title="How can I engage with Chapter 2 Preorder Token holders?">
+  <FAQSection title="How can I engage with Seeker users?">
 
-    Users that preordered Chapter 2 received a Chapter 2 Preorder Token NFT.  Ecosystem teams are entirely free to decide if (and if so, how) they wish to interact with the holders of these non-transferable tokens. 
+    Seeker users receive a Seeker Genesis Token NFT when they activate their Seed Vault Wallet.  Ecosystem teams are entirely free to decide if (and if so, how) they wish to interact with these users. 
     
-    You can generate a list of wallet addresses that hold the Chapter 2 non-transferable Preorder NFT by querying on-chain
-
     For more information, view the [Engaging with Seeker Users](marketing/engaging-seeker-users) documentation.
 
   </FAQSection>
