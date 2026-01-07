@@ -41,17 +41,15 @@ registerMwa({
     chains: ['solana:devnet', 'solana:mainnet'],
     chainSelector: createDefaultChainSelector(),
     onWalletNotFound: createDefaultWalletNotFoundHandler(),
-    remoteHostAuthority: '<REPLACE_WITH_URL_>', // Include to enable remote connection option.
 })
 ```
 
 Once registered, the wallet behavior automatically adapts to the user's device:
 
-- **Desktop**: If `remoteHostAuthority` is provided, remote connection via QR Code.
 - **Mobile**: Local connection via Android Intents (same as native Android apps).
+- **Desktop** (Not available yet): If `remoteHostAuthority` is provided, remote connection via QR Code. 
 
-
-## Enable remote connection
+<!-- ## Enable remote connection
 
 To enable the remote connection for desktop viewers, you need to configure the `remoteHostAuthority` parameter in the register function. If not provided, the wallet will only register on mobile environments.
 
@@ -61,14 +59,11 @@ The `remoteHostAuthority` is a URL that points to a [*reflector WebSocket server
 For more information, view the Reflector protocol documentation.
 :::
 
-
-
 ### 1. Get the endpoint URL
 
 Solana Mobile maintains a public endpoint for a reflector server (endpoint details to be announced).
 
 If needed, dApps can implement and self-host their own reflector server. More information on this to come.
-<!-- For more information, view the Hosting a Reflector server documentation. TODO -->
 
 ### 2. Configure your application
 
@@ -84,4 +79,4 @@ registerMwa({
 })
 ```
 
-After configured, MWA Remote connection will now appear as a wallet option on desktop environments.
+After configured, MWA Remote connection will now appear as a wallet option on desktop environments.  -->
