@@ -74,6 +74,19 @@ A list of open-source sample apps in different languages/frameworks to help you 
                 "AllDomains"
             ]}
     />
+    <SampleAppCard
+        title="cause-pots"
+        sampleAppLink="https://github.com/solana-mobile/react-native-samples/tree/main/cause-pots"
+        description="Crypto Pooling app for a common goal, showcasing Anchor smart contract integration"
+        imageUrl="sample_app_imgs/cause-pots.png"
+        tags={[
+                "React Native",
+                "Expo",
+                "Express",
+                "Anchor",
+                "Rust"
+            ]}
+    />
 
 </SampleAppCardLayout>
 </>
