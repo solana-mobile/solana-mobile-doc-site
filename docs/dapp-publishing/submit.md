@@ -43,9 +43,8 @@ By submitting this command  you agree to, and represent that you have read, (i) 
 
 Congrats! You've successfully submitted your app. Now, we'll review your app based on our policies.
 
- 1. Join the Solana Mobile Discord.
- 2. In the `#developer` channel, get the developer role.
- 3. Leave a message in the `#dapp-store` channel that you've completed app review.
- 4. We'll be in contact through the channel shortly after.
+ 1. Join the [Solana Mobile Discord](http://discord.gg/solanamobile)
+ 2. Leave a message in the `#dapp-store` channel that you have completed the Submit process
+ 3. We'll be in contact through the channel shortly after.
 
 
