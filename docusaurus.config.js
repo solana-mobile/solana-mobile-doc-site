@@ -184,6 +184,18 @@ const config = {
                 label: 'Privacy Policy',
                 href: 'https://legal.solanamobile.com/privacy-policy-homepage-web',
               },
+              {
+                label: 'Developer Agreement',
+                href: 'https://docs.solanamobile.com/dapp-publishing/agreement',
+              },
+              {
+                label: 'dApp Store Terms of Use',
+                href: 'https://docs.solanamobile.com/dapp-publishing/tou',
+              },
+              {
+                label: 'Cookie Policy',
+                href: 'https://legal.solanamobile.com/en/cookie-policy-web',
+              },
             ],
           },
         ],
