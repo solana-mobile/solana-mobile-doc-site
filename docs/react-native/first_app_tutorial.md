@@ -229,7 +229,7 @@ First, let's replace the existing `randomTransferTransaction` with a new transac
 add this code and remove `randomTransferTransaction`.
 
 ```tsx
-import {TextEncoder} from 'text-encoding'; // TextEncoder library to convert stirng to buffer.
+import {TextEncoder} from 'text-encoding'; // TextEncoder library to convert string to buffer.
 
 // Construct a message buffer from a string.
 const message = "Hello Solana!";
@@ -270,7 +270,7 @@ Now, the last step is to confirm that the transaction was processed by the netwo
 of the `transact` session and return the both `[signature, confirmationRepsonse]`. Read the docs learn more about [transaction confirmation](https://docs.solana.com/developing/transaction_confirmation).
 
 ```tsx
-// Add this step to confirm that the transaction was proccessed by the network.
+// Add this step to confirm that the transaction was processed by the network.
 const confirmationResponse = await connection.confirmTransaction({
     signature: signature,
     ...latestBlockhash,
@@ -375,7 +375,7 @@ const sendMemo = useCallback(
             return transactionSignatures[0];
         });
 
-        // Add this step to confirm that the transaction was proccessed by the network.
+        // Add this step to confirm that the transaction was processed by the network.
         const confirmationResponse = await connection.confirmTransaction({
             signature: signature,
             ...latestBlockhash,

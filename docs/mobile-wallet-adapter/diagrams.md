@@ -39,7 +39,7 @@ This example case outlines an MWA session where the dApp:
 
 <img src="/diagrams/authorize_and_sign.svg" alt="Authorize and Sign Diagram" className="diagram-image"/>
 
-In future sessions, the dApp can initiate with the valid authToken to immediately elevate to an "authorizd state", skipping the "connect" step.
+In future sessions, the dApp can initiate with the valid authToken to immediately elevate to an "authorized state", skipping the "connect" step.
 
 While the protocol technically supports multiple accounts, most wallet apps only implement a single account authorization per session.
 

@@ -84,7 +84,7 @@ const versionedTransaction = new VersionedTransaction(txMessage);
 </TabItem>
 <TabItem value="legacyTransaction" label="Legacy Transactions">
 
-For backwards compatiblity, you can still construct legacy transactions with `@solana/web3.js`.
+For backwards compatibility, you can still construct legacy transactions with `@solana/web3.js`.
 
 ```tsx
 import {
@@ -113,7 +113,7 @@ const randomTransferTransaction = new Transaction({
 ## Send a Transaction
 
 After a transaction is signed by the appropriate accounts, it can be submitted to the Solana network via RPC. See the
-next guide, _Using Mobile Walelt Adapter_ to learn how to sign transactions.
+next guide, _Using Mobile Wallet Adapter_ to learn how to sign transactions.
 
 <Tabs>
 <TabItem value="versionedTransaction" label="Versioned Transactions">
