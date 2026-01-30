@@ -14,8 +14,8 @@ module.exports = {
             label: 'dApp Store Overview'
         },
         {
-            type: 'doc',
-            id: 'dapp-publishing/faq',
+            type: 'link',
+            href: '/faq',
             label: 'Frequently Asked Questions'
         },
 
