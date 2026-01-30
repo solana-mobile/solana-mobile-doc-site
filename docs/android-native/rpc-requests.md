@@ -45,7 +45,7 @@ Calling the `getLatestBlockhash` method returns an [`RpcResponse`](https://githu
 
 - If successful, the response result will contain a [`BlockhashResult`](https://github.com/solana-mobile/rpc-core/blob/a6ea1466fb1d79113ca77f2d073d33a85fb5ad5e/solanaclient/src/commonMain/kotlin/com/solana/rpc/SolanaRpcClient.kt#L232).
 
-- If an error occured, the response will contain an [`RpcError`](https://github.com/solana-mobile/rpc-core/blob/a6ea1466fb1d79113ca77f2d073d33a85fb5ad5e/rpccore/src/commonMain/kotlin/com/solana/rpccore/RpcResponse.kt#L16).
+- If an error occurred, the response will contain an [`RpcError`](https://github.com/solana-mobile/rpc-core/blob/a6ea1466fb1d79113ca77f2d073d33a85fb5ad5e/rpccore/src/commonMain/kotlin/com/solana/rpccore/RpcResponse.kt#L16).
 
 ```kotlin
 import com.solana.rpc.SolanaRpcClient
@@ -68,7 +68,7 @@ To submit a transaction to the RPC, use the `sendTransaction` method.
 
 - If successful, the response result will contain a transaction signature string.
 
-- If an error occured, the response will contain an [`RpcError`](https://github.com/solana-mobile/rpc-core/blob/a6ea1466fb1d79113ca77f2d073d33a85fb5ad5e/rpccore/src/commonMain/kotlin/com/solana/rpccore/RpcResponse.kt#L16).
+- If an error occurred, the response will contain an [`RpcError`](https://github.com/solana-mobile/rpc-core/blob/a6ea1466fb1d79113ca77f2d073d33a85fb5ad5e/rpccore/src/commonMain/kotlin/com/solana/rpccore/RpcResponse.kt#L16).
 
 ```kotlin
 import com.solana.rpc.SolanaRpcClient
