@@ -150,7 +150,7 @@ await transact(async (wallet: Web3MobileWallet) => {
 <CTAButton label="API Reference" to="/reference/typescript/mobile-wallet-adapter#web3mobilewalletdeauthorize" />
 
 A dApp can revoke authorization or "disconnect" from a wallet by sending a `deauthorize` request.
-The wallet invalidate the provided `authToken`.
+The wallet invalidates the provided `authToken`.
 
 ```tsx
 await transact(async (wallet) => {
