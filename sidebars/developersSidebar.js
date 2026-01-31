@@ -115,5 +115,10 @@ module.exports = {
             id: 'developers/community',
             label: 'Community'
         },
+        {
+            type: 'doc',
+            id: 'developers/ai-toolkit',
+            label: 'AI Toolkit'
+        },
       ],
   };
