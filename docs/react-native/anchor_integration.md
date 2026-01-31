@@ -4,6 +4,10 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import CTAButton from "../../src/components/CTAButton";
 
+:::caution Content may be out of date
+Some of the content in this guide may be outdated. For an updated example of Anchor integration with an Expo app, see our [Cause Pots sample app](https://github.com/solana-mobile/react-native-samples/blob/main/cause-pots/frontend/services/pot-program.ts).
+:::
+
 This guide will show you how to integrate an Anchor Program into your React Native dApp, using the [Anchor Counter dApp](https://github.com/solana-mobile/tutorial-apps/tree/main/AnchorCounterDapp) as reference.
 
 <CTAButton label="Example App Repo" to="https://github.com/solana-mobile/tutorial-apps/tree/main/AnchorCounterDapp" />
@@ -23,23 +27,20 @@ This guide will show you how to integrate an Anchor Program into your React Nati
 
 ## Installation
 
-Add the Anchor library to your React Native Project:
+Add the Anchor library to your React Native project:
 
-:::caution
-React Native apps should use Anchor v0.28.0 because later versions of the library have a polyfill issue on React Native.
-:::
 <Tabs>
 <TabItem value="yarn" label="yarn">
 
 ```shell
-yarn add @coral-xyz/anchor@0.28.0
+yarn add @coral-xyz/anchor
 ```
 
 </TabItem>
 <TabItem value="npm" label="npm">
 
 ```shell
-npm install @coral-xyz/anchor@0.28.0
+npm install @coral-xyz/anchor
 ```
 
 </TabItem>
