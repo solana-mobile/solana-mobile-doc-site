@@ -51,7 +51,7 @@ Solana Mobile maintains an open-source **Android** SDK for Mobile Wallet Adapter
           height={20}
         />
       }
-      link="/react-native/using_mobile_wallet_adapter" 
+      link="/react-native/wallet_ui_mobile_wallet_adapter" 
     />
     <SDKSelectionButton 
       title="Kotlin" 
