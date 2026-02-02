@@ -73,13 +73,26 @@ module.exports = {
             items: [
                 {
                     type: 'doc',
-                    id: 'react-native/using_mobile_wallet_adapter',
-                    label: 'Connect to wallets and request signing'
+                    id: 'react-native/wallet_ui_mobile_wallet_adapter',
+                    label: 'Installation and Usage'
                 },
                 {
-                    type: 'doc',
-                    id: 'react-native/storing_mwa_auth',
-                    label: 'Cache wallet authorization'
+                    type: 'category',
+                    label: 'Advanced',
+                    collapsible: true,
+                    collapsed: true,
+                    items: [
+                        {
+                            type: 'doc',
+                            id: 'react-native/using_mobile_wallet_adapter',
+                            label: 'Invoke MWA sessions directly'
+                        },
+                        {
+                            type: 'doc',
+                            id: 'react-native/storing_mwa_auth',
+                            label: 'Caching wallet authorization'
+                        },
+                    ]
                 },
             ]
         },
