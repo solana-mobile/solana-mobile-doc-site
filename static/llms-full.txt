@@ -1,0 +1,4232 @@
+# Solana Mobile Documentation - Full Content
+
+> Complete documentation for building mobile dApps on Solana using the Solana Mobile Stack
+
+This document contains the full documentation content for AI/LLM indexing.
+
+
+---
+
+
+
+
+Welcome to the **Solana Mobile Documentation** site!
+
+The documentation site serves as a comprehensive knowledge center for developers that want to build with the **Solana Mobile Stack (SMS)**.
+
+Here, you can find an excellent collection of guides, tutorials, and references aimed at assisting developers as they build Web3 mobile dApps.
+In addition, there are also resources for developers wanting to publish on the [Solana dApp Store](/dapp-publishing/intro).
+
+These resources are actively maintained by the [Solana Mobile](https://github.com/solana-mobile) team, but welcomes [contributions from the community](https://github.com/solana-mobile/solana-mobile-doc-site)!
+
+You don't need a Solana Mobile device or physical device to start developing. The stack is compatible with any Android device. See [**prerequisite setup**](development-setup) to set up your development environment and start building!
+
+## Quickstart
+
+Learn how to develop Solana Mobile dApps in your preferred programming language.
+
+
+## Learn about Solana Mobile
+
+Learn about the Solana dApp Store or explore the libraries within the Solana Mobile SDK.
+
+
+
+---
+
+
+
+
+# Development Setup
+
+This section covers the steps to:
+- Set up your local environment for Android development.
+- Configure a device or emulator for building apps for the dApp Store.
+- Install an MWA-compliant wallet app for development purposes.
+
+
+## Set up Android development environment
+
+To build apps for the dApp Store, you need to setup your environment for Android development.
+
+
+For both Expo or React Native Android development:
+- View the Expo [**setup documentation**](https://docs.expo.dev/get-started/set-up-your-environment/?platform=android&device=physical&mode=development-build&buildEnv=local) (Choose custom development build instead of Expo Go).
+
+
+For Kotlin Android development:
+- Install [Android Studio](https://developer.android.com/studio/install).
+
+
+For Flutter Android development:
+- View the official Flutter [**setup documentation**](https://docs.flutter.dev/get-started/install/macos/mobile-android#configure-android-development).
+
+
+## Setup Device/Emulator
+
+You can test your app during development on any Android device or emulator. A Solana Mobile device is **not** required for dApp Store development—testing on a standard Android device is typically sufficient.
+
+For detailed device setup instructions, refer to Android's official documentation:
+
+- [Setting up a physical device](https://developer.android.com/studio/run/device)
+- [Configuring the Android Emulator](https://developer.android.com/studio/run/emulator)
+
+## Install a development wallet app 
+
+The [Mobile Wallet Adapter](/mobile-wallet-adapter/overview) (MWA) library allows your app to connect and interact with compatible wallet apps on your device. 
+
+Install an MWA-compatible wallet app to test your app's Mobile Wallet Adapter integration.
+
+### Mock MWA Wallet
+
+Solana Mobile provides a mock development wallet for you to test your app with and get a feel of what Seed Vault Wallet interactions on the Seeker will look like.
+
+The mock wallet features:
+- Mobile Wallet Adapter support
+- Simulate connection or signing errors
+- QR Code Scanning for MWA Remote Connections
+
+It is intended for development purposes only, so it does not store a persistent keypair and the wallet is reset each time the app is exited.
+
+
+Installation:
+
+1. Clone the Mock MWA Wallet repo from the [github repository](https://github.com/solana-mobile/mock-mwa-wallet)
+
+```
+git clone https://github.com/solana-mobile/mock-mwa-wallet.git
+```
+
+2. In Android Studio, `Open project > Navigate to the directory > Select mock-mwa-wallet/android/build.gradle`
+
+3. After Android Studio finishes loading the project, select `fakewallet` in the build/run configuration dropdown in the top right
+
+![Mock MWA Wallet build](/img/mock-mwa-wallet-install.png)
+
+4. After it builds successfully, you should see the app on your connected Android device or emulator.
+
+
+### Other MWA-compliant wallet apps
+
+You can also install and test with these popular MWA-compatible wallet apps:
+- [Phantom](https://phantom.com/)
+- [Solflare](https://www.solflare.com/)
+
+## Next steps
+
+You have a development environment and testing device, and are now ready to start developing. 
+
+Check out these links to quickly get an app running:
+- [Quickstart](/react-native/quickstart)
+- [Sample Apps](/sample-apps/sample_app_overview)
+
+
+
+---
+
+# Mobile dApp Architecture Overview
+
+This reference aims to give a conceptual overview of the architecture of a mobile dApp using the Solana Mobile Stack.
+
+## High Level
+
+The following diagram shows a bird's eye view of a mobile dApp's interactions with mobile wallets and the Solana network.
+
+  [Image: Full Architecture Diagram]
+
+## Mobile Wallet Adapter Protocol
+
+The **Mobile Wallet Adapter (MWA) ** protocol is what defines the communication exchange between a dApp and a mobile wallet.
+In the protocol, the dApp sends requests (i.e: authorization or signing), while the wallet is responsible for displaying
+these requests to the user and responding back to the dApp if approved.
+
+For an extensive, deep dive into the specifics of the protocol and MWA methods, refer to the [MWA spec](https://solana-mobile.github.io/mobile-wallet-adapter/spec/spec.html).
+
+### Session Establishment
+
+To begin the protocol, a dApp initiates first contact with a mobile wallet and establishes an **MWA session**.
+With the current SDKs, the MWA session is initiated through Android intents, with the dApp broadcasting an intent
+with the `solana-wallet://` scheme.
+
+  [Image: Session Establishment Diagram]
+  
+
+A wallet then receives the intent and starts a websocket connection, thus establishing a channel for commmunication.
+
+### Example: Authorize and Sign Transaction
+
+Once a session is established, the dApp can now begin sending MWA Requests to receive signed transactions from the wallet.
+This example case outlines an MWA session where the dApp:
+
+1. Establishes a session with a wallet.
+2. Requests authorization, elevating the session to an "authorized state" and receiving a list of authorized accounts and an authToken.
+3. Requests transaction signing, receiving a transaction signed by the authorized accounts.
+
+[Image: Authorize and Sign Diagram]
+
+In future sessions, the dApp can initiate with the valid authToken to immediately elevate to an "authorizd state", skipping the "connect" step.
+
+While the protocol technically supports multiple accounts, most wallet apps only implement a single account authorization per session.
+
+For a more detailed diagram that shows the full communication exchange, refer to this [section in the spec](https://solana-mobile.github.io/mobile-wallet-adapter/spec/spec.html#authorize-and-sign-transaction).
+
+## Submitting to the Solana network
+
+Just like web dApps, the process for a mobile dApp submitting transactions to the blockchain network is the same. The dApp specifies
+a cluster and an RPC endpoint then sends the transaction payload, following the [JSON RPC API](https://docs.solana.com/api).
+
+For certain usecases, the dApp may choose to communicate with the RPC through the [Websocket API](https://docs.solana.com/api/websocket)
+
+  [Image: Submit to RPC Diagram]
+
+### Sign and Send Transaction
+
+For submitting transactions, it is encouraged for the dApp to send a `sign_and_send_transaction` MWA request to the wallet. This request
+type sends a unsigned transaction to the wallet. If authorized, the wallet will then sign the transaction and send it to the network with its
+own implementation. Depending on the wallet app, this can include applying its own priority fee.
+
+Relying on the wallet reduces the risk of replay attacks with [durable nonce based transactions](https://docs.solana.com/implemented-proposals/durable-tx-nonces), which can be abused with `sign_transactions`.
+
+  [Image: Sign and Send Diagram]
+
+---
+
+# Mobile Wallet Adapter
+
+
+**Mobile Wallet Adapter (MWA)** is a generic protocol specification that enables dApps to connect with mobile wallet apps for Solana transaction and message signing.
+
+
+  [Image: Mobile Wallet Adapter]
+
+
+## Features
+
+
+## Client SDKs
+
+
+  
+
+  
+
+---
+
+# MWA for Web Apps
+
+
+## Overview
+
+Mobile Wallet Adapter works on both Desktop Web and Mobile Web applications through two different connection methods:
+
+- **Desktop Web Apps** connect remotely to wallet apps via QR code scanning.
+- **Mobile Web Apps**, including PWAs, connect locally to wallet apps on the same device.
+
+## SDK
+
+Use the **Mobile Wallet Standard** library to register MWA as a wallet option in your web app for both desktop and mobile users.
+
+The library handles both connection types automatically and presents the correct user experience based on the user's platform. It is compatible with any web app using the `@anza/wallet-adapter` libraries.
+
+  
+
+## Wallet Compatibility 
+
+| Wallet (Android only) | QR Code (Remote) | Mobile Web (Local) |
+| ------ | ---------------- | ------------------ |
+| Seed Vault Wallet | ✅ | ✅ |
+| Solflare | ✅ (Planned) | ✅ |
+| Phantom | ❌ | ✅ |
+
+## Browser Compatibility
+
+| Platform                                  | QR Code (Remote) | Mobile Web (Local) | Notes                                                          |
+| ----------------------------------------- | ---------------- | ------------------ | -------------------------------------------------------------- |
+| Desktop - All Browsers                    | ✅               | N/A                | QR Code display works on all desktop browsers.                 |
+| Android - Chrome                          | N/A              | ✅                 | Primary Android browser; also works with Chrome PWAs.          |
+| Android - Other Browsers                  | N/A              | ❌                 | Firefox, Opera, Brave, etc. do not support MWA.                |
+| iOS - All Browsers                        | N/A              | ❌                 | MWA is not available on any iOS browser.                       |
+
+
+---
+
+# Migrate to Wallet Standard
+
+On the web, Mobile Wallet Adapter (MWA) is available as a *standard wallet* with the package:
+
+- [`@solana-mobile/wallet-standard-mobile`](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/js/packages/wallet-standard-mobile)
+
+This is the recommended library for MWA on web and this guide explains why and how to migrate your web app.
+
+## How to upgrade
+
+### 1. Install Mobile Wallet Standard
+
+Installing the standard wallet takes two steps:
+
+#### Step 1
+
+Add the library `@solana-mobile/wallet-standard-mobile`.
+
+```bash
+npm install @solana-mobile/wallet-standard-mobile
+```
+
+#### Step 2
+
+Call the `registerMwa` function. 
+
+Ensure `registerMwa` is invoked in a non-SSR context. if you're using a framework with Server Side Rendering (e.g Next.js), 
+
+```ts
+// 'use client' - If using Next.js, ensure it is registered in a non-SSR context.
+
+
+    createDefaultAuthorizationCache, 
+    createDefaultChainSelector, 
+    createDefaultWalletNotFoundHandler,
+    registerMwa, 
+} from '@solana-mobile/wallet-standard-mobile';
+
+registerMwa({
+    appIdentity: {
+      name: 'My app',
+      uri: 'https://myapp.io',
+      icon: 'relative/path/to/icon.png', // resolves to https://myapp.io/relative/path/to/icon.png
+    },    
+    authorizationCache: createDefaultAuthorizationCache(),
+    chains: ['solana:devnet', 'solana:mainnet'],
+    chainSelector: createDefaultChainSelector(),
+    onWalletNotFound: createDefaultWalletNotFoundHandler(),
+    // remoteHostAuthority: '',  Include to enable remote connection option.
+})
+```
+
+Now, `Mobile Wallet Adapter` will appear as a wallet option.
+
+For more context, view the **full [installation guide](/mobile-wallet-adapter/web-installation).**
+
+### 2. Update to wallet-adapter >= 0.15.36
+
+If your web app is using `@solana/wallet-adapter-react` update to a version `>= 0.15.36`. 
+Updating fixes common MWA Web issues like:
+- the [*No connect after selecting MWA*](https://github.com/solana-mobile/mobile-wallet-adapter/issues/1086) bug.
+
+## Why switch?
+
+There are several reasons to upgrade to using MWA via Wallet Standard.
+
+### Wallet Adapter no longer includes MWA as a default 
+
+The `@solana/wallet-adapter-react` library will [not include MWA as a default option](https://github.com/anza-xyz/wallet-adapter/pull/1097) starting from versions `>= 1.0.0`. 
+
+This means any web app using `@solana/wallet-adapter-react` will no longer display `Mobile Wallet Adapter` as an option for users
+browsing on Android Chrome, unless explicitly added.
+
+### Enable remote connection
+
+The `@solana-mobile/wallet-standard-mobile` library includes a remote connection option that allows users to connect their mobile wallet app to a desktop web page.
+
+View the [MWA Remote documentation](/mobile-wallet-adapter/web-installation#enable-remote-connection) for more information.
+
+### Bug fixes and stability
+
+The `@solana-mobile/wallet-standard-mobile` is the recommended web library for MWA going forward. This means it will receive all the latest feature additions and updates. 
+
+The legacy `@solana-mobile/wallet-adapter-mobile` library will be deprecated and enter maintenance mode, and only receive updates for bug fixes.
+---
+
+# Mobile Wallet Adapter UX Guidelines
+
+This guide will cover the best practices for using Mobile Wallet Adapter (MWA) in your web app.
+
+This guide assumes:
+- You are using `@solana/wallet-adapter-react`
+- The user is browsing on an **Android Web environment**, where MWA is usually the only available wallet.
+
+## Call `connect()` directly
+
+You should explicitly handle two scenarios:
+
+1. If MWA is already selected, you should always directly call `connect`.
+
+2. If it is not selected, but available, `select` it as early as possible in your UI flow. 
+
+This will also fix connection related issues with Mobile Wallet Adapter.
+
+### Example: Connect Button
+
+```typescript
+
+
+export default function ConnectButton() {
+    const { connected, connect, wallet, wallets } = useWallet();
+    const { setVisible: showWalletSelectionModal } = useWalletModal();
+
+    const handleConnectClick = () => {
+        // MWA is only available if user is on Android Web environments (e.g Android Chrome).
+        if (wallet?.adapter?.name === SolanaMobileWalletAdapterWalletName) {
+            // If already selected, immediately connect.
+            await connect();
+        } else if (mobileWalletAdapter) {
+            // If MWA is not selected, but available, select it instead of showing modal.
+            select(SolanaMobileWalletAdapterWalletName)
+        } else {
+            // Else, show modal as usual.
+            showWalletSelectionModal(true)
+        }
+    }
+    return ;
+}
+```
+
+## Connect and Sign in a single user action
+
+If your app uses MWA and requires a user to *Sign-in-with-Solana* (e.g`connect` + `signMessage`), it needs to invoke both methods from a single user action.
+
+### Why?
+
+If `signMessage` is invoked programmatically (e.g in a `useEffect`), Android Chrome browser will block the navigation attempt in accordance with it's [trusted event policy](https://developer.chrome.com/docs/android/intents). 
+
+### Solution
+
+To `connect` + `signMessage` in a single user action, you should directly call the `signIn()` method
+
+Mobile Wallet Adapter always supports the `signIn` method which invokes a `connect` and `signMessage` all within a single method.
+
+### Example: Sign In Button
+
+```typescript
+
+
+export default function SignInButton() {
+    const { connected, signIn, wallet, wallets } = useWallet();
+    const { setVisible: showWalletSelectionModal } = useWalletModal();
+
+    const handleSignInButtonClick = () => {
+        // MWA is only available if user is on Android Web environments (e.g Android Chrome).
+        if (wallet?.adapter?.name === SolanaMobileWalletAdapterWalletName) {
+            // If MWA is present, immediately sign in.
+            const input: SolanaSignInInput = {
+                domain: window.location.host,
+                statement: "Sign in to My Web App",
+                uri: window.location.origin,
+            }
+            const output = await signIn(input);
+        } else {
+            // Else, show modal as usual.
+            showWalletSelectionModal(true)
+        }
+    }
+    return ;
+}
+```
+
+## Change the displayed name
+
+Throughout your UI, use the text `Use Installed Wallet` as the displayed name for the MWA option. 
+
+This descriptive text helps your users understand that this option will allow them to connect to an installed mobile wallet app (via MWA).
+
+### Example: Wallet List Item Component
+
+```typescript
+
+
+export default function WalletListItem({ wallet, onPress }){
+    // If we are showing MWA, use a descriptive display name.
+    const displayName = (wallet.adapter.name === SolanaMobileWalletAdapterWalletName) 
+                        ? `Use Installed Wallet` : wallet.adapter.name
+    return (
+    
+        {displayName}
+    
+    );
+};
+```
+
+---
+
+
+
+
+# React Native
+
+[**React Native**](https://reactnative.dev/docs/getting-started) is a popular development framework for creating mobile apps using React and Javascript.
+
+This section of the site provides a developer guide for building React Native Android apps for Solana Mobile.
+
+## Getting Started
+
+
+## Cookbook
+
+Read these guides for a collection of code snippets and examples for common use cases in Solana React Native dApps.
+
+
+## Why React Native?
+
+[**React Native**](https://reactnative.dev/docs/getting-started) is a popular development framework for creating mobile apps using React and Javascript. This section goes over the benefits of React Native and why you might choose it to build your mobile app.
+
+### Code Reusability
+
+Solana developers can continue using popular, well-supported Solana web libraries like `@solana/web3.js` and leverage their existing code in a React Native project. Developers familiar with Solana Web development will find this their quickest option to start building.
+
+### Familiarity
+
+Developers familiar with React development will be able to leverage their existing knowledge and translate it to building mobile apps. Just like React development on web, React Native supports live and hot reloading, which significantly speeds up the development process.
+
+## Expo?
+
+[**Expo**](https://docs.expo.dev/) is a popular platform that simplifies the development and deployment process for React Native projects, with the tradeoff of stricter customization of native code.
+
+To use Expo with the MWA libraries, you'll need to follow an alternate Expo development flow, called a [custom Expo Development build](https://docs.expo.dev/develop/development-builds/create-a-build/).
+
+
+---
+
+
+
+
+# Create a project
+
+We recommend starting with a Solana Mobile template app generated by [`create-solana-dapp`](https://github.com/solana-developers/create-solana-dapp).
+
+The Solana Mobile templates include:
+- React Native (via Expo)
+- Mobile Wallet Adapter and Solana RPC examples
+- Pre-built components, navigation, and React hooks
+
+
+## Initialize
+
+To create a new project, run the following command:
+
+```bash
+npm create solana-dapp@latest
+```
+
+## Select the Solana Mobile framework
+
+Select the Solana Mobile framework, then pick a template option.
+
+
+[Image: create-solana-dapp]
+
+
+## Next step
+
+Now you have a project, set up your development environment so you can build and run your app.
+
+
+---
+
+
+
+
+# Environment Setup
+
+Solana Mobile devices run Android OS, and the Solana dApp Store accepts only Android apps (APKs). 
+
+To develop for Solana Mobile, you'll need an Android development environment.
+
+
+## Expo
+
+Expo is the officially recommended framework to build React Native apps.
+
+For Solana Mobile development, we recommend this Expo setup:
+- Android (required)
+- Development Build (required for Mobile Wallet Adapter)
+- Build without EAS
+
+View Expo [**documentation**](https://docs.expo.dev/get-started/set-up-your-environment/?mode=development-build&buildEnv=local) to setup your environment for Android development.
+
+## Next steps
+
+With your development environment ready, you can now test your Solana Mobile app on any Android device or emulator - no Seeker required. 
+
+Learn how in the next section.
+---
+
+
+
+
+# Making RPC requests
+
+To interface with the Solana network, a client needs to construct and send [_JSON RPC requests_](https://docs.solana.com/api/http) to an [_RPC endpoint_](https://docs.solana.com/cluster/rpc-endpoints).
+
+## Add dependencies
+
+The [@solana/web3.js](https://github.com/solana-labs/solana-web3.js) library provides a convenient RPC client [`Connection`](https://solana-labs.github.io/solana-web3.js/classes/Connection.html) class that has an API for submitting RPC requests to a JSON RPC endpoint.
+
+
+```bash
+yarn install @solana/web3.js@1 \
+             react-native-get-random-values \
+             buffer
+```
+
+
+```bash
+npm install @solana/web3.js@1 \
+             react-native-get-random-values \
+             buffer
+```
+
+
+### Add polyfills
+
+After installing, ensure you have also added these [polyfills](/react-native/polyfill-guides/web3-js) to the `index.js` of your React native app. These are needed in some parts of `@solana/web3.js` because it is originally written as a web/node library and, as a result, certain expected APIs are missing in a React Native environment.
+
+## Creating a `Connection` client
+
+The `Connection` class represents a connection to a Solana RPC endpoint and provides convenient functions to make RPC requests.
+
+Construct a `Connection` client by passing in an RPC endpoint and an optional [commitment](https://docs.solana.com/cluster/commitments) config:
+
+```typescript
+const connection = new Connection("https://api.devnet.solana.com", "confirmed");
+```
+
+The `Connection` class created can be reused throughout your application.
+
+### Usage
+
+After creation, call various asynchronous RPC functions and receive responses from the RPC endpoint.
+
+```typescript
+// `getLatestBlockhash` RPC request
+const blockhash = await connection.getLatestBlockhash();
+
+// `getBalance` RPC request
+const balanceInLamports = await connection.getBalance();
+
+// Sending a Transaction
+const txSignature = await sendTransaction(tx);
+```
+
+View the [official documentation](https://solana-labs.github.io/solana-web3.js/classes/Connection.html) to see the full list of available RPC functions, parameter types, and response types.
+
+## Next steps
+
+- Read the following _Building transactions_ guide to learn how to create transactions that interact with on-chain Solana Programs.
+- Browse the [full list](https://docs.solana.com/api/http) of Solana RPC HTTP Methods
+
+---
+
+
+
+
+# Building transactions
+
+A client interacts with the Solana network by submitting a _transaction_ to the cluster. Transactions
+allow a client to invoke instructions of on-chain [_Programs_](https://docs.solana.com/developing/intro/programs).
+
+For a full explanation, see the core docs overview of a [_transaction_](https://docs.solana.com/developing/programming-model/transactions).
+
+## Add dependencies
+
+The [@solana/web3.js](https://github.com/solana-labs/solana-web3.js) library provides convenient classes and Solana primitive types to build transactions.
+
+
+```bash
+yarn install @solana/web3.js
+```
+
+
+```bash
+npm install @solana/web3.js
+```
+
+
+### Add polyfills
+
+After installing, ensure you have also added these [polyfills](/react-native/polyfill-guides/web3-js) to your React native app.
+These are needed by some parts of `@solana/web3.js` because it is originally written as a web/node library and, as a result, certain expected APIs are missing in a React Native environment.
+
+## Example: SOL Transfer Transaction
+
+In the following example, we create a _transaction_ that invokes the [System Program](https://docs.solana.com/developing/runtime-facilities/programs#system-program)'s _transfer_ instruction to send SOL to an address.
+
+A _[transaction instruction](https://docs.solana.com/developing/programming-model/transactions#instructions)_ is comprised of a program id, a list of accounts, and instruction data specific to the program.
+
+
+A [versioned transaction](https://docs.solana.com/developing/versioned-transactions) is a new format for transactions recommended for use by clients.
+
+As an example, we'll be invoking the _transfer_ instruction from the _System Program_. Use the `SystemProgram` factory class
+to conveniently generate the _transfer_ instruction.
+
+```tsx
+
+  Connection,
+  PublicKey,
+  VersionedTransaction,
+  SystemProgram,
+} from "@solana/web3.js";
+
+// Create a list of Program instructions to execute.
+const instructions = [
+  SystemProgram.transfer({
+    fromPubkey: fromPublicKey,
+    toPubkey: toPublicKey,
+    lamports: 1_000_000,
+  }),
+];
+
+// Connect to an RPC endpoint and get the latest blockhash, to include in
+// the transaction.
+const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
+const latestBlockhash = await connection.getLatestBlockhash();
+
+// Create the "message" of a transaction and compile to `V0Message` format.
+const txMessage = new TransactionMessage({
+  payerKey: fromPublicKey,
+  recentBlockhash: latestBlockhash.blockhash,
+  instructions,
+}).compileToV0Message();
+
+// Construct the Versioned Transaction passing in the message.
+const versionedTransaction = new VersionedTransaction(txMessage);
+```
+
+
+For backwards compatibility, you can still construct legacy transactions with `@solana/web3.js`.
+
+```tsx
+
+  Connection,
+  PublicKey,
+  Transaction,
+  SystemProgram,
+} from "@solana/web3.js";
+
+const latestBlockhash = await connection.getLatestBlockhash();
+const randomTransferTransaction = new Transaction({
+  ...latestBlockhash,
+  feePayer: fromPublicKey,
+}).add(
+  SystemProgram.transfer({
+    fromPubkey: fromPublicKey,
+    toPubkey: toPublicKey,
+    lamports: 1_000,
+  })
+);
+```
+
+
+## Send a Transaction
+
+After a transaction is signed by the appropriate accounts, it can be submitted to the Solana network via RPC. See the
+next guide, _Using Mobile Wallet Adapter_ to learn how to sign transactions.
+
+
+```tsx
+
+
+  sendTransaction,
+  clusterApiUrl,
+  Connection,
+  VersionedTransaction,
+  confirmTransaction,
+} from "@solana/web3.js";
+
+const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
+const unsignedTx = new VersionedTransaction(/* ... */);
+const signedTx: VersionedTransaction = await transact((wallet) => {
+  /* ...sign `unsignedTx` with Mobile Wallet Adapter... */
+});
+
+// After sending, a transaction signature is returned.
+const txSignature = await connection.sendTransaction(signedTx);
+
+// Confirm the transaction was successful.
+const confirmationResult = await connection.confirmTransaction(
+  txSignature,
+  "confirmed"
+);
+
+if (confirmationResult.value.err) {
+  throw new Error(JSON.stringify(confirmationResult.value.err));
+} else {
+  console.log("Transaction successfully submitted!");
+}
+```
+
+
+```tsx
+
+
+  sendTransaction,
+  clusterApiUrl,
+  Connection,
+  Transaction,
+  confirmTransaction,
+} from "@solana/web3.js";
+
+const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
+const signedTx: Transaction = await transact((wallet) => {
+  /* ...signing code from above... */
+});
+
+// After sending, a transaction signature is returned.
+const txSignature = await sendTransaction(signedTx, connection);
+
+// Confirm the transaction was successful.
+const confirmationResult = await connection.confirmTransaction(
+  txSignature,
+  "confirmed"
+);
+
+if (confirmationResult.value.err) {
+  throw new Error(JSON.stringify(confirmationResult.value.err));
+} else {
+  console.log("Transaction successfully submitted!");
+}
+```
+
+
+## Next steps
+
+- Read the following _Using Mobile Wallet Adapter_ guide to learn how to sign these transactions and submit them to the Solana network.
+- See the [Anchor Integration guide](/react-native/anchor_integration) to learn how to create and create transactions and invoke instructions from Anchor programs.
+
+---
+
+
+
+
+# Using Mobile Wallet Adapter
+
+The Mobile Wallet Adapter protocol is a spec that enables a secure communication exchange between a dApp and an MWA-compliant wallet app installed on the device.
+
+Mobile Wallet Adapter 2.0 is the newest and current version of the Mobile Wallet Adapter protocol. The complete 2.0 spec is viewable [here](https://solana-mobile.github.io/mobile-wallet-adapter/spec/spec.html).
+
+## Add dependencies
+
+Solana Mobile has published two React Native libraries to use Mobile Wallet Adapter.
+
+- [`@solana-mobile/mobile-wallet-adapter-protocol`](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/js/packages/mobile-wallet-adapter-protocol) is the core library that implements the Mobile Wallet Adapter protocol for React Native.
+- [`@solana-mobile/mobile-wallet-adapter-protocol-web3js`](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/js/packages/mobile-wallet-adapter-protocol-web3js) is a convenience wrapper package around the core library that enables use of common types from `@solana/web3.js` – such as `Transaction` and `Uint8Array`.
+
+These libraries provide a convenient API to connect, issue signing requests to a locally installed wallet app, and receive responses.
+
+
+```bash
+yarn add @solana-mobile/mobile-wallet-adapter-protocol-web3js \
+             @solana-mobile/mobile-wallet-adapter-protocol
+```
+
+
+```bash
+npm install @solana-mobile/mobile-wallet-adapter-protocol-web3js \
+            @solana-mobile/mobile-wallet-adapter-protocol \
+```
+
+
+## Establishing an MWA session
+
+
+To establish a session, or request to 'connect', with an MWA wallet, use the `transact` method provided by `@solana-mobile/mobile-wallet-adapter-protocol-web3js`.
+
+Calling `transact` dispatches an assocication intent to a locally installed MWA wallet app and prompts the user to approve or reject the connection request.
+
+Once session is established, the user can begin issuing MWA requests and receiving responses from the wallet app within the provided `callback`.
+
+```tsx
+
+  transact,
+  Web3MobileWallet,
+} from "@solana-mobile/mobile-wallet-adapter-protocol-web3js";
+
+await transact(async (wallet: Web3MobileWallet) => {
+  /* ...In callback, send requests to `wallet`... */
+});
+```
+
+Use the `transact` function from `@solana-mobile/mobile-wallet-adapter-protocol-web3js` rather than `@solana-mobile/mobile-wallet-adapter-protocol`.
+
+The former provides convenient wrappers around common `web3.js` Solana types like `Transaction` while the latter provides base64 encoded byte payloads.
+
+## Connecting to a wallet
+
+
+After session establishment, you can connect to the wallet by issuing an [`authorize`](/reference/typescript/mobile-wallet-adapter#web3mobilewalletauthorize) request. This authorization step is required if you want to request signing services from the wallet.
+
+Define the _App Identity_ of your dApp so that the wallet app can properly display your dApp info to the user.
+
+- `name`: The name of your app.
+- `uri`: The web URL associated with your app.
+- `icon`: A path to your app icon relative to the app uri above.
+
+```tsx
+
+
+export const APP_IDENTITY = {
+  name: 'React Native dApp',
+  uri:  'https://yourdapp.com'
+  icon: "favicon.ico", // Full path resolves to https://yourdapp.com/favicon.ico
+};
+
+const authorizationResult = await transact(async (wallet: Web3MobileWallet) => {
+    const authorizationResult = await wallet.authorize({
+        cluster: 'solana:devnet',
+        identity: APP_IDENTITY,
+    });
+
+    /* After approval, signing requests are available in the session. */
+
+    return authorizationResult;
+});
+
+console.log("Connected to: " + authorizationResult.accounts[0].address)
+```
+
+**Authorization Result**
+
+If the user approves, the wallet returns an `AuthorizationResult` response that contains the user's authorized wallet `accounts`, an `auth_token`, and `wallet_uri_base`.
+
+In practice, most wallet apps currently only support single account authorization, so there will be at most 1 item in `accounts`.
+
+```ts
+type AuthorizationResult = Readonly<{
+  accounts: Account[];
+  auth_token: AuthToken;
+  wallet_uri_base: string;
+  sign_in_result?: SolanaSignInOutput;
+}>;
+```
+
+See the [SDK reference](/reference/typescript/mobile-wallet-adapter#web3mobilewalletauthorize) for a full explanation of the `AuthorizationResult` response type.
+
+### Connecting with an `auth_token`
+
+For subsequent sessions with the wallet app, you can skip the authorization step by including an `auth_token` in the `authorize` request.
+
+If valid, the user is able to skip the connection approval dialog for authorization.
+
+```tsx
+
+
+export const APP_IDENTITY = {
+  name: 'React Native dApp',
+  uri:  'https://yourdapp.com'
+  icon: "./favicon.ico",
+};
+
+// If we have one, retrieve an authToken from a previous authorization.
+const storedAuthToken = maybeGetStoredAuthToken(); // dummy placeholder function
+
+await transact(async (wallet: Web3MobileWallet) => {
+    // If we have a previously stored authToken, we can pass it into `authorize`.
+    const authorizationResult = await wallet.authorize({
+        chain: 'solana:devnet',
+        identity: APP_IDENTITY,
+        auth_token: storedAuthToken ? storedAuthToken: undefined,
+    });
+
+    // Rest of transact code goes below...
+});
+```
+
+### Deauthorizing a wallet
+
+
+A dApp can revoke authorization or "disconnect" from a wallet by sending a `deauthorize` request.
+The wallet invalidates the provided `authToken`.
+
+```tsx
+await transact(async (wallet) => {
+  if (!previouslyStoredAuthToken) {
+    return;
+  }
+
+  // Pass in the prior auth token to invalidate it.
+  await wallet.deauthorize({ auth_token: previouslyStoredAuthToken });
+});
+```
+
+## Sign in with Solana
+
+To connect to a wallet and simultaneously verify the user's ownership of the wallet, use the [_Sign in with Solana_](https://github.com/phantom/sign-in-with-solana?tab=readme-ov-file#introduction) feature.
+_SIWS_ combines the `authorize` and `signMessage` step and returns a `SolanaSignInOutput` that can be verified by the dApp.
+
+To initiate _SIWS_, include the optional `sign_in_payload` parameter in the `authorize` request. If provided, the wallet
+will display a dedicated _SIWS_ UI and prompt the user to sign in by signing the `statement` message.
+
+```tsx
+const signInResult = await transact(async (wallet: Web3MobileWallet) => {
+  const authorizationResult = await wallet.authorize({
+    chain: 'solana:devnet',
+    identity: APP_IDENTITY,
+    sign_in_payload: {
+      domain: 'yourdomain.com',
+      statement: 'Sign into React Native Sample App',
+      uri: 'https://yourdomain.com',
+    },
+  });
+
+  return authorizationResult.sign_in_result;
+}
+```
+
+### Verifying the sign-in result
+
+If approved, the wallet will include a `sign_in_result` payload in the `AuthorizationResult` response. The dApp can then
+verify that the `sign_in_result` was correctly signed by the user's wallet.
+
+The `@solana/wallet-standard-util` library provides a `verifySignIn` helper method for SIWS message and signature verification.
+
+```typescript
+
+  SolanaSignInInput,
+  SolanaSignInOutput,
+} from "@solana/wallet-standard-features";
+
+
+export function verifySIWS(
+  input: SolanaSignInInput,
+  output: SolanaSignInOutput
+): boolean {
+  const serialisedOutput: SolanaSignInOutput = {
+    account: {
+      publicKey: new Uint8Array(output.account.publicKey),
+      ...output.account,
+    },
+    signature: new Uint8Array(output.signature),
+    signedMessage: new Uint8Array(output.signedMessage),
+  };
+  return verifySignIn(input, serialisedOutput);
+}
+```
+
+See the [Phantom SIWS docs](https://github.com/phantom/sign-in-with-solana?tab=readme-ov-file#dapp-integration) for more information. It is written for web dApps, but can be extrapolated for mobile dApps.
+
+## Signing and sending a transaction
+
+
+To request a wallet to sign and then send a Solana transaction, use the `signAndSendTransactions` method. With this method,
+the wallet will handle both signing the transactions then submitting them to the Solana network.
+
+This request sends an unsigned transaction to the wallet. If authorized, the wallet will then sign the transaction and send it to the network with its own implementation.
+
+
+```tsx
+
+
+  sendTransaction,
+  clusterApiUrl,
+  Connection,
+  VersionedTransaction,
+  confirmTransaction,
+} from "@solana/web3.js";
+
+const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
+const txSignature = await transact((wallet) => {
+  // Authorize the wallet session
+  const authorizationResult = await wallet.authorize({
+    cluster: "solana:devnet",
+    identity: APP_IDENTITY,
+  });
+
+  // Convert base64 address to web3.js PublicKey class
+  const authorizedPubkey = new PublicKey(
+    toByteArray(authorizationResult.accounts[0].address)
+  );
+
+  // Construct an instruction to transfer 1,000,000 lamports to a randomly generated account
+  const randomKeypair = Keypair.generate();
+  const instructions = [
+    SystemProgram.transfer({
+      fromPubkey: authorizedPubkey,
+      toPubkey: randomKeypair.publicKey,
+      lamports: 1_000_000,
+    }),
+  ];
+
+  // Construct the Versioned message and transaction.
+  const txMessage = new TransactionMessage({
+    payerKey: authorizedPubkey,
+    recentBlockhash: latestBlockhash.blockhash,
+    instructions,
+  }).compileToV0Message();
+
+  const transferTx = new VersionedTransaction(txMessage);
+
+  // Send the unsigned transaction, the wallet will sign and submit it to the network,
+  // returning the transaction signature.
+  const transactionSignatures = await wallet.signAndSendTransactions({
+    transactions: [transferTx],
+  });
+
+  return transactionSignatures[0];
+});
+
+// Confirm the transaction was successful.
+const confirmationResult = await connection.confirmTransaction(
+  txSignature,
+  "confirmed"
+);
+
+if (confirmationResult.value.err) {
+  throw new Error(JSON.stringify(confirmationResult.value.err));
+} else {
+  console.log("Transaction successfully submitted!");
+}
+```
+
+
+```tsx
+
+
+  sendTransaction,
+  clusterApiUrl,
+  Connection,
+  Transaction,
+  confirmTransaction,
+} from "@solana/web3.js";
+
+const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
+const txSignature = await transact((wallet) => {
+  /* ...building transaction code... */
+
+  const transferTx = new Transaction({
+    ...latestBlockhash,
+    feePayer: authorizedPubkey,
+  }).add(
+    SystemProgram.transfer({
+      fromPubkey: authorizedPubkey,
+      toPubkey: toPublicKey,
+      lamports: 1_000_000,
+    })
+  );
+
+  // Send the unsigned transaction, the wallet will sign and submit it to the network,
+  // returning the transaction signature.
+  const transactionSignatures = await wallet.signAndSendTransactions({
+    transactions: [transferTx],
+  });
+
+  return transactionSignatures[0];
+});
+
+// Confirm the transaction was successful.
+const confirmationResult = await connection.confirmTransaction(
+  txSignature,
+  "confirmed"
+);
+
+if (confirmationResult.value.err) {
+  throw new Error(JSON.stringify(confirmationResult.value.err));
+} else {
+  console.log("Transaction successfully submitted!");
+}
+```
+
+
+The result from sending a transaction is a base58 transaction signature (or transaction ID). This transaction signature can be used to uniquely identify your transaction on the ledger.
+
+Using `confirmTransaction`, you can check that the transaction was `confirmed` by the network. For other commitment levels, read about [Commitment Status](https://docs.solana.com/cluster/commitments).
+
+## Signing Transactions
+
+
+Alternatively, you can request the wallet to just sign a transaction by issuing a `signTransactions` request.
+
+
+```tsx
+
+
+// Connect to an RPC endpoint and get the latest blockhash, to include in
+// the transaction.
+const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
+const latestBlockhash = await connection.getLatestBlockhash();
+
+const signedTx = await transact(async (wallet) => {
+  /* ...transaction code from above... */
+  const transferTx = new VersionedTransaction(txMessage);
+
+  // Request to sign the transaction
+  const signedTxs = await wallet.signTransactions({
+    transactions: [transferTx],
+  });
+
+  return signedTxs[0];
+});
+```
+
+
+```tsx
+
+
+  Keypair,
+  clusterApiUrl,
+  Connection,
+  SystemProgram,
+  Transaction,
+} from "@solana/web3.js";
+
+// Connect to an RPC endpoint and get the latest blockhash, to include in
+// the transaction.
+const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
+const latestBlockhash = await connection.getLatestBlockhash();
+
+const signedTx = await transact(async (wallet) => {
+  /* ...transaction code from above... */
+
+  // Sign and return the transactions.
+  const signedTransactions = await wallet.signTransactions({
+    transactions: [randomTransferTransaction],
+  });
+
+  return signedTransactions[0];
+});
+```
+
+
+The response returned will be a signed `Transaction` that can be submitted to an RPC endpoint with the `sendTransaction` function from the `Connection` class.
+
+## Signing messages
+
+
+To request off-chain message signing, issue a `signMessages` request. In this case, a _message_ is any payload of bytes.
+
+```tsx
+
+
+// Convert 'Hello world!' to a byte array.
+const message = 'Hello world!'
+const messageBuffer = new Uint8Array(
+  message.split('').map(c => c.charCodeAt(0)),
+);
+
+const signedMessages = await transact(async (wallet) => {
+  // Authorize the wallet session.
+  const authorizationResult = await wallet.authorize({
+      cluster: 'solana:devnet',
+      identity: APP_IDENTITY,
+  });
+
+  // Request to sign the payload with the authorized account.
+  const signedMessages = wallet.signMessages({
+    addresses: [authorizationResult.accounts[0].address].
+    payloads: [messageBuffer]
+  })
+
+  return signedMessages;
+});
+```
+
+The response returned will be an `Uint8Array[]`, where each item corresponds to the signed message input.
+
+## Next Steps
+
+- Browse the collection of [Sample Apps](/sample-apps/sample_app_overview) to reference a full Solana React Native app.
+
+- View the [Anchor Integration guide](/react-native/anchor_integration) to learn how to interact with Anchor programs in React Native.
+
+---
+
+# Caching MWA Authorization
+
+
+A key component to unlocking great UX in mobile dApps is correctly storing the address and authentication token of a user's currently authorized wallet.
+
+If authorization details are cached, then it can be re-used between reloads of the dApp (i.e: Staying "connected" after exiting and reopening the app).
+
+
+## Simple Storage API
+
+This guide will cover a simple storage API to manage authorization details in a dApp using the `@react-native-async-storage/async-storage` library.
+
+### AsyncStorage 
+
+Install it with:
+
+
+```shell
+yarn add @react-native-async-storage/async-storage
+```
+
+
+```shell
+npm install @react-native-async-storage/async-storage
+```
+
+
+You can use it like this: 
+
+```tsx
+
+
+// Store a string against some key.
+await AsyncStorage.setItem('address', 'abc123');
+// Then, some time later...
+const storedAddress = await AsyncStorage.getItem('address');
+```
+
+## Implementation Examples
+
+### Check for cached authorization
+
+When the dApp boots up, we first check the cache to see if there is a prior authorization. We designate
+the cache keys to be `authToken` and `base64Address`.
+
+```tsx
+const App = () => {
+    // Store details about the currently connected wallet.
+    const [currentAccount, setCurrentAccount] = useState<{
+        authToken: string;
+        pubkey: PublicKey;
+    } | null>(null);
+    
+    // When the application boots up, check to see if we have a prior authorization.
+    useEffect(() => {
+        (async () => {
+            const [cachedAuthToken, cachedBase64Address] = await Promise.all([
+                AsyncStorage.getItem('authToken'),
+                AsyncStorage.getItem('base64Address'),
+            ]);
+            if (cachedBase64Address && cachedAuthToken) {
+                const pubkeyAsByteArray = toByteArray(cachedBase64Address);
+                const cachedCurrentAccount = {
+                    authToken: cachedAuthToken,
+                    pubkey: new PublicKey(pubkeyAsByteArray),
+                };
+                setCurrentAccount(cachedCurrentAccount);
+            }
+        })();
+    }, []);
+
+    /* ...*/
+}
+```
+
+### Cache on authorize
+
+You can cache the authorization details, when the user completes an `authorize` request with wallet. In this example,
+the caches when the connect button is pressed.
+
+```tsx
+// Store details about the currently connected wallet.
+const [currentAccount, setCurrentAccount] = useState<{
+    authToken: string;
+    pubkey: PublicKey;
+} | null>(null);
+
+const handleConnectPress = useCallback(() => {
+    transact(async wallet => {
+        const {accounts, auth_token} = await wallet.authorize({
+            cluster: 'devnet',
+            identity: {
+                name: 'My amazing app',
+            },
+        });
+        const firstAccount = accounts[0];
+        AsyncStorage.setItem('authToken', auth_token);
+        AsyncStorage.setItem('base64Address', firstAccount.address);
+        const pubkeyAsByteArray = toByteArray(firstAccount.address);
+        const nextCurrentAccount = {
+            authToken: auth_token,
+            pubkey: new PublicKey(pubkeyAsByteArray),
+        };
+        setCurrentAccount(nextCurrentAccount);
+    });
+}, []);
+```
+
+We can choose to only render the Connect button, if there is no `currentAccount` state.
+
+### Clear cache on deauthorize
+The user can choose to "disconnect" their wallet with the `deauthorize` MWA request. In this case,
+we should invalidate the cache by calling `AsyncStorage.clear()`.
+
+```tsx
+// Pressing disconnect deauthorizes this app with the wallet, and clears
+// all cached account information.
+const handleDisconnectPress = useCallback(() => {
+    transact(async wallet => {
+        if (currentAccount == null) {
+            throw new Error('There is no current account to deauthorize');
+        }
+        await wallet.deauthorize({auth_token: currentAccount.authToken});
+        AsyncStorage.clear();
+        setCurrentAccount(null);
+    });
+}, [currentAccount]);
+```
+
+## Reference Apps
+
+The following reference apps showcase implementing MWA authorization in a dApp.
+
+### [SimpleStorageDapp](https://github.com/solana-mobile/tutorial-apps/tree/main/SimpleStorageDapp)
+
+This reference app makes a small change to the Solana Mobile dApp Scaffold adding an authorization cache with `AsyncStorage`. The current authorization
+is managed through the [AuthorizationProvider](https://github.com/solana-mobile/tutorial-apps/blob/main/SimpleStorageDapp/components/providers/AuthorizationProvider.tsx) component.
+
+### [example-react-native-app](https://github.com/solana-mobile/mobile-wallet-adapter/blob/main/examples/example-react-native-app/App.tsx#L31)
+
+This reference app implements an `AsyncStorage` provider with the [`swr`](https://swr.vercel.app/) data fetching library. The caching and parsing logic
+is defined in [`App`](https://github.com/solana-mobile/mobile-wallet-adapter/blob/main/examples/example-react-native-app/App.tsx#L78) component while
+the current authorization is provided with the [`useAuthorization`](https://github.com/solana-mobile/mobile-wallet-adapter/blob/main/examples/example-react-native-app/utils/useAuthorization.tsx) hook.
+
+
+
+---
+
+# Anchor Integration Guide
+
+
+Some of the content in this guide may be outdated. For an updated example of Anchor integration with an Expo app, see our [Cause Pots sample app](https://github.com/solana-mobile/react-native-samples/blob/main/cause-pots/frontend/services/pot-program.ts).
+
+This guide will show you how to integrate an Anchor Program into your React Native dApp, using the [Anchor Counter dApp](https://github.com/solana-mobile/tutorial-apps/tree/main/AnchorCounterDapp) as reference.
+
+
+## What you will learn
+
+- How to import an Anchor Program into a React Native project
+- How to create an Anchor Wallet and Provider with Mobile Wallet Adapter
+- How to sign and submit transactions with an Anchor Program IDL
+- How to generate instructions with an Anchor Program IDL
+
+## Prerequisites
+
+- [React Native setup](../react-native/setup) and [Anchor setup](https://book.anchor-lang.com/getting_started/installation.html)
+- Basic understanding of [Anchor Programs](https://book.anchor-lang.com/) and IDL.
+- An existing [deployed](https://book.anchor-lang.com/anchor_in_depth/milestone_project_tic-tac-toe.html#deployment) Anchor Program.
+
+## Installation
+
+Add the Anchor library to your React Native project:
+
+
+```shell
+yarn add @coral-xyz/anchor
+```
+
+
+```shell
+npm install @coral-xyz/anchor
+```
+
+
+## Create an Anchor Wallet with Mobile Wallet Adapter
+
+The Anchor Counter Program example app shows how to create an Anchor wallet that is integrated
+with a more complex state management framework.
+
+
+To create an `AnchorWallet`, use Mobile Wallet Adapter `transact` to implement the required signing functions.
+
+A simple implementation:
+
+```tsx
+
+
+  transact,
+  Web3MobileWallet,
+} from "@solana-mobile/mobile-wallet-adapter-protocol-web3js";
+
+const anchorWallet = useMemo(() => {
+  return {
+    signTransaction: async (transaction: Transaction) => {
+      return transact(async (wallet: Web3MobileWallet) => {
+        const authorizationResult = await wallet.authorize({
+              cluster: RPC_ENDPOINT,
+              identity: APP_IDENTITY,
+        }));
+
+        const signedTransactions = await wallet.signTransactions({
+          transactions: [transaction],
+        });
+        return signedTransactions[0];
+      });
+    },
+    signAllTransactions: async (transactions: Transaction[]) => {
+      return transact(async (wallet: Web3MobileWallet) => {
+        const authorizationResult = await wallet.authorize({
+              cluster: RPC_ENDPOINT,
+              identity: APP_IDENTITY,
+        }));
+
+        const signedTransactions = await wallet.signTransactions({
+          transactions: transactions,
+        });
+        return signedTransactions;
+      });
+    },
+    get publicKey() {
+      return userPubKey;
+    },
+  } as anchor.Wallet;
+}, []);
+```
+
+## Importing an Anchor Program in Typescript
+
+### Generating an Anchor Program IDL
+
+If you have an Anchor project in your local workspace, build the program and generate the Typescript IDL with:
+
+```shell
+anchor build
+```
+
+If the Anchor program is already deployed and you know its address, you can use the [Anchor CLI](https://book.anchor-lang.com/anchor_references/cli.html?highlight=idl#idl) to fetch it:
+
+```shell
+anchor idl fetch GrAkKfEpTKQuVHG2Y97Y2FF4i7y7Q5AHLK94JBy7Y5yv
+```
+
+### Instantiate your Anchor Program
+
+Once your IDL has been generated, you can import it and create an instance of your `Program` in Typescript.
+
+- Import your generated IDL file, in this case from `/target/types/basic_counter.ts`
+- Use the `anchorWallet` from the previous step to create an `AnchorProvider`.
+
+
+```tsx
+
+
+const COUNTER_PROGRAM_ID = "ADraQ2ENAbVoVZhvH5SPxWPsF2hH5YmFcgx61TafHuwu";
+
+// Address of the devnet-deployed Counter Program
+const counterProgramId = useMemo(() => {
+  return new PublicKey(COUNTER_PROGRAM_ID);
+}, []);
+
+// Create an AnchorProvider with the anchorWallet.
+const provider = useMemo(() => {
+  if (!anchorWallet) {
+    return null;
+  }
+  return new AnchorProvider(connection, anchorWallet, {
+    preflightCommitment: "confirmed",
+    commitment: "processed",
+  });
+}, [anchorWallet, connection]);
+
+// Create an instance of your Program.
+const counterProgram = useMemo(() => {
+  if (!provider) {
+    return null;
+  }
+
+  return new Program(
+    idl as BasicCounterProgram,
+    counterProgramId,
+    provider
+  );
+}, [counterProgramId, provider]);
+```
+
+## Sign transactions manually with Mobile Wallet Adapter
+
+With an instantiated `Program`, you can:
+
+- Generate serialized program instructions.
+- Construct a `Transaction` with the generated instructions.
+- Manually sign the `Transaction` with Mobile Wallet Adapter.
+
+In the following example, we generate an `incrementInstruction` from the program then sign it within a Mobile Wallet Adapter
+session.
+
+```tsx
+const {counterProgram, counterPDA} = useCounterProgram();
+
+const signIncrementTransaction = async () => {
+  return await transact(async (wallet: Web3MobileWallet) => {
+    const authorizationResult = wallet.authorize({
+      cluster: RPC_ENDPOINT,
+      identity: APP_IDENTITY,
+    }));
+
+    const latestBlockhash = await connection.getLatestBlockhash();
+
+    // Generate the increment ix from the Anchor program
+    const incrementInstruction = await counterProgram.methods
+        .increment(new anchor.BN(amount))
+        .accounts({
+          counter: counterPDA,
+        })
+        .instruction();
+
+    // Build a transaction containing the instruction
+    const incrementTransaction = new Transaction({
+      ...latestBlockhash,
+      feePayer: authorizationResult.publicKey,
+    }).add(incrementInstruction);
+
+    // Sign a transaction and receive
+    const signedTransactions = await wallet.signTransactions({
+      transactions: [incrementTransaction],
+    });
+
+    return signedTransactions[0];
+  });
+}
+```
+
+This approach is flexible and allows you to fully utilize the Mobile Wallet Adapter session.
+
+## Sign transactions using a Mobile Wallet Adapter signer
+
+With an instantiated `Program`, you can also use the Anchor provided `rpc()` function to sign and submit an Anchor transaction to an RPC.
+
+
+```tsx
+const { counterProgram, counterPDA } = useCounterProgram();
+
+const incrementCounter = async () => {
+  // Submit an increment transaction to the RPC endpoint
+  const signature = await counterProgram.methods
+    .increment(new anchor.BN(amount))
+    .accounts({
+      counter: counterPDA,
+    })
+    .rpc();
+
+  return signature;
+};
+```
+
+Calling the `rpc()` will generate and sign the transaction using the interface methods (`signTransaction`, `signAllTransactions`) of the Anchor Wallet that the program was instantiated with.
+
+---
+
+# Metaplex Integration Guide
+
+
+[**Metaplex**](https://docs.metaplex.com/) provides a collection of on-chain tools/programs for creating and managing NFTs on Solana. In addition, Metaplex provides multiple [Client SDKs](https://docs.metaplex.com/sdks/) that makes it easier for developers to interact and use their on chain programs.
+
+This guide will focus on integrating with the [Metaplex JS SDK](https://docs.metaplex.com/sdks/js/) in a React Native app with Mobile Wallet Adapter.
+
+
+## Installation
+Install the Metaplex JS package to your project.
+
+
+```shell
+yarn add @metaplex-foundation/js
+```
+
+
+```shell
+npm install @metaplex-foundation/js
+```
+
+
+### Polyfill installation
+
+The Metaplex JS SDK was originally written for a Browser/Node environment, so certain dependencies aren't immediately available on React Native. These polyfill libraries will fill in the missing libraries and enable React Native compatibility.
+
+#### 1. Install polyfills
+```shell
+yarn add \
+    assert \
+    crypto-browserify \
+    readable-stream \
+    zlib \
+    react-native-url-polyfill
+```
+
+#### 2. Add polyfills to resolver in metro.config.js
+Adding the `resolver` property lets the Metro know which packages to substitute with when seeing a `require`.
+```js
+module.exports = {
+  resolver: {
+    extraNodeModules: {
+      crypto: require.resolve('crypto-browserify'),
+      stream: require.resolve('readable-stream'),
+      zlib: require.resolve('browserify-zlib'),
+      path: require.resolve('path-browserify'),
+      url: require.resolve('react-native-url-polyfill'),
+    },
+  },
+  transformer: {
+    getTransformOptions: async () => ({
+      transform: {
+        experimentalImportSupport: false,
+        inlineRequires: true,
+      },
+    }),
+  },
+};
+```
+
+#### 3. Add imports to index.js
+```tsx
+
+
+AppRegistry.registerComponent(appName, () => App);
+```
+
+## Usage
+
+### Creating a Metaplex Instance
+
+The entry point to the JavaScript SDK is a `Metaplex` instance that will give you access to its API. It provides a convenient API to interact with on-chain programs, simplifying actions like minting an NFT.
+
+It accepts a `Connection` instance from `@solana/web3.js` that will be used to communicate with the cluster.
+
+```tsx
+
+
+const metaplex = Metaplex.make(connection);
+```
+
+### Using MWA as an Identity Driver
+
+Metaplex also allows you to further customize who the SDK should interact on behalf of, by providing an "Identity Driver". You can use the Mobile Wallet Adapter methods to implement an Identity Driver. With this provided, Metaplex SDK can request signing for transactions/messages when needed. 
+
+#### Create an MWA Identity Signer:
+
+```tsx
+
+
+  transact,
+  Web3MobileWallet,
+} from '@solana-mobile/mobile-wallet-adapter-protocol-web3js';
+
+
+const mwaIdentitySigner: IdentitySigner = {
+    publicKey: signersPublicKey,
+    signMessage: async (message: Uint8Array): Promise => {
+        return await transact(async (wallet: Web3MobileWallet) => {
+            const authResult = await wallet.authorize({
+                cluster: RPC_ENDPOINT,
+                identity: APP_IDENTITY,
+            }); 
+            
+            // Optionally, double check authResult returns the matching account to 'signersPublicKey'
+
+            const signedMessages = await wallet.signMessages({
+                addresses: [selectedAccount.publicKey.toBase58()],
+                payloads: [message],
+            });
+
+            return signedMessages[0];
+        });
+    },
+    signTransaction: async (
+        transaction: Transaction,
+    ): Promise => {
+        return await transact(async (wallet: Web3MobileWallet) => {
+            const authResult = await wallet.authorize({
+                cluster: RPC_ENDPOINT,
+                identity: APP_IDENTITY,
+             });
+
+            // Optionally, double check authResult returns the matching account to 'signersPublicKey'
+
+            const signedTransactions = await wallet.signTransactions({
+                transactions: [transaction],
+            });
+
+            return signedTransactions[0];
+        });
+    },
+    signAllTransactions: async (
+        transactions: Transaction[],
+    ): Promise => {
+        return transact(async (wallet: Web3MobileWallet) => {
+            const authResult = await wallet.authorize({
+                cluster: RPC_ENDPOINT,
+                identity: APP_IDENTITY,
+            })
+
+            // Optionally, double check authResult returns the matching account to 'signersPublicKey'
+
+            const signedTransactions = await wallet.signTransactions({
+                transactions: transactions,
+            });
+            return signedTransactions;
+        });
+    },
+};
+```
+
+#### Using the Identity Driver  
+Then you need to wrap the implemented `IdentitySigner` within a `MetaplexPlugin`. Now you can call the `use` method on the Metaplex instance and supply the identity driver plugin.
+
+The Metaplex instance requires passing in a `MetaplexPlugin`, so you need to first create a plugin that wraps the identity signer. Lastly, you can call the `use` method on the `Metaplex` instance and supply the identity driver plugin.
+
+```tsx
+// Create a Metaplex Plugin for the identity driver
+const mobileWalletAdapterIdentity = (
+  mwaIdentitySigner: IdentitySigner,
+): MetaplexPlugin => ({
+  install(metaplex: Metaplex) {
+    metaplex.identity().setDriver(mwaIdentitySigner);
+  },
+});
+
+// Finally, create the Metaplex instance with the identity driver.
+const metaplex = Metaplex.make(connection).use(
+    mobileWalletAdapterIdentity(mwaIdentitySigner),
+);
+```
+
+### Storage Drivers
+
+On Browser/Node environments, the SDK also allows you to specify a "Storage Driver" that conveniently integrates various de/centralized storage options (e.g: Bundlr, IPFS, AWS), for uploading media assets and metadata.
+
+**For React Native, the usual storage driver plugins will not work**. Read the note below!
+
+The existing 3rd party storage drivers provided by Metaplex **are not compatible with React Native**, due to reliance on Node libraries! For example, the `bundlrStorage()` and `nftStorage()` plugins will not work and throw an error.
+
+The workaround solution is to manually interact with the storage providers directly, without relying on a prebuilt Metaplex SDK/plugin.
+For example, you can upload directly to IPFS using [NFT.storage's REST API](https://nft.storage/api-docs/). You can see an code example of this in the [example app](https://github.com/solana-mobile/tutorial-apps/blob/main/MobileNFTMinter/ipfs/uploadToIPFS.ts#L7).
+
+### Viewing owned NFTs
+
+Now with the Metaplex instance, you can access the `nfts()` module that provides easy interaction and signing with onchain programs.
+
+
+```tsx
+const myNfts = await metaplex.nfts().findAllByOwner({
+    owner: metaplex.identity().publicKey
+});
+```
+
+### Minting an NFT
+
+
+For example, to mint an NFT:
+
+```tsx
+// Uses the identity driver to request signing from a wallet.
+const {nft, response} = await metaplex.nfts().create({
+    name: 'NFT Name',
+    uri: 'https://someService.com/path/to/metadata/json',
+    sellerFeeBasisPoints: 0,
+    tokenOwner: signersPublicKey,
+});
+```
+The `nfts()` module provides plenty of other APIs. Look through the Metaplex [docs](https://github.com/metaplex-foundation/js#nfts) for full details.
+
+
+
+---
+
+--- 
+title: Your first React Native dApp
+---
+
+
+In this tutorial, you'll learn how to build a React Native dApp that sends a message to the Solana network.
+
+## What you will learn
+- How to use [**Mobile Wallet Adapter**](/developers/overview#mobile-wallet-adapter) to connect to an installed wallet app.
+- How to connect to devnet, check your wallet balance, and request an airdrop of SOL.
+- How to use the memo program to write your message to the network
+- View your message on the [Solana Explorer](https://explorer.solana.com/)!
+
+## Prerequisites
+Read the [prerequisite setup](../developers/development-setup) guide before starting the tutorial. 
+You'll need:
+- a running Android emulator or device to build and launch your app.
+- an MWA-compatible wallet installed on the same device.
+- an IDE/Editor of your choice.
+
+
+This tutorial will be using the [fakewallet](../developers/development-setup#3-install-a-wallet-app) app to test your app's integration with Mobile Wallet Adapter.
+
+
+## Clone the React Native dApp Scaffold
+
+This dApp will build off the **[React Native Scaffold dApp](/react-native/setup#solana-mobile-dapp-scaffold)** which already has a simple user interface that allows you to connect to a mobile wallet, request an airdrop, and sign transactions. 
+
+#### Step 1. Initialize a template app
+
+```shell
+npx react-native init FirstDappTutorial --template https://github.com/solana-mobile/solana-mobile-dapp-scaffold.git
+```
+
+#### Step 2. Enter the directory and install the project dependencies.
+
+
+```shell
+cd FirstDappTutorial && yarn install 
+```
+
+
+```shell
+cd FirstDappTutorial && npm install 
+```
+
+
+#### Step 3. Make sure your emulator/device is running, then build and launch the app.
+
+```shell
+npx react-native run-android
+```
+
+### First run
+
+At this point, your app should build, install into your device, and launch automatically. 
+You should also see the Metro Bundler console window pop up. This is where you can read the logs and access the debug menu.
+
+With React Native's *fast refresh* feature, you can edit the React components, save your changes, and immediately see your app UI update!
+
+## Scaffold dApp Components
+
+Now lets quickly go over the features of the dApp Scaffold. If you want to skip to building the memo transaction, then jump to this [section](/react-native/first_app_tutorial#send-a-memo-transaction).
+
+### Connect Button
+Clicking on the *Connect Wallet* button will 'connect' you to a locally installed MWA-compatible wallet. It uses the Mobile Wallet Adapter 
+SDK to request [`authorization`](/react-native/quickstart#authorizing-a-wallet) from the wallet and receives your wallet account's info, like the public key.
+
+On click, it starts a wallet session with `transact` and calls `authorizeSession` from the [`AuthorizationProvider`](https://github.com/solana-mobile/tutorial-apps/blob/main/first-mobile-dapp/components/AuthorizationProvider.tsx) class.
+```tsx
+await transact(async wallet => {
+    await authorizeSession(wallet);
+});
+```
+
+[`AuthorizationProvider`](https://github.com/solana-mobile/tutorial-apps/blob/main/first-mobile-dapp/components/AuthorizationProvider.tsx) is a helper class that manages wallet authorization. It calls `wallet.authorize()` on first connect, and for subsequent connects it re-uses
+the `authToken` in `wallet.reauthorize()`.
+
+```tsx
+const authorizeSession = useCallback(
+    async (wallet: AuthorizeAPI & ReauthorizeAPI) => {
+        const authorizationResult = await (authorization
+        ? wallet.reauthorize({
+            auth_token: authorization.authToken,
+            identity: APP_IDENTITY,
+            })
+        : wallet.authorize({
+            cluster: APP_CLUSTER,
+            identity: APP_IDENTITY,
+            }));
+        console.log(authorizationResult);
+        return (await handleAuthorizationResult(authorizationResult))
+        .selectedAccount;
+    },
+    [authorization, handleAuthorizationResult],
+);
+```
+
+### Account Info
+
+This is a simple component takes a balance in [*lamports*](https://docs.solana.com/terminology#lamport) and converts it to units of [*SOL*](https://docs.solana.com/terminology#sol) for display. 
+
+#### Balance fetching
+In the `MainScreen.tsx` component, we fetch the user's wallet balance when its available, and pass it into the `AccountInfo` component.
+To do so, we use the `connection` class and just call the `getBalance` function, which is part of the [API spec](https://docs.solana.com/api/http#getbalance).
+
+```tsx
+const {connection} = useConnection();
+const fetchAndUpdateBalance = useCallback(
+    async (account: Account) => {
+        const fetchedBalance = await connection.getBalance(account.publicKey);
+        setBalance(fetchedBalance);
+    },
+    [connection],
+);
+```
+
+### Airdrop Button
+
+This component takes in a user's wallet `publicKey` and requests an airdrop of lamports to that address on click. Again, we use the `connection` class
+and call the `requestAirdrop` RPC method, as part of the [API spec](https://docs.solana.com/api/http#requestairdrop).
+
+```tsx
+const requestAirdrop = useCallback(async () => {
+    const signature = await connection.requestAirdrop(
+        selectedAccount.publicKey,
+        LAMPORTS_PER_AIRDROP,
+    );
+    return await connection.confirmTransaction(signature);
+}, [connection, selectedAccount]);
+```
+
+### Sign Transaction/Message Button
+
+The `SignMessageButton` component takes in a `messageBuffer` byte array and calls `wallet.signMessages()`. This requests the
+connected wallet to sign the message with the user's private key.
+
+The `SignTransactionButton` component does several things on click. Within the wallet session, it constructs a `Transaction` with a
+`SystemProgram.transfer` instruction, then requests the wallet to provide a signature in the transaction.
+
+
+```tsx
+const signMessage = useCallback(
+    async (messageBuffer: Uint8Array) => {
+        return await transact(async (wallet: Web3MobileWallet) => {
+        // First, request for authorization from the wallet.
+        const authorizationResult = await authorizeSession(wallet);
+
+        // Sign the payload with the provided address from authorization.
+        const signedMessages = await wallet.signMessages({
+            addresses: [authorizationResult.address],
+            payloads: [messageBuffer],
+        });
+
+        return signedMessages[0];
+        });
+    },
+    [authorizeSession],
+);
+```
+
+
+```tsx
+const signTransaction = useCallback(async () => {
+    return await transact(async (wallet: Web3MobileWallet) => {
+        const connection = new Connection(clusterApiUrl('devnet'), 'confirmed');
+
+        // First, request for authorization from the wallet and fetch the latest
+        // blockhash for building the transaction.
+        const [authorizationResult, latestBlockhash] = await Promise.all([
+            authorizeSession(wallet),
+            connection.getLatestBlockhash(),
+        ]);
+
+        // Construct a transaction. This transaction uses web3.js `SystemProgram`
+        // to create a transfer that sends lamports to randomly generated address.
+        const keypair = Keypair.generate();
+        const randomTransferTransaction = new Transaction({
+            ...latestBlockhash,
+            feePayer: authorizationResult.publicKey,
+        }).add(
+        SystemProgram.transfer({
+            fromPubkey: authorizationResult.publicKey,
+            toPubkey: keypair.publicKey,
+            lamports: 1_000,
+        }),
+        );
+
+        // Sign a transaction and receive
+        const signedTransactions = await wallet.signTransactions({
+            transactions: [randomTransferTransaction],
+        });
+
+        return signedTransactions[0];
+    }, [authorizeSession]);
+});
+```
+
+
+## Send a memo transaction
+
+Now that we've gone over the existing scaffold, lets add some new functionality to it. 
+
+Instead of a random transfer transaction, lets create a new transaction that records an immutable message on the Solana blockchain, 
+using the [Memo program](https://spl.solana.com/memo). After that, we can view our message on the [Solana Explorer](https://explorer.solana.com/).
+
+### Copy over the SignTransactionButton
+
+Lets build off our existing `SignTransactionButton`, and copy it over into a new component renamed to `SendMemoButton`. Then, rename the `signTransaction` helper function into `sendMemo`.
+
+
+### Construct a memo program transaction
+
+First, let's replace the existing `randomTransferTransaction` with a new transaction that calls the Solana `Memo` program address. Within the `transact` block, 
+add this code and remove `randomTransferTransaction`.
+
+```tsx
+
+
+// Construct a message buffer from a string.
+const message = "Hello Solana!";
+const messageBuffer = new TextEncoder().encode(message) as Buffer
+
+// Construct a 'Hello World' transaction and replace `randomTransferTransaction
+const memoProgramTransaction = new Transaction({
+    ...latestBlockhash,
+    feePayer: authorizationResult.publicKey,
+}).add(
+    new TransactionInstruction({
+    data: messageBuffer,
+    keys: [],
+    programId: new PublicKey(
+        'MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr', // Memo Program address
+    ),
+    }),
+);
+```
+
+### Request the wallet to sign and send a transaction
+
+Next, instead of `wallet.signTransactions()`, now lets request our wallet to send the transaction for us, with `wallet.signAndSendTransactions()`. 
+
+This is an optional feature that MWA wallets can choose to support, and `fakewallet` does support this. You can also directly use `connection`
+to [send and confirm a transaction](https://solanacookbook.com/references/basic-transactions.html#how-to-send-sol).
+
+```tsx
+// Changed to `signAndSendTransactions.` and pass in `memoProgramTransaction`.
+const transactionSignatures = await wallet.signAndSendTransactions({
+    transactions: [memoProgramTransaction],
+});
+```
+
+### Confirm the transaction
+
+Now, the last step is to confirm that the transaction was processed by the network. Add this to the send
+of the `transact` session and return the both `[signature, confirmationRepsonse]`. Read the docs learn more about [transaction confirmation](https://docs.solana.com/developing/transaction_confirmation).
+
+```tsx
+// Add this step to confirm that the transaction was processed by the network.
+const confirmationResponse = await connection.confirmTransaction({
+    signature: signature,
+    ...latestBlockhash,
+});
+
+return [signature, confirmationResponse];
+```
+
+### Add Solana Explorer link navigation
+
+After transaction confirmation, we can now view the message on the Solana blockchain itself! To do so,
+we'll use the public tool [Solana Explorer](https://explorer.solana.com/), construct an explorer URL, and prompt the user to
+navigate to the link through an alert.
+
+```tsx
+// Show an alert with an explorer link when we have a confirmed memo transaction.
+function showExplorerAlert(memoTransactionSignature: string, cluster: string) {
+  const explorerUrl =
+    'https://explorer.solana.com/tx/' +
+    memoTransactionSignature +
+    '?cluster=' +
+    cluster;
+  Alert.alert(
+    'Success!',
+    'Your message was successfully recorded. View your message on Solana Explorer:',
+    [
+      {text: 'View', onPress: () => Linking.openURL(explorerUrl)},
+      {text: 'Cancel', style: 'cancel'},
+    ],
+  );
+}
+```
+
+
+### Update the button onPress
+
+Almost done! Now just update the `onPress` handler in the button component to call `sendMemo`, handle errors, and show the explorer URL.
+Here is what the final code should look like at this step for `sendMemo` and the button component.
+
+
+```tsx
+return (
+     {
+            if (signingInProgress) {
+                return;
+            }
+            setSigningInProgress(true);
+            try {
+                const [memoTransactionSignature, confirmationResponse] = await sendMemo();
+                const err = confirmationResponse.value.err;
+                if (err) {
+                console.log(
+                    'Failed to record message:' +
+                    (err instanceof Error ? err.message : err),
+                );
+                } else {
+                    // APP_CLUSTER is either 'devnet', 'testnet', 'mainnet-beta'.
+                    showExplorerAlert(memoTransactionSignature, APP_CLUSTER);
+                }
+            } finally {
+                setSigningInProgress(false);
+            }
+        }}
+    />
+);
+```
+
+
+```tsx
+const sendMemo = useCallback(
+    async (
+        messageBuffer: Buffer,
+    ): Promise<[string, RpcResponseAndContext]> => {
+        const latestBlockhash = await connection.getLatestBlockhash();
+        const signature = await transact(async (wallet: Web3MobileWallet) => {
+        const authorizationResult = await authorizeSession(wallet);
+
+        const memoProgramTransaction = new Transaction({
+            ...latestBlockhash,
+            feePayer: authorizationResult.publicKey,
+        }).add(
+            new TransactionInstruction({
+            data: messageBuffer,
+            keys: [],
+            programId: new PublicKey(
+                'MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr', // Memo Program address
+            ),
+            }),
+        );
+
+        const transactionSignatures = await wallet.signAndSendTransactions({
+            transactions: [memoProgramTransaction],
+        });
+            return transactionSignatures[0];
+        });
+
+        // Add this step to confirm that the transaction was processed by the network.
+        const confirmationResponse = await connection.confirmTransaction({
+            signature: signature,
+            ...latestBlockhash,
+        });
+
+        return [signature, confirmationResponse];
+    },
+    [authorizeSession, connection],
+);
+```
+
+
+### Finishing touches
+
+Last step. All that's left is to render the new `SendMemoButton` in the app's `MainScreen`. Just change the existing `SignTransactionButton` 
+component into the `SendMemoButton` component and you're done!
+
+Make sure you request an airdrop of SOL before pressing the `SendMemoButton`, as 
+you need to pay a small fee to send transactions on the network.
+
+**Congratulations!**
+
+You've finished the tutorial and built your first mobile dApp! Play around with the new `SendMemoButton` and view your message on the explorer. Make sure, you request 
+an airdrop of SOL before trying to send the transaction.
+
+## Next steps
+
+Explore guides and SDK references to learn more and create more advanced applications. Here are some links to explore:
+
+### Sample App Collection
+- If you want to see more examples of dApps, then check out this [curated list](/sample-apps/sample_app_overview) of Solana mobile sample apps. It also includes a more [robust version of the app](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/examples/example-react-native-app) built in this tutorial.
+
+### Guides/References
+- [web3.js Javascript SDK reference](https://solana-labs.github.io/solana-web3.js/)
+- [Writing your own Solana programs](https://docs.solana.com/developing/on-chain-programs/overview)
+- [Hello World Tutorial](/react-native/hello_world_tutorial): A lengthier tutorial that teaches how to write MWA UI components.
+
+
+
+---
+
+# Mobile NFT Minter Tutorial
+
+
+In this tutorial, you will learn how to build a React Native dApp that can mint NFTs from your phone photos.
+
+<p float="left">
+  [Image: Saga Photo 3]
+  [Image: Saga Photo 3]
+  [Image: Saga Photo 3]
+</p>
+
+View or download the complete open-source program on Github, or follow this tutorial to build the application from scratch.
+
+
+## What you will learn  
+- Integrate the Metaplex JS in a React Native project.
+- Use an MWA Identity Signer with Metaplex.
+- How to read image files from the OS file system.
+- How to upload image and metadata files to IPFS, through NFT.storage.
+- Create and mint a Metaplex NFT on-chain.
+
+## Prerequisites
+- Complete [prerequisite setup](../developers/development-setup) for a ready dev environment.
+- An Android device/emulator to build and launch a React Native app
+- An MWA-compatible wallet installed on the same device/emulator.
+- Basic understanding of MWA.
+
+## Project Setup
+
+### 1. Initialize Scaffold
+
+This tutorial builds off the [dApp Scaffold template](https://github.com/solana-mobile/solana-mobile-dapp-scaffold). This template
+comes setup with the essential packages like MWA and web3.js.
+
+Initialize the scaffold using the following command:
+
+```shell
+npx react-native init MobileNFTMinter --template @solana-mobile/solana-mobile-dapp-scaffold --npm
+cd MobileNFTMinter
+```
+
+The `--npm` flag is only necessary if you're using newer versions of Yarn (Yarn 2 or Yarn 3).
+After running the command, you can simply delete the `package-lock.json` generated and continue using
+Yarn.
+
+Next, install the dependencies:
+
+
+```shell
+rm package-lock.json
+yarn install
+```
+
+
+```shell
+npm install
+```
+
+
+### 2. Install Metaplex JS SDK
+
+The next step is to install the `@metaplex-foundation/js` package. This is the Metaplex JS SDK that provides
+a developer friendly API to interact with onchain programs.
+
+Carefully follow the [Metaplex installation](../react-native/metaplex_integration#installation) steps
+here to make sure you install the package along with all the necessary polyfill libraries.
+
+### 3. Install dependencies
+
+In addition to the Metaplex JS SDK, the app will use several other libraries that handle other usecases, like file reading,
+IPFS, and others. Some of these are opinionated, so feel free to swap out a library with one of your choice.
+
+
+A brief overview of each dependency:
+
+- [`rn-fetch-blob`](https://github.com/joltup/rn-fetch-blob): A React Native file system reader for converting photos to bytes.
+- [`react-native-image-picker`](https://github.com/react-native-image-picker/react-native-image-picker): Provides a convenient Photo selector UI.
+- [`react-native-config`](https://github.com/luggit/react-native-config):Used to store and expose the NFT.storage API key to Javascript.
+- [`multiformats`](https://github.com/multiformats/js-multiformats): A low-level JS library that provides an API/interface to compute CIDs in IPFS format.
+
+
+```shell
+yarn install \
+    rn-fetch-blob \
+    react-native-image-picker \
+    react-native-config \
+    multiformats
+```
+
+
+```shell
+npm install \
+    rn-fetch-blob \
+    react-native-image-picker \
+    react-native-config \
+    multiformats
+```
+
+
+### 4. Launch the app
+
+```shell
+npx react-native run-android
+```
+
+At this point, your app should build, install into your device, and launch automatically. If you are seeing errors
+about missing/undefined methods, double check you installed the polyfills correctly.
+
+## How does minting work?
+
+The end to end procedure of minting a photo NFT roughly follows these steps:
+1. Select a photo and upload it to a storage provider.
+2. Upload a JSON object containing metadata that conforms to the [Metaplex NFT Standard](https://docs.metaplex.com/programs/token-metadata/token-standard#the-non-fungible-standard), to a storage provider.
+3. Submit a transaction to the network that creates your NFT on chain.
+
+## Uploading to IPFS with NFT.storage
+
+In this tutorial, we choose [IPFS](https://ipfs.tech/), a decentralized storage provider, to host the selected photo and the metadata object. 
+
+We'll also be using [NFT.storage](https://nft.storage/docs/) to help upload directly to IPFS, through their [HTTP API](https://nft.storage/docs/client/http/).
+You can sign up for a free API key on their website.
+
+
+### Selecting the photo
+
+You need to select an existing photo from our gallery. To present a picker UI and retrieve the file path, use `launchImageLibrary` from the `react-native-image-picker` library.
+
+In the example app, this is done within the `NftMinter` component where `handleSelectImage` is called on a [button press](https://github.com/solana-mobile/tutorial-apps/blob/main/MobileNFTMinter/components/NftMinter.tsx#L44).
+
+We save the image path as state, to be used in the next step.
+
+```tsx
+
+
+const photo = await launchImageLibrary({
+    selectionLimit: 1,
+    mediaType: 'photo',
+});
+const selectedPhoto = photo?.assets?.[0];
+if (!selectedPhoto?.uri) {
+    console.warn('Selected photo not found');
+    return;
+}
+const imagePath = selectedPhoto.uri;
+```
+
+### Upload the photo
+
+Now that we have the image path, we need to upload the raw bytes of the file to IPFS, using the NFT.storage `/upload` endpoint.
+
+The steps:
+1. Use the `rn-fetch-blob` library to read the image file into a Base 64 string.
+2. Convert to raw bytes by decoding the Base64 string with `Buffer`.
+3. Use `fetch` to send a request containing the image bytes to the upload endpoint.
+
+In the example app, this is handled in a separate helper function [`uploadToIPFS`](https://github.com/solana-mobile/tutorial-apps/blob/main/MobileNFTMinter/ipfs/uploadToIPFS.ts#L7), which is called
+later within the larger the [`mintNft`](https://github.com/solana-mobile/tutorial-apps/blob/main/MobileNFTMinter/components/NftMinter.tsx#L61) function. 
+
+During this step, you'll need to provide your own API key from NFT.storage. In the example app, the `NFT_STORAGE_API_KEY` value is set through
+an environment variable config, using the `react-native-config` library.
+
+```tsx
+// Read the image file and get the base64 string.
+const imageBytesInBase64: string = await RNFetchBlob.fs.readFile(
+    imagePath,
+    'base64',
+);
+
+// Convert base64 into raw bytes.
+const bytes = Buffer.from(imageBytesInBase64, 'base64');
+
+// Upload the image to IPFS by sending a POST request to the NFT.storage upload endpoint.
+const headers = {
+    Accept: 'application/json',
+    Authorization: `Bearer ${Config.NFT_STORAGE_API_KEY}`,
+};
+const imageUpload = await fetch('https://api.nft.storage/upload', {
+    method: 'POST',
+    headers: {
+        ...headers,
+        'Content-Type': 'image/jpg',
+    },
+    body: bytes,
+});
+
+const imageData = await imageUpload.json();
+console.log(imageData.value.cid);
+```
+
+If successful, the `imageData.value.cid` will contain a valid [CID (Content Identifier)](https://docs.ipfs.tech/concepts/content-addressing/). This is a string that
+uniquely identifies your uploaded asset. 
+
+You can view your uploaded asset on an [IPFS gateway](https://docs.ipfs.tech/concepts/ipfs-gateway/) by passing in the CID in the URL (e.g: `https://ipfs.io/ipfs/<cid>`). 
+View an [example](https://ipfs.io/ipfs/bafkreicdv4jt7oaah73kvjfnm4f2yd5klbnyehlkpi33kxjakdo6encepe) of an uploaded photo on ipfs.io.
+
+### Uploading the metadata 
+Next, we need to construct a metadata object that conforms to the [Metaplex NFT Standard](https://docs.metaplex.com/programs/token-metadata/token-standard#the-non-fungible-standard), then
+upload it to the same `/upload` endpoint.
+
+Metadata fields:
+- Name: The name of the NFT.
+- Description: A description of the NFT.
+- Image: A URL that hosts the photo. In this case, we use an `ipfs.io` URL with the CID of the uploaded photo.
+
+In the example app, the metadata upload step is also handled within the [`uploadToIPFS`](https://github.com/solana-mobile/tutorial-apps/blob/main/MobileNFTMinter/ipfs/uploadToIPFS.ts#L37) function.
+
+There is a slight difference that should be noted. The `image` field uses a precomputed CID for the photo, rather than waiting for the photo upload to finish. 
+This is an optimization that is explained in the next section.
+
+```tsx
+// Construct the metadata fields.
+const metadata = JSON.stringify({ 
+    name,
+    description,
+    image: `https://ipfs.io/ipfs/${imageData.value.cid}`,
+});
+// Upload to IPFS
+const metadataUpload = await fetch('https://api.nft.storage/upload', {
+    method: 'POST',
+    headers: {
+        ...headers,
+        'Content-Type': 'application/json',
+    },
+    body: metadata,
+});
+
+const metadataData = await metadataUpload.json();
+console.log(metadataData.value.cid);
+```
+
+If successful, `metadataData.value.cid` will now contain a CID that points to a JSON object representing the NFT metadata. View an [example](https://ipfs.io/ipfs/bafkreidbymwcjxntxak7wkxvblzgtaivg2ktef47i3nfcqtbw4but5ufhe) of an uploaded metadata object.
+
+To recap, we now have two CIDs that are viewable on IPFS. First, the CID of our uploaded photo, and second, the CID of
+JSON Metadata (which has a reference to the photo CID in the `image` field).
+
+### Precomputing the CID
+
+You may notice in the example app, that during the upload step in [`uploadToIPFS`](https://github.com/solana-mobile/tutorial-apps/blob/main/MobileNFTMinter/ipfs/uploadToIPFS.ts#L50)
+we're able to precompute the CID of the photo asset before actually uploading it to IPFS. This is an optimization that allows us to
+construct and upload the metadata object, without waiting for the photo upload to complete and return the CID.
+
+We take advantage of this by uploading both the photo and metadata asynchronously.
+```tsx
+// Fire off both uploads aysnc
+return Promise.all([
+    imageUpload.then(response => response.json()),
+    metadataUpload.then(response => response.json()),
+]);
+```
+
+This is made possible because CIDs are generated deterministically from the binary data of any given asset. This mean we can compute the CID of an asset before
+uploading it to IPFS.
+
+To compute the CID from the bytes of a given asset, see the [`getCid`](https://github.com/solana-mobile/tutorial-apps/blob/main/MobileNFTMinter/ipfs/getCid.ts) function.
+
+```tsx
+
+const crypto = require('crypto-browserify');
+
+const SHA_256_CODE = 0x12;
+const IPLD_RAW_BINARY_CODE = 0x55;
+
+const getCid = async (bytes: Buffer) => {
+  const sha256 = hasher.from({
+    // As per multiformats table
+    // https://github.com/multiformats/multicodec/blob/master/table.csv#L9
+    name: 'sha2-256',
+    code: SHA_256_CODE,
+    encode: input =>
+      new Uint8Array(crypto.createHash('sha256').update(input).digest()),
+  });
+  const hash = await sha256.digest(bytes);
+  const cid = await CID.create(1, IPLD_RAW_BINARY_CODE, hash);
+
+  return cid;
+};
+```
+
+## Minting the NFT
+
+At this point we have completed the IPFS uploading steps and all that is left is to mint the NFT on chain. To do so,
+we'll use the Metaplex JS SDK.
+
+### Create a Metaplex Instance
+
+To interact with Metaplex onchain programs, instantiate a `Metaplex` instance provided by the SDK.
+
+Follow this [section](../react-native/metaplex_integration#using-mwa-as-an-identity-driver) in the Metaplex guide, to create an MWA Identity Signer plugin. We'll need
+this so that the `Metaplex` instance will be able to request wallet signing through MWA.
+
+In the example app, this is handled in two files: 
+- [`mwaPlugin`](https://github.com/solana-mobile/tutorial-apps/blob/main/MobileNFTMinter/metaplex-util/mwaPlugin.ts): A helper file that installs a `MetaplexPlugin` using MWA as an identity signer.
+- [`useMetaplex`](https://github.com/solana-mobile/tutorial-apps/blob/main/MobileNFTMinter/metaplex-util/useMetaplex.tsx): A React hook that vends a `Metaplex` instance with
+the `mobileWalletAdapterIdentity` installed.
+
+Like in the example app, create the `Metaplex` instance with the `useMetaplex` hook.
+```tsx
+
+
+const {metaplex} = useMetaplex(connection, selectedAccount, authorizeSession);
+```
+
+### Create the NFT
+
+With the `metaplex` instance, we can now access the `nfts()` module that provides [a collection of functions](https://docs.metaplex.com/programs/token-metadata/getting-started#javascript-sdk) that
+make it simple to interact with on chain programs and submit transactions.
+
+To mint an NFT, call the `create` function which takes in a JSON object corresponding to the [Token Metadata Standard](https://docs.metaplex.com/programs/token-metadata/changelog/v1.0#token-metadata-program).
+
+This will prompt the user to sign a transaction using MWA, then submit the transaction to the specified RPC.
+
+In the example app, this step happens at the end of [`mintNft`](https://github.com/solana-mobile/tutorial-apps/blob/main/MobileNFTMinter/components/NftMinter.tsx#L84C1-L90C59). 
+We return the NFT address and present a [clickable explorer link](https://github.com/solana-mobile/tutorial-apps/blob/main/MobileNFTMinter/components/NftMinter.tsx#L159).
+
+```tsx
+const {nft, response} = await metaplex.nfts().create({
+    name: nftName,
+    uri: `https://ipfs.io/ipfs/${metadataUploadData.value.cid}`,
+    sellerFeeBasisPoints: 0,
+    tokenOwner: selectedAccount?.publicKey,
+});
+
+console.log(nft.address.toBase58())
+console.log(response.signature)
+```
+
+**Congrats!** 
+
+Your NFT should now be minted and viewable on chain! You can view it on a block explorer by pasting in the String from `nft.address.toBase58()`.
+---
+
+# Solana React Native Polyfills
+
+When developing with React Native on Solana, you may encounter polyfill issues with certain JavaScript libraries that work fine on the web.
+
+To help with this, this section of docs aims to:
+
+- Document the needed polyfills for popular Solana Javascript libraries
+- Teach you how to set up each polyfill for a React Native or Expo app
+
+## What are polyfills?
+
+[Polyfills](https://developer.mozilla.org/en-US/docs/Glossary/Polyfill) are pieces of code that provide functionality which is not natively supported by a specific environment. They act as a substitute, allowing developers to use modern JavaScript features or libraries in environments that do not support them out of the box.
+
+In the context of React Native and Solana, many popular Solana Javascript libraries (e.g solana-web3.js, Anchor SDK, Metaplex JS) were primarily built for a browser or Node environment. As a result, these libraries do not work out of the box when used in a React Native environment.
+
+To remedy this, this section will show you how to set up the necessary polyfills to enable the library in your app.
+
+---
+
+# Polyfill Guide: Solana web3.js
+
+
+This guide will teach you how to set up the Solana web3.js library with the necessary polyfills in a React Native or Expo app.
+
+## Installation
+
+Add the library to your project:
+
+
+```shell
+yarn add @solana/web3.js
+```
+
+
+```shell
+npm install @solana/web3.js
+```
+
+
+## Polyfills
+
+The following polyfills are needed, **only if you intend to use the `Keypair.generate` function**. Otherwise, this polyfill is not
+required to use `@solana/web3.js`.
+
+### Install getRandomValues
+
+Add the `react-native-get-random-values` library to your project.
+
+
+```shell
+yarn add react-native-get-random-values
+```
+
+
+```shell
+npm install react-native-get-random-values
+```
+
+
+Then, import the library in your app's entrypoint file (e.g `index.js`), before the `@solana/web3.js` library is imported.
+
+```js
+
+// ...other imports below
+```
+
+
+Alternatively, you can use the `expo-crypto` library to polyfill `crypto.getRandomValues`. View this [sample app](https://github.com/solana-mobile/tutorial-apps/blob/main/AnchorCounterDapp/src/polyfills.ts#L7) for a reference of how to polyfill the `crypto` class.
+
+
+## Example
+
+---
+
+
+
+
+# Kotlin Android Development
+
+Kotlin is an [officially supported](https://developer.android.com/kotlin) programming language for Android development and is used to build native Android apps.
+
+This section of the site provides a developer guide for building Kotlin Android apps for Solana.
+
+## Quickstart
+
+
+## Core Kotlin SDKs
+
+Read these guides for a collection of code snippets and examples for basic use cases commonly used in Solana Kotlin dApps.
+
+
+## Benefits of native Android development
+
+### Direct access to Android OS features
+
+Developing on Android enables convenient and full access to the Android platform's capabilities. Developers can access OS-specific functionalities like Camera SDK, ARKit, Touch ID, hardware sensors, etc without needing any bridging.
+
+### Optimized performance
+
+Native Android apps, as a result of full utilization of the system capabilities, generally have better performance and efficiency. Native apps provide the highest attainable frame rates, computing power, graphics support, etc.
+
+### Jetpack Compose
+
+Kotlin enables the building of Android apps using [Jetpack Compose](https://developer.android.com/jetpack/compose/why-adopt), a modern toolkit for creating native Android UIs. The Kotlin sample apps
+on this documentation site are all built with Jetpack Compose.
+
+---
+
+
+
+
+# Kotlin Project Setup
+
+### Prerequisites
+
+- Download [Android Studio](https://developer.android.com/studio) for development and device management.
+
+- Follow the [prerequisite setup](../developers/development-setup#prerequisite-setup) guide to set up your [Android Device/Emulator](../developers/development-setup#2-setup-deviceemulator) and install a MWA-compatible wallet, like [fakewallet](../developers/development-setup#3-install-a-wallet-app).
+
+## Solana Mobile Kotlin Compose Scaffold
+
+The quickest way to start developing on Kotlin is to build off of the [Solana Jetpack Compose Scaffold](https://github.com/solana-mobile/solana-kotlin-compose-scaffold) example.
+
+The scaffold is a basic Solana Android app built with [Jetpack Compose](https://developer.android.com/jetpack/compose) and Material 3 components.
+
+Follow the quickstart guide to install and run the scaffold app.
+
+
+## Android Project Setup
+
+### Setting up a fresh Android Project
+
+Follow these steps to setup a fresh Android project with the recommended libraries for Solana development.
+
+#### Step 1: Navigate to your Android project's build.gradle file
+
+In Android Studio, navigate to your Android project's module `build.gradle.kts` file.
+
+#### Step 2. Add Solana dependencies
+
+Include the following dependencies to your Android project's `build.gradle.kts` file. These
+are the recommended core Kotlin libraries for Solana transaction building, RPC requests, and wallet signing.
+
+
+Overview of each dependency:
+
+- `com.solanamobile:mobile-wallet-adapter-clientlib-ktx`: Mobile Wallet Adapter client library for interacting with MWA-compatible wallets.
+- `com.solanamobile:web3-solana`: Solana Kotlin library providing core Solana primitives like transaction building and public key class.
+- `com.solanamobile:rpc-core`: A Kotlin library providing a generic interface and abstractions for building Solana RPC requests.
+- `io.github.funkatronics:multimult`: Lightweight utility library for Base58 conversions.
+
+
+#### Step 3. Build and run your app
+
+Your project's dependencies should be set up and you can try building and run the app!
+
+## Next Steps
+
+Congrats! At this point, you have installed the necessary libraries for your project and are ready to start building an app that interacts with the Solana network.
+
+Check out the other resources on this site like guides, SDK references, and sample apps to learn more about what you can do.
+
+---
+
+
+
+
+# Kotlin Quickstart
+
+The quickest way to start building Solana Kotlin dApps is to build off the [Solana Jetpack Compose Scaffold](https://github.com/solana-mobile/solana-kotlin-compose-scaffold).
+
+## Solana Jetpack Compose Scaffold
+
+The scaffold app serves as both a starting implementation and an example reference of how to use the core Kotlin SDKs, like `web3-core`, `rpc-core`,
+and Mobile Wallet Adapter.
+
+It includes:
+
+- Core Solana kotlin libraries
+- Pre-built Compose UI components,
+- Code examples of transaction building and RPC requests.
+
+
+## Prerequisites
+
+Follow the [prerequisite setup](../developers/development-setup#prerequisite-setup) guide to set up Android Studio, your [Android Device/Emulator](../developers/development-setup#2-setup-deviceemulator) and install a MWA-compatible wallet, like [fakewallet](../developers/development-setup#3-install-a-wallet-app).
+
+## Install the Jetpack Compose Scaffold
+
+**Clone the repo**
+
+The scaffold app is open source and can be fetched from [Github](https://github.com/solana-mobile/solana-kotlin-compose-scaffold).
+
+```shell
+git clone https://github.com/solana-mobile/solana-kotlin-compose-scaffold.git
+```
+
+**Open the project in Android Studio**
+
+In Android Studio, open the project with `File > Open > SolanaKotlinComposeScaffold/build.gradle.kts`
+
+**Build and run**
+
+Ensure you have connected an Android emulator or device and it is detected by Android Studio. If not, follow
+this [guide](../developers/development-setup#2-setup-deviceemulator) to setup your emulator/device.
+
+In the top bar of Android Studio, select `"app"` as the configuration and your emulator/device, then click run.
+
+[Image: Build and run the app]
+
+
+If successful, the scaffold app will launch on your emulator/device.
+
+Connect with a locally installed wallet app to start interacting with the Solana network! 🎉
+
+## Further learning
+
+To learn how to better use the core Solana Kotlin SDKs, check out these developer guides.
+
+
+
+---
+
+
+
+
+# RPC Client Usage guide
+
+To interface with the Solana network, a client needs to construct and send [_JSON RPC requests_](https://docs.solana.com/api/http) to an [_RPC endpoint_](https://docs.solana.com/cluster/rpc-endpoints).
+
+This guide will teach you how to use the `SolanaRpcClient` and send these RPC requests.
+
+## Add dependencies
+
+The [`rpc-core`](https://github.com/solana-mobile/rpc-core) library provides a convenient `SolanaRpcClient` that implements an API to call these RPC methods and return responses.
+
+
+```groovy
+dependencies {
+    implementation("com.solanamobile:rpc-core:0.2.6")
+}
+```
+
+
+## Create an RPC Client
+
+To create an instance of a `SolanaRpcClient`, pass in:
+
+- an RPC `url` that the client will send requests.
+- a `networkDriver` used to send HTTP requests.
+
+In this example, we construct an RPC client pointed at devnet and Ktor as a network driver:
+
+```kotlin
+
+
+val rpcClient = SolanaRpcClient("https://api.devnet.solana.com", KtorNetworkDriver())
+```
+
+## Example: Fetching latest blockhash
+
+Calling the `getLatestBlockhash` method returns an [`RpcResponse`](https://github.com/solana-mobile/rpc-core/blob/a6ea1466fb1d79113ca77f2d073d33a85fb5ad5e/rpccore/src/commonMain/kotlin/com/solana/rpccore/RpcResponse.kt#L6).
+
+- If successful, the response result will contain a [`BlockhashResult`](https://github.com/solana-mobile/rpc-core/blob/a6ea1466fb1d79113ca77f2d073d33a85fb5ad5e/solanaclient/src/commonMain/kotlin/com/solana/rpc/SolanaRpcClient.kt#L232).
+
+- If an error occured, the response will contain an [`RpcError`](https://github.com/solana-mobile/rpc-core/blob/a6ea1466fb1d79113ca77f2d073d33a85fb5ad5e/rpccore/src/commonMain/kotlin/com/solana/rpccore/RpcResponse.kt#L16).
+
+```kotlin
+
+
+val rpcClient = SolanaRpcClient("https://api.devnet.solana.com", KtorNetworkDriver())
+
+val response = rpcClient.getLatestBlockhash()
+
+if (response.result) {
+    println("Latest blockhash: ${response.result.blockhash}")
+} else if (response.error) {
+    println("Failed to fetch latest blockhash: ${response.error.message}")
+}
+```
+
+## Example: Sending a transaction
+
+To submit a transaction to the RPC, use the `sendTransaction` method.
+
+- If successful, the response result will contain a transaction signature string.
+
+- If an error occured, the response will contain an [`RpcError`](https://github.com/solana-mobile/rpc-core/blob/a6ea1466fb1d79113ca77f2d073d33a85fb5ad5e/rpccore/src/commonMain/kotlin/com/solana/rpccore/RpcResponse.kt#L16).
+
+```kotlin
+
+
+val rpcClient = SolanaRpcClient("https://api.devnet.solana.com", KtorNetworkDriver())
+
+val transaction = Transaction(/* ... */)
+
+/* ...sign the transaction... */
+
+val response = rpc.sendTransaction(transaction)
+
+if (response.result) {
+    println("Transaction signature: ${response.result}")
+} else if (response.error) {
+    println("Failed to send transaction: ${response.error.message}")
+}
+
+```
+
+## Next steps
+
+These examples are just some of the methods supported by `SolanaRpcClient`. Here are suggestions to continue learning:
+
+- Read the following guide to learn how to build Solana program instructions and transactions.
+- For a complete reference of the RPC methods supported, view the `SolanaRpcClient` [source code](https://github.com/solana-mobile/rpc-core/blob/main/solanaclient/src/commonMain/kotlin/com/solana/rpc/SolanaRpcClient.kt) and [unit tests](https://github.com/solana-mobile/rpc-core/blob/main/solanaclient/src/commonTest/kotlin/com/solana/rpc/RpcClientTests.kt).
+- Read the [_Building JSON RPC requests_ deep dive](/android-native/building-json-rpc-requests) to learn how to create requests for RPC methods that aren't immediately supported by `SolanaRpcClient`.
+
+---
+
+
+
+
+# Building Solana transactions
+
+A client interacts with the Solana network by submitting a _transaction_ to the cluster. Transactions
+allow a client to invoke instructions of on-chain [_Programs_](https://docs.solana.com/developing/intro/programs).
+
+For a full explanation, see the core docs overview of a [_transaction_](https://docs.solana.com/developing/programming-model/transactions).
+
+## Add dependencies
+
+The [`web3-solana`](https://github.com/solana-mobile/web3-core) library provides the abstraction classes like `Transaction` and `AccountMeta` to simplify building Solana transactions.
+
+
+## Example: Memo Program Transaction
+
+In the following example, we are creating a `Transaction` that invokes the [Memo Program](https://spl.solana.com/memo) to publish the message "Hello Solana" on-chain.
+
+### Create an instruction
+
+A transaction instruction is comprised of a program id, a list of accounts, and instruction data specific to the program.
+
+To create an instruction, define a list of `AccountMeta` that represent the accounts required by the instruction.
+Then pass the encoded message as `data` into the `TransactionInstruction` constructor.
+
+```kotlin
+
+
+// Solana Memo Program
+val memoProgramId = "MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr"
+val memoProgramIdKey = SolanaPublicKey.from(memoProgramId)
+
+// Construct the instruction
+val message = "Hello Solana!"
+val memoInstruction = TransactionInstruction(
+    memoProgramIdKey,
+    // Define the accounts in instruction
+    listOf(AccountMeta(address, true, true)),
+    // Pass in the instruction data as ByteArray
+    message.encodeToByteArray()
+)
+```
+
+### Create the Memo transaction
+
+After creating the instructions, use `Message.Builder()` to assemble the instructions and a _blockhash_ to construct the a _Transaction message_. Then
+pass the transaction message into the `Transaction` constructor.
+
+See the previous _Making RPC Requests_ guide for an example of how to fetch a blockhash.
+
+```kotlin
+
+
+// Fetch blockhash from RPC
+val rpcClient = SolanaRpcClient("https://api.devnet.solana.com", KtorNetworkDriver())
+val blockhasResponse = rpcClient.getLatestBlockhash()
+
+if (response.error) {
+    println("Failed to fetch latest blockhash: ${response.error.message}")
+    return;
+}
+
+// Build transaction message
+val memoTxMessage = Message.Builder()
+    // highlight-next-line
+    .addInstruction(memoInstruction) // Pass in instruction from previous step
+    .setRecentBlockhash(blockhasResponse.result!!.blockhash)
+    .build()
+
+// Construct the Transaction object from the message
+val unsignedTx = Transaction(memoTxMessage)
+```
+
+## Next steps
+
+Read the following _Using Mobile Wallet Adapter_ guide to learn how to sign these transactions and submit them to the Solana network.
+
+---
+
+
+
+
+# Using Mobile Wallet Adapter
+
+The Mobile Wallet Adapter protocol is a spec that enables a secure, communication exchange between a dApp and an MWA-compliant wallet app, installed on the device.
+
+Mobile Wallet Adapter 2.0 is the newest and current version and the complete 2.0 spec is viewable [here](https://solana-mobile.github.io/mobile-wallet-adapter/spec/spec.html).
+
+## Add dependencies
+
+The `mobile-wallet-adapter-clientlib-ktx` library is Solana Mobile's implementation of the Mobile Wallet Adapter protocol.
+
+It provides a convenient API to connect, issue signing requests to a locally installed wallet app, and receive responses.
+
+
+## Instantiate `MobileWalletAdapter` client
+
+The `MobileWalletAdapter` object provides methods to connect to wallets and issue MWA requests.
+
+Define the `ConnectionIdentity` of your dApp so that the wallet app can properly display your dApp info to the user.
+
+Parameters:
+
+- `identityName`: The name of your app.
+- `identityUri`: The web URL associated with your app.
+- `iconUri`: A path to your app icon relative to the app uri above.
+
+```kotlin
+
+
+// Define dApp's identity metadata
+val solanaUri = Uri.parse("https://yourdapp.com")
+val iconUri = Uri.parse("favicon.ico") // resolves to https://yourdapp.com/favicon.ico
+val identityName = "Solana Kotlin dApp"
+
+// Construct the client
+val walletAdapter = MobileWalletAdapter(connectionIdentity = ConnectionIdentity(
+    identityUri = solanaUri,
+    iconUri = iconUri,
+    identityName = identityName
+))
+```
+
+### Managing the `authToken`
+
+The `MobileWalletAdapter` object exposes an `authToken` property that it manages throughout its lifetime.
+
+If present, the `authToken` is automatically used by the MWA client when issuing MWA requests (like `connect`, `signMessages`, etc). And if valid,
+the user is able to skip the connection approval dialog for subsequent requests.
+
+The `authToken` is stored by the `MobileWalletAdapter` client whenever you connect to a wallet, but it can also be
+provided manually:
+
+```kotlin
+// Retrieve and use a persisted authToken from a previous session of the app.
+val previouslyStoredAuthToken = maybeGetStoredAuthToken()
+walletAdapter.authToken = previouslyStoredAuthToken
+```
+
+This is especially useful when you want to persist connections after a user closes and re-opens the app.
+
+## Establishing an MWA session
+
+To establish a session, or 'connect', with an MWA wallet, use the `transact` method provided by the `MobileWalletAdapter` object.
+
+Calling `transact` dispatches an assocication intent to a locally installed MWA wallet app and prompts the
+user to approve or reject the connection request.
+
+Once connected, the user can begin issuing MWA requests and receiving responses from the wallet app. The `MobileWalletAdapter`
+object also stores, in memory, the `authToken` from successful connections to be used automatically subsequent sessions.
+
+```kotlin
+
+
+ // `this` is the current Android activity
+val sender = ActivityResultSender(this)
+
+// Instantiate the MWA client object
+val walletAdapter = MobileWalletAdapter(/* ... */)
+
+// `transact` dispatches an association intent to MWA-compatible wallet apps.
+val result = walletAdapter.transact(sender) { authResult ->
+    /* Once connected, send requests to the wallet in this callback */
+}
+```
+
+When the session is complete, `transact` returns a `TransactionResult` that can be unwrapped and conditioned upon to handle success and error cases.
+
+### Connecting to a wallet
+
+If you only need to connect to a wallet and do not need to send any additional MWA requests, use the `connect` method from the `MobileWalletAdapter` client.
+
+```kotlin
+
+
+ // `this` is the current Android activity
+val sender = ActivityResultSender(this)
+
+// Instantiate the MWA client object
+val walletAdapter = MobileWalletAdapter(/* ... */)
+
+// `connect` dispatches an association intent to MWA-compatible wallet apps.
+val result = walletAdapter.connect(sender)
+
+when (result) {
+    is TransactionResult.Success -> {
+        // On success, an `AuthorizationResult` type is returned.
+        val authResult = result.authResult
+    }
+    is TransactionResult.NoWalletFound -> {
+        println("No MWA compatible wallet app found on device.")
+    }
+    is TransactionResult.Failure -> {
+        println("Error connecting to wallet: " + result.e.message)
+    }
+}
+```
+
+On successful connection, the `TransactionResult` will contain an `AuthorizationResult` that contains the user's wallet address, `authToken`, etc.
+
+#### What's the difference with `transact` and `connect`?
+
+Under the hood, the `connect` method just calls the `transact` function with an empty callback, immediately returning the `authResult`.
+
+```kotlin
+suspend fun connect(sender: ActivityResultSender) = transact(sender) { }
+```
+
+## Sign in with Solana
+
+To connect to a wallet and simultaneously verify the user's ownership of the wallet, use the [_Sign in with Solana_](https://github.com/phantom/sign-in-with-solana?tab=readme-ov-file#introduction) feature.
+_SIWS_ combines the `authorize` and `signMessage` step and returns a `SignInResult` that can be verified by the dApp.
+
+To initiate _SIWS_, use the `signIn` method and pass in a `SignInPayload` parameter. If provided, the wallet
+will display a dedicated _SIWS_ UI and prompt the user to sign in by signing the `statement` message.
+
+```kotlin
+
+
+ // `this` is the current Android activity
+val sender = ActivityResultSender(this)
+
+// Instantiate the MWA client object
+val walletAdapter = MobileWalletAdapter(/* ... */)
+
+// `connect` dispatches an association intent to MWA-compatible wallet apps.
+val result = walletAdapter.signIn(
+    sender,
+    SignInWithSolana.Payload("solana.com", "Sign in to Ktx Sample App")
+)
+
+when (result) {
+    is TransactionResult.Success -> {
+        // On success, an `AuthorizationResult` with a `signInResult` object is returned.
+        val signInresult = result.authResult.signInResult
+    }
+    is TransactionResult.NoWalletFound -> {
+        println("No MWA compatible wallet app found on device.")
+    }
+    is TransactionResult.Failure -> {
+        println("Error connecting to wallet: " + result.e.message)
+    }
+}
+```
+
+### Verifying the sign-in result
+
+If successful, the wallet will respond with an `authResult` that includes a `SignInResult` object, which can be used
+for verifying the sign-in process. The `SignInResult` object will contain the fields outlined in the [SIWS spec](https://github.com/phantom/sign-in-with-solana?tab=readme-ov-file#sign-in-output-fields).
+
+To verify the Sign-In output, use an Ed25519 library to verify that the message was correctly signed by the user's wallet. See `fakedapp` for an [example of message verification in Kotlin](https://github.com/solana-mobile/mobile-wallet-adapter/blob/761c3367e5ed4651fa2661767439abf25a178588/android/fakedapp/src/main/java/com/solana/mobilewalletadapter/fakedapp/MainViewModel.kt#L99C13-L108C18) or an [example with javascript on server-side](https://github.com/phantom/sign-in-with-solana?tab=readme-ov-file#sign-in-output-verification-backend).
+
+### Transact after signing in
+
+Similarly to `connect`, the `signIn` method just wraps an empty `transact` call and includes the provided `signInPayload`.
+
+If you want to sign in to the wallet and and continue issuing additional MWA requests, then you can use
+the include the optional `signInPayload` parameter when using the `transact` method.
+
+```kotlin
+// Sign in to authorize the session, then continue issuing requests.
+val result = walletAdapter.transact(sender,
+             SignInWithSolana.Payload("solana.com", "Sign in to Ktx Sample App")) { authResult ->
+    /* ..Send MWA requests.. */
+}
+```
+
+## Disconnecting from a wallet
+
+A dApp can revoke authorization or disconnect from a wallet by sending a disconnect request. The wallet will invalidate the `authToken` stored by the `MobileWalletAdapter`. This will require the user to approve the connection request once again, when connecting to that wallet.
+
+```kotlin
+
+
+ // `this` is the current Android activity
+val sender = ActivityResultSender(this)
+
+// Instantiate the MWA client object
+val walletAdapter = MobileWalletAdapter(/* ... */)
+
+val result = walletAdapter.disconnect(sender)
+
+when (result) {
+    is TransactionResult.Success -> {
+        // On success, the authToken has been successfully invalidated.
+    }
+    is TransactionResult.NoWalletFound -> {
+        println("No MWA compatible wallet app found on device.")
+    }
+    is TransactionResult.Failure -> {
+        println("Error connecting to wallet: " + result.e.message)
+    }
+}
+```
+
+Alternatively, you can directly issue a `deauthorize` request to the wallet and provide a specific `authToken` to invalidate.
+
+```kotlin
+val result = walletAdapter.transact(sender) { authResult ->
+    deauthorize(someAuthToken)
+}
+```
+
+## Signing and sending transactions
+
+To request a wallet to sign and then send a Solana transaction, use the `signAndSendTransactions` method. With this method,
+the wallet will handle both signing the transactions then submitting them to the Solana network.
+
+For an example of building a transaction, see the 'Building transactions' guide.
+
+```kotlin
+
+
+ // `this` is the current Android activity
+val sender = ActivityResultSender(this)
+
+// Instantiate the MWA client object
+val walletAdapter = MobileWalletAdapter(/* ... */)
+
+val result = walletAdapter.transact(sender) { authResult ->
+    // Build a transaction using web3-solana classes
+    val account = SolanaPublicKey(authResult.accounts.first().publicKey)
+    val memoTx = buildMemoTransaction(account, "Hello Solana!");
+
+    // Issue a 'signTransactions' request
+    signAndSendTransactions(arrayOf(memoTx.serialize()));
+}
+
+when (result) {
+    is TransactionResult.Success -> {
+        val txSignatureBytes = result.successPayload?.signatures?.first()
+        txSignatureBytes?.let {
+            println("Transaction signature: " + Base58.encodeToString(signedTxBytes))
+        }
+    }
+    is TransactionResult.NoWalletFound -> {
+        println("No MWA compatible wallet app found on device.")
+    }
+    is TransactionResult.Failure -> {
+        println("Error during signing and sending transactions: " + result.e.message)
+    }
+}
+```
+
+If successful, the `TransactionResult` will contain a `successPayload` with an array (`signatures`), where each item is a transaction
+signature serialized as `ByteArray`, in corresponding order to the input.
+
+## Signing messages
+
+To request a wallet to sign a message, use the `signMessagesDetached` method. In this case, a _message_ is any payload of bytes.
+
+```kotlin
+
+
+ // `this` is the current Android activity
+val sender = ActivityResultSender(this)
+
+// Instantiate the MWA client object
+val walletAdapter = MobileWalletAdapter(/* ... */)
+
+val message = "Sign this message please!"
+val result = walletAdapter.transact(sender) { authResult ->
+    signMessagesDetached(arrayOf(message.toByteArray()), arrayOf((authResult.accounts.first().publicKey)))
+}
+
+when (result) {
+    is TransactionResult.Success -> {
+        val signedMessageBytes = result.successPayload?.messages?.first()?.signatures?.first()
+        signedMessageBytes?.let {
+            println("Message signed: ${Base58.encodeToString(it)}")
+        }
+    }
+    is TransactionResult.NoWalletFound -> {
+        println("No MWA compatible wallet app found on device.")
+    }
+    is TransactionResult.Failure -> {
+        println("Error during transaction signing: " + result.e.message)
+    }
+}
+```
+
+If successful, the `TransactionResult` will contain a `successPayload` with an array (`messages`), where each item is a signed message
+payload serialized as a `ByteArray`, in corresponding order to the input.
+
+## Signing transactions (deprecated)
+
+The `signTransactions` method is deprecated according to the Mobile Wallet Adapter 2.0 [specification](https://solana-mobile.github.io/mobile-wallet-adapter/spec/spec.html). Wallet apps
+may still support this method for backwards compatibility, but it is recommended for dApps to use `signAndSendTransactions` instead.
+
+To request a wallet to sign a Solana transaction, use the `signTransactions` method. For an example
+of building a transaction, see the 'Building transactions' guide.
+
+```kotlin
+
+
+ // `this` is the current Android activity
+val sender = ActivityResultSender(this)
+
+// Instantiate the MWA client object
+val walletAdapter = MobileWalletAdapter(/* ... */)
+
+val result = walletAdapter.transact(sender) { authResult ->
+    // Build a transaction using web3-solana classes
+    val account = SolanaPublicKey(authResult.accounts.first().publicKey)
+    val memoTx = buildMemoTransaction(account, "Hello Solana!");
+
+    // Issue a 'signTransactions' request
+    signTransactions(arrayOf(memoTx.serialize()));
+}
+
+when (result) {
+    is TransactionResult.Success -> {
+        val signedTxBytes = result.successPayload?.signedPayloads?.first()
+        signedTxBytes?.let {
+            println("Signed memo transaction: " + Base58.encodeToString(signedTxBytes))
+        }
+    }
+    is TransactionResult.NoWalletFound -> {
+        println("No MWA compatible wallet app found on device.")
+    }
+    is TransactionResult.Failure -> {
+        println("Error during transaction signing: " + result.e.message)
+    }
+}
+```
+
+The `signTransactions` method accepts an array of serialized transactions and, on success, returns `signedPayloads` containing the corresponding
+signed payloads serialized as `ByteArray`.
+
+## Next Steps
+
+- Browse or clone the [MintyFresh repo](https://github.com/solana-mobile/Minty-fresh/tree/main) to reference best practices for a live, published Kotlin Solana dApp.
+
+---
+
+# Example: Sign and send a SOL transfer
+
+This example will walkthrough the steps to build a transaction that sends SOL from a user's wallet to another wallet.
+
+To achieve this, you will write code that:
+
+1. Builds a transaction that invokes the System Program's `transfer` instruction
+2. Connects to the user's wallet to retrieve their wallet address
+3. Prompt the user to sign the transaction with Mobile Wallet Adapter
+
+## Build a transfer transaction
+
+Write a helper method `buildTransferTransaction` that handles creating the transfer instruction and assembling it into a `Transaction`.
+
+You can use the `SystemProgram.transfer` util method provided by `web3-solana` to conveniently generate a serialized transfer instruction.
+
+```kotlin
+
+
+fun buildTransferTransaction(
+    blockhash: String,
+    fromPublicKey: SolanaPublicKey,
+    toPublicKey: SolanaPublicKey,
+    lamports: Long
+): Transaction {
+    val transferTxMessage = Message.Builder()
+        .addInstruction(
+            SystemProgram.transfer(
+                fromPublicKey,
+                toPublicKey,
+                lamports
+            )
+        )
+        .setRecentBlockhash(blockhash)
+        .build()
+
+    return Transaction(transferTxMessage)
+}
+```
+
+
+## Fetching the latest blockhash
+
+In this method, we use a `blockhash` parameter. See this [RPC requests guide](/android-native/rpc-requests#example-fetching-latest-blockhash) for an example.
+
+
+## Instantiate Mobile Wallet Adapter client
+
+In your app, instantiate a `MobileWalletAdapter` client instance, that will be used to establish a session with the user's mobile wallet app.
+
+```kotlin
+
+
+// Define dApp's identity metadata
+val solanaUri = Uri.parse("https://yourdapp.com")
+val iconUri = Uri.parse("favicon.ico") // resolves to https://yourdapp.com/favicon.ico
+val identityName = "Solana Kotlin Transfer Example"
+
+// Construct the client
+val walletAdapter = MobileWalletAdapter(connectionIdentity = ConnectionIdentity(
+    identityUri = solanaUri,
+    iconUri = iconUri,
+    identityName = identityName
+))
+```
+
+## Connect to the user's wallet
+
+Assuming you do not currently have the user's wallet address available, you can use Mobile Wallet Adapter
+to connect to their mobile wallet app, and learn what their wallet address is.
+
+```kotlin
+
+
+ // `this` is the current Android activity
+val sender = ActivityResultSender(this)
+
+// Instantiate the MWA client object
+val walletAdapter = MobileWalletAdapter(/* ... */)
+
+val lamportAmount = 1000000
+val result = walletAdapter.transact(sender) { authResult ->
+    // Retrieve the user wallet address from the MWA authResult
+    val userAccountAddress = SolanaPublicKey(authResult.accounts.first().publicKey)
+
+    // Fetch latest blockhash
+    val rpcClient = SolanaRpcClient("https://api.devnet.solana.com", KtorNetworkDriver())
+    val blockhashResponse = rpcClient.getLatestBlockhash()
+
+    // Use the wallet address to build the transfer transaction
+    val transferTx = buildTransferTransaction(
+        blockhashResponse.result!!.blockhash,
+        userAccountAddress,
+        SolanaPublicKey("<address_of_recipient>"),
+        lamportAmount
+    );
+
+    // ...
+}
+```
+
+## Sign and send the transaction
+
+Finally, issue a `signAndSendTransactions` request, prompting the user to sign the transfer transaction
+and submit it to the network.
+
+```kotlin
+
+
+ // `this` is the current Android activity
+val sender = ActivityResultSender(this)
+
+// Instantiate the MWA client object
+val walletAdapter = MobileWalletAdapter(/* ... */)
+
+val result = walletAdapter.transact(sender) { authResult ->
+    // Build a transaction using web3-solana classes
+    val userAccountAddress = SolanaPublicKey(authResult.accounts.first().publicKey)
+
+    // Fetch latest blockhash
+    val rpcClient = SolanaRpcClient("https://api.devnet.solana.com", KtorNetworkDriver())
+    val blockhashResponse = rpcClient.getLatestBlockhash()
+
+    // Use the wallet address to build the transfer transaction
+    val transferTx = buildTransferTransaction(
+        blockhashResponse.result!!.blockhash,
+        userAccountAddress,
+        SolanaPublicKey("<address_of_recipient>"),
+        lamportAmount
+    );
+
+    // Issue a 'signTransactions' request
+    signAndSendTransactions(arrayOf(transferTx.serialize()));
+}
+
+// Read the results!
+when (result) {
+    is TransactionResult.Success -> {
+        val txSignatureBytes = result.successPayload?.signatures?.first()
+        txSignatureBytes?.let {
+            println("Transaction signature: " + Base58.encodeToString(signedTxBytes))
+        }
+    }
+    is TransactionResult.NoWalletFound -> {
+        println("No MWA compatible wallet app found on device.")
+    }
+    is TransactionResult.Failure -> {
+        println("Error during signing and sending transactions: " + result.e.message)
+    }
+}
+```
+
+If signing is successful, you can check the returned `result` for the transaction signature, or handle failure cases.
+
+## Next steps
+
+Check out the [Kotlin Compose Scaffold](https://github.com/solana-mobile/solana-kotlin-compose-scaffold) for a code examples of what is discussed in this guide, and an easy launching point to getting started with Solana Kotlin development!
+
+---
+
+# Working with Anchor Programs in Kotlin
+
+
+[Anchor](https://www.anchor-lang.com/) is a popular Solana development framework for writing on-chain programs. Programs and instructions created with Anchor, have a different data format than other programs like SPL and SystemProgram.
+
+This guide will teach you how to build instructions and transactions that invoke Anchor programs in Kotlin.
+
+## Add dependencies
+
+Add the following dependencies to your project:
+
+- [`web3-solana`](https://github.com/solana-mobile/web3-core) library provides the abstraction classes like `Transaction` and `AccountMeta` to simplify building Solana transactions.
+- [`rpc-core`](https://github.com/solana-mobile/rpc-core) library provides a `SolanaRpcClient` class with convenient RPC methods.
+- [`kborsh`](https://github.com/Funkatronics/kBorsh/tree/main) library for Borsh serialization of instruction data.
+
+
+## Example: Counter Program
+
+As an example, we'll build a transaction using this devnet on-chain [Counter Program](https://github.com/solana-mobile/tutorial-apps/blob/main/AnchorCounterDapp/counter-program/programs/counter-program/src/lib.rs) that was created with Anchor.
+
+Specifically, let's invoke the `Increment` instruction.
+
+### Instruction Format
+
+Taking a look at the [source code](https://github.com/solana-mobile/tutorial-apps/blob/main/AnchorCounterDapp/counter-program/programs/counter-program/src/lib.rs#L43), observe that the `Increment` instruction format expects:
+
+**Program ID**
+
+- The Counter Program is deployed on devnet with the Program Id: `ADraQ2ENAbVoVZhvH5SPxWPsF2hH5YmFcgx61TafHuwu`.
+
+**Account Addresses**
+
+- The Counter account PDA as a non-signer. `"counter"` is the only seed used to derive the PDA.
+
+**Instruction Data**
+
+- An `amount: u64` parameter.
+- An additional 8 bytes for the [Anchor discriminator](https://book.anchor-lang.com/anchor_bts/discriminator.html)
+
+Now, let's create each of these required inputs.
+
+### 1. Find the Counter account PDA
+
+To derive the Counter PDA, we'll use the `ProgramDerivedAddres` interface in the `web3-solana` module which provides a `find` method.
+
+Call `ProgramDerivedAddres.find` and pass `"counter"` as a seed and the Counter program ID:
+
+```kotlin
+
+
+val programId = SolanaPublicKey.from("ADraQ2ENAbVoVZhvH5SPxWPsF2hH5YmFcgx61TafHuwu")
+
+// Counter account has a single seed 'counter'
+val seeds = listOf("counter".encodeToByteArray())
+
+// Calculate the PDA
+val result = ProgramDerivedAddress.find(seeds, programId)
+
+// Unwrap the result
+val counterAccountPDA = result.getOrNull()
+```
+
+### 2. Serialize the instruction data
+
+The next step is to build and serialize the instruction data.
+
+Using the `kotlinx` serialization library, define the expected increment arguments as a `@Serializable` class.
+
+```kotlin
+
+
+@Serializable
+class Args_increment(val amount: UInt)
+```
+
+Now, use the `AnchorInstructionSerializer` to serialize the instruction arguments and lastly use the `kBorsh` library to Borsh encode the data.
+
+```kotlin
+val encodedInstructionData = Borsh.encodeToByteArray(
+    AnchorInstructionSerializer("increment"),
+    Args_increment(amount)
+)
+```
+
+
+Anchor instruction data uses a unique [Anchor discriminator](https://book.anchor-lang.com/anchor_bts/discriminator.html) to determine which instruction is called.
+
+The `AnchorInstructionSerializer` will handle this discriminator during serialization, as long as you pass the correct instruction name (e.g `increment`) into the constructor.
+
+
+### 3. Construct the instruction
+
+Putting all the inputs together, you can build the full `TransactionInstruction`.
+
+```kotlin
+
+
+val incrementInstruction = TransactionInstruction(
+    SolanaPublicKey.from("ADraQ2ENAbVoVZhvH5SPxWPsF2hH5YmFcgx61TafHuwu"),
+    listOf(AccountMeta(counterAccountPDA!!, false, true)),
+    encodedInstructionData
+)
+```
+
+### 4. Create the transaction
+
+Then build a transaction message and construct the `Transaction` packed with the increment instruction.
+
+```kotlin
+
+
+// Fetch latest blockhash from RPC
+val rpcClient = SolanaRpcClient("https://api.devnet.solana.com", KtorNetworkDriver())
+val blockhashResponse = rpcClient.getLatestBlockhash()
+
+// Build transaction message
+val incrementAmount = 5
+val incrementCounterMessage =
+    Message.Builder()
+        .addInstruction(
+            incrementInstruction
+        )
+        .setRecentBlockhash(blockhashResponse.result!!.blockhash)
+        .build()
+
+// Construct the Transaction object from the message
+val unsignedIncrementTx = Transaction(incrementCounterMessage)
+```
+
+### 5. Sign the transaction
+
+At this point, you have successfully created an _unsigned_ Solana transaction for incrementing the counter account. Before submitting to the network, the transaction must be signed by the fee payer.
+
+#### Signing with Mobile Wallet Adapter
+
+If you want users to sign the transaction using their mobile wallet app (e.g Phantom, Solflare) you can use Mobile Wallet Adapter to request signing.
+
+Read the [_Using Mobile Wallet Adapter_ guide](/android-native/using_mobile_wallet_adapter#signing-and-sending-transactions) to learn how to prompt users to sign these transactions and submit them to the Solana network.
+
+#### Signing with a keypair
+
+If you have direct access to a keypair, you can serialize the Transaction message, sign the bytes, and construct the signed transaction.
+
+```kotlin
+
+
+// Fetch latest blockhash from RPC
+val rpcClient = SolanaRpcClient("https://api.devnet.solana.com", KtorNetworkDriver())
+val blockhashResponse = rpcClient.getLatestBlockhash()
+
+// Build transaction message
+val incrementAmount = 5
+val incrementCounterMessage =
+    Message.Builder()
+        .addInstruction(
+            incrementInstruction
+        )
+        .setRecentBlockhash(blockhashResponse.result!!.blockhash)
+        .build()
+
+// Sign the transaction with some keypair signer
+val signature = ed25519Signer.signBytes(incrementCounterMessage.serialize())
+
+// Signed transaction ready to be submitted to the network
+val signedTransaction = Transaction(listOf(signature), incrementCounterMessage)
+
+```
+
+### 6. Sending the transaction
+
+After the transaction is signed, it can be submitted to an RPC using the `SolanaRpcClient` class.
+
+```kotlin
+
+
+val rpcClient = SolanaRpcClient("https://api.devnet.solana.com", KtorNetworkDriver())
+
+val response = rpcClient.sendTransaction(signedTransaction)
+
+if (response.result) {
+    println("Transaction signature: ${response.result}")
+} else if (response.error) {
+    println("Failed to send transaction: ${response.error.message}")
+}
+```
+
+---
+
+
+# Solana dApp Store
+
+
+The Solana dApp Store is the crypto-friendly app store for Solana Mobile devices.
+
+# Quickstart
+
+Wherever you are in your publishing journey, you can find resources here to get started.
+
+
+## More resources
+
+
+
+---
+
+# Publishing Journey Checklist
+
+
+This checklist aims to provide you a high level overview of the dApp publishing process. You can get
+an idea of the resources you'll need to prepare before submitting your app.
+
+## Publishing Journey
+
+At a high level, the publishing process can be simplified into these steps:
+
+
+### Build an Android APK
+
+The dApp Publishing tool requires you to submit an Android APK of your app.
+
+- If you already have an Android app (e.g Published to Google Play Store), you can generate a release build APK.
+- If you have a web app, follow [this guide](/dapp-publishing/publishing-a-pwa) to convert it to an Android app and generate an APK for submission.
+
+
+Ensure you are submitting a release build of your app that is [signed](https://developer.android.com/studio/publish/app-signing#opt-out). Debug builds will not be accepted.
+
+
+### Test on an Android device
+
+To ensure a great user experience, we recommend developers to thoroughly test their app to catch any bugs/crashes/issues.
+
+You do not need a Solana Mobile device to test your app, you can just test against a comparable Android device or emulator.
+
+- If using Mobile Wallet Adapter, test your app's connect and signing flows with popular MWA wallets like Phantom and Solflare.
+- If your app content is gated (e.g beta access, NFT-gated), prepare a test account with full access for App Review.
+
+### Prepare your App Listing Page
+
+Your app's listing page is what gives users the first impression of your app. You'll want to prepare ahead of time, assets like
+your app icon, screenshots/videos, and text content.
+
+See the [Listing Page guidelines](/dapp-publishing/listing-page-guidelines) to visualize your app's listing page and learn best practices.
+
+### Proceed to App Submission!
+
+Once you are ready for publishing, you can follow the step-by-step [App Submission guide](/dapp-publishing/submit-new-app) to submit your app. The publishing process
+is completely self service, so it can be started whenever you are ready!
+
+After finished, your app will be in queue for App Review and, using your provided contact details, we will reach out to you if any questions are needed.
+
+### App Promotion
+
+For questions regarding promoting your app after launching, see our [Marketing & Partnership documentation](/marketing/overview).
+
+---
+
+
+# dApp Listing Page Guidelines
+
+
+Your dApp's listing page is often the first impression users will have of your application.
+These guidelines will help you create a compelling and informative listing that showcases your dApp.
+
+
+The app icon is often a user's first point of contact with your app on the dApp Store, so it is crucial that it is thoughtfully crafted to convey your dApp's brand and value.
+
+**Requirements**
+
+- Icon must be 512px by 512px dimensions.
+
+
+Your app name should be unique, memorable, and suggest your app's core functionality. Set yourself apart by choosing a name that isn't generic or too similar to existing apps.
+
+
+**Short Description**
+
+Your app’s subtitle, or short description, should concisely communicate the purpose of your app. Use this space to showcase your app's "elevator pitch" and capture a user's attention.
+
+##### **Requirements**
+
+- Short description cannot exceed 30 characters.
+
+**Long Description**
+
+Your app's long description should be a well-written, concise overview of your app' features and functionality. Use this space to give more context to users about what your app is and how they will use it. Users should be able to read it and quickly understand your app's core purpose.
+
+
+### Videos
+
+An app preview video should effectively showcase your app's main features, UI flow, and core user experience.
+
+##### **Requirements**
+
+- All videos must be at least 720px in width and height. 1080p (1920px by 1080px) is strongly recommended.
+- All videos must be `.mp4` video file format.
+
+### Screenshots
+
+An app preview screenshot should highlight a core feature or screen of your app. The preview gallery should tell a compelling visual story of your app's core user experience.
+
+##### **Requirements**
+
+- All images must be at least 1080px in width and height.
+- All images must have consistent orientation (landscape or portrait).
+- All images must have equal aspect ratio.
+
+
+
+---
+
+# Publishing a Progressive Web App (PWA)
+
+## PWAs on the dApp Store
+
+[Progressive Web Apps (PWAs)](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps) are web applications that use modern web capabilities to deliver an app-like experience to users.
+
+PWAs can be published on the dApp Store, as an Android app wrapped within a **Trusted Web Activity (TWA)**.
+
+## Trusted Web Activities (TWAs)
+
+[Trusted Web Activities (TWAs)](https://developer.chrome.com/docs/android/trusted-web-activity) allow you to package your PWA into an Android app. TWAs use Chrome to render the web app, providing a full screen, native-like experience without any browser UI.
+
+Once you create a TWA, you will have an Android APK file and you can follow the dApp publishing guide to submit the app.
+
+Follow the guide below to get your PWA ready for the dApp Store.
+
+## Tutorial: Converting a PWA to an Android App
+
+This guide shows you how to:
+
+- Install the Bubblewrap CLI tool
+- Build the TWA and output an APK
+- Generate the Digital Asset Link for the APK
+
+By the end, you will have a functional, signed release APK that can be published on the dApp Store!
+
+### Prerequisite
+
+- A PWA [web manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest) hosted at `https://your-pwa-url.com/manifest.json`
+
+### Template: Web Manifest 
+
+At minimum, a typical manifest file includes:
+
+- The app's name
+- The icons the app should use
+- The URL that should be opened when the app launches
+
+You can use this template to quickly stand up a `manifest.json` on your website.
+
+```json manifest.json
+{
+    "name": "APP_NAME",
+    "short_name": "APP_NAME",
+    "scope": "/",
+    "start_url": "/",
+    "icons": [
+        {
+            "src": "/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff",
+    "display": "standalone"
+}
+```
+
+For more information on web manifests, view this [documentation](https://web.dev/articles/add-manifest).
+
+
+### 1. Installing Bubblewrap CLI
+
+[Bubblewrap CLI](https://github.com/GoogleChromeLabs/bubblewrap/tree/main/packages/cli) is a tool that simplifies the process of converting your PWA into an Android app using TWA.
+
+Requires Node 14.15.0 and above
+
+```bash
+npm i -g @bubblewrap/cli
+```
+
+### 2. Initializing Your Project
+
+In a new directory, run the `init` command and supply the URL to your web manifest.
+Bubblewrap will download the existing manifest and use it to help fill in metadata for the TWA's manifest.
+
+- See the Bubblewrap official [documentation](https://github.com/GoogleChromeLabs/bubblewrap/tree/main/packages/cli#init).
+
+```bash
+bubblewrap init --manifest https://your-pwa-url.com/manifest.json
+```
+
+This command will guide you through the process of creating the TWA manifest for the project.
+
+- If it asks to install additional tooling (e.g Android SDK, JDK, or build tools), it is necessary and you should allow it to install.
+
+#### Manifest Configuration
+
+It will also prompt a series of questions regarding configurations for:
+
+- **Domain and URL path**
+  - Ensure this points directly to where your PWA is hosted.
+- **Display mode and Status Bar settings**
+  - See the [Android documentation](https://material.io/design/platform-guidance/android-bars.html) to see how Status Bar and Navigation Bars appear and decide what configuration is appropriate for your app.
+- **Splash Screen and Icons**
+  - Create a cohesive splash screen by providing a splash screen color and an icon that displays over it.
+- **Keystore location and Password**
+  - See _Caution_ below.
+
+
+The `init` command will ask you to generate an **Android Keystore and password**.
+
+The [Android Keystore](https://developer.android.com/privacy-and-security/keystore) is a security tool that:
+
+- Contains a private key used to digitally sign your app. This signature is used to verify the app's authenticity and integrity.
+- The same key must be used to sign all future updates of your app. This ensures that only you can make updates to your app.
+
+Keep the Keystore file and password secure – losing them can prevent future app updates. Consider following
+Google's [official guide for best practices around Keystore management](https://developer.android.com/studio/publish/app-signing#secure_key).
+
+
+After completion, Bubblewrap will create in your directory:
+
+- A `twa-manifest.json` configured with the options from above.
+- TWA Android project files generated from `twa-manifest.json`.
+
+
+The Android project is entirely generated from the `twa-manifest.json`, so you only need to include
+`twa-manifest.json` in source control. The Android project files are unncessary to track as they are generated.
+
+Any changes to the Android project will be deleted or overwritten by the `update` command (explained in the _Updating your TWA_ section).
+
+
+### 3. Building the Android APK
+
+#### Add supported langauges
+
+Before running the build command, you need to specify the languages your app supports. 
+
+Do not skip this step!
+
+By default, Bubblewrap CLI incorrectly declares that your app supports all locales. This inaccuracy will be displayed on your dApp Store listing page.
+
+In the generated Android project, edit the `build.gradle` and add:
+
+```kt build.gradle
+android {
+    defaultConfig {
+        ...
+        resConfigs "en", "es" // Add any locales your app supports
+    }
+}
+```
+
+See the [Android documentation](https://developer.android.com/guide/topics/resources/multilingual-support#specify-the-languages-your-app-supports) for more details.
+
+#### Build the APK
+
+The next step is to build initialized Android project and output a _signed release APK_. This APK is what you will submit for publishing on the dApp Store.
+
+
+In the same directory, run:
+
+```bash
+bubblewrap build
+```
+
+This command will
+
+- If it asks to install additional tooling (e.g Android SDK, JDK, or build tools), you should allow it to install.
+
+### 4. Publish Digital Asset Links
+
+The last step is to declare your app's [Digital Asset Links (DAL)](https://developers.google.com/digital-asset-links/v1/getting-started). DALs establish a secure connection between your website and the Android app.
+
+
+This step is **required** for the PWA to display in a full screen, native-like experience. If missing, the PWA will display
+Chrome browser UI (e.g the URL bar).
+
+
+Declare the connection by adding the SHA256 fingerprints of your app’s signing certificate at `https://your-domain.com/.well-known/assetlinks.json`.
+
+1. Generate the SHA256 fingerprint from the Keystore:
+
+```bash
+keytool -list -v -keystore android.keystore
+```
+
+2. Add the fingerprint to your TWA manifest:
+
+```bash
+bubblewrap fingerprint add 
+```
+
+3. Generate the DAL `assetlinks.json` file:
+
+```bash
+bubblewrap fingerprint generateAssetLinks
+```
+
+It should generate a file named `assetlinks.json` configured with the SHA256 fingerprint.
+
+4. Publish the generated `assetlinks.json` file at:
+   `https://your-domain.com/.well-known/assetlinks.json`
+
+Congrats! You have successfully converted your PWA into a working Android app.
+
+## Testing Your App
+
+If you have an emulator or testing device ready, you can install the APK with:
+
+```bash
+bubblewrap install app-release-signed.apk
+```
+
+Ensure the app is working as expected before submitting to the dApp Store.
+
+
+If you are seeing the browser navigation bar at the top of the app, your app's Digital Asset Links might not be configured
+correctly.
+
+Double check that you followed Step 4 and have correctly published your app's SHA256 fingerprint.
+
+
+## Updating your TWA
+
+If you want to release a new version of the app with changes to the TWA manifest (e.g Updating the icon), you can
+make edits to `twa-manifest.json` and run the command:
+
+```bash
+bubblewrap update --manifest=./path/to/twa-manifest.json
+```
+
+This command regenerates the entire Android project from the `twa-manifest.json` and bumps the app version. The manifest is preserved, while any manual changes to the previous Android project are deleted or overwritten.
+
+After this you can run `bubblewrap build` again to generate the signed release APK.
+
+## Publishing to dApp Store
+
+Once you have a signed APK, you can proceed with publishing as if you were publishing a normal
+Android app.
+
+**Follow the step by step [dApp publishing guide](/dapp-publishing/submit-new-app) to submit your signed release APK.**
+
+---
+
+# Building a release APK with Expo
+
+If you have a React Native app built with Expo, just a few steps are needed to publish it on the Solana Mobile dApp Store.
+
+This guide assumes minimal experience with typical Android development tools.
+
+## Step 1. Build an APK
+
+By default, when building with EAS, the platform compiles an Android App Bundle (.aab) file. Solana Mobile dApp Store requires a different binary format, APK, so we'll create a new EAS profile by adding the following lines in `eas.json`:
+
+```
+"dapp-store": {
+    "channel": "production",
+    "android": {
+        "buildType": "apk"
+    }
+}
+```
+
+Then build:
+
+```
+npx eas build -p android --profile dapp-store
+```
+
+Meanwhile, in your project directory, create a new folder `dapp-store-build` (if you're using Git you may want to add this folder to `.gitignore` to avoid uploading large binary files).
+
+Once the EAS build has finished, download the APK file, and name it `myapp-v0.0.1-unsigned.apk`. Replace `myapp` and `0.0.1` with your app name and release version, but keep file naming consistent between updates.
+
+## Step 2. Set up Java and Android tooling
+
+You will need to download and install:
+
+- JDK: https://www.oracle.com/java/technologies/downloads/
+- Android Studio: https://developer.android.com/studio
+
+Once Android Studio is installed, you need to create an empty project. Then, open Settings > Languages & Frameworks > Android SDK.
+
+Switch to SDK Tools tab and check if you have Android SDK Command-line tools installed.
+
+A tool named AAPT2 (Android Asset Packaging Tool) may be missing from Android Studio, and you may have to install it separately:
+
+```
+sdkmanager "build-tools;build-tools-version"
+```
+
+`build-tools-version` should be replaced with the latest version from the release page: https://developer.android.com/tools/releases/build-tools
+
+For example:
+
+```
+sdkmanager "build-tools;34.0.0"
+```
+
+Alternatively, use a full path on Mac:
+
+```
+~/Library/Android/sdk/cmdline-tools/latest/bin/sdkmanager "build-tools;34.0.0"
+```
+
+## Step 3. Sign the APK
+
+In your project directory, create a new folder `dapp-store-signing-keys` (if you're using Git you may want to add this folder to `.gitignore` to avoid exposing signing keys).
+
+Open the folder `dapp-store-signing-keys` and run the following command (edit as needed) to create a keystore used for signing the app.
+
+```
+keytool -genkey -v -keystore release-key.keystore -alias myapp -keyalg RSA -keysize 2048 -validity 50000
+```
+
+In this command you need to change the values:
+
+- `myapp`: unique name (alias) that identifies your app or project
+- `50000`: key validity in days; you may want to reduce it
+
+Open your project directory, and run the following command:
+
+```
+~/Library/Android/sdk/build-tools/35.0.0/apksigner sign \
+    --ks ./dapp-store-signing-keys/release-key.keystore \
+    --ks-key-alias myapp \
+    --out ./dapp-store-build/myapp-v0.0.1-signed.apk \
+    ./dapp-store-build/myapp-v0.0.1-unsigned.apk
+```
+
+The signed binary will be at `dapp-store-build/myapp-v0.0.1-signed.apk`. This is the file you'll need to reference in `config.yaml` at the publishing stage.
+
+## Publishing to dApp Store
+
+Now that you have signed APK, you are ready to follow the [dApp publishing guide](/dapp-publishing/submit-new-app) to submit your app to Solana Mobile dApp Store.
+---
+
+# Solana Mobile Publisher Policy
+
+This Solana Mobile Publisher Policy (“Publisher Policy”) is part of and subject to the Solana Mobile dApp Store Developer Agreement (“Developer Agreement”). Capitalized words used but not defined herein have the meaning given in the Developer Agreement. By submitting any Developer Asset to Solana Mobile, you acknowledge and agree that such Developer Asset complies with the terms of this Publisher Policy. If you encounter any Developer Asset or other Content in the dApp Store or otherwise via our products and services that does not comply with the terms of this Publisher Policy, you may notify us at [concerns@dappstore.solanamobile.com](mailto:concerns@dappstore.solanamobile.com). We reserve the right, but assume no obligation, to investigate and take any action we deem appropriate.
+
+## Restricted Content
+Solana Mobile does not allow any Developer Assets, User Content, or text, images, audio content, code, or other content of any sort (“Content”) that Solana Mobile determines in its sole discretion may violate applicable law, rule, or regulation (“Applicable Law”), or the Solana dApp Store mission (“Restricted Content”). Restricted Content includes, without limitation, the following:
+
+
+* **Illegality:** Content that violates or promotes the violation of Applicable Law, including the following:
+  * Content that facilitates or promotes the facilitation of: the consumption of alcohol, tobacco, or other age-restricted products by minors; the purchase or sale of illegal narcotics; or the manufacturing of illegal substances, including narcotics;
+  * Content that depicts, promotes, or encourages the abuse or exploitation of children, including all child sexual abuse materials; and
+  * Content that depicts, promotes, or encourages activity or behavior that is illegal or restricted under Applicable Law, including (as applicable to your jurisdiction) pornography, prostitution, theft, murder, or other violent or offensive acts.
+  * Content that infringes on intellectual property of any third-party.
+* **Content Adverse to Community:** Content that is antithetical to our community values, including:
+  * Hate speech or speech that threatens, promotes or incites hatred or violence against individuals or groups based on immutable characteristics or other characteristics associated with systemic discrimination;
+  * Content that depicts, promotes, advocates for or facilitates gratuitous or real-world violence or other dangerous activity, including any Content that promotes self-harm, suicide, or games where serious injury or death may result;
+  * Content that promotes or encourages the promotion of false or misleading health claims or claims that can cause physical harm to users;
+  * Pornography, prostitution, other sexually explicit Content; and
+  * Content designed to interfere with the proper functions of government, including false election Content (such as “official voting dApps”).
+* **Deliberately Misleading Content:** Content that intentionally misleads users or can reasonably be expected to mislead users, e.g.,:
+  * Content that falsely claims an affiliation with or endorsement by a third party (government, celebrity, private enterprise, etc.);
+  * Content that falsely induces or influences a user to take action with respect to their device, such as encouraging users to modify security settings or features;
+  * Content that misleads users as to the true intent, nature, or purpose of any dApp; and
+  * Content designed to create, or to enable users to create, ‘deepfakes’ or other false or misleading Content.
+  * Content designed to create a likelihood of confusion with a third-party’s entity, brand, products or services.
+
+## Guidelines for User Data
+dApps that collect, access, use, store, or disclose User Content or other information from or about a user, including without limitation device information (“User Data”), must be transparent about the collection and use of such User Data. Without limitation, all dApps on the dApp Store must:
+
+* Disclose the dApp’s or its Developer’s practices with respect to the collection, use, and disclosure of User Data in a privacy policy or other statement that complies with Applicable Law;
+* Obligate all third-party services used by or integrated with the dApp that may have access to the applicable User Data to comply with this Publisher Policy;
+* Not collect User Data from minors (as determined by Applicable Law) without the consent of a parent or guardian;
+* Provide a means or method for users to delete their account, and delete the User Data associated with such account (except to the extent you have lawful reasons, such as regulatory requirements or fraud prevention, to retain such data); and
+* Not use fraudulent, deceptive, or coercive measures to obtain user consent to the collection, sharing, or any specific use of User Data, and respect users’ decisions if they decline to consent.
+
+dApps that collect, access, share, or encourage the collection, access, or sharing of Regulated Data from or between or among end users must comply with all Applicable Laws with respect to such Regulated Data. “Regulated Data” means any (a) Social Security numbers or other government-issued identification numbers; (b) protected health information subject to the Health Insurance Portability and Accountability Act (HIPAA) or other information regarding an individual’s medical history, mental or physical condition, or medical treatment or diagnosis by a health care professional; (c) health insurance information; (d) biometric information or biometric identifiers; (e) credentials to any financial accounts or credit, debit or payment card data subject to the Payment Card Industry Data Security Standard (PCI DSS); (f) tax return data; (g) precise geolocation data; (h) data revealing racial or ethnic origin, religious beliefs, sex life or sexual orientation, union membership, citizenship, or immigration status; (i) genetic data; (j) personal data collected from an individual under the age of 18; (k) personal data subject to any Applicable Law related to data protection, including U.S. state consumer privacy laws such as the California Consumer Privacy Act; (l) data relating to criminal convictions or offenses; or (m) online account credentials. Without limiting the foregoing:
+
+* dApps that collect Regulated Data should collect only the minimum amount of such Regulated Data required to perform such dApp’s function;
+* dApps should not offer Regulated Data for sale or otherwise make it available to any third party except with the applicable users’ express consent and in compliance with Applicable Law; and
+* dApps that collect, store, and transfer Regulated Data should use encryption and other industry best practices to protect such Regulated Data in transit and at rest.
+
+## Restricted Activities and Transactions
+Solana Mobile does not knowingly allow any dApps that are designed to process transactions, provide services, or facilitate other activities that violate Applicable Law. Without limiting the foregoing:
+
+* dApps may not facilitate the sale or purchase of prescription drugs without a prescription;
+* dApps may not promote or sell any substance that is unapproved under Applicable Law, regardless of whether it is being sold for such purposes;
+* dApps that provide or purport to provide financial services subject to any regulation under Applicable Law must obtain and provide in connection with such Developer Assets all documentation required by Applicable Law to provide such financial services;
+* dApps that are or purport to be regulated medical devices must obtain and provide in connection with such Developer Assets all documentation required by Applicable Law to act as a medical device;
+* dApps that make any medical or health-related claims with respect to their services must substantiate those claims, and must have required legal and regulatory disclosures;
+* dApps may not interfere with, disrupt, damage, or gain unauthorized access to any user devices or any other devices, networks, or services; and
+* dApps may not include, distribute, or incorporate code that would introduce or exploit security vulnerabilities.
+
+
+Developer Assets may not include, and Solana Mobile will not knowingly permit the dApp Store to allow, any of the following:
+
+* dApps that block or interfere with the display of ads on other dApps;
+* dApps that facilitate the circumvention of or provide instructions on how to circumvent security protections or otherwise hack networks, services, software, or hardware;
+* dApps that encourage or cause cheating on or otherwise affect the gameplay of other dApps;
+* dApps that access or use any service in a manner that violates the terms of use of such service;
+* dApps that install other dApps or any other Content on a device without the user’s prior consent;
+* dApps that link to or facilitate the distribution or installation of viruses or other malicious software;
+* dApps or other Content containing a webview that loads untrusted web Content or unverified URLs obtained from untrusted sources; and
+* dApps that force user interaction with disruptive ads or notifications.
+
+## Guidelines for User-Generated Content
+dApps that solicit, permit, host, display, enable, or otherwise make available (“Make Available”) user-generated Content (“UGC”) are solely responsible for ensuring that such UGC complies with the restrictions applicable to Content as set forth in this Publisher Policy. In particular, and without limitation, any dApp that Makes Available any UGC must:
+
+* Cause its user terms to include the same restrictions as this Publisher Policy, and require end users to agree to such user terms;
+* Enable users to report or flag offensive or inappropriate content from within the dApp;
+* Moderate UGC to ensure that there is no Restricted Content or other UGC that would violate this Publisher Policy or Applicable Law; and
+* Provide reasonable self-help remedies for end users (e.g., a “block” function) to enable end users to minimize disputes, and support user dispute resolution through established processes.
+
+---
+
+# Seed Vault
+
+The [**Seed Vault**](https://github.com/solana-mobile/seed-vault-sdk) is a system service providing secure key custody to _Wallet apps_. By integrating with secure execution environments available on mobile devices (such as secure operating modes of the processor and/or secure auxiliary coprocessors), Seed Vault helps to keep your secrets safe, by moving them to the highest privileged environment available on the device. Your keys, seeds, and secrets never leave the secure execution environment, while UI components built into Android handle interaction with the user to provide a secure transaction signing experience to users.
+
+### Using the SDK
+
+#### For dApps
+
+The Seed Vault SDK is designed for usage by _wallet_ apps. If you are building a mobile dApp, you should just use Mobile Wallet Adapter for your usecase.
+
+#### For Wallet Apps
+
+To integrate and provide Seed Vault custody in a wallet app, follow this [integration guide](https://github.com/solana-mobile/seed-vault-sdk/blob/main/docs/integration_guide.md) for a deep dive into the SDK. The repo includes a Seed vault simulator, which can be used to simulate and test for Seed Vault integration on emulators.
+
+
+---
+
+# Development community
+
+## Discord
+
+Currently, most technical discussion around the Solana Mobile Stack happens in our offical [Solana Mobile Discord](https://discord.gg/solanamobile).
+If you have any questions, are interested in contributing, or want to get in touch with the development community, come join and send a message!
+
+## Twitter
+
+On Twitter, you can follow [@SolanaMobile](https://twitter.com/solanamobile).
+---
+
+
+
+
+Explore the API references for the various libraries that are used in the Solana Mobile Stack.
+
+## Mobile Wallet Adapter
+See the API for the various client libraries implemented for Mobile Wallet Adapter
+
+
+## Solana RPC Clients
+
+These clients provide a library to interact with Solana nodes through the Solana [JSON RPC API](https://docs.solana.com/api).
+
+
+---
+
+
+
+# Frequently Asked Questions
+
+
+
+---
+
+# Links
+
+- Documentation: https://docs.solanamobile.com
+- GitHub: https://github.com/solana-mobile
+- dApp Store: https://dappstore.solanamobile.com
+- Solana Mobile: https://solanamobile.com
