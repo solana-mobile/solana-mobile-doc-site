@@ -55,7 +55,7 @@ Taking a look at the [source code](https://github.com/solana-mobile/tutorial-app
 **Instruction Data**
 
 - An `amount: u64` parameter.
-- An additional 8 bytes for the [Anchor discriminator](https://book.anchor-lang.com/anchor_bts/discriminator.html)
+- An additional 8 bytes for the [Anchor discriminator](https://www.anchor-lang.com/docs/basics/idl#discriminators)
 
 Now, let's create each of these required inputs.
 
@@ -105,7 +105,7 @@ val encodedInstructionData = Borsh.encodeToByteArray(
 
 :::info
 
-Anchor instruction data uses a unique [Anchor discriminator](https://book.anchor-lang.com/anchor_bts/discriminator.html) to determine which instruction is called.
+Anchor instruction data uses a unique [Anchor discriminator](https://www.anchor-lang.com/docs/basics/idl#discriminators) to determine which instruction is called.
 
 The `AnchorInstructionSerializer` will handle this discriminator during serialization, as long as you pass the correct instruction name (e.g `increment`) into the constructor.
 

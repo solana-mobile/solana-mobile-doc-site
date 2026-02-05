@@ -174,6 +174,11 @@ module.exports = {
             id: 'react-native/mobile_nft_minter_tutorial',
             label: 'Mobile NFT Photo Minter'
         },
+        {
+            type: 'link',
+            href: '/sample-apps/sample_app_overview',
+            label: 'Sample Apps'
+        },
 
         /* Reference Section */
         {

@@ -21,9 +21,9 @@ This guide will show you how to integrate an Anchor Program into your React Nati
 
 ## Prerequisites
 
-- [React Native setup](../react-native/setup) and [Anchor setup](https://book.anchor-lang.com/getting_started/installation.html)
+- [React Native setup](../react-native/setup) and [Anchor setup](https://www.anchor-lang.com/docs/installation)
 - Basic understanding of [Anchor Programs](https://book.anchor-lang.com/) and IDL.
-- An existing [deployed](https://book.anchor-lang.com/anchor_in_depth/milestone_project_tic-tac-toe.html#deployment) Anchor Program.
+- An existing [deployed](https://www.anchor-lang.com/docs/quickstart/local#deploy-to-devnet) Anchor Program.
 
 ## Installation
 

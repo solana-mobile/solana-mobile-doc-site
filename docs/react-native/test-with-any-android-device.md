@@ -38,6 +38,10 @@ Mock MWA Wallet features:
 - Biometric authentication
 - Configurable Ed25519 private key importing
 
+:::warning
+Your device/emulator must have a PIN or biometric set up. Without it, you'll get `java.lang.IllegalStateException`.
+:::
+
 For installation, view the [**Github repository**](https://github.com/solana-mobile/mock-mwa-wallet).
 
 </ SideBySideLayout>

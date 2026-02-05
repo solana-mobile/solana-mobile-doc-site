@@ -34,6 +34,10 @@ Your storage provider selection determines where all your dApp assets (e.g APK f
 
 Use the storage cost tool to estimate the SOL amount required for upload based on your app's size.
 
+:::tip
+You must use **Top Up Balance** to fund your storage account before publishing. Without sufficient balance, the submission will fail.
+:::
+
 ![Storage provider selection screenshot](/publishing_portal/storage-provider.png)
 
 ## 4. Add your dApp details

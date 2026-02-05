@@ -4,7 +4,23 @@
 This page is under active development. Check back for updates.
 :::
 
-Accelerate your Solana mobile development with AI-powered tools. This guide covers Claude Code skills and other AI resources to help you build faster.
+Accelerate your Solana mobile development with AI-powered tools. This guide covers LLM resources and Claude Code skills to help you build faster.
+
+## LLM Resources
+
+> These files make the Solana Mobile docs agent-ready. Start with [`llms.txt`](/llms.txt) to discover the documentation structure.
+
+### `llms.txt`
+
+A hierarchical index of all documentation pages with descriptions. Use this for a quick overview of the documentation structure.
+
+- View: [llms.txt](https://docs.solanamobile.com/llms.txt)
+
+### `llms-full.txt`
+
+The entire documentation site concatenated into a single markdown file. Use this for deep indexing and comprehensive context.
+
+- View: [llms-full.txt](https://docs.solanamobile.com/llms-full.txt)
 
 ## Claude Code Skills
 

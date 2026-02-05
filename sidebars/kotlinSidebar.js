@@ -74,6 +74,22 @@ module.exports = {
             ]
         },
 
+        /* Tutorials Section */
+        {
+            type: 'html',
+            value: '<div class="sidebar-divider" />',
+        },
+        {
+            type: 'html',
+            value: 'Tutorials',
+            className: 'sidebar-section-header',
+        },
+        {
+            type: 'link',
+            href: '/sample-apps/sample_app_overview',
+            label: 'Sample Apps'
+        },
+
         /* Reference Section */
         {
             type: 'html',
@@ -89,5 +105,5 @@ module.exports = {
             href: 'https://www.javadoc.io/doc/com.solanamobile/mobile-wallet-adapter-clientlib-ktx/latest/index.html',
             label: 'Kotlin MWA reference'
         },
-    ]  
+    ]
   };

@@ -58,7 +58,7 @@ When running on a Seeker device, the above code outputs something like:
 }
 ```
 
-To check if the user on a Seeker, you can check the `Model` constant:
+To check if the user is on a Seeker, you can check the `Model` constant:
 
 ```ts
 const isSeekerDevice = (): boolean => {
