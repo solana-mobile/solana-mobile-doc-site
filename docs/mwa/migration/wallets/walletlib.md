@@ -105,7 +105,7 @@ public class SignInResult {
 
 The `AuthorizationResult` object that is returned to the dapp endpoint is now constructed by passing in a list of `AuthorizedAccount` objects, rather than a single public key and label.
 
-An optional `walletIcon` parameter has also been added to allow the wallets to send back an icon (data URI) for dapps to display on thier UI when the wallet is connected.
+An optional `walletIcon` parameter has also been added to allow the wallets to send back an icon (data URI) for dapps to display on their UI when the wallet is connected.
 
 Constructor for `AuthorizationResult`:
 
@@ -148,7 +148,7 @@ AuthorizedAccount {
 
 ### Sign And Send Transactions ([2.0 spec](https://solana-mobile.github.io/mobile-wallet-adapter/spec/spec.html#sign_and_send_transactions))
 
-Suport for the `sign_and_send_transactions` request has been made mandatory in the Mobile Wallet Adapter 2.0 specification. Wallets must now implement this method according to [the spec](https://solana-mobile.github.io/mobile-wallet-adapter/spec/spec.html#sign_and_send_transactions).
+Support for the `sign_and_send_transactions` request has been made mandatory in the Mobile Wallet Adapter 2.0 specification. Wallets must now implement this method according to [the spec](https://solana-mobile.github.io/mobile-wallet-adapter/spec/spec.html#sign_and_send_transactions).
 
 The optional transaction parameters have also been expanded to allows dapps to further specify how transactions should be sent to the RPC by the wallet endpoint.
 
@@ -189,7 +189,7 @@ For an explanation on each parameter, see the [spec](https://solana-mobile.githu
 The configuration object that is used when setting up an MWA session has been updated. This object is returned to the dapp endpoint from a [`get_capabilities`](https://solana-mobile.github.io/mobile-wallet-adapter/spec/spec1.0.html#get_capabilities) RPC request.
 
 The boolean feature flags `supportsSignAndSendTransactions` and `supportsCloneAuthorization` have been replaced with the `supportedFeatures` array, using the new
-feature extension and identifer API.
+feature extension and identifier API.
 
 The wallet can flag these features by adding `solana:signAndSendTransaction` and `solana:cloneAuthorization` and exposed through the new feature extension API.
 
