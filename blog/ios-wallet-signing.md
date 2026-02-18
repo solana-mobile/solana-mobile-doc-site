@@ -29,6 +29,8 @@ That is -- How can iOS mobile dApps enable native transaction signing?
 
 We commonly see the same questions and ideas being raised across different social medias and platforms, so one goal of this article is to share all the insights from the Solana Mobile team's research into different iOS solutions.
 
+<!-- truncate -->
+
 ## Mobile Wallet Adapter
 
 First, we need to understand why the current implementation of MWA (Mobile Wallet Adapter) is incompatible with iOS.
