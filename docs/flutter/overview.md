@@ -22,7 +22,7 @@ Please be understanding if certain areas are still under development. Your
 contributions are always welcome to help address any issues you may encounter.
 
 Thank you to the [Espresso Cash](https://github.com/espresso-cash/espresso-cash-public/tree/master) team for your
-active maintenance of this library!
+active maintanence of this library!
 :::
 
 ### [Solana Dart Library](https://pub.dev/packages/solana)
